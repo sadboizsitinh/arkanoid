@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.List;
+import java.util.Iterator;
 
 public class GameManager {
     private final GraphicsContext gc;
@@ -37,11 +38,14 @@ public class GameManager {
         ball.update();
         // va chạm với paddle
         if (ball.intersects(paddle)) ball.bounceVertical();
-        // va chạm với brick
-        for (Brick brick : bricks) {
+        // va chạm với brick - sử dụng Iterator để xóa an toàn
+        Iterator<Brick> iterator = bricks.iterator();
+        while (iterator.hasNext()) {
+            Brick brick = iterator.next();
             if (ball.checkIntersects(brick)) {
                 ball.handleCollision(brick);
-                break;
+                iterator.remove(); // Xóa gạch khỏi danh sách
+                break; // Chỉ xử lý 1 gạch mỗi frame
             }
         }
     }
