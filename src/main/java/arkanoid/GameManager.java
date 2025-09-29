@@ -25,6 +25,10 @@ public class GameManager {
     public void onKeyPressed(KeyCode code) { keys.add(code); }
     public void onKeyReleased(KeyCode code) { keys.remove(code); }
 
+    public void stopGame() {
+        System.exit(0);
+    }
+
     public void update() {
         // di chuyển paddle
         if (keys.contains(KeyCode.LEFT))  paddle.move(-6);
@@ -33,6 +37,13 @@ public class GameManager {
         ball.update();
         // va chạm với paddle
         if (ball.intersects(paddle)) ball.bounceVertical();
+        // va chạm với brick
+        for (Brick brick : bricks) {
+            if (ball.checkIntersects(brick)) {
+                ball.handleCollision(brick);
+                break;
+            }
+        }
     }
 
     public void render() {

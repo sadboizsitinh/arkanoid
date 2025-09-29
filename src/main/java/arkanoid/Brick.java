@@ -5,16 +5,10 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Brick {
-    private double x, y, width, height;
-    private Color color;
+public class Brick extends GameObject {
 
     public Brick(double x, double y, double width, double height, Color color) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.color = color;
+        super(x, y, width, height, color);
     }
 
     public void draw(GraphicsContext gc) {
