@@ -8,16 +8,16 @@ import javafx.geometry.Rectangle2D;
 public class GameObject {
     protected double x, y;
     protected double width, height;
-    protected Color color;;
+    protected Color color;
 
-    public GameObject(double x, double y, double width, double height, Color color) {
+    public GameObject(double x, double y, double width, double height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.color = color;
+        this.color = Color.WHITE;
     }
-    
+
 
     // getter va setter
     public double getX() { return x; }

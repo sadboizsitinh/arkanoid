@@ -30,6 +30,7 @@ public class GameManager {
         System.exit(0);
     }
 
+
     public void update() {
         // di chuyển paddle
         if (keys.contains(KeyCode.LEFT))  paddle.move(-6);
@@ -44,7 +45,8 @@ public class GameManager {
             Brick brick = iterator.next();
             if (ball.checkIntersects(brick)) {
                 ball.handleCollision(brick);
-                iterator.remove(); // Xóa gạch khỏi danh sách
+                brick.takeHit();
+                if (brick.isDestroyed()) iterator.remove();
                 break; // Chỉ xử lý 1 gạch mỗi frame
             }
         }
