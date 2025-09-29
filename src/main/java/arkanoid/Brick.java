@@ -6,9 +6,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Brick extends GameObject {
+    protected int hitPoints;
+    protected int maxHitPoints;
+    protected boolean destroyed;
+    protected BrickType type;
 
-    public Brick(double x, double y, double width, double height, Color color) {
-        super(x, y, width, height, color);
+    public Brick(double x, double y, double width, double height, int hitPoints, BrickType type) {
+        super(x, y, width, height);
+        this.hitPoints = hitPoints;
+        this.maxHitPoints = hitPoints;
+        this.destroyed = false;
+        this.type = type;
+    }
+
+    public enum BrickType {
+        NORMAL, STRONG, UNBREAKABLE;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
+    public BrickType getType() {
+        return type;
+    }
+
+    public void takeHit() {
+        if (type != BrickType.UNBREAKABLE) {
+            hitPoints--;
+            if (hitPoints <= 0) {
+                destroyed = true;
+            }
+            // update color khi bị giảm máu
+        }
     }
 
     public void draw(GraphicsContext gc) {
@@ -35,7 +65,8 @@ public class Brick extends GameObject {
             for (int col = 0; col < 10; col++) {
                 double x = startX + col * (brickWidth + 5);
                 double y = startY + row * (brickHeight + 5);
-                bricks.add(new Brick(x, y, brickWidth, brickHeight, Color.RED));
+                BrickFactory brickFactory = new BrickFactory();
+                bricks.add(brickFactory.createRandomBrick(x, y, brickWidth, brickHeight));
             }
         }
         return bricks;
