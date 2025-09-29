@@ -17,7 +17,7 @@ public class GameObject {
         this.height = height;
         this.color = color;
     }
-    
+
 
     // getter va setter
     public double getX() { return x; }

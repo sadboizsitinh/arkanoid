@@ -29,6 +29,7 @@ public class GameManager {
         System.exit(0);
     }
 
+
     public void update() {
         // di chuyển paddle
         if (keys.contains(KeyCode.LEFT))  paddle.move(-6);
