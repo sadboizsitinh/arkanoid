@@ -2,14 +2,20 @@ package arkanoid;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Brick extends GameObject {
+/**
+ * Base class for all brick types
+ * Can be hit and destroyed
+ */
+public abstract class Brick extends GameObject {
     protected int hitPoints;
     protected int maxHitPoints;
     protected boolean destroyed;
     protected BrickType type;
+
+    public enum BrickType {
+        NORMAL, STRONG, UNBREAKABLE
+    }
 
     public Brick(double x, double y, double width, double height, int hitPoints, BrickType type) {
         super(x, y, width, height);
@@ -19,9 +25,20 @@ public class Brick extends GameObject {
         this.type = type;
     }
 
-    public enum BrickType {
-        NORMAL, STRONG, UNBREAKABLE;
+    /**
+     * Handle being hit by the ball
+     */
+    public void takeHit() {
+        if (type != BrickType.UNBREAKABLE) {
+            hitPoints--;
+            if (hitPoints <= 0) {
+                destroyed = true;
+            }
+            updateColor();
+        }
     }
+
+    protected abstract void updateColor();
 
     public boolean isDestroyed() {
         return destroyed;
@@ -31,44 +48,32 @@ public class Brick extends GameObject {
         return type;
     }
 
-    public void takeHit() {
-        if (type != BrickType.UNBREAKABLE) {
-            hitPoints--;
-            if (hitPoints <= 0) {
-                destroyed = true;
-            }
-            // update color khi bị giảm máu
+    public int getPoints() {
+        switch (type) {
+            case NORMAL:
+                return 10;
+            case STRONG:
+                return 20;
+            case UNBREAKABLE:
+                return 0;
+            default:
+                return 0; // fallback an toàn
         }
     }
 
-    public void draw(GraphicsContext gc) {
-        gc.setFill(color);
-        gc.fillRect(x, y, width, height);
 
-        // Thêm viền trắng để gạch nổi bật hơn
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(1);
-        gc.strokeRect(x, y, width, height);
+    @Override
+    public void update(double deltaTime) {
+        // Bricks don't need to update unless animated
     }
 
-    // Phương thức tạo danh sách gạch
-    public static List<Brick> createBricks() {
-        List<Brick> bricks = new ArrayList<>();
-
-        double brickWidth = 75;
-        double brickHeight = 20;
-        double startX = 0;
-        double startY = 0;
-
-        // Tạo 5 hàng gạch với cùng một màu
-        for (int row = 0; row < 5; row++) {
-            for (int col = 0; col < 10; col++) {
-                double x = startX + col * (brickWidth + 5);
-                double y = startY + row * (brickHeight + 5);
-                BrickFactory brickFactory = new BrickFactory();
-                bricks.add(brickFactory.createRandomBrick(x, y, brickWidth, brickHeight));
-            }
+    @Override
+    public void render(GraphicsContext gc) {
+        if (!destroyed) {
+            gc.setFill(color);
+            gc.fillRect(x, y, width, height);
+            gc.setStroke(Color.BLACK);
+            gc.strokeRect(x, y, width, height);
         }
-        return bricks;
     }
 }

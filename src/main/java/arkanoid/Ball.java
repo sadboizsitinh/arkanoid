@@ -2,81 +2,190 @@ package arkanoid;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.geometry.Rectangle2D;
 
-public class Ball {
-    private double x, y, radius;
-    private double dx, dy;
+/**
+ * Game ball that bounces around the screen
+ * Handles collisions with other objects
+ */
+public class Ball extends MovableObject {
+    private static final double DEFAULT_SIZE = 15;
+    private static final double DEFAULT_SPEED = 200;
 
-    public Ball(double x, double y, double radius, double dx, double dy) {
-        this.x = x;
-        this.y = y;
-        this.radius = radius;
-        this.dx = dx; this.dy = dy;
+    private double directionX, directionY;
+
+    public Ball(double x, double y) {
+        super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, DEFAULT_SPEED);
+        this.color = Color.RED;
+        // Start moving up and right
+        this.directionX = 1;
+        this.directionY = -1;
+        updateVelocity();
     }
 
-    public void update() {
-        x += dx;
-        y += dy;
-        if (x - radius < 0 || x + radius > 800) bounceHorizontal();
-        if (y - radius < 0 || y + radius > 600) bounceVertical();
+    private void updateVelocity() {
+        dx = directionX * speed;
+        dy = directionY * speed;
     }
 
-    public void draw(GraphicsContext gc) {
-        gc.setFill(Color.WHITE);
-        gc.fillOval(x - radius, y - radius, radius*2, radius*2);
-    }
+    /**
+     * Bounce off another object using axis penetration to determine normal,
+     * then apply specular reflection. Also nudge the ball out of the object
+     * and clamp vertical component to avoid horizontal stalls.
+     */
+    public void bounceOff(GameObject other) {
+        // Compute overlaps
+        double otherX = other.getX();
+        double otherY = other.getY();
+        double otherW = other.getWidth();
+        double otherH = other.getHeight();
 
-    public void handleCollision(Brick brick) {
-        double left   = brick.getX();
-        double right  = brick.getX() + brick.getWidth();
-        double top    = brick.getY();
-        double bottom = brick.getY() + brick.getHeight();
-        // Phải đẩy ra trước khi nó bị va chạm vào 2 thẳng gạch
-        // Bên trái
-        if (x + radius > left && dx > 0 && x < left) {
-            x = left - radius; // đẩy ra ngoài
-            dx = -dx;
+        double overlapLeft   = (otherX + otherW) - x;            // amount from left
+        double overlapRight  = (x + width) - otherX;             // from right
+        double overlapTop    = (otherY + otherH) - y;            // from top
+        double overlapBottom = (y + height) - otherY;            // from bottom
+
+        // Choose the minimum penetration axis
+        double minX = Math.min(Math.abs(overlapLeft), Math.abs(overlapRight));
+        double minY = Math.min(Math.abs(overlapTop), Math.abs(overlapBottom));
+
+        double nx = 0, ny = 0; // collision normal
+        double epsilon = 0.5;  // small nudge
+        if (minX < minY) {
+            if (Math.abs(overlapLeft) < Math.abs(overlapRight)) {
+                nx = -1; // normal points left -> hit object's left side
+                x = otherX + otherW + epsilon; // move to right of object
+            } else {
+                nx = 1;  // hit object's right side
+                x = otherX - width - epsilon;  // move to left of object
+            }
+        } else {
+            if (Math.abs(overlapTop) < Math.abs(overlapBottom)) {
+                ny = -1; // hit object's top side
+                y = otherY + otherH + epsilon; // push below top
+            } else {
+                ny = 1;  // hit object's bottom side
+                y = otherY - height - epsilon; // push above bottom
+            }
         }
-        // Bên phải
-        else if (x - radius < right && dx < 0 && x > right) {
-            x = right + radius;
-            dx = -dx;
+
+        // Reflect current velocity vector about normal
+        double vx = dx, vy = dy;
+        double dot = vx * nx + vy * ny;
+        double rx = vx - 2 * dot * nx;
+        double ry = vy - 2 * dot * ny;
+
+        // Normalize back to direction and keep same speed
+        double mag = Math.sqrt(rx * rx + ry * ry);
+        if (mag == 0) {
+            rx = -vx; ry = -vy; mag = Math.sqrt(rx * rx + ry * ry);
         }
-        // Bên trên
-        else if (y + radius > top && dy > 0 && y < top) {
-            y = top - radius;
-            dy = -dy;
+        directionX = rx / mag;
+        directionY = ry / mag;
+
+        // Prevent near-horizontal motion which can feel sticky: ensure |directionY| >= 0.2
+        if (Math.abs(directionY) < 0.2) {
+            directionY = Math.copySign(0.2, directionY == 0 ? -1 : directionY);
+            // Re-normalize
+            double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
+            directionX /= m2; directionY /= m2;
         }
-        // Bên dưới
-        else if (y - radius < bottom && dy < 0 && y > bottom) {
-            y = bottom + radius;
-            dy = -dy;
+
+        updateVelocity();
+    }
+
+    /**
+     * Bounce off paddle with angle variation
+     */
+    public void bounceOffPaddle(Paddle paddle) {
+        double ballCenter = x + width / 2;
+        double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
+        double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
+
+        directionX = hitPosition * 0.8; // Max 80% horizontal component
+        directionY = -Math.abs(directionY); // Always bounce up
+
+        // Normalize direction vector
+        double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
+        directionX /= magnitude;
+        directionY /= magnitude;
+
+        updateVelocity();
+    }
+
+    /**
+     * Overload to support EnhancedPaddle without changing class hierarchy
+     */
+    public void bounceOffPaddle(EnhancedPaddle paddle) {
+        double ballCenter = x + width / 2;
+        double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
+        double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
+
+        directionX = hitPosition * 0.8; // Max 80% horizontal component
+        directionY = -Math.abs(directionY); // Always bounce up
+
+        // Normalize direction vector
+        double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
+        directionX /= magnitude;
+        directionY /= magnitude;
+
+        updateVelocity();
+    }
+
+    public void bounceOffWall(char wall) {
+        // Use specular reflection: v' = v - 2 (v·n) n
+        double vx = dx; double vy = dy;
+        double nx = 0, ny = 0; // surface normal
+        switch (wall) {
+            case 'L':
+                nx = 1; ny = 0;
+                break;
+            case 'R':
+                nx = -1; ny = 0;
+                break;
+            case 'T':
+                nx = 0; ny = 1;
+                break;
+            default:
+                nx = 0; ny = -1;
+                break;
         }
+
+        double dot = vx * nx + vy * ny;
+        double rx = vx - 2 * dot * nx;
+        double ry = vy - 2 * dot * ny;
+        // Normalize to direction and keep same speed
+        double mag = Math.sqrt(rx * rx + ry * ry);
+        if (mag == 0) { rx = -vx; ry = -vy; mag = Math.sqrt(rx*rx + ry*ry); }
+        directionX = rx / mag;
+        directionY = ry / mag;
+        updateVelocity();
     }
 
-
-    boolean checkIntersects(GameObject brick) {
-        double closestX = Math.max(brick.getX(), Math.min(x, brick.getX() + brick.getWidth()));
-        double closestY = Math.max(brick.getY(), Math.min(y, brick.getY() + brick.getHeight()));
-
-        double dx = x - closestX;
-        double dy = y - closestY;
-
-        return (dx * dx + dy * dy) <= (radius * radius);
+    /**
+     * Safely apply a new speed while preserving current direction.
+     * Updates dx, dy to reflect the new speed.
+     */
+    public void applySpeed(double newSpeed) {
+        this.speed = newSpeed;
+        updateVelocity();
     }
 
-    public Rectangle2D getBounds() {
-        return new Rectangle2D(x - radius, y - radius, radius*2, radius*2);
+    @Override
+    public void update(double deltaTime) {
+        move(deltaTime);
     }
 
-    public boolean intersects(Paddle paddle) {
-        return getBounds().intersects(paddle.getBounds());
+    @Override
+    public void render(GraphicsContext gc) {
+        gc.setFill(color);
+        gc.fillOval(x, y, width, height);
+        gc.setStroke(Color.BLACK);
+        gc.strokeOval(x, y, width, height);
     }
 
-    public void bounceVertical() { dy = -dy; }
-    public void bounceHorizontal() { dx = -dx; }
-
-
+    public void setDirection(double dx, double dy) {
+        this.directionX = dx;
+        this.directionY = dy;
+        updateVelocity();
+    }
 }
-

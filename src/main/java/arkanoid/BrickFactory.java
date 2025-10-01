@@ -14,8 +14,8 @@ public class BrickFactory {
             case UNBREAKABLE :
                 return new UnbreakableBrick(x, y, width, height);
 
-                default :
-                    return null;
+            default :
+                return null;
         }
     }
 
