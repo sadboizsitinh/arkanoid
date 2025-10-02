@@ -72,7 +72,8 @@ public abstract class Brick extends GameObject {
         if (!destroyed) {
             gc.setFill(color);
             gc.fillRect(x, y, width, height);
-            gc.setStroke(Color.BLACK);
+            gc.setStroke(Color.WHITE);
+            gc.setLineWidth(1);
             gc.strokeRect(x, y, width, height);
         }
     }

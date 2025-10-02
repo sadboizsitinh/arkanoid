@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
  */
 public class Ball extends MovableObject {
     private static final double DEFAULT_SIZE = 15;
-    private static final double DEFAULT_SPEED = 200;
+    private static final double DEFAULT_SPEED = 325;
 
     private double directionX, directionY;
 

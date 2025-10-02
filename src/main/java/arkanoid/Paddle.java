@@ -9,8 +9,8 @@ import javafx.scene.paint.Color;
  */
 public class Paddle extends MovableObject implements PaddleLike {
     private static final double DEFAULT_WIDTH = 100;
-    private static final double DEFAULT_HEIGHT = 20;
-    private static final double DEFAULT_SPEED = 300;
+    private static final double DEFAULT_HEIGHT = 15;
+    private static final double DEFAULT_SPEED = 800;
 
     private PowerUp currentPowerUp;
     private double originalWidth;
