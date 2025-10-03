@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
@@ -11,6 +12,9 @@
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" afterDir="false" />
     </list>
+=======
+    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="" />
+>>>>>>> 163d437 (in process)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -24,18 +28,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+<<<<<<< HEAD
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
+=======
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Arkanoid" />
+>>>>>>> 163d437 (in process)
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="33K6jMzShaIv8oNKR0gHzPJyFtv" />
+<<<<<<< HEAD
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
+=======
+>>>>>>> 163d437 (in process)
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -43,6 +54,10 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
+=======
+    &quot;JavaScript Debug.Next.js: debug client-side.executor&quot;: &quot;Run&quot;,
+>>>>>>> 163d437 (in process)
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
@@ -53,21 +68,39 @@
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+<<<<<<< HEAD
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Thinkpad/OneDrive/Desktop/arkanoid/Arkanoid&quot;,
+=======
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Thinkpad/Arkanoid&quot;,
+>>>>>>> 163d437 (in process)
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
+=======
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Thinkpad/Arkanoid/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+>>>>>>> 163d437 (in process)
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+<<<<<<< HEAD
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
+=======
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
+      <module name="Arkanoid" />
+>>>>>>> 163d437 (in process)
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="arkanoid.*" />
@@ -117,15 +150,26 @@
       <workItem from="1759115395623" duration="6973000" />
       <workItem from="1759128994273" duration="1588000" />
       <workItem from="1759155238877" duration="1034000" />
+<<<<<<< HEAD
       <workItem from="1759407909732" duration="1316000" />
       <workItem from="1759483336344" duration="2136000" />
       <workItem from="1759485505170" duration="1859000" />
+=======
+      <workItem from="1759405112030" duration="213000" />
+      <workItem from="1759405341900" duration="397000" />
+      <workItem from="1759405774091" duration="1091000" />
+      <workItem from="1759406915898" duration="15000" />
+      <workItem from="1759406975555" duration="9000" />
+      <workItem from="1759407017126" duration="17000" />
+      <workItem from="1759407719265" duration="122000" />
+>>>>>>> 163d437 (in process)
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -136,5 +180,17 @@
         </entry>
       </map>
     </option>
+=======
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+>>>>>>> 163d437 (in process)
   </component>
 </project>

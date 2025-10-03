@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/arkanoid.iml" filepath="$PROJECT_DIR$/arkanoid.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/Arkanoid.iml" filepath="$PROJECT_DIR$/Arkanoid.iml" />
+>>>>>>> 163d437 (in process)
     </modules>
   </component>
 </project>
