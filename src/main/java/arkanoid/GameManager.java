@@ -17,6 +17,8 @@ public class GameManager {
     private List<Brick> bricks;
     private List<PowerUp> powerUps;
 
+    // Deltatime
+    private double deltaTime = 0.05;
 
     // Game state
     private int score;
@@ -129,15 +131,22 @@ public class GameManager {
     }
 
     public void handleKeyPress(String key) {
+        keys['A'] = false;
+        keys['D'] = false;
         if (gameState == GameState.PLAYING) {
             switch (key.toUpperCase()) {
                 case "A":
                 case "LEFT":
-                    paddle.moveLeft(0.016); // Approximate deltaTime
+                    keys['A'] = true;
+                    paddle.moveLeft(deltaTime);
                     break;
                 case "D":
                 case "RIGHT":
-                    paddle.moveRight(0.016, gameWidth);
+                    keys['D'] = true;
+                    paddle.moveRight(deltaTime);
+                    break;
+                case "S":
+                    paddle.setDx(0);
                     break;
                 case "P":
                     togglePause();
@@ -145,8 +154,16 @@ public class GameManager {
                 default:
                     break;
             }
-
         }
+
+       if (keys['A'] == true) {
+           paddle.moveLeft(deltaTime);
+       }
+
+       if (keys['D'] == true) {
+           paddle.moveRight(deltaTime);
+       }
+
     }
 
     private void togglePause() {
