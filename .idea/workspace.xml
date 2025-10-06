@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="">
+    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="cap nhat">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Brick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Brick.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameObject.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -29,9 +27,42 @@
       </list>
     </option>
   </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
+  </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Basecode" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;DucHieu252&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,
+    &quot;accountId&quot;: &quot;f8b167ec-24de-42f0-8ea4-b07296b440b7&quot;
+  }
+}</component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
@@ -46,31 +77,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "js.debugger.nextJs.config.created.client": "true",
-    "js.debugger.nextJs.config.created.server": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Thinkpad/Arkanoid",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.Next.js: server-side.executor": "Run",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
+    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Thinkpad/Arkanoid&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
@@ -109,6 +140,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -132,6 +164,13 @@
       <workItem from="1759115395623" duration="6973000" />
       <workItem from="1759128994273" duration="1588000" />
       <workItem from="1759155238877" duration="1034000" />
+      <workItem from="1759657126089" duration="982000" />
+      <workItem from="1759708734683" duration="53000" />
+      <workItem from="1759711492510" duration="67000" />
+      <workItem from="1759711672428" duration="5201000" />
+      <workItem from="1759719521285" duration="27000" />
+      <workItem from="1759722757579" duration="23000" />
+      <workItem from="1759731220790" duration="2332000" />
     </task>
     <servers />
   </component>
@@ -143,7 +182,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

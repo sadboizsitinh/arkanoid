@@ -7,13 +7,17 @@ import javafx.scene.paint.Color;
  */
 public class StrongBrick extends Brick {
     public StrongBrick(double x, double y, double width, double height) {
-        super(x, y, width, height, 3, BrickType.STRONG);
-        this.color = Color.RED;
+        super(x, y, width, height, 2, BrickType.STRONG);
+        this.color = Color.DARKRED;
     }
 
     @Override
     protected void updateColor() {
-        double intensity = (double) hitPoints / maxHitPoints;
-        this.color = Color.RED.interpolate(Color.DARKRED, 1 - intensity);
+        // Change color based on remaining hit points
+        if (hitPoints == 1) {
+            this.color = Color.RED;
+        } else {
+            this.color = Color.DARKRED;
+        }
     }
 }

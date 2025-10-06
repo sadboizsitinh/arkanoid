@@ -14,8 +14,10 @@ public class GameManager {
     // Game objects
     private Paddle paddle;
     private Ball ball;
+    private List<Ball> balls; // Multiple balls support
     private List<Brick> bricks;
     private List<PowerUp> powerUps;
+    private List<PowerUp> activePowerUps; // Track active power-ups
 
     // Deltatime
     private double deltaTime = 0.05;
@@ -31,6 +33,9 @@ public class GameManager {
     private double gameWidth;
     private double gameHeight;
 
+    // Ball speed tracking for power-ups
+    private double originalBallSpeed;
+
     public enum GameState {
         MENU, PLAYING, PAUSED, GAME_OVER, LEVEL_COMPLETE
     }
@@ -41,9 +46,10 @@ public class GameManager {
         this.keys = new boolean[256];
         this.bricks = new ArrayList<>();
         this.powerUps = new ArrayList<>();
+        this.activePowerUps = new ArrayList<>();
+        this.balls = new ArrayList<>();
         reset();
     }
-
 
     public static GameManager getInstance() {
         if (instance == null) {
@@ -68,12 +74,18 @@ public class GameManager {
 
         // Initialize ball
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
+        originalBallSpeed = ball.getSpeed();
+
+        // Clear and add main ball to balls list
+        balls.clear();
+        balls.add(ball);
 
         // Initialize bricks
         createLevel(level);
 
         // Clear power-ups
         powerUps.clear();
+        activePowerUps.clear();
     }
 
     /**
@@ -112,14 +124,26 @@ public class GameManager {
 
         // Update game objects
         paddle.update(deltaTime);
-        ball.update(deltaTime);
 
+        // Update all balls
+        for (Ball b : balls) {
+            b.update(deltaTime);
+        }
 
-        // Update power-ups
-        powerUps.removeIf(PowerUp::isExpired);
+        // Update falling power-ups
         for (PowerUp powerUp : powerUps) {
             powerUp.update(deltaTime);
         }
+
+        // Update active power-ups and remove expired ones
+        activePowerUps.removeIf(powerUp -> {
+            powerUp.update(deltaTime);
+            if (powerUp.isExpired()) {
+                powerUp.removeEffect(paddle);
+                return true;
+            }
+            return false;
+        });
 
         checkCollisions();
         checkGameConditions();
@@ -127,7 +151,6 @@ public class GameManager {
 
     private void handleInput(double deltaTime) {
         // This would be called from the main application with current key states
-        // Simplified for demonstration
     }
 
     public void handleKeyPress(String key) {
@@ -156,14 +179,13 @@ public class GameManager {
             }
         }
 
-       if (keys['A'] == true) {
-           paddle.moveLeft(deltaTime);
-       }
+        if (keys['A']) {
+            paddle.moveLeft(deltaTime);
+        }
 
-       if (keys['D'] == true) {
-           paddle.moveRight(deltaTime);
-       }
-
+        if (keys['D']) {
+            paddle.moveRight(deltaTime);
+        }
     }
 
     private void togglePause() {
@@ -174,63 +196,75 @@ public class GameManager {
      * Check all collision detection
      */
     private void checkCollisions() {
-        // Ball-Wall collisions
-        if (ball.getX() <= 0) {
-            ball.setX(0);
-            ball.bounceOffWall('L');
-        }
-        if (ball.getX() + ball.getWidth() >= gameWidth) {
-            ball.setX(gameWidth - ball.getWidth());
-            ball.bounceOffWall('R');
-        }
-        if (ball.getY() <= 0) {
-            ball.setY(0);
-            ball.bounceOffWall('T');
-        }
+        // Process each ball
+        Iterator<Ball> ballIterator = balls.iterator();
+        while (ballIterator.hasNext()) {
+            Ball currentBall = ballIterator.next();
 
-        // Ball falls below paddle - lose life
-        if (ball.getY() > gameHeight) {
-            lives--;
-            if (lives <= 0) {
-                gameState = GameState.GAME_OVER;
-            } else {
-                resetBallAndPaddle();
+            // Ball-Wall collisions
+            if (currentBall.getX() <= 0) {
+                currentBall.setX(0);
+                currentBall.bounceOffWall('L');
             }
-        }
+            if (currentBall.getX() + currentBall.getWidth() >= gameWidth) {
+                currentBall.setX(gameWidth - currentBall.getWidth());
+                currentBall.bounceOffWall('R');
+            }
+            if (currentBall.getY() <= 0) {
+                currentBall.setY(0);
+                currentBall.bounceOffWall('T');
+            }
 
-        // Ball-Paddle collision
-        if (ball.intersects(paddle)) {
-            ball.bounceOffPaddle(paddle);
-        }
+            // Ball falls below paddle
+            if (currentBall.getY() > gameHeight) {
+                ballIterator.remove();
 
-        // Ball-Brick collisions
-        Iterator<Brick> brickIterator = bricks.iterator();
-        while (brickIterator.hasNext()) {
-            Brick brick = brickIterator.next();
-            if (ball.intersects(brick)) {
-                ball.bounceOff(brick);
-                brick.takeHit();
-
-                if (brick.isDestroyed()) {
-                    score += brick.getPoints();
-                    brickIterator.remove();
-
-                    // Random chance to spawn power-up
-                    if (Math.random() < 0.2) { // 20% chance
-                        spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
-                                brick.getY() + brick.getHeight());
+                // Only lose life if all balls are gone
+                if (balls.isEmpty()) {
+                    lives--;
+                    if (lives <= 0) {
+                        gameState = GameState.GAME_OVER;
+                    } else {
+                        resetBallAndPaddle();
                     }
                 }
-                break; // Only one collision per frame
+                continue;
+            }
+
+            // Ball-Paddle collision
+            if (currentBall.intersects(paddle)) {
+                currentBall.bounceOffPaddle(paddle);
+            }
+
+            // Ball-Brick collisions
+            for (Brick brick : bricks) {
+                if (currentBall.intersects(brick)) {
+                    currentBall.bounceOff(brick);
+                    brick.takeHit();
+
+                    if (brick.isDestroyed()) {
+                        score += brick.getPoints();
+
+                        // Random chance to spawn power-up
+                        if (Math.random() < 0.3) { // 30% chance
+                            spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
+                                    brick.getY() + brick.getHeight());
+                        }
+                    }
+                    break; // Only one collision per frame
+                }
             }
         }
+
+        // Remove destroyed bricks after checking all balls
+        bricks.removeIf(Brick::isDestroyed);
 
         // Paddle-PowerUp collisions
         Iterator<PowerUp> powerUpIterator = powerUps.iterator();
         while (powerUpIterator.hasNext()) {
             PowerUp powerUp = powerUpIterator.next();
             if (paddle.intersects(powerUp)) {
-                paddle.applyPowerUp(powerUp);
+                applyPowerUpEffect(powerUp);
                 powerUpIterator.remove();
             } else if (powerUp.getY() > gameHeight) {
                 powerUpIterator.remove(); // Remove if falls off screen
@@ -239,10 +273,89 @@ public class GameManager {
     }
 
     private void spawnRandomPowerUp(double x, double y) {
-        if (Math.random() < 0.5) {
-            powerUps.add(new ExpandPaddlePowerUp(x, y));
+        double rand = Math.random();
+        PowerUp powerUp;
+
+        // Tỷ lệ đều nhau: 20% cho mỗi loại (5 loại power-up)
+        if (rand < 0.2) {
+            powerUp = new ExpandPaddlePowerUp(x, y);
+        } else if (rand < 0.4) {
+            powerUp = new FastBallPowerUp(x, y);
+        } else if (rand < 0.6) {
+            powerUp = new SlowBallPowerUp(x, y);
+        } else if (rand < 0.8) {
+            powerUp = new ExtraLifePowerUp(x, y);
         } else {
-            powerUps.add(new FastBallPowerUp(x, y));
+            powerUp = new MultiBallPowerUp(x, y);
+        }
+
+        powerUps.add(powerUp);
+    }
+
+    private void applyPowerUpEffect(PowerUp powerUp) {
+        switch (powerUp.type) {
+            case EXPAND_PADDLE:
+                // Remove previous expand effect if exists
+                activePowerUps.removeIf(p -> p.type == PowerUp.PowerUpType.EXPAND_PADDLE);
+                powerUp.applyEffect(paddle);
+                activePowerUps.add(powerUp);
+                break;
+
+            case FAST_BALL:
+                // Remove any speed effect
+                activePowerUps.removeIf(p -> p.type == PowerUp.PowerUpType.FAST_BALL ||
+                        p.type == PowerUp.PowerUpType.SLOW_BALL);
+                for (Ball b : balls) {
+                    b.applySpeed(originalBallSpeed * 1.5);
+                }
+                powerUp.activate();
+                activePowerUps.add(powerUp);
+                break;
+
+            case SLOW_BALL:
+                // Remove any speed effect
+                activePowerUps.removeIf(p -> p.type == PowerUp.PowerUpType.FAST_BALL ||
+                        p.type == PowerUp.PowerUpType.SLOW_BALL);
+                for (Ball b : balls) {
+                    b.applySpeed(originalBallSpeed * 0.7);
+                }
+                powerUp.activate();
+                activePowerUps.add(powerUp);
+                break;
+
+            case EXTRA_LIFE:
+                lives++;
+                powerUp.activate();
+                break;
+
+            case MULTI_BALL:
+                spawnMultiBalls();
+                score += 50;
+                break;
+        }
+    }
+
+    /**
+     * Spawn 2 additional balls in different directions
+     */
+    private void spawnMultiBalls() {
+        if (balls.isEmpty()) return;
+
+        Ball originalBall = balls.get(0);
+
+        // Create 2 new balls
+        for (int i = 0; i < 2; i++) {
+            Ball newBall = new Ball(originalBall.getX(), originalBall.getY());
+            newBall.setTypeSkin(originalBall.getTypeSkin());
+            newBall.applySpeed(originalBall.getSpeed());
+
+            // Set different directions
+            double angle = Math.toRadians(-60 + i * 60); // -60° and 60°
+            double dx = Math.sin(angle);
+            double dy = -Math.cos(angle);
+            newBall.setDirection(dx, dy);
+
+            balls.add(newBall);
         }
     }
 
@@ -256,11 +369,18 @@ public class GameManager {
     }
 
     private void resetBallAndPaddle() {
-        ball.setX(gameWidth / 2 - 10);
-        ball.setY(gameHeight / 2);
+        balls.clear();
+
+        ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
         ball.setDirection(1, -1);
+        ball.applySpeed(originalBallSpeed);
+        balls.add(ball);
 
         paddle.setX(gameWidth / 2 - paddle.getWidth() / 2);
+        paddle.resetSize();
+
+        // Clear all active power-ups
+        activePowerUps.clear();
     }
 
     /**
@@ -278,7 +398,11 @@ public class GameManager {
         } else {
             // Render game objects
             paddle.render(gc);
-            ball.render(gc);
+
+            // Render all balls
+            for (Ball b : balls) {
+                b.render(gc);
+            }
 
             for (Brick brick : bricks) {
                 brick.render(gc);
@@ -289,6 +413,7 @@ public class GameManager {
             }
 
             renderUI(gc);
+            renderActivePowerUps(gc);
 
             if (gameState == GameState.PAUSED) {
                 renderPauseOverlay(gc);
@@ -316,6 +441,20 @@ public class GameManager {
         gc.fillText("Score: " + score, 10, 20);
         gc.fillText("Lives: " + lives, 10, 40);
         gc.fillText("Level: " + level, 10, 60);
+        gc.fillText("Balls: " + balls.size(), gameWidth - 80, 20);
+    }
+
+    private void renderActivePowerUps(GraphicsContext gc) {
+        gc.setFill(Color.YELLOW);
+        int yOffset = 80;
+        for (PowerUp powerUp : activePowerUps) {
+            if (powerUp.timeRemaining > 0) {
+                String text = powerUp.getSymbol() + ": " +
+                        String.format("%.1f", powerUp.timeRemaining) + "s";
+                gc.fillText(text, 10, yOffset);
+                yOffset += 20;
+            }
+        }
     }
 
     private void renderPauseOverlay(GraphicsContext gc) {
@@ -334,5 +473,4 @@ public class GameManager {
     public int getScore() { return score; }
     public int getLives() { return lives; }
     public int getLevel() { return level; }
-
 }

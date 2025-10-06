@@ -3,10 +3,11 @@ package arkanoid;
 import javafx.scene.paint.Color;
 
 /**
- * Power-up that expands the paddle size
+ * Power-up that expands the paddle width
  */
 public class ExpandPaddlePowerUp extends PowerUp {
-    private static final double EXPANSION_FACTOR = 1.5;
+    private static final double EXPANSION_MULTIPLIER = 1.5;
+    private double originalWidth;
 
     public ExpandPaddlePowerUp(double x, double y) {
         super(x, y, PowerUpType.EXPAND_PADDLE, 10.0); // 10 second duration
@@ -15,11 +16,16 @@ public class ExpandPaddlePowerUp extends PowerUp {
 
     @Override
     public void applyEffect(PaddleLike paddle) {
+        if (!active) {
+            originalWidth = paddle.getWidth();
+            paddle.setWidth(originalWidth * EXPANSION_MULTIPLIER);
+            activate();
+        }
     }
 
     @Override
     public void removeEffect(PaddleLike paddle) {
-
+        paddle.resetSize();
     }
 
     @Override
