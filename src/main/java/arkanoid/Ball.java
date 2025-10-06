@@ -8,8 +8,12 @@ import javafx.scene.paint.Color;
  * Handles collisions with other objects
  */
 public class Ball extends MovableObject {
-    private static final double DEFAULT_SIZE = 15;
+    private static final double DEFAULT_SIZE = 28;
     private static final double DEFAULT_SPEED = 325;
+
+    // Index Skin
+    private int TypeSkin = 1;
+
 
     private double directionX, directionY;
 
@@ -19,6 +23,7 @@ public class Ball extends MovableObject {
         // Start moving up and right
         this.directionX = 1;
         this.directionY = -1;
+
         updateVelocity();
     }
 
@@ -161,6 +166,14 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
+    public void setTypeSkin (int type) {
+        TypeSkin = type;
+    }
+
+    public int getTypeSkin () {
+        return TypeSkin;
+    }
+
     /**
      * Safely apply a new speed while preserving current direction.
      * Updates dx, dy to reflect the new speed.
@@ -177,10 +190,26 @@ public class Ball extends MovableObject {
 
     @Override
     public void render(GraphicsContext gc) {
+
+        String path = "/skinball_" + TypeSkin + ".png";
+        loadTexture(path);
+
+        if (useTexture == false && spriteSheet == null) {
+            System.exit(0);
+        }
+
+        setSpriteRegion(0,0,143, 143);
+        gc.drawImage(
+                spriteSheet,
+                sourceX, sourceY, sourceWidth, sourceHeight,  // Source rectangle
+                x, y, width, height                            // Destination rectangle
+        );
+       /*
         gc.setFill(color);
         gc.fillOval(x, y, width, height);
         gc.setStroke(Color.BLACK);
         gc.strokeOval(x, y, width, height);
+        */
     }
 
     public void setDirection(double dx, double dy) {
