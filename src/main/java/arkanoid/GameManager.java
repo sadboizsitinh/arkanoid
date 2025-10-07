@@ -131,30 +131,57 @@ public class GameManager {
     }
 
     /**
-     * Create bricks for the current level
+     * Create bricks for the current level from CSV file
      */
     private void createLevel(int level) {
         bricks.clear();
 
-        int rows = 5 + level;
-        int cols = 10;
-        double brickWidth = gameWidth / cols;
-        double brickHeight = 25;
-        double startY = 120;
+        String filename = "map" + level + ".csv";
+        try (Scanner scanner = new Scanner(new java.io.File("maps/" + filename))) {
+            int row = 0;
+            double brickWidth = gameWidth / 10;
+            double brickHeight = 25;
 
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                double x = col * brickWidth;
-                double y = startY + row * brickHeight;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] values = line.split(",");
+                for (int col = 0; col < values.length; col++) {
+                    int type = Integer.parseInt(values[col].trim());
+                    double x = col * brickWidth;
+                    double y = 50 + row * brickHeight;
 
-                if (row == 0) {
-                    bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
-                } else {
+                    switch (type) {
+                        case 1:
+                            bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            break;
+                        case 2:
+                            bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            break;
+                        case 3:
+                            bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                row++;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            int rows = 5 + level;
+            int cols = 10;
+            double brickWidth = gameWidth / cols;
+            double brickHeight = 25;
+            for (int r = 0; r < rows; r++) {
+                for (int c = 0; c < cols; c++) {
+                    double x = c * brickWidth;
+                    double y = 50 + r * brickHeight;
                     bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
                 }
             }
         }
     }
+
 
     /**
      * Main game update loop
@@ -401,13 +428,21 @@ public class GameManager {
     }
 
     private void checkGameConditions() {
-        // Check if all bricks destroyed
-        if (bricks.isEmpty()) {
+        boolean cleared = true;
+        for (Brick brick : bricks) {
+            if (!brick.isDestroyed() && brick.getType() != Brick.BrickType.UNBREAKABLE) {
+                cleared = false;
+                break;
+            }
+        }
+
+        if (cleared) {
             level++;
             createLevel(level);
             resetBallAndPaddle();
         }
     }
+
 
     private void resetBallAndPaddle() {
         balls.clear();

@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/StrongBrick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/StrongBrick.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/TextureManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/TextureManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "PhongHoangNguyen"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sadboizsitinh/Arkanoid.git",
+    "accountId": "b1338d4e-04e2-4a96-9e8a-f130691e4f77"
+  }
+}]]></component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
