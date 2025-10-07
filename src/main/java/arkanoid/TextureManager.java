@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Singleton class to manage game textures
- * Caches loaded images to improve performance
+ * Singleton TextureManager for loading and caching game textures
  */
 public class TextureManager {
     private static TextureManager instance;
@@ -24,58 +23,53 @@ public class TextureManager {
     }
 
     /**
-     * Load texture from resources folder
-     * @param resourcePath Path relative to resources folder (e.g., "/images/paddle.png")
+     * Load texture from resources, cache it if not already loaded
      */
     public Image loadTexture(String resourcePath) {
-        // Check cache first
         if (textureCache.containsKey(resourcePath)) {
             return textureCache.get(resourcePath);
         }
 
         try {
             Image image = new Image(getClass().getResourceAsStream(resourcePath));
-            textureCache.put(resourcePath, image);
-            System.out.println("Loaded texture: " + resourcePath);
-            return image;
+            if (!image.isError()) {
+                textureCache.put(resourcePath, image);
+                return image;
+            } else {
+                System.err.println("Error loading texture: " + resourcePath);
+                return null;
+            }
         } catch (Exception e) {
-            System.err.println("Failed to load texture: " + resourcePath + " - " + e.getMessage());
+            System.err.println("Failed to load texture " + resourcePath + ": " + e.getMessage());
             return null;
         }
     }
 
     /**
-     * Load texture from file system path
-     * @param filePath Absolute or relative file path
+     * Get texture from cache
      */
-    public Image loadTextureFromFile(String filePath) {
-        if (textureCache.containsKey(filePath)) {
-            return textureCache.get(filePath);
-        }
-
-        try {
-            Image image = new Image("file:" + filePath);
-            textureCache.put(filePath, image);
-            System.out.println("Loaded texture from file: " + filePath);
-            return image;
-        } catch (Exception e) {
-            System.err.println("Failed to load texture from file: " + filePath + " - " + e.getMessage());
-            return null;
-        }
+    public Image getTexture(String resourcePath) {
+        return textureCache.get(resourcePath);
     }
 
     /**
-     * Clear texture cache
+     * Check if texture is loaded
+     */
+    public boolean isLoaded(String resourcePath) {
+        return textureCache.containsKey(resourcePath);
+    }
+
+    /**
+     * Clear all cached textures
      */
     public void clearCache() {
         textureCache.clear();
-        System.out.println("Texture cache cleared");
     }
 
     /**
-     * Get cached texture
+     * Get cache size
      */
-    public Image getTexture(String path) {
-        return textureCache.get(path);
+    public int getCacheSize() {
+        return textureCache.size();
     }
 }
