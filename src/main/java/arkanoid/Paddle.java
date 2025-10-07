@@ -57,18 +57,15 @@ public class Paddle extends MovableObject implements PaddleLike {
 
     // Update position and check bound
     public void moveLeft(double deltaTime) {
-        dx = -speed;
+        x -= speed * deltaTime;
 
-        move(deltaTime);
-
-        if (x < 0) x = 0;
-        dx = 0;
+        if (x < 0) {
+            x = 0;
+        }
     }
 
     public void moveRight(double deltaTime) {
-        dx = speed;
-
-        x += dx * deltaTime;
+        x += speed * deltaTime;
 
         double gameWidth = GameManager.getInstance().getGameWidth();
 

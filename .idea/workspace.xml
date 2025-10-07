@@ -5,16 +5,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/Brick$BrickType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/BrickFactory$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/BrickFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBall.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBrick$BrickType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedGameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedNormalBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedPaddle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedSpecialItemBrick$ItemType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedSpecialItemBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedStrongBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedUnbreakableBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/ExpandPaddlePowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/ExtraLifePowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/FastBallPowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$GameState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/MovableObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/MultiBallPowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/NormalBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/PaddleLike.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/Particle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/ParticleSystem.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/PowerUp$PowerUpType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/PowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/SlowBallPowerUp.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/SpecialBrick$SpecialType.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/SpecialBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/StrongBrick.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/UnbreakableBrick.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Brick.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Brick.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,6 +86,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Maven.arkanoid [clean].executor": "Run",
+    "Maven.arkanoid [compile].executor": "Run",
+    "Maven.arkanoid [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor": "Run",
+    "Maven.arkanoid [org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile].executor": "Run",
+    "Maven.arkanoid [org.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -59,13 +101,16 @@
     "js.debugger.nextJs.config.created.server": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Thinkpad/Arkanoid",
+    "last_opened_file_path": "C:/Java/Merged_Arkanoid_Project/Merged_Arkanoid_Project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "npm.Next.js: server-side.executor": "Run",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
@@ -85,15 +130,6 @@
       </method>
     </configuration>
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
       <method v="2" />
     </configuration>
     <configuration name="Next.js: server-side" type="js.build_tools.npm">
@@ -132,6 +168,14 @@
       <workItem from="1759115395623" duration="6973000" />
       <workItem from="1759128994273" duration="1588000" />
       <workItem from="1759155238877" duration="1034000" />
+      <workItem from="1759465138247" duration="3745000" />
+      <workItem from="1759507671374" duration="676000" />
+      <workItem from="1759659756840" duration="64000" />
+      <workItem from="1759718954447" duration="2386000" />
+      <workItem from="1759771668196" duration="2398000" />
+      <workItem from="1759774234232" duration="4132000" />
+      <workItem from="1759793813452" duration="3434000" />
+      <workItem from="1759798612371" duration="1105000" />
     </task>
     <servers />
   </component>
@@ -143,7 +187,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

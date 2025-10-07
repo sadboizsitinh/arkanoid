@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.controller.MainController" stylesheets="@../css/style.css" prefWidth="800" prefHeight="600">
+  <top>
+    <VBox alignment="CENTER" spacing="6" BorderPane.alignment="CENTER" style="-fx-padding: 40;">
+      <Label text="ARKANOID" style="-fx-font-size: 72px; -fx-font-weight: bold;"/>
+      <Label text="Break all the brick" style="-fx-font-size: 20px; -fx-text-fill: #8b93a5;"/>
+    </VBox>
+  </top>
+  <center>
+    <VBox spacing="28" alignment="CENTER">
+      <Button text="Continue Game" fx:id="btnContinue" styleClass="button-main" prefWidth="300" prefHeight="54"/>
+      <HBox spacing="24" alignment="CENTER">
+        <Button text="Start Game" fx:id="btnStart" styleClass="button-main" prefWidth="200" prefHeight="54"/>
+        <Button text="High Scores" fx:id="btnHighScores" styleClass="button-alt" prefWidth="200" prefHeight="54"/>
+      </HBox>
+      <Button text="Exit" fx:id="btnExit" styleClass="button-alt" prefWidth="300" prefHeight="54"/>
+    </VBox>
+  </center>
+</BorderPane>
