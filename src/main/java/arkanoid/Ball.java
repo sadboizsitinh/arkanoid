@@ -14,13 +14,16 @@ public class Ball extends MovableObject {
     // Index Skin
     private int TypeSkin = 1;
 
-
     private double directionX, directionY;
+
+    // ✅ Trạng thái dính trên paddle
+    private boolean stuckToPaddle = true;
+    private double offsetFromPaddleCenter = 0; // Vị trí tương đối so với tâm paddle
 
     public Ball(double x, double y) {
         super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, DEFAULT_SPEED);
         this.color = Color.RED;
-        // Start moving up and right
+        // Start moving up and right (chỉ dùng khi release)
         this.directionX = 1;
         this.directionY = -1;
 
@@ -30,6 +33,42 @@ public class Ball extends MovableObject {
     private void updateVelocity() {
         dx = directionX * speed;
         dy = directionY * speed;
+    }
+
+    /**
+     * ✅ Release ball from paddle
+     */
+    public void release() {
+        stuckToPaddle = false;
+    }
+
+    /**
+     * ✅ Stick ball to paddle at start/new level
+     */
+    public void stickToPaddle(Paddle paddle) {
+        stuckToPaddle = true;
+        // Tính offset từ tâm paddle
+        double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
+        double ballCenter = x + width / 2;
+        offsetFromPaddleCenter = ballCenter - paddleCenter;
+    }
+
+    /**
+     * ✅ Update position when stuck to paddle
+     */
+    public void updateStuckPosition(Paddle paddle) {
+        if (stuckToPaddle) {
+            double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
+            x = paddleCenter + offsetFromPaddleCenter - width / 2;
+            y = paddle.getY() - height - 2; // Đặt trên paddle
+        }
+    }
+
+    /**
+     * ✅ Check if ball is stuck
+     */
+    public boolean isStuckToPaddle() {
+        return stuckToPaddle;
     }
 
     /**
@@ -185,12 +224,14 @@ public class Ball extends MovableObject {
 
     @Override
     public void update(double deltaTime) {
-        move(deltaTime);
+        // ✅ Chỉ di chuyển khi không dính trên paddle
+        if (!stuckToPaddle) {
+            move(deltaTime);
+        }
     }
 
     @Override
     public void render(GraphicsContext gc) {
-
         String path = "/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
@@ -204,12 +245,6 @@ public class Ball extends MovableObject {
                 sourceX, sourceY, sourceWidth, sourceHeight,  // Source rectangle
                 x, y, width, height                            // Destination rectangle
         );
-       /*
-        gc.setFill(color);
-        gc.fillOval(x, y, width, height);
-        gc.setStroke(Color.BLACK);
-        gc.strokeOval(x, y, width, height);
-        */
     }
 
     public void setDirection(double dx, double dy) {

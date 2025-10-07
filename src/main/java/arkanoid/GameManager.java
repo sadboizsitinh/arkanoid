@@ -35,7 +35,7 @@ public class GameManager {
     private double gameHeight;
 
     // Ball speed tracking for power-ups
-    private static final double DEFAULT_BALL_SPEED = 325.0; // ✅ Tốc độ mặc định cố định
+    private static final double DEFAULT_BALL_SPEED = 325.0;
     private double originalBallSpeed;
 
     public enum GameState {
@@ -49,16 +49,33 @@ public class GameManager {
         this.powerUps = new ArrayList<>();
         this.activePowerUps = new ArrayList<>();
         this.balls = new ArrayList<>();
-        this.originalBallSpeed = DEFAULT_BALL_SPEED; // ✅ Khởi tạo tốc độ gốc
+        this.originalBallSpeed = DEFAULT_BALL_SPEED;
         reset();
     }
 
     public void setMovingLeft(boolean moving) {
         this.movingLeft = moving;
+        // ✅ Release ball khi bắt đầu di chuyển
+        releaseBallsFromPaddle();
     }
 
     public void setMovingRight(boolean moving) {
         this.movingRight = moving;
+        // ✅ Release ball khi bắt đầu di chuyển
+        releaseBallsFromPaddle();
+    }
+
+    /**
+     * ✅ Release tất cả các ball đang dính trên paddle
+     */
+    private void releaseBallsFromPaddle() {
+        if (gameState == GameState.PLAYING) {
+            for (Ball b : balls) {
+                if (b.isStuckToPaddle()) {
+                    b.release();
+                }
+            }
+        }
     }
 
     public static GameManager getInstance() {
@@ -71,7 +88,6 @@ public class GameManager {
     public void startGame() {
         System.out.println("startGame called, current state: " + gameState);
 
-        // ✅ Reset hoàn toàn và chuyển sang PLAYING
         reset();
         gameState = GameState.PLAYING;
 
@@ -87,15 +103,15 @@ public class GameManager {
         movingLeft = false;
         movingRight = false;
 
-        // ✅ QUAN TRỌNG: Reset tốc độ về mặc định
         originalBallSpeed = DEFAULT_BALL_SPEED;
 
         // Initialize paddle
         paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 50);
 
-        // Initialize ball với tốc độ mặc định
+        // ✅ Initialize ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
-        ball.applySpeed(originalBallSpeed); // ✅ Đảm bảo tốc độ đúng
+        ball.applySpeed(originalBallSpeed);
+        ball.stickToPaddle(paddle); // Dính lên paddle
 
         // Clear and add main ball to balls list
         balls.clear();
@@ -104,10 +120,8 @@ public class GameManager {
         // Initialize bricks
         createLevel(level);
 
-        // ✅ Clear ALL power-ups và effects
         powerUps.clear();
 
-        // ✅ Remove effects from active power-ups before clearing
         for (PowerUp powerUp : activePowerUps) {
             powerUp.removeEffect(paddle);
         }
@@ -122,18 +136,17 @@ public class GameManager {
     private void createLevel(int level) {
         bricks.clear();
 
-        int rows = 5 + level; // More rows as level increases
+        int rows = 5 + level;
         int cols = 10;
         double brickWidth = gameWidth / cols;
         double brickHeight = 25;
-        double startY = 120; // ✅ Bắt đầu thấp hơn để tránh UI (trước là 50)
+        double startY = 120;
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 double x = col * brickWidth;
                 double y = startY + row * brickHeight;
 
-                // Create different brick types based on position
                 if (row == 0) {
                     bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
                 } else {
@@ -147,7 +160,6 @@ public class GameManager {
      * Main game update loop
      */
     public void updateGame(double deltaTime) {
-        // Chỉ update game logic khi đang PLAYING
         if (gameState != GameState.PLAYING) return;
 
         // Handle paddle movement with simple flags
@@ -156,6 +168,13 @@ public class GameManager {
         }
         if (movingRight) {
             paddle.moveRight(deltaTime);
+        }
+
+        // ✅ Update vị trí ball khi dính trên paddle
+        for (Ball b : balls) {
+            if (b.isStuckToPaddle()) {
+                b.updateStuckPosition(paddle);
+            }
         }
 
         // Update all balls
@@ -174,7 +193,6 @@ public class GameManager {
             if (powerUp.isExpired()) {
                 powerUp.removeEffect(paddle);
 
-                // ✅ Reset ball speed khi power-up hết hạn
                 if (powerUp.type == PowerUp.PowerUpType.FAST_BALL ||
                         powerUp.type == PowerUp.PowerUpType.SLOW_BALL) {
                     for (Ball b : balls) {
@@ -206,6 +224,11 @@ public class GameManager {
         Iterator<Ball> ballIterator = balls.iterator();
         while (ballIterator.hasNext()) {
             Ball currentBall = ballIterator.next();
+
+            // ✅ Bỏ qua collision check nếu ball đang dính
+            if (currentBall.isStuckToPaddle()) {
+                continue;
+            }
 
             // Ball-Wall collisions
             if (currentBall.getX() <= 0) {
@@ -273,7 +296,7 @@ public class GameManager {
                 applyPowerUpEffect(powerUp);
                 powerUpIterator.remove();
             } else if (powerUp.getY() > gameHeight) {
-                powerUpIterator.remove(); // Remove if falls off screen
+                powerUpIterator.remove();
             }
         }
     }
@@ -282,7 +305,6 @@ public class GameManager {
         double rand = Math.random();
         PowerUp powerUp;
 
-        // Tỷ lệ đều nhau: 20% cho mỗi loại (5 loại power-up)
         if (rand < 0.2) {
             powerUp = new ExpandPaddlePowerUp(x, y);
         } else if (rand < 0.4) {
@@ -301,7 +323,6 @@ public class GameManager {
     private void applyPowerUpEffect(PowerUp powerUp) {
         switch (powerUp.type) {
             case EXPAND_PADDLE:
-                // Remove previous expand effect if exists
                 activePowerUps.removeIf(p -> {
                     if (p.type == PowerUp.PowerUpType.EXPAND_PADDLE) {
                         p.removeEffect(paddle);
@@ -314,7 +335,6 @@ public class GameManager {
                 break;
 
             case FAST_BALL:
-                // Remove any speed effect
                 activePowerUps.removeIf(p ->
                         p.type == PowerUp.PowerUpType.FAST_BALL ||
                                 p.type == PowerUp.PowerUpType.SLOW_BALL
@@ -327,7 +347,6 @@ public class GameManager {
                 break;
 
             case SLOW_BALL:
-                // Remove any speed effect
                 activePowerUps.removeIf(p ->
                         p.type == PowerUp.PowerUpType.FAST_BALL ||
                                 p.type == PowerUp.PowerUpType.SLOW_BALL
@@ -359,6 +378,11 @@ public class GameManager {
 
         Ball originalBall = balls.get(0);
 
+        // ✅ Chỉ spawn nếu ball không dính trên paddle
+        if (originalBall.isStuckToPaddle()) {
+            return;
+        }
+
         // Create 2 new balls
         for (int i = 0; i < 2; i++) {
             Ball newBall = new Ball(originalBall.getX(), originalBall.getY());
@@ -370,6 +394,7 @@ public class GameManager {
             double dx = Math.sin(angle);
             double dy = -Math.cos(angle);
             newBall.setDirection(dx, dy);
+            newBall.release(); // Đảm bảo ball mới không dính
 
             balls.add(newBall);
         }
@@ -387,16 +412,16 @@ public class GameManager {
     private void resetBallAndPaddle() {
         balls.clear();
 
-        // ✅ Reset ball với tốc độ gốc
+        // ✅ Reset ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
         ball.setDirection(1, -1);
-        ball.applySpeed(originalBallSpeed); // ✅ Dùng tốc độ gốc không bị ảnh hưởng
+        ball.applySpeed(originalBallSpeed);
+        ball.stickToPaddle(paddle); // Dính lên paddle
         balls.add(ball);
 
         paddle.setX(gameWidth / 2 - paddle.getWidth() / 2);
         paddle.resetSize();
 
-        // ✅ Clear all active power-ups and remove their effects
         for (PowerUp powerUp : activePowerUps) {
             powerUp.removeEffect(paddle);
         }
@@ -445,9 +470,22 @@ public class GameManager {
             renderUI(gc);
             renderActivePowerUps(gc);
 
-            // ✅ KHÔNG render pause overlay trên canvas nữa vì đã có FXML
-            // PauseOverlay.fxml sẽ xử lý việc hiển thị
+            // ✅ Hiển thị hướng dẫn khi ball đang dính
+            if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
+                renderStuckBallHint(gc);
+            }
         }
+    }
+
+    /**
+     * ✅ Hiển thị hint khi ball đang dính trên paddle
+     */
+    private void renderStuckBallHint(GraphicsContext gc) {
+        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 18));
+        gc.setFill(Color.web("#fbbf24"));
+        String hint = "Move paddle to start!";
+        double textWidth = 180; // Ước lượng
+        gc.fillText(hint, gameWidth / 2 - textWidth / 2, gameHeight - 100);
     }
 
     private void renderMenu(GraphicsContext gc) {

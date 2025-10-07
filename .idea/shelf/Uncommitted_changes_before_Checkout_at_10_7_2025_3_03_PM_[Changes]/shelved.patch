@@ -1,0 +1,141 @@
+Index: src/main/java/arkanoid/Brick.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arkanoid;\r\n\r\nimport javafx.scene.canvas.GraphicsContext;\r\nimport javafx.scene.paint.Color;\r\n\r\n/**\r\n * Base class for all brick types\r\n * Can be hit and destroyed\r\n */\r\npublic abstract class Brick extends GameObject {\r\n    protected int hitPoints;\r\n    protected int maxHitPoints;\r\n    protected boolean destroyed;\r\n    protected BrickType type;\r\n\r\n    public enum BrickType {\r\n        NORMAL, STRONG, UNBREAKABLE\r\n    }\r\n\r\n    public Brick(double x, double y, double width, double height, int hitPoints, BrickType type) {\r\n        super(x, y, width, height);\r\n        this.hitPoints = hitPoints;\r\n        this.maxHitPoints = hitPoints;\r\n        this.destroyed = false;\r\n        this.type = type;\r\n    }\r\n\r\n    /**\r\n     * Handle being hit by the ball\r\n     */\r\n    public void takeHit() {\r\n        if (type != BrickType.UNBREAKABLE) {\r\n            hitPoints--;\r\n            if (hitPoints <= 0) {\r\n                destroyed = true;\r\n            }\r\n            updateColor();\r\n        }\r\n    }\r\n\r\n    protected abstract void updateColor();\r\n\r\n    public boolean isDestroyed() {\r\n        return destroyed;\r\n    }\r\n\r\n    public BrickType getType() {\r\n        return type;\r\n    }\r\n\r\n    public int getPoints() {\r\n        switch (type) {\r\n            case NORMAL:\r\n                return 10;\r\n            case STRONG:\r\n                return 20;\r\n            case UNBREAKABLE:\r\n                return 0;\r\n            default:\r\n                return 0; // fallback an toàn\r\n        }\r\n    }\r\n\r\n\r\n    @Override\r\n    public void update(double deltaTime) {\r\n        // Bricks don't need to update unless animated\r\n    }\r\n\r\n    @Override\r\n    public void render(GraphicsContext gc) {\r\n        if (!destroyed) {\r\n            gc.setFill(color);\r\n            gc.fillRect(x, y, width, height);\r\n            gc.setStroke(Color.WHITE);\r\n            gc.setLineWidth(1);\r\n            gc.strokeRect(x, y, width, height);\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/arkanoid/Brick.java b/src/main/java/arkanoid/Brick.java
+--- a/src/main/java/arkanoid/Brick.java	(revision ced47bdb23b05dcdc4694e2908c280e59676daf3)
++++ b/src/main/java/arkanoid/Brick.java	(date 1759739328747)
+@@ -77,4 +77,4 @@
+             gc.strokeRect(x, y, width, height);
+         }
+     }
+-}
++}
+\ No newline at end of file
+Index: src/main/java/arkanoid/EnhancedNormalBrick.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arkanoid;\r\n\r\nimport javafx.scene.canvas.GraphicsContext;\r\nimport javafx.scene.paint.Color;\r\n\r\n/**\r\n * Enhanced normal brick with gradient and effects\r\n */\r\npublic class EnhancedNormalBrick extends EnhancedBrick {\r\n\r\n    public EnhancedNormalBrick(double x, double y, double width, double height, ParticleSystem particleSystem) {\r\n        super(x, y, width, height, 1, BrickType.NORMAL, particleSystem);\r\n\r\n        // Set gradient colors\r\n        Color baseColor = Color.color(1.0, 0.6, 0.2); // Orange\r\n        setGradient(baseColor.brighter(), baseColor.darker());\r\n        this.color = baseColor;\r\n    }\r\n\r\n    @Override\r\n    protected void updateColor() {\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/arkanoid/EnhancedNormalBrick.java b/src/main/java/arkanoid/EnhancedNormalBrick.java
+--- a/src/main/java/arkanoid/EnhancedNormalBrick.java	(revision ced47bdb23b05dcdc4694e2908c280e59676daf3)
++++ b/src/main/java/arkanoid/EnhancedNormalBrick.java	(date 1759739378108)
+@@ -20,4 +20,4 @@
+     @Override
+     protected void updateColor() {
+     }
+-}
++}
+\ No newline at end of file
+Index: src/main/java/arkanoid/NormalBrick.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package arkanoid;\r\n\r\nimport javafx.scene.paint.Color;\r\n\r\n/**\r\n * Normal brick - destroyed in one hit\r\n */\r\npublic class NormalBrick extends Brick {\r\n    public NormalBrick(double x, double y, double width, double height) {\r\n        super(x, y, width, height, 1, BrickType.NORMAL);\r\n        this.color = Color.ORANGE;\r\n    }\r\n\r\n    @Override\r\n    protected void updateColor() {\r\n        // Normal bricks don't change color\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/arkanoid/NormalBrick.java b/src/main/java/arkanoid/NormalBrick.java
+--- a/src/main/java/arkanoid/NormalBrick.java	(revision ced47bdb23b05dcdc4694e2908c280e59676daf3)
++++ b/src/main/java/arkanoid/NormalBrick.java	(date 1759739352492)
+@@ -15,4 +15,4 @@
+     protected void updateColor() {
+         // Normal bricks don't change color
+     }
+-}
++}
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"189f6748-a51a-430d-9ac0-828437885028\" name=\"Changes\" comment=\"cap nhat\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/classes/arkanoid/GameManager.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/arkanoid/GameManager.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/classes/arkanoid/Paddle.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/arkanoid/Paddle.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Merge.Settings\">\r\n    <option name=\"BRANCH\" value=\"main\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <excluded-from-favorite>\r\n      <branch-storage>\r\n        <map>\r\n          <entry type=\"LOCAL\">\r\n            <value>\r\n              <list>\r\n                <branch-info repo=\"$PROJECT_DIR$\" source=\"main\" />\r\n              </list>\r\n            </value>\r\n          </entry>\r\n        </map>\r\n      </branch-storage>\r\n    </excluded-from-favorite>\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"Basecode\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;DucHieu252&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,\r\n    &quot;accountId&quot;: &quot;f8b167ec-24de-42f0-8ea4-b07296b440b7&quot;\r\n  }\r\n}</component>\r\n  <component name=\"PackageJsonUpdateNotifier\">\r\n    <dismissed value=\"$PROJECT_DIR$/package.json\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 8\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"33K6jMzShaIv8oNKR0gHzPJyFtv\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"1\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Application.Main.executor&quot;: &quot;Run&quot;,\r\n    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;main&quot;,\r\n    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,\r\n    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,\r\n    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,\r\n    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,\r\n    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/Thinkpad/Arkanoid&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,\r\n    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"arkanoid.Main\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"arkanoid.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Next.js: debug client-side\" type=\"JavascriptDebugType\" uri=\"http://localhost:3000/\">\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Next.js: server-side\" type=\"js.build_tools.npm\">\r\n      <package-json value=\"$PROJECT_DIR$/package.json\" />\r\n      <command value=\"run\" />\r\n      <scripts>\r\n        <script value=\"dev\" />\r\n      </scripts>\r\n      <node-interpreter value=\"project\" />\r\n      <envs />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.Main\" />\r\n        <item itemvalue=\"Application.Main\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"189f6748-a51a-430d-9ac0-828437885028\" name=\"Changes\" comment=\"\" />\r\n      <created>1759053550378</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1759053550378</updated>\r\n      <workItem from=\"1759053551557\" duration=\"6314000\" />\r\n      <workItem from=\"1759072016019\" duration=\"2477000\" />\r\n      <workItem from=\"1759115395623\" duration=\"6973000\" />\r\n      <workItem from=\"1759128994273\" duration=\"1588000\" />\r\n      <workItem from=\"1759155238877\" duration=\"1034000\" />\r\n      <workItem from=\"1759657126089\" duration=\"982000\" />\r\n      <workItem from=\"1759708734683\" duration=\"53000\" />\r\n      <workItem from=\"1759711492510\" duration=\"67000\" />\r\n      <workItem from=\"1759711672428\" duration=\"5201000\" />\r\n      <workItem from=\"1759719521285\" duration=\"27000\" />\r\n      <workItem from=\"1759722757579\" duration=\"23000\" />\r\n      <workItem from=\"1759731220790\" duration=\"2332000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"main\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ced47bdb23b05dcdc4694e2908c280e59676daf3)
++++ b/.idea/workspace.xml	(date 1759823985594)
+@@ -4,16 +4,11 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="cap nhat">
++    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="feat: add powerup for game!">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedNormalBrick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedNormalBrick.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/NormalBrick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/NormalBrick.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -97,6 +92,9 @@
+     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+     &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+     &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+     &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+@@ -170,8 +168,28 @@
+       <workItem from="1759711672428" duration="5201000" />
+       <workItem from="1759719521285" duration="27000" />
+       <workItem from="1759722757579" duration="23000" />
+-      <workItem from="1759731220790" duration="2332000" />
++      <workItem from="1759731220790" duration="2946000" />
++      <workItem from="1759736638184" duration="734000" />
++      <workItem from="1759737471596" duration="72000" />
++      <workItem from="1759738177162" duration="1382000" />
++    </task>
++    <task id="LOCAL-00001" summary="feat: add powerup for game!">
++      <option name="closed" value="true" />
++      <created>1759735531729</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1759735531729</updated>
+     </task>
++    <task id="LOCAL-00002" summary="feat: add powerup for game!">
++      <option name="closed" value="true" />
++      <created>1759735551317</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1759735551317</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -188,7 +206,7 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
+-                        <option value="main" />
++                        <option value="origin/main" />
+                       </list>
+                     </value>
+                   </entry>
+@@ -200,4 +218,8 @@
+       </map>
+     </option>
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="feat: add powerup for game!" />
++    <option name="LAST_COMMIT_MESSAGE" value="feat: add powerup for game!" />
++  </component>
+ </project>
+\ No newline at end of file
