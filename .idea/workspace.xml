@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
-    </list>
+    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -145,6 +140,15 @@
       <workItem from="1759793813452" duration="3434000" />
       <workItem from="1759798612371" duration="1105000" />
     </task>
+    <task id="LOCAL-00001" summary="Thêm map và sửa điều kiện thắng">
+      <option name="closed" value="true" />
+      <created>1759844400220</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1759844400220</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,5 +176,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Thêm map và sửa điều kiện thắng" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thêm map và sửa điều kiện thắng" />
   </component>
 </project>
