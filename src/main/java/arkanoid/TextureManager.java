@@ -1,8 +1,14 @@
 package arkanoid;
 
 import javafx.scene.image.Image;
+
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * Singleton TextureManager for loading and caching game textures

@@ -22,9 +22,7 @@ public abstract class MovableObject extends GameObject {
     public double sourceX, sourceY, sourceWidth, sourceHeight;
     public boolean useTexture;
 
-    /**
-     * Load sprite sheet từ TextureManager
-     */
+
     public void loadTexture(String resourcePath) {
         try {
             spriteSheet = TextureManager.getInstance().loadTexture(resourcePath);
@@ -41,13 +39,6 @@ public abstract class MovableObject extends GameObject {
         }
     }
 
-    /**
-     * Đặt vùng sprite cần lấy từ sprite sheet
-     * @param x Tọa độ X trên sprite sheet
-     * @param y Tọa độ Y trên sprite sheet
-     * @param width Chiều rộng vùng cắt
-     * @param height Chiều cao vùng cắt
-     */
     public void setSpriteRegion(double x, double y, double width, double height) {
         this.sourceX = x;
         this.sourceY = y;

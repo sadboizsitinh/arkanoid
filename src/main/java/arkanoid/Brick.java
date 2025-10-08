@@ -69,12 +69,23 @@ public abstract class Brick extends GameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-        if (!destroyed) {
-            gc.setFill(color);
-            gc.fillRect(x, y, width, height);
-            gc.setStroke(Color.WHITE);
-            gc.setLineWidth(1);
-            gc.strokeRect(x, y, width, height);
+        String BrickCode = "";
+        if (type == BrickType.NORMAL) {
+            BrickCode = "normal_";
         }
+        if (type == BrickType.STRONG) {
+            BrickCode = "strong_";
+        }
+        if (type == BrickType.UNBREAKABLE) {
+            BrickCode = "unbreakable_";
+        }
+        String path = "/brick_" + BrickCode + (hitPoints == 1 ? "2" : "1") + ".png";
+        loadTexture(path);
+        setSpriteRegion(0,0,384, 128);
+        gc.drawImage(
+                spriteSheet,
+                sourceX, sourceY, sourceWidth, sourceHeight,
+                x, y, width, height
+        );
     }
 }

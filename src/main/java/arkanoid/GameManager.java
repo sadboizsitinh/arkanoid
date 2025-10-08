@@ -149,7 +149,7 @@ public class GameManager {
                     int type = Integer.parseInt(values[col].trim());
                     double x = col * brickWidth;
                     double y = 50 + row * brickHeight;
-
+                    bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
                     switch (type) {
                         case 1:
                             bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
@@ -176,7 +176,7 @@ public class GameManager {
                 for (int c = 0; c < cols; c++) {
                     double x = c * brickWidth;
                     double y = 50 + r * brickHeight;
-                    bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
+                    bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
                 }
             }
         }

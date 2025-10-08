@@ -1,6 +1,7 @@
 package arkanoid;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import java.util.Random;
 
@@ -34,6 +35,7 @@ public abstract class EnhancedBrick extends EnhancedGameObject {
         setShadow(3, 3, Color.color(0, 0, 0, 0.4));
     }
 
+
     /**
      * Handle being hit by the ball with enhanced effects
      */
@@ -60,13 +62,6 @@ public abstract class EnhancedBrick extends EnhancedGameObject {
 
     @Override
     public void render(GraphicsContext gc) {
-    }
-
-    /**
-     * Render cracks based on remaining hit points. The more damaged the brick,
-     * the denser and thicker the cracks appear.
-     */
-    private void renderCracks(GraphicsContext gc) {
     }
 
     private static double clamp(double v, double min, double max) {
