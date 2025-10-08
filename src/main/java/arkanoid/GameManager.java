@@ -147,9 +147,13 @@ public class GameManager {
                 String[] values = line.split(",");
                 for (int col = 0; col < values.length; col++) {
                     int type = Integer.parseInt(values[col].trim());
+
+                    if (type == 0) continue; // Bỏ qua ô trống
+
                     double x = col * brickWidth;
                     double y = 50 + row * brickHeight;
-                    bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
+
+                    // ✅ Chỉ add 1 brick dựa trên type
                     switch (type) {
                         case 1:
                             bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
@@ -160,14 +164,15 @@ public class GameManager {
                         case 3:
                             bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
                             break;
-                        default:
-                            break;
                     }
                 }
                 row++;
             }
         } catch (Exception e) {
+            System.err.println("⚠️ Cannot load " + filename + ": " + e.getMessage());
             e.printStackTrace();
+
+            // Fallback: tạo map mặc định
             int rows = 5 + level;
             int cols = 10;
             double brickWidth = gameWidth / cols;
@@ -176,7 +181,7 @@ public class GameManager {
                 for (int c = 0; c < cols; c++) {
                     double x = c * brickWidth;
                     double y = 50 + r * brickHeight;
-                    bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
+                    bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
                 }
             }
         }
