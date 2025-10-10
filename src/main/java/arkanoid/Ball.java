@@ -2,7 +2,7 @@ package arkanoid;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-
+import javafx.scene.image.Image;
 /**
  * Game ball that bounces around the screen
  * Handles collisions with other objects
@@ -12,7 +12,7 @@ public class Ball extends MovableObject {
     private static final double DEFAULT_SPEED = 325;
 
     // Index Skin
-    private int TypeSkin = 1;
+    private int TypeSkin = 2;
 
     private double directionX, directionY;
 
@@ -235,11 +235,11 @@ public class Ball extends MovableObject {
         String path = "/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
-        if (useTexture == false && spriteSheet == null) {
-            System.exit(0);
-        }
+        Image img = new Image(path);
+        double W = img.getWidth();
+        double H = img.getHeight();
 
-        setSpriteRegion(0,0,143, 143);
+        setSpriteRegion(0,0,W, H);
         gc.drawImage(
                 spriteSheet,
                 sourceX, sourceY, sourceWidth, sourceHeight,  // Source rectangle

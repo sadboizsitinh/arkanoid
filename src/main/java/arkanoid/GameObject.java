@@ -21,6 +21,35 @@ public abstract class GameObject {
         this.color = Color.WHITE;
     }
 
+    // Texture detail
+    public Image spriteSheet;
+    public double sourceX, sourceY, sourceWidth, sourceHeight;
+    public boolean useTexture;
+
+
+    public void loadTexture(String resourcePath) {
+        try {
+            spriteSheet = TextureManager.getInstance().loadTexture(resourcePath);
+            if (spriteSheet != null) {
+                useTexture = true;
+                System.out.println("Paddle sprite sheet loaded via TextureManager!");
+            } else {
+                useTexture = false;
+                System.out.println("Sprite sheet not found, using color fallback");
+            }
+        } catch (Exception e) {
+            System.out.println("Could not load sprite sheet: " + e.getMessage());
+            useTexture = false;
+        }
+    }
+
+    public void setSpriteRegion(double x, double y, double width, double height) {
+        this.sourceX = x;
+        this.sourceY = y;
+        this.sourceWidth = width;
+        this.sourceHeight = height;
+    }
+
     // Getters and Setters with proper encapsulation
     public double getX() { return x; }
     public double getY() { return y; }

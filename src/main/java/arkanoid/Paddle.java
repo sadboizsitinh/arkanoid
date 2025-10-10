@@ -17,9 +17,6 @@ public class Paddle extends MovableObject implements PaddleLike {
     private PowerUp currentPowerUp;
     private double originalWidth;
 
-    public boolean called = false;
-    public boolean loaded = false;
-
     public Paddle(double x, double y) {
         super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SPEED);
 
@@ -27,11 +24,9 @@ public class Paddle extends MovableObject implements PaddleLike {
         this.color = Color.BLUE;
         this.useTexture = false;
 
-        if (loaded == false) {
-            loadTexture("/bricks-wip.png");
-            setSpriteRegion(0, 125, 100, 25);
-            loaded = true;
-        }
+
+        loadTexture("/bricks-wip.png");
+        setSpriteRegion(0, 125, 100, 25);
     }
 
     public void applyPowerUp(PowerUp powerUp) {
