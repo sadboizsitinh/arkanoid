@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng" />
+    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/Brick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/GameObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,18 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "PhongHoangNguyen"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;PhongHoangNguyen&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sadboizsitinh/Arkanoid.git",
-    "accountId": "b1338d4e-04e2-4a96-9e8a-f130691e4f77"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,
+    &quot;accountId&quot;: &quot;b1338d4e-04e2-4a96-9e8a-f130691e4f77&quot;
   }
-}]]></component>
+}</component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
@@ -139,6 +148,7 @@
       <workItem from="1759774234232" duration="4132000" />
       <workItem from="1759793813452" duration="3434000" />
       <workItem from="1759798612371" duration="1105000" />
+      <workItem from="1760262216776" duration="303000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm map và sửa điều kiện thắng">
       <option name="closed" value="true" />

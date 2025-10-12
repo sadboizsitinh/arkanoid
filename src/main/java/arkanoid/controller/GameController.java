@@ -25,7 +25,7 @@ public class GameController {
 
     @FXML
     private PauseOverlayController pauseOverlayController;
-
+    private static GameController lastInstance;
     private GameManager.GameState lastState = null;
 
     private GameManager gameManager;
@@ -37,6 +37,7 @@ public class GameController {
 
     @FXML
     private void initialize() {
+        lastInstance = this;
         System.out.println("GameController initialize called");
         System.out.println("Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
 
@@ -193,6 +194,7 @@ public class GameController {
                                 GameOverController ctrl = loader.getController();
                                 ctrl.setStats(gameManager.getScore(), gameManager.getLevel());
 
+                                stopLoop();
                                 Stage stage = (Stage) gameCanvas.getScene().getWindow();
                                 stage.setScene(new Scene(root, 800, 600));
                             } catch (Exception e) {
@@ -220,4 +222,15 @@ public class GameController {
         gameManager.setMovingLeft(false);
         gameManager.setMovingRight(false);
     }
+
+    private void stopLoop() {
+        if (gameLoop != null) {
+            gameLoop.stop();
+            gameLoop = null;
+        }
+    }
+    public static void stopGameLoopIfAny() {
+        if (lastInstance != null) lastInstance.stopLoop();
+    }
+
 }

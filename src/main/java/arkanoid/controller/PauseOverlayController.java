@@ -1,5 +1,6 @@
 package arkanoid.controller;
 
+import arkanoid.controller.GameController;
 import arkanoid.GameManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ public class PauseOverlayController {
                     javafx.stage.Stage stage = (javafx.stage.Stage) btnMenu.getScene().getWindow();
                     javafx.fxml.FXMLLoader loader =
                             new javafx.fxml.FXMLLoader(getClass().getResource("/ui/fxml/Main.fxml"));
+                    GameController.stopGameLoopIfAny();
                     javafx.scene.Parent root = loader.load();
                     stage.setScene(new javafx.scene.Scene(root, 800, 600));
                 } catch (Exception ex) {

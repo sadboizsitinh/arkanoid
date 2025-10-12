@@ -252,4 +252,8 @@ public class Ball extends MovableObject {
         this.directionY = dy;
         updateVelocity();
     }
+    // --- Added getters to support snapshot/resume ---
+    public double getSpeed() { return speed; }
+    public double getDX() { return dx; }
+    public double getDY() { return dy; }
 }
