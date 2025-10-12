@@ -5,14 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/Brick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/GameManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/GameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/PauseOverlayController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/PauseOverlayController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +155,8 @@
       <workItem from="1759774234232" duration="4132000" />
       <workItem from="1759793813452" duration="3434000" />
       <workItem from="1759798612371" duration="1105000" />
-      <workItem from="1760262216776" duration="303000" />
+      <workItem from="1760262216776" duration="529000" />
+      <workItem from="1760268217738" duration="1398000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm map và sửa điều kiện thắng">
       <option name="closed" value="true" />

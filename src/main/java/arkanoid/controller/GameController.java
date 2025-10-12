@@ -44,26 +44,33 @@ public class GameController {
         // Ẩn overlay lúc đầu
         if (pauseOverlay != null) {
             pauseOverlay.setVisible(false);
-            pauseOverlay.setMouseTransparent(true); // Không chặn input khi ẩn
+            pauseOverlay.setMouseTransparent(true);
         }
 
         gameManager = GameManager.getInstance();
 
-        // ✅ QUAN TRỌNG: Force reset và start game ngay lập tức
-        gameManager.setGameState(GameManager.GameState.MENU);
-        gameManager.startGame(); // Chuyển sang PLAYING
+        // ✅ QUAN TRỌNG: KIỂM TRA CÓ SAVED GAME KHÔNG
+        if (gameManager.hasSavedGame()) {
+            System.out.println("🔄 Continuing from saved game...");
+            // Không gọi startGame() - game state đã được set sẵn bởi continueGame()
+        } else {
+            System.out.println("🆕 Starting new game...");
+            // Chỉ start game mới khi KHÔNG có saved game
+            gameManager.setGameState(GameManager.GameState.MENU);
+            gameManager.startGame(); // Chuyển sang PLAYING
+        }
 
-        System.out.println("Game state after start: " + gameManager.getGameState());
+        System.out.println("Game state after init: " + gameManager.getGameState());
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 
-        // ✅ Canvas phải có focus để nhận keyboard events
+        // Canvas phải có focus để nhận keyboard events
         gameCanvas.setFocusTraversable(true);
 
-        // ✅ Bắt đầu vòng lặp game TRƯỚC KHI thiết lập input
+        // Bắt đầu vòng lặp game TRƯỚC KHI thiết lập input
         startGameLoop(gc);
 
-        // ✅ Xử lý input - đợi scene sẵn sàng
+        // Xử lý input - đợi scene sẵn sàng
         gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
                 System.out.println("Scene ready, setting up input handlers");
@@ -85,11 +92,11 @@ public class GameController {
             }
         });
 
-        // ✅ Nút Pause
+        // Nút Pause
         if (btnPause != null) {
             btnPause.setOnAction(e -> {
                 gameManager.togglePause();
-                gameCanvas.requestFocus(); // Trả focus về canvas
+                gameCanvas.requestFocus();
             });
         }
 
@@ -160,7 +167,7 @@ public class GameController {
                 gameManager.updateGame(deltaTime);
                 gameManager.render(gc);
 
-                // ✅ Theo dõi trạng thái game
+                // Theo dõi trạng thái game
                 GameManager.GameState state = gameManager.getGameState();
                 if (lastState != state) {
                     System.out.println("State changed: " + lastState + " -> " + state);
@@ -178,7 +185,7 @@ public class GameController {
                         // Request focus lại khi resume
                         gameCanvas.requestFocus();
                     } else if (state == GameManager.GameState.GAME_OVER) {
-                        // ✅ DỪNG GAME LOOP TRƯỚC KHI CHUYỂN SCENE
+                        // DỪNG GAME LOOP TRƯỚC KHI CHUYỂN SCENE
                         gameLoop.stop();
 
                         // Reset input flags

@@ -16,11 +16,18 @@ public class PauseOverlayController {
             btnContinue.setOnAction(e -> GameManager.getInstance().togglePause());
 
         if (btnNewGame != null)
-            btnNewGame.setOnAction(e -> GameManager.getInstance().startGame());
+            btnNewGame.setOnAction(e -> {
+                // Clear saved game và start mới
+                GameManager.getInstance().clearSavedGame();
+                GameManager.getInstance().startGame();
+            });
 
         if (btnMenu != null)
             btnMenu.setOnAction(e -> {
                 try {
+                    // ✅ LƯU GAME STATE TRƯỚC KHI VỀ MENU
+                    GameManager.getInstance().saveGameState();
+
                     javafx.stage.Stage stage = (javafx.stage.Stage) btnMenu.getScene().getWindow();
                     javafx.fxml.FXMLLoader loader =
                             new javafx.fxml.FXMLLoader(getClass().getResource("/ui/fxml/Main.fxml"));

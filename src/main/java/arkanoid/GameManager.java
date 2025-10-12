@@ -25,6 +25,7 @@ public class GameManager {
     private int lives;
     private int level;
     private GameState gameState;
+    private GameStateSnapshot savedSnapshot = null;
 
     // Input handling - simple boolean flags
     private boolean movingLeft = false;
@@ -631,6 +632,181 @@ public class GameManager {
         }
     }
 
+    public boolean hasSavedGame() {
+        return savedSnapshot != null;
+    }
+
+    /**
+     * Lưu snapshot khi pause và về menu
+     */
+    public void saveGameState() {
+        if (gameState == GameState.PAUSED) {
+            savedSnapshot = GameStateSnapshot.createSnapshot(this);
+            System.out.println("✅ Game state saved! Score: " + savedSnapshot.score + ", Lives: " + savedSnapshot.lives);
+        }
+    }
+
+    /**
+     * Xóa snapshot (khi game over hoặc win)
+     */
+    public void clearSavedGame() {
+        savedSnapshot = null;
+        System.out.println("🗑️ Saved game cleared");
+    }
+
+    /**
+     * Continue game từ snapshot đã lưu
+     */
+    public void continueGame() {
+        if (savedSnapshot == null) {
+            System.err.println("❌ No saved game to continue!");
+            return;
+        }
+
+        restoreFromSnapshot(savedSnapshot);
+        gameState = GameState.PLAYING;
+
+        // ✅ KHÔNG clear snapshot ngay - chỉ clear khi game over hoặc start new
+        // savedSnapshot sẽ còn cho đến khi:
+        // - Game Over
+        // - Start New Game
+        // - Complete Level (tùy chọn)
+
+        System.out.println("▶️ Game continued from saved state");
+        System.out.println("   Score: " + score + ", Lives: " + lives + ", Level: " + level);
+    }
+
+    /**
+     * Khôi phục game state từ snapshot
+     */
+    private void restoreFromSnapshot(GameStateSnapshot snapshot) {
+        // Khôi phục stats
+        this.score = snapshot.score;
+        this.lives = snapshot.lives;
+        this.level = snapshot.level;
+
+        // Khôi phục paddle
+        paddle = new Paddle(snapshot.paddleX, snapshot.paddleY);
+        paddle.setWidth(snapshot.paddleWidth);
+
+        // Khôi phục balls
+        balls.clear();
+        for (GameStateSnapshot.BallState ballState : snapshot.ballStates) {
+            Ball ball = new Ball(ballState.x, ballState.y);
+            ball.setTypeSkin(ballState.typeSkin);
+            ball.applySpeed(ballState.speed);
+            ball.setDirection(ballState.dx / ballState.speed, ballState.dy / ballState.speed);
+
+            if (ballState.stuckToPaddle) {
+                ball.stickToPaddle(paddle);
+            } else {
+                ball.release();
+            }
+
+            balls.add(ball);
+        }
+
+        // Set main ball reference
+        if (!balls.isEmpty()) {
+            ball = balls.get(0);
+        }
+
+        // Khôi phục bricks
+        bricks.clear();
+        for (GameStateSnapshot.BrickState brickState : snapshot.brickStates) {
+            Brick brick = null;
+            switch (brickState.type) {
+                case NORMAL:
+                    brick = new NormalBrick(brickState.x, brickState.y, brickState.width, brickState.height);
+                    break;
+                case STRONG:
+                    brick = new StrongBrick(brickState.x, brickState.y, brickState.width, brickState.height);
+                    break;
+                case UNBREAKABLE:
+                    brick = new UnbreakableBrick(brickState.x, brickState.y, brickState.width, brickState.height);
+                    break;
+            }
+
+            if (brick != null) {
+                // Restore hitPoints
+                brick.hitPoints = brickState.hitPoints;
+                brick.updateColor();
+                bricks.add(brick);
+            }
+        }
+
+        // Khôi phục falling powerups
+        powerUps.clear();
+        for (GameStateSnapshot.PowerUpState pState : snapshot.powerUpStates) {
+            PowerUp powerUp = createPowerUpByType(pState.type, pState.x, pState.y);
+            if (powerUp != null) {
+                powerUps.add(powerUp);
+            }
+        }
+
+        // Khôi phục active powerups
+        activePowerUps.clear();
+        for (GameStateSnapshot.ActivePowerUpState apState : snapshot.activePowerUpStates) {
+            PowerUp powerUp = createPowerUpByType(apState.type, 0, 0);
+            if (powerUp != null) {
+                powerUp.activate();
+                powerUp.timeRemaining = apState.timeRemaining;
+                powerUp.applyEffect(paddle);
+                activePowerUps.add(powerUp);
+            }
+        }
+
+        // Reset input flags
+        movingLeft = false;
+        movingRight = false;
+    }
+
+    /**
+     * Helper method để tạo PowerUp theo type
+     */
+    private PowerUp createPowerUpByType(PowerUp.PowerUpType type, double x, double y) {
+        switch (type) {
+            case EXPAND_PADDLE:
+                return new ExpandPaddlePowerUp(x, y);
+            case FAST_BALL:
+                return new FastBallPowerUp(x, y);
+            case SLOW_BALL:
+                return new SlowBallPowerUp(x, y);
+            case EXTRA_LIFE:
+                return new ExtraLifePowerUp(x, y);
+            case MULTI_BALL:
+                return new MultiBallPowerUp(x, y);
+            default:
+                return null;
+        }
+    }
+
+    // Cập nhật phương thức checkGameConditions để clear saved game khi thắng/thua
+    // Thêm vào cuối phương thức checkGameConditions():
+    /*
+    if (cleared) {
+        level++;
+        createLevel(level);
+        resetBallAndPaddle();
+        // Clear saved game vì đã qua level mới
+        clearSavedGame();
+    }
+    */
+
+    // Cập nhật startGame để clear saved game khi start mới
+    // Thêm vào đầu startGame():
+    /*
+    public void startGame() {
+        System.out.println("startGame called, current state: " + gameState);
+
+        clearSavedGame(); // ✅ Clear saved game khi start mới
+        reset();
+        gameState = GameState.PLAYING;
+
+        System.out.println("Game started, new state: " + gameState);
+    }
+    */
+
     // Getters for external access
     public GameState getGameState() { return gameState; }
     public void setGameState(GameState state) { this.gameState = state; }
@@ -639,4 +815,10 @@ public class GameManager {
     public int getScore() { return score; }
     public int getLives() { return lives; }
     public int getLevel() { return level; }
+    //
+    public Paddle getPaddle() { return paddle; }
+    public List<Ball> getBalls() { return balls; }
+    public List<Brick> getBricks() { return bricks; }
+    public List<PowerUp> getPowerUps() { return powerUps; }
+    public List<PowerUp> getActivePowerUps() { return activePowerUps; }
 }

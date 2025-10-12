@@ -16,6 +16,9 @@ public class GameOverController {
 
     @FXML
     private void initialize() {
+        // ✅ Clear saved game khi vào màn Game Over
+        GameManager.getInstance().clearSavedGame();
+
         if (btnRestart != null)
             btnRestart.setOnAction(e -> {
                 GameManager.getInstance().startGame();
