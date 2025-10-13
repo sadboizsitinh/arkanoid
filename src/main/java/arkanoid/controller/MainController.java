@@ -1,6 +1,7 @@
 package arkanoid.controller;
 
 import arkanoid.GameManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -72,6 +73,22 @@ public class MainController {
             });
         }
     }
+    // MainController.java
+    @FXML
+    private void openSelectSkin(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/SelectSkin.fxml")); // dùng path tuyệt đối
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root, 800, 600);
+        // ⚠️ Đổi đường dẫn dưới cho khớp vị trí thật của style.css:
+        scene.getStylesheets().add(getClass().getResource("/ui/css/style.css").toExternalForm());
+
+        // Mở ngay trên cửa sổ chính (giống các màn khác)
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     /**
      * Chuyển sang scene khác theo đường dẫn FXML.

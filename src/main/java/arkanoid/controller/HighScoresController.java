@@ -17,11 +17,11 @@ public class HighScoresController {
         // ✅ Thêm dữ liệu mẫu vào danh sách điểm cao
         if (listScores != null) {
             listScores.getItems().addAll(
-                    "1. Player 1 - 5000",
-                    "2. Player 2 - 4500",
-                    "3. Player 3 - 4000",
-                    "4. Player 4 - 3500",
-                    "5. Player 5 - 3000"
+                    "1. Player 1 - 0",
+                    "2. Player 2 - 0",
+                    "3. Player 3 - 0",
+                    "4. Player 4 - 0",
+                    "5. Player 5 - 0"
             );
         }
 

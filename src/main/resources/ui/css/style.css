@@ -5,3 +5,4 @@
 .button-main { -fx-background-color: linear-gradient(to bottom, #17c0e9, #0ea5e9, #0369a1); -fx-text-fill: white; }
 .button-alt { -fx-background-color: transparent; -fx-border-color: #ec4899; -fx-border-width: 2; -fx-border-radius: 14; -fx-text-fill: #ec4899; }
 .button:hover { -fx-opacity: 0.9; }
+
