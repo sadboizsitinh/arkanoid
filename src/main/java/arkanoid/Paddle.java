@@ -41,6 +41,10 @@ public class Paddle extends MovableObject implements PaddleLike {
         this.width = originalWidth;
     }
 
+    public void setWidth(double newWidth) {
+        this.width = newWidth;
+    }
+
     @Override
     public void update(double deltaTime) {
         // Progress power-up
@@ -100,4 +104,7 @@ public class Paddle extends MovableObject implements PaddleLike {
     public double getSourceY() { return sourceY; }
     public double getSourceWidth() { return sourceWidth; }
     public double getSourceHeight() { return sourceHeight; }
+    public static double getDefaultWidth() {
+        return DEFAULT_WIDTH;
+    }
 }

@@ -4,37 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng">
+    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/HighScoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/HighScoresController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,16 +31,11 @@
     &quot;accountId&quot;: &quot;b1338d4e-04e2-4a96-9e8a-f130691e4f77&quot;
   }
 }</component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/package.json" />
-  </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="33K6jMzShaIv8oNKR0gHzPJyFtv" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="340gYOp5fH26lyT1jTtzUiOAD9w" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -68,49 +43,18 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.arkanoid [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.arkanoid [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.arkanoid [org.apache.maven.plugins:maven-clean-plugin:3.2.0:clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.arkanoid [org.apache.maven.plugins:maven-compiler-plugin:3.8.1:compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.arkanoid [org.apache.maven.plugins:maven-compiler-plugin:3.8.1:testCompile].executor&quot;: &quot;Run&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Java/Merged_Arkanoid_Project/Merged_Arkanoid_Project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.Next.js: server-side.executor&quot;: &quot;Run&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="arkanoid.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.Next.js: debug client-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -124,11 +68,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Main" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -140,71 +79,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="" />
-      <created>1759053550378</created>
+      <changelist id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="" />
+      <created>1760355949893</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1759053550378</updated>
-      <workItem from="1759053551557" duration="6314000" />
-      <workItem from="1759072016019" duration="2477000" />
-      <workItem from="1759115395623" duration="6973000" />
-      <workItem from="1759128994273" duration="1588000" />
-      <workItem from="1759155238877" duration="1034000" />
-      <workItem from="1759465138247" duration="3745000" />
-      <workItem from="1759507671374" duration="676000" />
-      <workItem from="1759659756840" duration="64000" />
-      <workItem from="1759718954447" duration="2386000" />
-      <workItem from="1759771668196" duration="2398000" />
-      <workItem from="1759774234232" duration="4132000" />
-      <workItem from="1759793813452" duration="3434000" />
-      <workItem from="1759798612371" duration="1105000" />
-      <workItem from="1760262216776" duration="529000" />
-      <workItem from="1760268217738" duration="1712000" />
-      <workItem from="1760289896211" duration="46000" />
-      <workItem from="1760323730076" duration="131000" />
-      <workItem from="1760326055354" duration="4955000" />
-      <workItem from="1760332747190" duration="455000" />
-      <workItem from="1760337753342" duration="2768000" />
+      <updated>1760355949893</updated>
+      <workItem from="1760355951068" duration="29000" />
+      <workItem from="1760355997671" duration="117000" />
+      <workItem from="1760356130072" duration="29000" />
+      <workItem from="1760356190697" duration="21000" />
     </task>
-    <task id="LOCAL-00001" summary="Thêm map và sửa điều kiện thắng">
-      <option name="closed" value="true" />
-      <created>1759844400220</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1759844400220</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Thêm map và sửa điều kiện thắng" />
-    <option name="LAST_COMMIT_MESSAGE" value="Thêm map và sửa điều kiện thắng" />
   </component>
 </project>
