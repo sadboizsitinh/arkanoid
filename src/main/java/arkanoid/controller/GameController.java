@@ -49,7 +49,6 @@ public class GameController {
 
         gameManager = GameManager.getInstance();
 
-        // ✅ QUAN TRỌNG: KIỂM TRA CÓ SAVED GAME KHÔNG
         if (gameManager.hasSavedGame()) {
             System.out.println("🔄 Continuing from saved game...");
             // Không gọi startGame() - game state đã được set sẵn bởi continueGame()

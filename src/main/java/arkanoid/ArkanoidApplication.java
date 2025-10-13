@@ -16,10 +16,10 @@ public class ArkanoidApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            // ✅ Load giao diện chính (menu game)
+            //  Load giao diện chính (menu game)
             Parent root = FXMLLoader.load(getClass().getResource("/ui/fxml/Main.fxml"));
 
-            // ✅ Tạo scene và hiển thị
+            //  Tạo scene và hiển thị
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setTitle("Arkanoid Game - JavaFX Version");
             primaryStage.setScene(scene);
@@ -28,7 +28,7 @@ public class ArkanoidApplication extends Application {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("❌ Lỗi khi load Main.fxml: " + e.getMessage());
+            System.err.println(" Lỗi khi load Main.fxml: " + e.getMessage());
         }
     }
 

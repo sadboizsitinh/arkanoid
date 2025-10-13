@@ -56,18 +56,18 @@ public class GameManager {
 
     public void setMovingLeft(boolean moving) {
         this.movingLeft = moving;
-        // ✅ Release ball khi bắt đầu di chuyển
+        //  Release ball khi bắt đầu di chuyển
         releaseBallsFromPaddle();
     }
 
     public void setMovingRight(boolean moving) {
         this.movingRight = moving;
-        // ✅ Release ball khi bắt đầu di chuyển
+        //  Release ball khi bắt đầu di chuyển
         releaseBallsFromPaddle();
     }
 
     /**
-     * ✅ Release tất cả các ball đang dính trên paddle
+     *  Release tất cả các ball đang dính trên paddle
      */
     private void releaseBallsFromPaddle() {
         if (gameState == GameState.PLAYING) {
@@ -100,7 +100,7 @@ public class GameManager {
 
         score = 0;
         lives = 3;
-        level = 1;
+        level = 3;
         movingLeft = false;
         movingRight = false;
 
@@ -109,7 +109,7 @@ public class GameManager {
         // Initialize paddle
         paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 50);
 
-        // ✅ Initialize ball và dính lên paddle
+        //  Initialize ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
         ball.applySpeed(originalBallSpeed);
         ball.stickToPaddle(paddle); // Dính lên paddle
@@ -154,7 +154,7 @@ public class GameManager {
                     double x = col * brickWidth;
                     double y = 50 + row * brickHeight;
 
-                    // ✅ Chỉ add 1 brick dựa trên type
+                    //  Chỉ add 1 brick dựa trên type
                     switch (type) {
                         case 1:
                             bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
@@ -170,7 +170,7 @@ public class GameManager {
                 row++;
             }
         } catch (Exception e) {
-            System.err.println("⚠️ Cannot load " + filename + ": " + e.getMessage());
+            System.err.println(" Cannot load " + filename + ": " + e.getMessage());
             e.printStackTrace();
 
             // Fallback: tạo map mặc định
@@ -203,7 +203,7 @@ public class GameManager {
             paddle.moveRight(deltaTime);
         }
 
-        // ✅ Update vị trí ball khi dính trên paddle
+        //  Update vị trí ball khi dính trên paddle
         for (Ball b : balls) {
             if (b.isStuckToPaddle()) {
                 b.updateStuckPosition(paddle);
@@ -258,7 +258,7 @@ public class GameManager {
         while (ballIterator.hasNext()) {
             Ball currentBall = ballIterator.next();
 
-            // ✅ Bỏ qua collision check nếu ball đang dính
+            //  Bỏ qua collision check nếu ball đang dính
             if (currentBall.isStuckToPaddle()) {
                 continue;
             }
@@ -411,7 +411,7 @@ public class GameManager {
 
         Ball originalBall = balls.get(0);
 
-        // ✅ Chỉ spawn nếu ball không dính trên paddle
+        //  Chỉ spawn nếu ball không dính trên paddle
         if (originalBall.isStuckToPaddle()) {
             return;
         }
@@ -453,7 +453,7 @@ public class GameManager {
     private void resetBallAndPaddle() {
         balls.clear();
 
-        // ✅ Reset ball và dính lên paddle
+        //  Reset ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
         ball.setDirection(1, -1);
         ball.applySpeed(originalBallSpeed);
@@ -511,7 +511,7 @@ public class GameManager {
             renderUI(gc);
             renderActivePowerUps(gc);
 
-            // ✅ Hiển thị hướng dẫn khi ball đang dính
+            //  Hiển thị hướng dẫn khi ball đang dính
             if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
                 renderStuckBallHint(gc);
             }
@@ -519,7 +519,7 @@ public class GameManager {
     }
 
     /**
-     * ✅ Hiển thị hint khi ball đang dính trên paddle
+     *  Hiển thị hint khi ball đang dính trên paddle
      */
     private void renderStuckBallHint(GraphicsContext gc) {
         gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 18));
@@ -642,7 +642,7 @@ public class GameManager {
     public void saveGameState() {
         if (gameState == GameState.PAUSED) {
             savedSnapshot = GameStateSnapshot.createSnapshot(this);
-            System.out.println("✅ Game state saved! Score: " + savedSnapshot.score + ", Lives: " + savedSnapshot.lives);
+            System.out.println(" Game state saved! Score: " + savedSnapshot.score + ", Lives: " + savedSnapshot.lives);
         }
     }
 
@@ -651,7 +651,7 @@ public class GameManager {
      */
     public void clearSavedGame() {
         savedSnapshot = null;
-        System.out.println("🗑️ Saved game cleared");
+        System.out.println(" Saved game cleared");
     }
 
     /**
@@ -659,20 +659,20 @@ public class GameManager {
      */
     public void continueGame() {
         if (savedSnapshot == null) {
-            System.err.println("❌ No saved game to continue!");
+            System.err.println(" No saved game to continue!");
             return;
         }
 
         restoreFromSnapshot(savedSnapshot);
         gameState = GameState.PLAYING;
 
-        // ✅ KHÔNG clear snapshot ngay - chỉ clear khi game over hoặc start new
+        //  KHÔNG clear snapshot ngay - chỉ clear khi game over hoặc start new
         // savedSnapshot sẽ còn cho đến khi:
         // - Game Over
         // - Start New Game
         // - Complete Level (tùy chọn)
 
-        System.out.println("▶️ Game continued from saved state");
+        System.out.println(" Game continued from saved state");
         System.out.println("   Score: " + score + ", Lives: " + lives + ", Level: " + level);
     }
 
@@ -799,7 +799,7 @@ public class GameManager {
     public void startGame() {
         System.out.println("startGame called, current state: " + gameState);
 
-        clearSavedGame(); // ✅ Clear saved game khi start mới
+        clearSavedGame(); //  Clear saved game khi start mới
         reset();
         gameState = GameState.PLAYING;
 

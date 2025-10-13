@@ -14,7 +14,6 @@ public class HighScoresController {
 
     @FXML
     private void initialize() {
-        // ✅ Thêm dữ liệu mẫu vào danh sách điểm cao
         if (listScores != null) {
             listScores.getItems().addAll(
                     "1. Player 1 - 0",
@@ -25,7 +24,6 @@ public class HighScoresController {
             );
         }
 
-        // ✅ Xử lý nút Back
         if (btnBack != null) {
             btnBack.setOnAction(e -> {
                 try {
@@ -40,7 +38,6 @@ public class HighScoresController {
             });
         }
 
-        // ✅ Xử lý nút Clear
         if (btnClear != null) {
             btnClear.setOnAction(e -> {
                 if (listScores != null) {

@@ -26,16 +26,16 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        // ✅ Kiểm tra và hiển thị/ẩn nút Continue
+        //  Kiểm tra và hiển thị/ẩn nút Continue
         if (btnContinue != null) {
             boolean hasSavedGame = GameManager.getInstance().hasSavedGame();
             btnContinue.setVisible(hasSavedGame);
             btnContinue.setManaged(hasSavedGame);
 
             if (hasSavedGame) {
-                System.out.println("✅ Found saved game - Continue button enabled");
+                System.out.println(" Found saved game - Continue button enabled");
             } else {
-                System.out.println("ℹ️ No saved game - Continue button hidden");
+                System.out.println(" No saved game - Continue button hidden");
             }
         }
 
@@ -59,16 +59,14 @@ public class MainController {
             btnExit.setOnAction(e -> System.exit(0));
         }
 
-        // ✅ Khi nhấn Continue → khôi phục game đã lưu
         if (btnContinue != null) {
             btnContinue.setOnAction(e -> {
                 if (GameManager.getInstance().hasSavedGame()) {
-                    // ✅ QUAN TRỌNG: Gọi continueGame() TRƯỚC khi switchScene
                     GameManager.getInstance().continueGame();
-                    System.out.println("▶️ Continue game called, state: " + GameManager.getInstance().getGameState());
+                    System.out.println(" Continue game called, state: " + GameManager.getInstance().getGameState());
                     switchScene("/ui/fxml/GameView.fxml");
                 } else {
-                    System.err.println("❌ No saved game to continue!");
+                    System.err.println(" No saved game to continue!");
                 }
             });
         }
@@ -80,7 +78,6 @@ public class MainController {
         Parent root = loader.load();
 
         Scene scene = new Scene(root, 800, 600);
-        // ⚠️ Đổi đường dẫn dưới cho khớp vị trí thật của style.css:
         scene.getStylesheets().add(getClass().getResource("/ui/css/style.css").toExternalForm());
 
         // Mở ngay trên cửa sổ chính (giống các màn khác)

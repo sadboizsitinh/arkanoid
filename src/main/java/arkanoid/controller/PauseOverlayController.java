@@ -25,7 +25,7 @@ public class PauseOverlayController {
         if (btnMenu != null)
             btnMenu.setOnAction(e -> {
                 try {
-                    // ✅ LƯU GAME STATE TRƯỚC KHI VỀ MENU
+                    //  LƯU GAME STATE TRƯỚC KHI VỀ MENU
                     GameManager.getInstance().saveGameState();
 
                     javafx.stage.Stage stage = (javafx.stage.Stage) btnMenu.getScene().getWindow();

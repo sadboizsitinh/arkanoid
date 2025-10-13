@@ -16,7 +16,6 @@ public class Ball extends MovableObject {
 
     private double directionX, directionY;
 
-    // ✅ Trạng thái dính trên paddle
     private boolean stuckToPaddle = true;
     private double offsetFromPaddleCenter = 0; // Vị trí tương đối so với tâm paddle
 
@@ -35,16 +34,12 @@ public class Ball extends MovableObject {
         dy = directionY * speed;
     }
 
-    /**
-     * ✅ Release ball from paddle
-     */
+
     public void release() {
         stuckToPaddle = false;
     }
 
-    /**
-     * ✅ Stick ball to paddle at start/new level
-     */
+
     public void stickToPaddle(Paddle paddle) {
         stuckToPaddle = true;
         // Tính offset từ tâm paddle
@@ -53,9 +48,7 @@ public class Ball extends MovableObject {
         offsetFromPaddleCenter = ballCenter - paddleCenter;
     }
 
-    /**
-     * ✅ Update position when stuck to paddle
-     */
+
     public void updateStuckPosition(Paddle paddle) {
         if (stuckToPaddle) {
             double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
@@ -64,9 +57,6 @@ public class Ball extends MovableObject {
         }
     }
 
-    /**
-     * ✅ Check if ball is stuck
-     */
     public boolean isStuckToPaddle() {
         return stuckToPaddle;
     }
@@ -224,7 +214,6 @@ public class Ball extends MovableObject {
 
     @Override
     public void update(double deltaTime) {
-        // ✅ Chỉ di chuyển khi không dính trên paddle
         if (!stuckToPaddle) {
             move(deltaTime);
         }

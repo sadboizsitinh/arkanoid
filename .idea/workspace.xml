@@ -6,11 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="189f6748-a51a-430d-9ac0-828437885028" name="Changes" comment="Thêm map và sửa điều kiện thắng">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/HighScoresController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/HighScoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +162,9 @@
       <workItem from="1760268217738" duration="1712000" />
       <workItem from="1760289896211" duration="46000" />
       <workItem from="1760323730076" duration="131000" />
-      <workItem from="1760326055354" duration="4817000" />
+      <workItem from="1760326055354" duration="4955000" />
+      <workItem from="1760332747190" duration="455000" />
+      <workItem from="1760337753342" duration="2768000" />
     </task>
     <task id="LOCAL-00001" summary="Thêm map và sửa điều kiện thắng">
       <option name="closed" value="true" />
