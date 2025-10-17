@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.controller.HighScoresController" stylesheets="@../css/style.css" alignment="CENTER" spacing="20" style="-fx-padding: 40;" prefWidth="800" prefHeight="600">
-  <Label text="High Scores" style="-fx-font-size: 48px; -fx-font-weight: bold;"/>
-  <ListView fx:id="listScores" prefHeight="350" prefWidth="520"/>
-  <Button text="Back to Menu" fx:id="btnBack" styleClass="button-main" prefWidth="220" prefHeight="48"/>
-  <Button text="Clear High Scores" fx:id="btnClear" styleClass="button-alt" prefWidth="220" prefHeight="48"/>
-</VBox>
