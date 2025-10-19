@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +125,7 @@
       <workItem from="1760856030605" duration="4130000" />
       <workItem from="1760861037346" duration="402000" />
       <workItem from="1760864836011" duration="5842000" />
-      <workItem from="1760887267507" duration="316000" />
+      <workItem from="1760887267507" duration="2346000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
