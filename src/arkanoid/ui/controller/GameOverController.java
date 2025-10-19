@@ -54,11 +54,30 @@ public class GameOverController {
             btnRestart.setOnAction(e -> {
                 GameManager.getInstance().startGame();
                 try {
+                    GameController.stopGameLoopIfAny();
+
+                    GameManager.getInstance().clearSavedGame();
+
+                    GameManager.getInstance().startGame();
+
                     Stage stage = (Stage) btnRestart.getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/GameView.fxml"));
+                    FXMLLoader loader = new FXMLLoader();
+
+                    java.net.URL resourceUrl = getClass().getResource("/ui/fxml/GameView.fxml");
+                    if (resourceUrl != null) {
+                        loader.setLocation(resourceUrl);
+                    } else {
+                        java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/GameView.fxml");
+                        loader.setLocation(fxmlFile.toURI().toURL());
+                    }
+
                     Parent root = loader.load();
                     stage.setScene(new Scene(root, 800, 600));
+
+                    System.out.println("✅ Game restarted successfully!");
+
                 } catch (Exception ex) {
+                    System.err.println("❌ Error restarting game:");
                     ex.printStackTrace();
                 }
             });
