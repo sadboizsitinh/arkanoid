@@ -170,31 +170,44 @@ public class GameManager {
             filename = "map" + mapNumber + ".csv";
         }
 
-        try (Scanner scanner = new Scanner(new java.io.File("D:/arkanoid/Arkanoid/src/arkanoid/assets/maps/" + filename))) {
-            int row = 0;
-            double brickWidth = gameWidth / 10;
-            double brickHeight = 25;
+        try {
+            // 1) Ưu tiên ../assets/maps/<filename>
+            java.nio.file.Path file = java.nio.file.Paths.get("..", "assets", "maps", filename).normalize();
 
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] values = line.split(",");
-                for (int col = 0; col < values.length; col++) {
-                    int type = Integer.parseInt(values[col].trim());
-                    if (type == 0) continue;
-
-                    double x = col * brickWidth;
-                    double y = 50 + row * brickHeight;
-
-                    switch (type) {
-                        case 1 -> bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
-                        case 2 -> bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
-                        case 3 -> bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
-                    }
+            // 2) Nếu không có, fallback về vị trí hiện tại của bạn
+            if (!java.nio.file.Files.isRegularFile(file)) {
+                file = java.nio.file.Paths.get("src","arkanoid","assets","maps", filename).normalize();
+                if (!java.nio.file.Files.isRegularFile(file)) {
+                    file = java.nio.file.Paths.get("..","src","arkanoid","assets","maps", filename).normalize();
                 }
-                row++;
             }
 
-            // ⚡ Tăng tốc độ bóng theo độ khó
+            try (java.util.Scanner scanner = new java.util.Scanner(
+                    java.nio.file.Files.newBufferedReader(file, java.nio.charset.StandardCharsets.UTF_8))) {
+
+                int row = 0;
+                double brickWidth = gameWidth / 10.0, brickHeight = 25.0;
+
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] values = line.split(",", -1); // giữ cột trống
+                    for (int col = 0; col < values.length; col++) {
+                        String raw = values[col].trim();
+                        if (raw.isEmpty()) continue;
+                        int type; try { type = Integer.parseInt(raw); } catch (NumberFormatException ex) { continue; }
+                        if (type == 0) continue;
+
+                        double x = col * brickWidth, y = 50 + row * brickHeight;
+                        switch (type) {
+                            case 1 -> bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            case 2 -> bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            case 3 -> bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
+                        }
+                    }
+                    row++;
+                }
+            }
+// ⚡ Tăng tốc độ bóng theo độ khó
             originalBallSpeed = DEFAULT_BALL_SPEED * (1 + 0.1 * (difficultyLevel - 1));
             ball.applySpeed(originalBallSpeed);
 
@@ -205,7 +218,7 @@ public class GameManager {
             System.out.println(" Loaded " + filename + " | Difficulty: " + difficultyLevel);
 
         } catch (Exception e) {
-            System.err.println(" Cannot load " + filename + ": " + e.getMessage());
+            System.err.println("Cannot load " + filename + ": " + e.getMessage());
             e.printStackTrace();
         }
     }
