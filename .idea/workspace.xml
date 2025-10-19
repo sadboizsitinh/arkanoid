@@ -5,14 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
-      <change afterPath="$PROJECT_DIR$/src/arkanoid/core/HighScoreManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +124,7 @@
       <workItem from="1760855335617" duration="515000" />
       <workItem from="1760856030605" duration="4130000" />
       <workItem from="1760861037346" duration="402000" />
-      <workItem from="1760864836011" duration="4696000" />
+      <workItem from="1760864836011" duration="5075000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
