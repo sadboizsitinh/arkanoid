@@ -4,149 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_7_2025_3_03_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_7_2025_3_03_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map1.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map10.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map2.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map3.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map4.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map5.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map6.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map7.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map8.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/maps/map9.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ArkanoidApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Ball.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Brick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/BrickFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedBall.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedGameObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedNormalBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedPaddle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedSpecialItemBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedStrongBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/EnhancedUnbreakableBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ExpandPaddlePowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ExtraLifePowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/FastBallPowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/GameStateSnapshot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/MovableObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/MultiBallPowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/NormalBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Paddle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/PaddleLike.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/Particle.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/ParticleSystem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/PowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/SlowBallPowerUp.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/SpecialBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/StrongBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/TextureManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/UnbreakableBrick.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/GameOverController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/HighScoresController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/NewHighScoreController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/PauseOverlayController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/arkanoid/controller/SelectSkinController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ui/SceneNavigator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Fire-Ball.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/brick_normal_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/brick_strong_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/brick_strong_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/brick_unbreakable_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/bricks-wip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/skinball_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/skinball_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/skinball_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/GameOver.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/GameView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/HighScores.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/Main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/NewHighScore.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/PauseOverlay.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/fxml/SelectSkin.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Fire-Ball.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Ball.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Brick$BrickType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Brick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/BrickFactory$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/BrickFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBall.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBrick$BrickType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedGameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedNormalBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedPaddle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedSpecialItemBrick$ItemType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedSpecialItemBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedStrongBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/EnhancedUnbreakableBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ExpandPaddlePowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ExtraLifePowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/FastBallPowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager$GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameStateSnapshot$ActivePowerUpState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameStateSnapshot$BallState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameStateSnapshot$BrickState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameStateSnapshot$PowerUpState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/GameStateSnapshot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/MovableObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/MultiBallPowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/NormalBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Paddle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/PaddleLike.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Particle.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ParticleSystem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/PowerUp$PowerUpType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/PowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/SlowBallPowerUp.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/SpecialBrick$SpecialType.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/SpecialBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/StrongBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/TextureManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/UnbreakableBrick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/GameOverController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/HighScoresController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/NewHighScoreController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/PauseOverlayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/controller/SelectSkinController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/brick_normal_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/brick_strong_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/brick_strong_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/brick_unbreakable_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/bricks-wip.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/org/example/ui/SceneNavigator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/skinball_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/skinball_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/skinball_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/GameOver.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/GameView.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/HighScores.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/Main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/NewHighScore.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/PauseOverlay.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ui/fxml/SelectSkin.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +55,7 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JavaScript Debug.Next.js: debug client-side">
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -237,7 +96,10 @@
       <workItem from="1760451022258" duration="1357000" />
       <workItem from="1760620589371" duration="430000" />
       <workItem from="1760623757557" duration="1059000" />
-      <workItem from="1760624832683" duration="16709000" />
+      <workItem from="1760624832683" duration="17703000" />
+      <workItem from="1760716422981" duration="241000" />
+      <workItem from="1760716825467" duration="8000" />
+      <workItem from="1760757019309" duration="3271000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
@@ -247,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760356339954</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat:Sửa lại cấu trúc game">
+      <option name="closed" value="true" />
+      <created>1760676003579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1760676003579</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +136,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn" />
+    <MESSAGE value="feat:Sửa lại cấu trúc game" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:Sửa lại cấu trúc game" />
   </component>
 </project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.GameOverController" stylesheets="@../css/style.css" alignment="CENTER" spacing="24" style="-fx-padding: 40;" prefWidth="800" prefHeight="600">
+  <Label text="GAME OVER" style="-fx-font-size: 72px; -fx-font-weight: bold;"/>
+  <VBox alignment="CENTER" spacing="6" style="-fx-background-color: #1e293b; -fx-padding: 20; -fx-background-radius: 12;">
+    <Label fx:id="lblScore" text="Final Score: 0" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+    <Label fx:id="lblLevel" text="Level Reached: 0" style="-fx-font-size: 20px; -fx-text-fill: white;"/>
+  </VBox>
+  <HBox spacing="28" alignment="CENTER">
+    <Button text="Restart" fx:id="btnRestart" styleClass="button-main" prefWidth="170" prefHeight="48"/>
+    <Button text="Back to Menu" fx:id="btnBack" styleClass="button-alt" prefWidth="170" prefHeight="48"/>
+  </HBox>
+</VBox>

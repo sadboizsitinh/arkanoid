@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="arkanoid.ui.controller.GameController"
+           stylesheets="@../css/style.css"
+           styleClass="root"
+           prefWidth="800" prefHeight="600">
+
+    <!-- Background layer với viền -->
+    <VBox style="-fx-background-color: #0f172a; -fx-padding: 8;">
+        <AnchorPane style="-fx-background-color: linear-gradient(to bottom, #1e293b, #0f172a);
+                       -fx-border-color: #0ea5e9;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 4;
+                       -fx-background-radius: 4;">
+
+            <!-- Game Canvas -->
+            <Canvas fx:id="gameCanvas"
+                    width="784"
+                    height="584"
+                    AnchorPane.topAnchor="0"
+                    AnchorPane.leftAnchor="0"/>
+
+            <!-- Pause Button - GÓC TRÊN BÊN PHẢI -->
+            <Button fx:id="btnPause"
+                    text="⏸"
+                    style="-fx-background-color: rgba(236, 72, 153, 0.9);
+                     -fx-text-fill: white;
+                     -fx-font-size: 20px;
+                     -fx-font-weight: bold;
+                     -fx-background-radius: 10;
+                     -fx-cursor: hand;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 8, 0.3, 0, 2);"
+                    AnchorPane.topAnchor="12"
+                    AnchorPane.rightAnchor="12"
+                    prefWidth="52"
+                    prefHeight="52"/>
+        </AnchorPane>
+    </VBox>
+
+    <!-- Pause Overlay -->
+    <fx:include source="PauseOverlay.fxml"
+                fx:id="pauseOverlay"
+                visible="false"
+                mouseTransparent="true"/>
+</StackPane>
