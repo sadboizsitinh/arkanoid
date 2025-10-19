@@ -170,6 +170,9 @@ public class GameController {
                             pauseOverlay.setMouseTransparent(false);
                         }
                     } else if (state == GameManager.GameState.PLAYING) {
+                        if (btnPause != null) {
+                            btnPause.setVisible(true);
+                        }
                         gameOverShown = false; // Reset flag khi chơi lại
                         if (pauseOverlay != null) {
                             pauseOverlay.setVisible(false);
@@ -194,6 +197,10 @@ public class GameController {
         if (gameOverShown) {
             System.out.println("⚠️ Game Over already shown, skipping...");
             return;
+        }
+
+        if (btnPause != null) {
+            btnPause.setVisible(false);
         }
 
         gameOverShown = true;

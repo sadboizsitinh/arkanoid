@@ -525,7 +525,7 @@ public class GameManager {
         if (gameState == GameState.MENU) {
             renderMenu(gc);
         } else if (gameState == GameState.GAME_OVER) {
-            renderUI(gc);
+            //renderUI(gc);
         } else {
             // Render game objects
             paddle.render(gc);
