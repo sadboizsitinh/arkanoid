@@ -9,7 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class GameController {
@@ -31,15 +35,18 @@ public class GameController {
     private GameManager gameManager;
     private AnimationTimer gameLoop;
 
-    // Track key states để tránh xử lý trùng lặp
+    // Track key states
     private boolean leftKeyDown = false;
     private boolean rightKeyDown = false;
+
+    // Flag để tránh hiển thị Game Over nhiều lần
+    private boolean gameOverShown = false;
 
     @FXML
     private void initialize() {
         lastInstance = this;
-        System.out.println("GameController initialize called");
-        System.out.println("Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
+        System.out.println("🎮 GameController initialize called");
+        System.out.println("📐 Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
 
         // Ẩn overlay lúc đầu
         if (pauseOverlay != null) {
@@ -50,43 +57,36 @@ public class GameController {
         gameManager = GameManager.getInstance();
 
         if (gameManager.hasSavedGame()) {
-            System.out.println("🔄 Continuing from saved game...");
-            // Không gọi startGame() - game state đã được set sẵn bởi continueGame()
+            System.out.println("📄 Continuing from saved game...");
         } else {
             System.out.println("🆕 Starting new game...");
-            // Chỉ start game mới khi KHÔNG có saved game
             gameManager.setGameState(GameManager.GameState.MENU);
-            gameManager.startGame(); // Chuyển sang PLAYING
+            gameManager.startGame();
         }
 
-        System.out.println("Game state after init: " + gameManager.getGameState());
+        System.out.println("✅ Game state after init: " + gameManager.getGameState());
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
-
-        // Canvas phải có focus để nhận keyboard events
         gameCanvas.setFocusTraversable(true);
 
-        // Bắt đầu vòng lặp game TRƯỚC KHI thiết lập input
+        // Bắt đầu game loop
         startGameLoop(gc);
 
-        // Xử lý input - đợi scene sẵn sàng
+        // Setup input handlers
         gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
-                System.out.println("Scene ready, setting up input handlers");
+                System.out.println("🎯 Scene ready, setting up input handlers");
 
-                // Khi nhấn phím
                 newScene.setOnKeyPressed(event -> {
                     handleKeyPress(event.getCode(), true);
                     event.consume();
                 });
 
-                // Khi thả phím
                 newScene.setOnKeyReleased(event -> {
                     handleKeyPress(event.getCode(), false);
                     event.consume();
                 });
 
-                // Request focus
                 gameCanvas.requestFocus();
             }
         });
@@ -99,18 +99,13 @@ public class GameController {
             });
         }
 
-        // Request focus ngay lập tức nếu có thể
         javafx.application.Platform.runLater(() -> {
             gameCanvas.requestFocus();
-            System.out.println("Focus requested");
+            System.out.println("⌨️ Focus requested");
         });
     }
 
-    /**
-     * Xử lý sự kiện phím bấm - với tracking để tránh duplicate events
-     */
     private void handleKeyPress(KeyCode code, boolean isPressed) {
-        // Phím di chuyển - CHỈ XỬ LÝ KHI TRẠNG THÁI THAY ĐỔI
         if (code == KeyCode.A || code == KeyCode.LEFT) {
             if (isPressed && !leftKeyDown) {
                 leftKeyDown = true;
@@ -131,7 +126,6 @@ public class GameController {
             }
         }
 
-        // Các phím đặc biệt - chỉ khi nhấn (không phải thả)
         if (isPressed) {
             if (code == KeyCode.P || code == KeyCode.ESCAPE) {
                 gameManager.togglePause();
@@ -151,25 +145,24 @@ public class GameController {
 
             @Override
             public void handle(long now) {
-                // Tính delta time chính xác hơn
                 if (lastUpdate == 0) {
                     lastUpdate = now;
                     return;
                 }
 
-                double deltaTime = (now - lastUpdate) / 1_000_000_000.0; // Convert to seconds
+                double deltaTime = (now - lastUpdate) / 1_000_000_000.0;
                 lastUpdate = now;
-
-                // Cap delta time để tránh jump lớn
                 deltaTime = Math.min(deltaTime, 0.05);
 
                 gameManager.updateGame(deltaTime);
                 gameManager.render(gc);
 
-                // Theo dõi trạng thái game
+                // Theo dõi state changes
                 GameManager.GameState state = gameManager.getGameState();
                 if (lastState != state) {
-                    System.out.println("State changed: " + lastState + " -> " + state);
+                    System.out.println("==========================================");
+                    System.out.println("🔄 STATE CHANGE: " + lastState + " → " + state);
+                    System.out.println("==========================================");
 
                     if (state == GameManager.GameState.PAUSED) {
                         if (pauseOverlay != null) {
@@ -177,48 +170,180 @@ public class GameController {
                             pauseOverlay.setMouseTransparent(false);
                         }
                     } else if (state == GameManager.GameState.PLAYING) {
+                        gameOverShown = false; // Reset flag khi chơi lại
                         if (pauseOverlay != null) {
                             pauseOverlay.setVisible(false);
                             pauseOverlay.setMouseTransparent(true);
                         }
-                        // Request focus lại khi resume
                         gameCanvas.requestFocus();
                     } else if (state == GameManager.GameState.GAME_OVER) {
-                        // DỪNG GAME LOOP TRƯỚC KHI CHUYỂN SCENE
-                        gameLoop.stop();
-
-                        // Reset input flags
-                        leftKeyDown = false;
-                        rightKeyDown = false;
-                        gameManager.setMovingLeft(false);
-                        gameManager.setMovingRight(false);
-
-                        javafx.application.Platform.runLater(() -> {
-                            try {
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/GameOver.fxml"));
-                                Parent root = loader.load();
-                                GameOverController ctrl = loader.getController();
-                                ctrl.setStats(gameManager.getScore(), gameManager.getLevel());
-
-                                stopLoop();
-                                Stage stage = (Stage) gameCanvas.getScene().getWindow();
-                                stage.setScene(new Scene(root, 800, 600));
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        });
+                        handleGameOver();
                     }
                     lastState = state;
                 }
             }
         };
         gameLoop.start();
-        System.out.println("Game loop started");
+        System.out.println("✅ Game loop started");
     }
 
     /**
-     * Cleanup khi controller bị destroy
+     * Xử lý khi game over
      */
+    private void handleGameOver() {
+        if (gameOverShown) {
+            System.out.println("⚠️ Game Over already shown, skipping...");
+            return;
+        }
+
+        gameOverShown = true;
+        System.out.println("💀 GAME OVER DETECTED!");
+
+        // Dừng game loop
+        if (gameLoop != null) {
+            gameLoop.stop();
+            System.out.println("⏸️ Game loop stopped");
+        }
+
+        // Reset input
+        leftKeyDown = false;
+        rightKeyDown = false;
+        gameManager.setMovingLeft(false);
+        gameManager.setMovingRight(false);
+
+        // Delay nhỏ để đảm bảo render cuối cùng hoàn tất
+        javafx.application.Platform.runLater(() -> {
+            try {
+                Thread.sleep(100); // Delay 100ms
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            showGameOverOverlay();
+        });
+    }
+
+    /**
+     * Hiển thị Game Over overlay - LOAD TỪ FXML
+     */
+    private void showGameOverOverlay() {
+        System.out.println("====================================");
+        System.out.println("🎯 showGameOverOverlay() CALLED");
+        System.out.println("====================================");
+
+        try {
+            Scene scene = gameCanvas.getScene();
+            if (scene == null) {
+                System.err.println("❌ ERROR: Scene is NULL!");
+                return;
+            }
+            System.out.println("✅ Scene found: " + scene);
+
+            Parent currentRoot = scene.getRoot();
+            System.out.println("✅ Current root: " + currentRoot.getClass().getName());
+
+            // Tạo container
+            StackPane container = new StackPane();
+            container.getChildren().add(currentRoot);
+            scene.setRoot(container);
+            System.out.println("✅ Container created and set as root");
+
+            // === LOAD FXML ===
+            System.out.println("📂 Attempting to load GameOver.fxml...");
+
+            FXMLLoader loader = new FXMLLoader();
+            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/GameOver.fxml");
+
+            Parent overlay = null;
+
+            if (resourceUrl != null) {
+                System.out.println("✅ Loading from resources: " + resourceUrl);
+                loader.setLocation(resourceUrl);
+                overlay = loader.load();
+            } else {
+                System.out.println("⚠️ Resource not found, trying file path...");
+                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/GameOver.fxml");
+
+                if (fxmlFile.exists()) {
+                    System.out.println("✅ Loading from file: " + fxmlFile.getAbsolutePath());
+                    loader.setLocation(fxmlFile.toURI().toURL());
+                    overlay = loader.load();
+                } else {
+                    System.err.println("❌ GameOver.fxml NOT FOUND in file system!");
+                    System.err.println("   Tried: " + fxmlFile.getAbsolutePath());
+
+                    // Fallback: Tạo overlay đơn giản
+                    overlay = createSimpleGameOverOverlay();
+                }
+            }
+
+            if (overlay == null) {
+                System.err.println("❌ Failed to load overlay, creating simple one...");
+                overlay = createSimpleGameOverOverlay();
+            } else {
+                System.out.println("✅ GameOver.fxml loaded successfully!");
+
+                // Lấy controller và set stats
+                GameOverController ctrl = loader.getController();
+                if (ctrl != null) {
+                    ctrl.setStats(gameManager.getScore(), gameManager.getLevel());
+                    System.out.println("✅ Stats set: Score=" + gameManager.getScore() + ", Level=" + gameManager.getLevel());
+                } else {
+                    System.err.println("⚠️ GameOverController is NULL!");
+                }
+            }
+
+            // Thêm overlay vào container
+            container.getChildren().add(overlay);
+            System.out.println("✅ Overlay added to container");
+            System.out.println("📊 Container has " + container.getChildren().size() + " children");
+
+            // Force refresh
+            container.requestLayout();
+
+        } catch (Exception ex) {
+            System.err.println("❌ EXCEPTION in showGameOverOverlay:");
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * Tạo overlay đơn giản nếu không load được FXML
+     */
+    private Parent createSimpleGameOverOverlay() {
+        System.out.println("🔧 Creating simple fallback overlay...");
+
+        VBox simpleOverlay = new VBox(20);
+        simpleOverlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.9); -fx-alignment: center; -fx-padding: 50;");
+        simpleOverlay.setPrefSize(800, 600);
+
+        Label title = new Label("GAME OVER");
+        title.setStyle("-fx-font-size: 72px; -fx-font-weight: bold; -fx-text-fill: #ef4444;");
+
+        Label scoreLabel = new Label("Final Score: " + gameManager.getScore());
+        scoreLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+        Label levelLabel = new Label("Level: " + gameManager.getLevel());
+        levelLabel.setStyle("-fx-font-size: 24px; -fx-text-fill: white;");
+
+        Button btnRestart = new Button("Restart");
+        btnRestart.setStyle("-fx-font-size: 18px; -fx-padding: 10 30;");
+        btnRestart.setOnAction(e -> {
+            gameManager.startGame();
+            try {
+                Stage stage = (Stage) gameCanvas.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/GameView.fxml"));
+                Parent root = loader.load();
+                stage.setScene(new Scene(root, 800, 600));
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        simpleOverlay.getChildren().addAll(title, scoreLabel, levelLabel, btnRestart);
+
+        return simpleOverlay;
+    }
+
     public void cleanup() {
         if (gameLoop != null) {
             gameLoop.stop();
@@ -235,8 +360,8 @@ public class GameController {
             gameLoop = null;
         }
     }
+
     public static void stopGameLoopIfAny() {
         if (lastInstance != null) lastInstance.stopLoop();
     }
-
 }

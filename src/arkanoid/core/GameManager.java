@@ -525,7 +525,7 @@ public class GameManager {
         if (gameState == GameState.MENU) {
             renderMenu(gc);
         } else if (gameState == GameState.GAME_OVER) {
-            renderGameOver(gc);
+            renderUI(gc);
         } else {
             // Render game objects
             paddle.render(gc);
@@ -583,28 +583,6 @@ public class GameManager {
         gc.setFont(javafx.scene.text.Font.font("Arial", 16));
         gc.fillText("Use A/D or Arrow Keys to Move", gameWidth / 2 - 120, gameHeight / 2 + 40);
         gc.fillText("Press P to Pause", gameWidth / 2 - 70, gameHeight / 2 + 70);
-    }
-
-    private void renderGameOver(GraphicsContext gc) {
-        // Game Over text với màu đỏ nổi bật
-        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 56));
-        gc.setFill(Color.web("#ef4444"));
-        gc.fillText("GAME OVER", gameWidth / 2 - 130, gameHeight / 2 - 40);
-
-        // Stats box background
-        gc.setFill(Color.web("#1e293b"));
-        gc.fillRoundRect(gameWidth / 2 - 120, gameHeight / 2 - 10, 240, 80, 12, 12);
-
-        // Stats
-        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.NORMAL, 22));
-        gc.setFill(Color.WHITE);
-        gc.fillText("Final Score: " + score, gameWidth / 2 - 80, gameHeight / 2 + 20);
-        gc.fillText("Level: " + level, gameWidth / 2 - 40, gameHeight / 2 + 50);
-
-        // Instruction
-        gc.setFont(javafx.scene.text.Font.font("Arial", 18));
-        gc.setFill(Color.web("#0ea5e9"));
-        gc.fillText("Press R to Restart", gameWidth / 2 - 80, gameHeight / 2 + 100);
     }
 
     private void renderUI(GraphicsContext gc) {
