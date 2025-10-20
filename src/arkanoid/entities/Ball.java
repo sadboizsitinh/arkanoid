@@ -43,9 +43,7 @@ public class Ball extends MovableObject {
     public void stickToPaddle(Paddle paddle) {
         stuckToPaddle = true;
         // Tính offset từ tâm paddle
-        double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
-        double ballCenter = x + width / 2;
-        offsetFromPaddleCenter = ballCenter - paddleCenter;
+        offsetFromPaddleCenter = 0;
     }
 
 
