@@ -211,10 +211,6 @@ public class GameManager {
             originalBallSpeed = DEFAULT_BALL_SPEED * (1 + 0.1 * (difficultyLevel - 1));
             ball.applySpeed(originalBallSpeed);
 
-            // 🔻 Giảm kích thước paddle theo độ khó
-            double scale = 1.0 - (difficultyLevel - 1) * 0.05;
-            paddle.setWidth(Paddle.getDefaultWidth() * scale);
-
             System.out.println(" Loaded " + filename + " | Difficulty: " + difficultyLevel);
 
         } catch (Exception e) {
@@ -373,16 +369,16 @@ public class GameManager {
         double rand = Math.random();
         PowerUp powerUp;
 
-        if (rand < 0.2) {
+        if (rand < 0.3) {
             powerUp = new ExpandPaddlePowerUp(x, y);
-        } else if (rand < 0.4) {
+        } else if (rand < 0.55) {
             powerUp = new FastBallPowerUp(x, y);
-        } else if (rand < 0.6) {
-            powerUp = new SlowBallPowerUp(x, y);
         } else if (rand < 0.8) {
-            powerUp = new ExtraLifePowerUp(x, y);
-        } else {
+            powerUp = new SlowBallPowerUp(x, y);
+        } else if (rand < 0.95) {
             powerUp = new MultiBallPowerUp(x, y);
+        } else {
+            powerUp = new ExtraLifePowerUp(x, y);
         }
 
         powerUps.add(powerUp);
@@ -427,7 +423,8 @@ public class GameManager {
                 break;
 
             case EXTRA_LIFE:
-                lives++;
+                if(lives < 3)
+                    lives++;
                 powerUp.activate();
                 break;
 

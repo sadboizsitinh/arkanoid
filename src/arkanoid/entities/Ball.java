@@ -149,21 +149,6 @@ public class Ball extends MovableObject {
     /**
      * Overload to support EnhancedPaddle without changing class hierarchy
      */
-    public void bounceOffPaddle(EnhancedPaddle paddle) {
-        double ballCenter = x + width / 2;
-        double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
-        double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
-
-        directionX = hitPosition * 0.8; // Max 80% horizontal component
-        directionY = -Math.abs(directionY); // Always bounce up
-
-        // Normalize direction vector
-        double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
-        directionX /= magnitude;
-        directionY /= magnitude;
-
-        updateVelocity();
-    }
 
     public void bounceOffWall(char wall) {
         // Use specular reflection: v' = v - 2 (v·n) n

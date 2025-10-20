@@ -6,6 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/effects/ParticleSystem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedBall.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedGameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedNormalBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedPaddle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedSpecialItemBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedStrongBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/EnhancedUnbreakableBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Particle.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/SpecialBrick.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedBall.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedBrick$BrickType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedGameObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedNormalBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedPaddle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedSpecialItemBrick$ItemType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedSpecialItemBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedStrongBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/EnhancedUnbreakableBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/SpecialBrick$SpecialType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/SpecialBrick.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +154,7 @@
       <workItem from="1760856030605" duration="4130000" />
       <workItem from="1760861037346" duration="402000" />
       <workItem from="1760864836011" duration="5842000" />
-      <workItem from="1760887267507" duration="2346000" />
+      <workItem from="1760887267507" duration="4491000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
