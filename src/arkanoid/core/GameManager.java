@@ -1,5 +1,6 @@
 package arkanoid.core;
 
+
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -21,6 +22,9 @@ public class GameManager {
     private List<PowerUp> powerUps;
     private List<PowerUp> activePowerUps; // Track active power-ups
     private List<Integer> availableMaps = new ArrayList<>();
+
+    // Camera Shake
+    private CameraShake cameraShake;
 
     // Game state
     private int score;
@@ -46,7 +50,8 @@ public class GameManager {
         MENU, PLAYING, PAUSED, GAME_OVER, LEVEL_COMPLETE
     }
 
-    private GameManager() {
+
+    public GameManager() {
         this.gameWidth = 800;
         this.gameHeight = 600;
         this.bricks = new ArrayList<>();
@@ -54,8 +59,10 @@ public class GameManager {
         this.activePowerUps = new ArrayList<>();
         this.balls = new ArrayList<>();
         this.originalBallSpeed = DEFAULT_BALL_SPEED;
+        this.cameraShake = new CameraShake(); // ✅ Khởi tạo camera shake
         reset();
     }
+
 
     public void setMovingLeft(boolean moving) {
         this.movingLeft = moving;
@@ -226,6 +233,9 @@ public class GameManager {
     public void updateGame(double deltaTime) {
         if (gameState != GameState.PLAYING) return;
 
+        // ✅ Cập nhật camera shake
+        cameraShake.update(deltaTime);
+
         // Handle paddle movement with simple flags
         if (movingLeft) {
             paddle.moveLeft(deltaTime);
@@ -327,6 +337,7 @@ public class GameManager {
             // Ball-Paddle collision
             if (currentBall.intersects(paddle)) {
                 currentBall.bounceOffPaddle(paddle);
+                cameraShake.shakeOnPaddleHit();
             }
 
             // Ball-Brick collisions
@@ -335,7 +346,9 @@ public class GameManager {
                     currentBall.bounceOff(brick);
                     brick.takeHit();
 
+                    // ✅ Shake mạnh khi brick bị vỡ
                     if (brick.isDestroyed()) {
+                        cameraShake.shakeOnBrickHit(); // Shake mạnh
                         score += brick.getPoints();
 
                         // Random chance to spawn power-up
@@ -343,6 +356,9 @@ public class GameManager {
                             spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
                                     brick.getY() + brick.getHeight());
                         }
+                    } else {
+                        // ✅ Shake nhẹ khi brick bị hit nhưng chưa vỡ
+                        cameraShake.shakeOnPaddleHit();
                     }
                     break; // Only one collision per frame
                 }
@@ -505,14 +521,24 @@ public class GameManager {
      * Render all game objects
      */
     public void render(GraphicsContext gc) {
-        // Clear screen với gradient background đẹp hơn
+        // ✅ Lấy offset từ camera shake
+        double shakeX = cameraShake.getShakeX();
+        double shakeY = cameraShake.getShakeY();
+
+        // Lưu trạng thái canvas
+        gc.save();
+
+        // ✅ Áp dụng offset rung lên toàn bộ canvas
+        gc.translate(shakeX, shakeY);
+
+        // Clear screen với gradient background
         javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
                 0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
                 new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
                 new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
         );
         gc.setFill(gradient);
-        gc.fillRect(0, 0, gameWidth, gameHeight);
+        gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
 
         // Thêm viền trang trí
         gc.setStroke(Color.web("#0ea5e9"));
@@ -541,11 +567,21 @@ public class GameManager {
             }
 
 
+
+
             // Hiển thị hướng dẫn khi ball đang dính
             if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
                 renderStuckBallHint(gc);
             }
         }
+
+        // ✅ Khôi phục trạng thái canvas
+        gc.restore();
+    }
+
+    // Getter để Ball có thể gọi shake nếu cần
+    public CameraShake getCameraShake() {
+        return cameraShake;
     }
 
     /**
@@ -579,7 +615,6 @@ public class GameManager {
         gc.fillText("Use A/D or Arrow Keys to Move", gameWidth / 2 - 120, gameHeight / 2 + 40);
         gc.fillText("Press P to Pause", gameWidth / 2 - 70, gameHeight / 2 + 70);
     }
-
 
     private void renderActivePowerUps(GraphicsContext gc) {
         if (activePowerUps.isEmpty()) return;
