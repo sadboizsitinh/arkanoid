@@ -6,6 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import java.util.*;
 import arkanoid.entities.*;
+import arkanoid.utils.SoundManager;
 
 /**
  * Singleton GameManager - manages all game logic and state
@@ -326,8 +327,10 @@ public class GameManager {
                 if (balls.isEmpty()) {
                     lives--;
                     if (lives <= 0) {
+                        SoundManager.play("game_over.wav");
                         gameState = GameState.GAME_OVER;
                     } else {
+                        SoundManager.play("matmang.wav");
                         resetBallAndPaddle();
                     }
                 }
@@ -338,6 +341,7 @@ public class GameManager {
             if (currentBall.intersects(paddle)) {
                 currentBall.bounceOffPaddle(paddle);
                 cameraShake.shakeOnPaddleHit();
+                SoundManager.play("paddle.wav");
             }
 
             // Ball-Brick collisions
@@ -349,6 +353,7 @@ public class GameManager {
                     // ✅ Shake mạnh khi brick bị vỡ
                     if (brick.isDestroyed()) {
                         cameraShake.shakeOnBrickHit(); // Shake mạnh
+                        SoundManager.play("gachvo.wav");
                         score += brick.getPoints();
 
                         // Random chance to spawn power-up
@@ -359,6 +364,7 @@ public class GameManager {
                     } else {
                         // ✅ Shake nhẹ khi brick bị hit nhưng chưa vỡ
                         cameraShake.shakeOnPaddleHit();
+                        SoundManager.play("gach.wav");
                     }
                     break; // Only one collision per frame
                 }
@@ -374,6 +380,7 @@ public class GameManager {
             PowerUp powerUp = powerUpIterator.next();
             if (paddle.intersects(powerUp)) {
                 applyPowerUpEffect(powerUp);
+                SoundManager.play("powerup.wav");
                 powerUpIterator.remove();
             } else if (powerUp.getY() > gameHeight) {
                 powerUpIterator.remove();
@@ -491,6 +498,7 @@ public class GameManager {
         }
 
         if (cleared) {
+            SoundManager.play("Qua_man.wav");
             level++;
             createLevel(level);
             resetBallAndPaddle();
