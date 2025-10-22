@@ -30,23 +30,4 @@ public class MultiBallPowerUp extends PowerUp {
         return "M";
     }
 
-    @Override
-    public void render(GraphicsContext gc) {
-        // Custom render with animated effect
-        gc.setFill(color);
-        gc.fillRect(x, y, width, height);
-        gc.setStroke(Color.WHITE);
-        gc.setLineWidth(2);
-        gc.strokeRect(x, y, width, height);
-
-        // Draw multiple circles to represent multi-ball
-        gc.setFill(Color.WHITE);
-        double centerX = x + width / 2;
-        double centerY = y + height / 2;
-        double radius = 3;
-
-        gc.fillOval(centerX - radius, centerY - radius, radius * 2, radius * 2);
-        gc.fillOval(centerX - radius - 5, centerY - radius - 3, radius * 2, radius * 2);
-        gc.fillOval(centerX - radius + 5, centerY - radius - 3, radius * 2, radius * 2);
-    }
 }
