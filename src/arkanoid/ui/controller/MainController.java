@@ -1,6 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
+import arkanoid.utils.SoundManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class MainController {
 
     @FXML
     private void initialize() {
+        SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.5);
         //  Kiểm tra và hiển thị/ẩn nút Continue
         if (btnContinue != null) {
             boolean hasSavedGame = GameManager.getInstance().hasSavedGame();

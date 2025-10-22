@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
