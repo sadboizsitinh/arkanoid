@@ -8,14 +8,40 @@
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/sounds/Arkanoid_sound_menu.wav" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/sounds/Arkanoid_sound_menu.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/utils/SoundManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/utils/SoundManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Main.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball$TrailPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick$BrickType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/BrickFactory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/BrickFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/ExpandPaddlePowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/ExtraLifePowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/FastBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/GameObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/MovableObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/MultiBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/NormalBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PaddleLike.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp$PowerUpType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/SlowBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/StrongBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/UnbreakableBrick.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/SelectSkinController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/SelectSkinController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/utils/TextureManager.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +191,7 @@
       <workItem from="1761119487341" duration="359000" />
       <workItem from="1761124736571" duration="43000" />
       <workItem from="1761124792377" duration="2495000" />
+      <workItem from="1761153167158" duration="6637000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />

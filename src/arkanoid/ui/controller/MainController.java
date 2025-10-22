@@ -27,7 +27,7 @@ public class MainController {
 
     @FXML
     private void initialize() {
-        SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.5);
+        SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.3);
         //  Kiểm tra và hiển thị/ẩn nút Continue
         if (btnContinue != null) {
             boolean hasSavedGame = GameManager.getInstance().hasSavedGame();
