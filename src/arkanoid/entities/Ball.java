@@ -3,28 +3,43 @@ package arkanoid.entities;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * Game ball that bounces around the screen
  * Handles collisions with other objects
+ * Includes trail/glow effect
  */
 public class Ball extends MovableObject {
     private static final double DEFAULT_SIZE = 28;
     private static final double DEFAULT_SPEED = 325;
 
+    // Trail effect constants
+    private static final int MAX_TRAIL_POINTS = 30;
+    private static final double TRAIL_UPDATE_INTERVAL = 0.01; // Update trail every 10ms
+
     // Index Skin
-    private int TypeSkin = 2;
+    private int TypeSkin = 3;
 
     private double directionX, directionY;
 
     private boolean stuckToPaddle = true;
-    private double offsetFromPaddleCenter = 0; // Vị trí tương đối so với tâm paddle
+    private double offsetFromPaddleCenter = 0;
+
+    // Trail effect
+    private Queue<TrailPoint> trail;
+    private double timeSinceLastTrail = 0;
 
     public Ball(double x, double y) {
         super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, DEFAULT_SPEED);
         this.color = Color.RED;
-        // Start moving up and right (chỉ dùng khi release)
+        // Start moving up and right
         this.directionX = 1;
         this.directionY = -1;
+
+        // Initialize trail
+        this.trail = new LinkedList<>();
 
         updateVelocity();
     }
@@ -34,24 +49,22 @@ public class Ball extends MovableObject {
         dy = directionY * speed;
     }
 
-
     public void release() {
         stuckToPaddle = false;
     }
 
-
     public void stickToPaddle(Paddle paddle) {
         stuckToPaddle = true;
-        // Tính offset từ tâm paddle
         offsetFromPaddleCenter = 0;
+        // Clear trail when stuck
+        trail.clear();
     }
-
 
     public void updateStuckPosition(Paddle paddle) {
         if (stuckToPaddle) {
             double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
             x = paddleCenter + offsetFromPaddleCenter - width / 2;
-            y = paddle.getY() - height - 2; // Đặt trên paddle
+            y = paddle.getY() - height - 2;
         }
     }
 
@@ -60,53 +73,104 @@ public class Ball extends MovableObject {
     }
 
     /**
+     * Update trail points - add new point if enough time has passed
+     */
+    private void updateTrail() {
+        timeSinceLastTrail += 0.016; // Approximate delta time
+
+        if (timeSinceLastTrail >= TRAIL_UPDATE_INTERVAL && !stuckToPaddle) {
+            double ballCenterX = x + width / 2;
+            double ballCenterY = y + height / 2;
+
+            trail.add(new TrailPoint(ballCenterX, ballCenterY, 1.0));
+
+            // Keep trail size limited
+            if (trail.size() > MAX_TRAIL_POINTS) {
+                trail.poll();
+            }
+
+            timeSinceLastTrail = 0;
+        }
+
+        // Fade out trail points
+        for (TrailPoint point : trail) {
+            point.alpha -= 0.05;
+        }
+
+        // Remove fully faded points
+        trail.removeIf(point -> point.alpha <= 0);
+    }
+
+    /**
+     * Render trail effect
+     */
+    private void renderTrail(GraphicsContext gc) {
+        for (TrailPoint point : trail) {
+            if (point.alpha > 0) {
+                // Draw glowing circle with decreasing size and opacity
+                double radius = (width / 2) * point.alpha;
+
+                // Outer glow - more transparent
+                gc.setFill(Color.color(1.0, 1.0, 1.0, 0.3 * point.alpha));
+                gc.fillOval(point.x - radius * 1.5, point.y - radius * 1.5,
+                        radius * 3, radius * 3);
+
+                // Middle glow
+                gc.setFill(Color.color(0.6, 0.8, 1.0, 0.5 * point.alpha));
+                gc.fillOval(point.x - radius, point.y - radius,
+                        radius * 2, radius * 2);
+
+                // Core - brighter
+                gc.setFill(Color.color(1.0, 1.0, 1.0, 0.8 * point.alpha));
+                gc.fillOval(point.x - radius * 0.6, point.y - radius * 0.6,
+                        radius * 1.2, radius * 1.2);
+            }
+        }
+    }
+
+    /**
      * Bounce off another object using axis penetration to determine normal,
-     * then apply specular reflection. Also nudge the ball out of the object
-     * and clamp vertical component to avoid horizontal stalls.
+     * then apply specular reflection.
      */
     public void bounceOff(GameObject other) {
-        // Compute overlaps
         double otherX = other.getX();
         double otherY = other.getY();
         double otherW = other.getWidth();
         double otherH = other.getHeight();
 
-        double overlapLeft   = (otherX + otherW) - x;            // amount from left
-        double overlapRight  = (x + width) - otherX;             // from right
-        double overlapTop    = (otherY + otherH) - y;            // from top
-        double overlapBottom = (y + height) - otherY;            // from bottom
+        double overlapLeft   = (otherX + otherW) - x;
+        double overlapRight  = (x + width) - otherX;
+        double overlapTop    = (otherY + otherH) - y;
+        double overlapBottom = (y + height) - otherY;
 
-        // Choose the minimum penetration axis
         double minX = Math.min(Math.abs(overlapLeft), Math.abs(overlapRight));
         double minY = Math.min(Math.abs(overlapTop), Math.abs(overlapBottom));
 
-        double nx = 0, ny = 0; // collision normal
-        double epsilon = 0.5;  // small nudge
+        double nx = 0, ny = 0;
+        double epsilon = 0.5;
         if (minX < minY) {
             if (Math.abs(overlapLeft) < Math.abs(overlapRight)) {
-                nx = -1; // normal points left -> hit object's left side
-                x = otherX + otherW + epsilon; // move to right of object
+                nx = -1;
+                x = otherX + otherW + epsilon;
             } else {
-                nx = 1;  // hit object's right side
-                x = otherX - width - epsilon;  // move to left of object
+                nx = 1;
+                x = otherX - width - epsilon;
             }
         } else {
             if (Math.abs(overlapTop) < Math.abs(overlapBottom)) {
-                ny = -1; // hit object's top side
-                y = otherY + otherH + epsilon; // push below top
+                ny = -1;
+                y = otherY + otherH + epsilon;
             } else {
-                ny = 1;  // hit object's bottom side
-                y = otherY - height - epsilon; // push above bottom
+                ny = 1;
+                y = otherY - height - epsilon;
             }
         }
 
-        // Reflect current velocity vector about normal
         double vx = dx, vy = dy;
         double dot = vx * nx + vy * ny;
         double rx = vx - 2 * dot * nx;
         double ry = vy - 2 * dot * ny;
 
-        // Normalize back to direction and keep same speed
         double mag = Math.sqrt(rx * rx + ry * ry);
         if (mag == 0) {
             rx = -vx; ry = -vy; mag = Math.sqrt(rx * rx + ry * ry);
@@ -114,10 +178,8 @@ public class Ball extends MovableObject {
         directionX = rx / mag;
         directionY = ry / mag;
 
-        // Prevent near-horizontal motion which can feel sticky: ensure |directionY| >= 0.2
         if (Math.abs(directionY) < 0.2) {
             directionY = Math.copySign(0.2, directionY == 0 ? -1 : directionY);
-            // Re-normalize
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
             directionX /= m2; directionY /= m2;
         }
@@ -133,10 +195,9 @@ public class Ball extends MovableObject {
         double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
         double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
 
-        directionX = hitPosition * 0.8; // Max 80% horizontal component
-        directionY = -Math.abs(directionY); // Always bounce up
+        directionX = hitPosition * 0.8;
+        directionY = -Math.abs(directionY);
 
-        // Normalize direction vector
         double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
         directionX /= magnitude;
         directionY /= magnitude;
@@ -144,14 +205,9 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
-    /**
-     * Overload to support EnhancedPaddle without changing class hierarchy
-     */
-
     public void bounceOffWall(char wall) {
-        // Use specular reflection: v' = v - 2 (v·n) n
         double vx = dx; double vy = dy;
-        double nx = 0, ny = 0; // surface normal
+        double nx = 0, ny = 0;
         switch (wall) {
             case 'L':
                 nx = 1; ny = 0;
@@ -170,7 +226,6 @@ public class Ball extends MovableObject {
         double dot = vx * nx + vy * ny;
         double rx = vx - 2 * dot * nx;
         double ry = vy - 2 * dot * ny;
-        // Normalize to direction and keep same speed
         double mag = Math.sqrt(rx * rx + ry * ry);
         if (mag == 0) { rx = -vx; ry = -vy; mag = Math.sqrt(rx*rx + ry*ry); }
         directionX = rx / mag;
@@ -178,18 +233,14 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
-    public void setTypeSkin (int type) {
+    public void setTypeSkin(int type) {
         TypeSkin = type;
     }
 
-    public int getTypeSkin () {
+    public int getTypeSkin() {
         return TypeSkin;
     }
 
-    /**
-     * Safely apply a new speed while preserving current direction.
-     * Updates dx, dy to reflect the new speed.
-     */
     public void applySpeed(double newSpeed) {
         this.speed = newSpeed;
         updateVelocity();
@@ -199,11 +250,16 @@ public class Ball extends MovableObject {
     public void update(double deltaTime) {
         if (!stuckToPaddle) {
             move(deltaTime);
+            updateTrail();
         }
     }
 
     @Override
     public void render(GraphicsContext gc) {
+        // Render trail first (behind the ball)
+        renderTrail(gc);
+
+        // Render ball
         String path = "file:src/arkanoid/assets/images/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
@@ -211,11 +267,11 @@ public class Ball extends MovableObject {
         double W = img.getWidth();
         double H = img.getHeight();
 
-        setSpriteRegion(0,0,W, H);
+        setSpriteRegion(0, 0, W, H);
         gc.drawImage(
                 spriteSheet,
-                sourceX, sourceY, sourceWidth, sourceHeight,  // Source rectangle
-                x, y, width, height                            // Destination rectangle
+                sourceX, sourceY, sourceWidth, sourceHeight,
+                x, y, width, height
         );
     }
 
@@ -224,8 +280,21 @@ public class Ball extends MovableObject {
         this.directionY = dy;
         updateVelocity();
     }
-    // --- Added getters to support snapshot/resume ---
+
     public double getSpeed() { return speed; }
     public double getDX() { return dx; }
     public double getDY() { return dy; }
+
+    /**
+     * Inner class to represent a trail point
+     */
+    private static class TrailPoint {
+        double x, y, alpha;
+
+        TrailPoint(double x, double y, double alpha) {
+            this.x = x;
+            this.y = y;
+            this.alpha = alpha;
+        }
+    }
 }
