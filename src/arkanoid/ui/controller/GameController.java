@@ -331,30 +331,26 @@ public class GameController {
     /**
      * Hiển thị Game Over overlay - LOAD TỪ FXML
      */
+    /**
+     * Hiển thị Game Over overlay - LOAD TỪ FXML
+     */
+    /**
+     * Hiển thị Game Over overlay - LOAD TỪ FXML
+     */
     private void showGameOverOverlay() {
         System.out.println("====================================");
         System.out.println("🎯 showGameOverOverlay() CALLED");
         System.out.println("====================================");
 
         try {
-            Scene scene = gameCanvas.getScene();
-            if (scene == null) {
-                System.err.println("❌ ERROR: Scene is NULL!");
+            Stage stage = (Stage) gameCanvas.getScene().getWindow();
+            if (stage == null) {
+                System.err.println("❌ ERROR: Stage is NULL!");
                 return;
             }
-            System.out.println("✅ Scene found: " + scene);
-
-            Parent currentRoot = scene.getRoot();
-            System.out.println("✅ Current root: " + currentRoot.getClass().getName());
-
-            // Tạo container
-            StackPane container = new StackPane();
-            container.getChildren().add(currentRoot);
-            scene.setRoot(container);
-            System.out.println("✅ Container created and set as root");
 
             // === LOAD FXML ===
-            System.out.println("📂 Attempting to load GameOver.fxml...");
+            System.out.println("📂 Loading GameOver.fxml...");
 
             FXMLLoader loader = new FXMLLoader();
             java.net.URL resourceUrl = getClass().getResource("/ui/fxml/GameOver.fxml");
@@ -374,16 +370,13 @@ public class GameController {
                     loader.setLocation(fxmlFile.toURI().toURL());
                     overlay = loader.load();
                 } else {
-                    System.err.println("❌ GameOver.fxml NOT FOUND in file system!");
-                    System.err.println("   Tried: " + fxmlFile.getAbsolutePath());
-
-                    // Fallback: Tạo overlay đơn giản
+                    System.err.println("❌ GameOver.fxml NOT FOUND!");
                     overlay = createSimpleGameOverOverlay();
                 }
             }
 
             if (overlay == null) {
-                System.err.println("❌ Failed to load overlay, creating simple one...");
+                System.err.println("❌ Failed to load overlay");
                 overlay = createSimpleGameOverOverlay();
             } else {
                 System.out.println("✅ GameOver.fxml loaded successfully!");
@@ -398,13 +391,26 @@ public class GameController {
                 }
             }
 
-            // Thêm overlay vào container
-            container.getChildren().add(overlay);
-            System.out.println("✅ Overlay added to container");
-            System.out.println("📊 Container has " + container.getChildren().size() + " children");
+            // ✅ THAY THẾ TOÀN BỘ SCENE - KHÔNG DÙNG STACKPANE
+            Scene newScene = new Scene(overlay, 800, 600);
 
-            // Force refresh
-            container.requestLayout();
+            // ✅ Load stylesheet từ file hoặc resource
+            try {
+                java.net.URL cssUrl = getClass().getResource("/ui/css/style.css");
+                if (cssUrl != null) {
+                    newScene.getStylesheets().add(cssUrl.toExternalForm());
+                } else {
+                    java.io.File cssFile = new java.io.File("src/arkanoid/ui/css/style.css");
+                    if (cssFile.exists()) {
+                        newScene.getStylesheets().add(cssFile.toURI().toURL().toExternalForm());
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("⚠️ Could not load stylesheet");
+            }
+
+            stage.setScene(newScene);
+            System.out.println("✅ Game Over scene set successfully!");
 
         } catch (Exception ex) {
             System.err.println("❌ EXCEPTION in showGameOverOverlay:");
