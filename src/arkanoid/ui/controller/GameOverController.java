@@ -37,7 +37,7 @@ public class GameOverController {
         if (lblLevel != null) lblLevel.setText("Level Reached: " + level);
 
         // ✅ Dùng PauseTransition để delay trước khi check high score
-        PauseTransition delay = new PauseTransition(Duration.seconds(0.001));
+        PauseTransition delay = new PauseTransition(Duration.seconds(0.0001));
         delay.setOnFinished(event -> {
             System.out.println("⏰ Delay finished, calling checkAndShowHighScore()");
             checkAndShowHighScore();
@@ -72,7 +72,7 @@ public class GameOverController {
                     }
 
                     Parent root = loader.load();
-                    stage.setScene(new Scene(root, 800, 600));
+                    stage.setScene(new Scene(root, 1000, 600));
 
                     System.out.println("✅ Game restarted successfully!");
 

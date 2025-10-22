@@ -1,6 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
+import arkanoid.entities.PowerUp;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,6 +30,29 @@ public class GameController {
 
     @FXML
     private PauseOverlayController pauseOverlayController;
+
+    // UI Labels for left panel
+    @FXML
+    private Label lblScore;
+
+    @FXML
+    private Label lblLives;
+
+    @FXML
+    private Label lblLevel;
+
+    @FXML
+    private Label lblBalls;
+
+    @FXML
+    private VBox ballsContainer;
+
+    @FXML
+    private VBox powerUpsContainer;
+
+    @FXML
+    private Label lblNoPowerUps;
+
     private static GameController lastInstance;
     private GameManager.GameState lastState = null;
 
@@ -157,6 +181,9 @@ public class GameController {
                 gameManager.updateGame(deltaTime);
                 gameManager.render(gc);
 
+                // Update UI panel
+                updateUIPanel();
+
                 // Theo dõi state changes
                 GameManager.GameState state = gameManager.getGameState();
                 if (lastState != state) {
@@ -188,6 +215,78 @@ public class GameController {
         };
         gameLoop.start();
         System.out.println("✅ Game loop started");
+    }
+
+    /**
+     * Cập nhật UI panel bên trái
+     */
+    private void updateUIPanel() {
+        if (lblScore != null) {
+            lblScore.setText(String.valueOf(gameManager.getScore()));
+        }
+
+        if (lblLives != null) {
+            lblLives.setText(String.valueOf(gameManager.getLives()));
+        }
+
+        if (lblLevel != null) {
+            lblLevel.setText(String.valueOf(gameManager.getLevel()));
+        }
+
+        // Update balls counter
+        int ballCount = gameManager.getBalls().size();
+        if (ballsContainer != null) {
+            if (ballCount > 1) {
+                ballsContainer.setVisible(true);
+                ballsContainer.setManaged(true);
+                if (lblBalls != null) {
+                    lblBalls.setText(String.valueOf(ballCount));
+                }
+            } else {
+                ballsContainer.setVisible(false);
+                ballsContainer.setManaged(false);
+            }
+        }
+
+        // Update active power-ups
+        updatePowerUpsDisplay();
+    }
+
+    /**
+     * Cập nhật hiển thị power-ups đang active
+     */
+    private void updatePowerUpsDisplay() {
+        if (powerUpsContainer == null) return;
+
+        // Clear old power-ups (except the "no power-ups" label)
+        powerUpsContainer.getChildren().clear();
+
+        var activePowerUps = gameManager.getActivePowerUps();
+
+        if (activePowerUps.isEmpty()) {
+            if (lblNoPowerUps != null) {
+                lblNoPowerUps.setText("No active power-ups");
+                lblNoPowerUps.setStyle("-fx-font-size: 12px; -fx-text-fill: #8b93a5; -fx-font-style: italic;");
+                powerUpsContainer.getChildren().add(lblNoPowerUps);
+            }
+        } else {
+            for (PowerUp powerUp : activePowerUps) {
+                if (powerUp.getTimeRemaining() > 0) {
+                    Label powerUpLabel = new Label(
+                            powerUp.getDisplaySymbol() + " " +
+                                    String.format("%.1fs", powerUp.getTimeRemaining())
+                    );
+                    powerUpLabel.setStyle(
+                            "-fx-font-size: 13px; " +
+                                    "-fx-text-fill: #fbbf24; " +
+                                    "-fx-background-color: rgba(251, 191, 36, 0.1); " +
+                                    "-fx-padding: 4 8; " +
+                                    "-fx-background-radius: 4;"
+                    );
+                    powerUpsContainer.getChildren().add(powerUpLabel);
+                }
+            }
+        }
     }
 
     /**
@@ -340,7 +439,7 @@ public class GameController {
                 Stage stage = (Stage) gameCanvas.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ui/fxml/GameView.fxml"));
                 Parent root = loader.load();
-                stage.setScene(new Scene(root, 800, 600));
+                stage.setScene(new Scene(root, 1000, 600));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

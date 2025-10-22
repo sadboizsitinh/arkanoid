@@ -540,8 +540,6 @@ public class GameManager {
                 powerUp.render(gc);
             }
 
-            renderUI(gc);
-            renderActivePowerUps(gc);
 
             // Hiển thị hướng dẫn khi ball đang dính
             if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
@@ -582,40 +580,6 @@ public class GameManager {
         gc.fillText("Press P to Pause", gameWidth / 2 - 70, gameHeight / 2 + 70);
     }
 
-    private void renderUI(GraphicsContext gc) {
-        // UI panel background
-        gc.setFill(Color.web("#1e293b", 0.8));
-        gc.fillRoundRect(5, 5, 200, 90, 8, 8);
-
-        // UI text với màu sắc đẹp
-        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 18));
-
-        gc.setFill(Color.web("#0ea5e9"));
-        gc.fillText("Score: ", 15, 28);
-        gc.setFill(Color.WHITE);
-        gc.fillText(String.valueOf(score), 85, 28);
-
-        gc.setFill(Color.web("#ec4899"));
-        gc.fillText("Lives: ", 15, 52);
-        gc.setFill(Color.WHITE);
-        gc.fillText(String.valueOf(lives), 85, 52);
-
-        gc.setFill(Color.web("#10b981"));
-        gc.fillText("Level: ", 15, 76);
-        gc.setFill(Color.WHITE);
-        gc.fillText(String.valueOf(level), 85, 76);
-
-        // Balls counter (góc phải)
-        if (balls.size() > 1) {
-            gc.setFill(Color.web("#1e293b", 0.8));
-            gc.fillRoundRect(gameWidth - 100, 5, 90, 35, 8, 8);
-
-            gc.setFill(Color.web("#fbbf24"));
-            gc.fillText("Balls: ", gameWidth - 95, 28);
-            gc.setFill(Color.WHITE);
-            gc.fillText(String.valueOf(balls.size()), gameWidth - 35, 28);
-        }
-    }
 
     private void renderActivePowerUps(GraphicsContext gc) {
         if (activePowerUps.isEmpty()) return;

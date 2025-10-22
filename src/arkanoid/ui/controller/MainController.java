@@ -79,7 +79,7 @@ public class MainController {
         FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1000, 600);
 
         // Load CSS từ file
         java.io.File cssFile = new java.io.File("src/arkanoid/ui/css/style.css");
@@ -116,7 +116,9 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 800, 600);
+            // ✅ CẬP NHẬT: Nếu là GameView thì dùng width 1000 (800 canvas + 200 panel)
+            int width = fxmlPath.contains("GameView") ? 1000 : 800;
+            Scene scene = new Scene(root, width, 600);
             stage.setScene(scene);
 
             System.out.println("✅ Scene switched successfully");
