@@ -7,12 +7,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane prefHeight="600" prefWidth="800" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.MainController">
   <top>
-    <VBox alignment="CENTER" spacing="6" style="-fx-padding: 40;" BorderPane.alignment="CENTER">
-      <Label style="-fx-font-size: 72px; -fx-font-weight: bold;" text="ARKANOID" />
-      <Label style="-fx-font-size: 20px; -fx-text-fill: #8b93a5;" text="Break all the brick" />
-    </VBox>
+      <VBox alignment="CENTER" spacing="6" style="-fx-padding: 40;" BorderPane.alignment="CENTER">
+          <ImageView fitHeight="150" fitWidth="600" preserveRatio="true">
+              <image>
+                  <Image url="@../../assets/images/arkanoid-logo.png" />
+              </image>
+          </ImageView>
+          <Label style="-fx-font-size: 20px; -fx-text-fill: #8b93a5;" text="Break all the brick" />
+      </VBox>
   </top>
   <center>
       <AnchorPane>
