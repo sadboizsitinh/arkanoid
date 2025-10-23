@@ -7,15 +7,10 @@
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/skinball_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/CameraShake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/CameraShake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/skinball_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/CameraShake.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/CameraShake.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" afterDir="false" />
@@ -130,8 +125,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
+        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
@@ -173,6 +168,8 @@
       <workItem from="1761153167158" duration="6637000" />
       <workItem from="1761160852158" duration="2809000" />
       <workItem from="1761204803267" duration="1032000" />
+      <workItem from="1761208119114" duration="172000" />
+      <workItem from="1761239334148" duration="5332000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />

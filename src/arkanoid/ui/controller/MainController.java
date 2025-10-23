@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -28,6 +29,23 @@ public class MainController {
     @FXML
     private void initialize() {
         SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.3);
+        // Set background image cho Main Menu
+        if (btnStart.getScene() != null && btnStart.getScene().getRoot() instanceof Pane) {
+            BackgroundHelper.setBackgroundImage(
+                    (Pane) btnStart.getScene().getRoot(),
+                    "bg-retrospace.png"
+            );
+        }
+
+        // Hoặc dùng Platform.runLater nếu scene chưa sẵn sàng
+        javafx.application.Platform.runLater(() -> {
+            if (btnStart.getScene() != null && btnStart.getScene().getRoot() instanceof Pane) {
+                BackgroundHelper.setBackgroundImage(
+                        (Pane) btnStart.getScene().getRoot(),
+                        "bg-retrospace.png"
+                );
+            }
+        });
         //  Kiểm tra và hiển thị/ẩn nút Continue
         if (btnContinue != null) {
             boolean hasSavedGame = GameManager.getInstance().hasSavedGame();
