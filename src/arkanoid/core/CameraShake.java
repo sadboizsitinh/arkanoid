@@ -16,8 +16,8 @@ public class CameraShake {
     private static final double BRICK_SHAKE_INTENSITY = 4.0;
     private static final double BRICK_SHAKE_DURATION = 0.2; // 100ms
 
-    private static final double PADDLE_SHAKE_INTENSITY = 2.0;
-    private static final double PADDLE_SHAKE_DURATION = 0.09; // 60ms
+    private static final double PADDLE_SHAKE_INTENSITY = 2.7;
+    private static final double PADDLE_SHAKE_DURATION = 0.2; // 60ms
 
     public CameraShake() {
         this.shakeIntensity = 0;

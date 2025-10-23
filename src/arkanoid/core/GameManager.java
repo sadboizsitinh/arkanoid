@@ -124,7 +124,7 @@ public class GameManager {
         originalBallSpeed = DEFAULT_BALL_SPEED;
 
         // Initialize paddle
-        paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 50);
+        paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 80);
 
         // Initialize ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
@@ -237,6 +237,8 @@ public class GameManager {
         // ✅ Cập nhật camera shake
         cameraShake.update(deltaTime);
 
+        paddle.update(deltaTime);
+
         // Handle paddle movement with simple flags
         if (movingLeft) {
             paddle.moveLeft(deltaTime);
@@ -340,6 +342,7 @@ public class GameManager {
             // Ball-Paddle collision
             if (currentBall.intersects(paddle)) {
                 currentBall.bounceOffPaddle(paddle);
+                paddle.triggerHitAnimation();
                 cameraShake.shakeOnPaddleHit();
                 SoundManager.play("paddle.wav");
             }
