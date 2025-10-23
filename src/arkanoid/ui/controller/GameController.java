@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -53,6 +54,9 @@ public class GameController {
     @FXML
     private Label lblNoPowerUps;
 
+    @FXML
+    private HBox rootPane;
+
     private static GameController lastInstance;
     private GameManager.GameState lastState = null;
 
@@ -93,6 +97,13 @@ public class GameController {
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gameCanvas.setFocusTraversable(true);
 
+        if (rootPane != null) {
+            BackgroundHelper.setBackgroundImage(rootPane, "bg-retrospace.png");
+            System.out.println("🎨 Background set for game view");
+        }
+        javafx.application.Platform.runLater(() -> {
+            gameCanvas.requestFocus();
+        });
         // Bắt đầu game loop
         startGameLoop(gc);
 

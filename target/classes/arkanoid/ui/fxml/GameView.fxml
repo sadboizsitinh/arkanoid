@@ -8,7 +8,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.GameController">
+<!-- ✅ Thêm style trực tiếp vào HBox root -->
+<HBox fx:id="rootPane" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/style.css"
+      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.GameController">
 
     <!-- LEFT PANEL - STATS -->
     <VBox prefWidth="200" style="-fx-background-color: #0f172a; -fx-padding: 20; -fx-spacing: 20; -fx-border-color: #0ea5e9; -fx-border-width: 0 2 0 0;">
@@ -63,7 +65,7 @@
                 <!-- Game Canvas -->
                 <Canvas fx:id="gameCanvas" height="600" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 
-                <!-- Pause Button - GÓC TRÊN BÊNPHẢI -->
+                <!-- Pause Button - GÓC TRÊN BÊN PHẢI -->
                 <Button fx:id="btnPause" prefHeight="52" prefWidth="52"
                         style="-fx-background-color: rgba(236, 72, 153, 0.9);
                                -fx-text-fill: white;

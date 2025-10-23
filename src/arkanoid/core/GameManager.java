@@ -543,13 +543,34 @@ public class GameManager {
         gc.translate(shakeX, shakeY);
 
         // Clear screen với gradient background
-        javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
-                0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
-                new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
-                new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
-        );
-        gc.setFill(gradient);
-        gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
+        // ✅ Thử load background image
+        try {
+            String imagePath = "src/arkanoid/assets/images/bg-retrospace.png";
+            java.io.File imgFile = new java.io.File(imagePath);
+
+            if (imgFile.exists()) {
+                javafx.scene.image.Image bgImage = new javafx.scene.image.Image(imgFile.toURI().toString());
+                gc.drawImage(bgImage, -shakeX, -shakeY, gameWidth, gameHeight);
+            } else {
+                // Fallback: gradient
+                javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
+                        0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
+                        new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
+                        new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
+                );
+                gc.setFill(gradient);
+                gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
+            }
+        } catch (Exception e) {
+            // Fallback nếu lỗi
+            javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
+                    0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
+                    new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
+                    new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
+            );
+            gc.setFill(gradient);
+            gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
+        }
 
         // Thêm viền trang trí
         gc.setStroke(Color.web("#0ea5e9"));
