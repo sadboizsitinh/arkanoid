@@ -2,6 +2,7 @@ package arkanoid.core;
 
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import java.util.*;
@@ -42,6 +43,9 @@ public class GameManager {
     // Game dimensions
     private double gameWidth;
     private double gameHeight;
+
+    private Image cachedBackground = null;
+    private boolean backgroundLoaded = false;
 
     // Ball speed tracking for power-ups
     private static final double DEFAULT_BALL_SPEED = 325.0;
@@ -528,10 +532,47 @@ public class GameManager {
         activePowerUps.clear();
     }
 
+    private void loadBackgroundImage() {
+        if (backgroundLoaded) return;
+
+        try {
+            String resourcePath = "/assets/images/bg-retrospace.png";
+            var resourceStream = getClass().getResourceAsStream(resourcePath);
+
+            if (resourceStream != null) {
+                cachedBackground = new Image(resourceStream);
+                System.out.println("✅ Background cached from resources");
+            } else {
+                // Fallback: load từ file
+                java.io.File imageFile = new java.io.File("src/arkanoid/assets/images/bg-retrospace.png");
+                if (imageFile.exists()) {
+                    cachedBackground = new Image(imageFile.toURI().toString());
+                    System.out.println("✅ Background cached from file");
+                } else {
+                    System.err.println("⚠️ Background image not found");
+                    cachedBackground = null;
+                }
+            }
+
+            backgroundLoaded = true;
+
+        } catch (Exception e) {
+            System.err.println("❌ Error loading background: " + e.getMessage());
+            cachedBackground = null;
+            backgroundLoaded = true;
+        }
+    }
+
+
     /**
      * Render all game objects
      */
     public void render(GraphicsContext gc) {
+        // ✅ Load background chỉ 1 lần
+        if (!backgroundLoaded) {
+            loadBackgroundImage();
+        }
+
         // ✅ Lấy offset từ camera shake
         double shakeX = cameraShake.getShakeX();
         double shakeY = cameraShake.getShakeY();
@@ -542,33 +583,12 @@ public class GameManager {
         // ✅ Áp dụng offset rung lên toàn bộ canvas
         gc.translate(shakeX, shakeY);
 
-        // Clear screen với gradient background
-        // ✅ Thử load background image
-        try {
-            String imagePath = "src/arkanoid/assets/images/bg-retrospace.png";
-            java.io.File imgFile = new java.io.File(imagePath);
-
-            if (imgFile.exists()) {
-                javafx.scene.image.Image bgImage = new javafx.scene.image.Image(imgFile.toURI().toString());
-                gc.drawImage(bgImage, -shakeX, -shakeY, gameWidth, gameHeight);
-            } else {
-                // Fallback: gradient
-                javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
-                        0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
-                        new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
-                        new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
-                );
-                gc.setFill(gradient);
-                gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
-            }
-        } catch (Exception e) {
-            // Fallback nếu lỗi
-            javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
-                    0, 0, 0, 1, true, javafx.scene.paint.CycleMethod.NO_CYCLE,
-                    new javafx.scene.paint.Stop(0, Color.web("#1e293b")),
-                    new javafx.scene.paint.Stop(1, Color.web("#0f172a"))
-            );
-            gc.setFill(gradient);
+        // ✅ VẼ BACKGROUND (đã được cache - NHANH!)
+        if (cachedBackground != null) {
+            gc.drawImage(cachedBackground, -shakeX, -shakeY, gameWidth, gameHeight);
+        } else {
+            // Fallback: clear với màu đơn sắc nếu không có background
+            gc.setFill(Color.web("#0f172a"));
             gc.fillRect(-shakeX, -shakeY, gameWidth, gameHeight);
         }
 
@@ -580,7 +600,7 @@ public class GameManager {
         if (gameState == GameState.MENU) {
             renderMenu(gc);
         } else if (gameState == GameState.GAME_OVER) {
-            //renderUI(gc);
+            // renderUI(gc);
         } else {
             // Render game objects
             paddle.render(gc);
@@ -597,9 +617,6 @@ public class GameManager {
             for (PowerUp powerUp : powerUps) {
                 powerUp.render(gc);
             }
-
-
-
 
             // Hiển thị hướng dẫn khi ball đang dính
             if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {

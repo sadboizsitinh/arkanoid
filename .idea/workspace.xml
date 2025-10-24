@@ -7,10 +7,7 @@
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/arkanoid-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +79,7 @@
 }</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../.jdks/openjdk-25" />
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
       <module name="arkanoid" />
@@ -165,6 +162,12 @@
       <workItem from="1761204803267" duration="1032000" />
       <workItem from="1761208119114" duration="172000" />
       <workItem from="1761239334148" duration="10059000" />
+      <workItem from="1761249917846" duration="187000" />
+      <workItem from="1761250181829" duration="33000" />
+      <workItem from="1761250237085" duration="97000" />
+      <workItem from="1761278601526" duration="2224000" />
+      <workItem from="1761320717273" duration="41000" />
+      <workItem from="1761321824476" duration="2105000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
