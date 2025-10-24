@@ -21,7 +21,7 @@ Mỗi viên gạch bị phá sẽ cho điểm, và một số gạch có thể r
   - 🏋️ *Expand Paddle* - mở rộng thanh chắn.
   - 🌀 *Slow Ball* – giảm tốc độ bóng.
   - ⚡️ *Fast Ball* - tăng tốc độ bóng.
-- 👔 **Kho trang phục đa dạng :** đừng lo nhàm chán khi chơi nha ^^!
+- 👔 **Phối màu đa dạng :**, được thiết kế với chủ đề galaxy, kết hợp bảng phối màu theo chuyên gia. 
 - 🌈 **Hệ thống điểm số (Score System):**
   - High Score được lưu lại khi chơi lại.
 - 🧱 **Nhiều cấp độ (Levels):**
