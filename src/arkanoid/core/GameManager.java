@@ -115,7 +115,7 @@ public class GameManager {
 
         score = 0;
         lives = 3;
-        level = 3;
+        level = 1;
         difficultyLevel = 1;
         movingLeft = false;
         movingRight = false;

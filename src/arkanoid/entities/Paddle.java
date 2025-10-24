@@ -78,6 +78,7 @@ public class Paddle extends MovableObject implements PaddleLike {
     public void setWidth(double newWidth) {
         this.width = newWidth;
     }
+    public void setHeight(double newHeight) {this.height = newHeight;}
 
     @Override
     public void update(double deltaTime) {
