@@ -58,17 +58,13 @@ Mỗi viên gạch bị phá sẽ cho điểm, và một số gạch có thể r
 ## 🧩 CẤU TRÚC THƯ MỤC
 
 ```bash
-Arkanoid/
+arkanoid/
 ├── src/
-│   ├── entities/        # Ball, Paddle, Brick, PowerUp
-│   ├── controller/      # Game logic, event handling
-│   ├── ui/              # Menu, HUD, Scoreboard
-│   ├── assets/          # Sprite, sound, font
-│   └── main/            # Entry point (Main.cpp / Main.java)
-├── resources/
-│   ├── images/
-│   ├── sounds/
-│   └── levels/
+│   ├── assets/        # Ball, Paddle, Brick, PowerUp
+│   ├── core/      # Game logic, event handling
+│   ├── entitites/   # Menu, HUD, Scoreboard
+│   ├── ui/          # Sprite, sound, font
+│   └── untils/      # Entry point (Main.cpp / Main.java)
 └── README.md
 ```
 ## 💻 LÀM SAO ĐỂ CHẠY CODE 
