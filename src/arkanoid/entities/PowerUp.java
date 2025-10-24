@@ -110,9 +110,9 @@ public abstract class PowerUp extends MovableObject {
             gc.drawImage(img, x, y, width, height);
 
             // Optional: Thêm border cho đẹp
-            gc.setStroke(Color.WHITE);
+           // gc.setStroke(Color.WHITE);
             gc.setLineWidth(2);
-            gc.strokeRect(x, y, width, height);
+          //  gc.strokeRect(x, y, width, height);
         } else {
             // ✅ MODE 2: Render với TEXT (fallback hoặc khi không có image)
             // Background màu
