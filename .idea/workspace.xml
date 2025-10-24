@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,6 +163,7 @@
       <workItem from="1761320698244" duration="2309000" />
       <workItem from="1761324431273" duration="534000" />
       <workItem from="1761325119390" duration="2341000" />
+      <workItem from="1761331753440" duration="1148000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
