@@ -9,5 +9,6 @@ public interface PaddleLike {
     double getWidth();
     double getHeight();
     void setWidth(double width);
+    void setHeight(double height);
     void resetSize();
 }

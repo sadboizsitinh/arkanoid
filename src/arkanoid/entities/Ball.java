@@ -15,7 +15,7 @@ public class Ball extends MovableObject {
 
 
 
-    private static final double DEFAULT_SIZE = 28;
+    private static final double DEFAULT_SIZE = 30;
     private static final double DEFAULT_SPEED = 325;
 
     // Trail effect constants
@@ -23,7 +23,7 @@ public class Ball extends MovableObject {
     private static final double TRAIL_UPDATE_INTERVAL = 0.01; // Update trail every 10ms
 
     // Index Skin
-    private int TypeSkin = 3;
+    private int TypeSkin = 1;
 
     private double directionX, directionY;
 
@@ -266,11 +266,7 @@ public class Ball extends MovableObject {
         String path = "file:src/arkanoid/assets/images/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
-        Image img = new Image(path);
-        double W = img.getWidth();
-        double H = img.getHeight();
-
-        setSpriteRegion(0, 0, W, H);
+        setSpriteRegion(0, 0, 317, 323);
 
         gc.drawImage(
                 spriteSheet,

@@ -4,27 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: thay giao diện!">
-      <change afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/slow_ball1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/slow_ball1.png" afterDir="false" />
+    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/bg-retrospace(1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo(1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/bg-retrospace(1).png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/Fire-Ball.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/expand_paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/expand_paddle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/extra_life.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/extra_life.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/fast_ball.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/fast_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/fast_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/multi_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/multi_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/slow_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/slow_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/Fire-Ball.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo(1).png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/expand_paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/expand_paddle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/extra_life.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/extra_life.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/fast_ball.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/fast_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/fast_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/multi_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/multi_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/slow_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/slow_ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/arkanoid-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/bg-retrospace.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/bg-retrospace.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/arkanoid-logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/bg-retrospace.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/bg-retrospace.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,7 +179,7 @@
       <workItem from="1761320698244" duration="2309000" />
       <workItem from="1761324431273" duration="534000" />
       <workItem from="1761325119390" duration="2341000" />
-      <workItem from="1761333680780" duration="3606000" />
+      <workItem from="1761333680780" duration="1699000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
@@ -199,15 +197,7 @@
       <option name="project" value="LOCAL" />
       <updated>1760676003579</updated>
     </task>
-    <task id="LOCAL-00003" summary="feat: thay giao diện!">
-      <option name="closed" value="true" />
-      <created>1761335601751</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1761335601751</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,8 +229,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn" />
     <MESSAGE value="feat:Sửa lại cấu trúc game" />
-    <MESSAGE value="feat: thay giao diện!" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: thay giao diện!" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:Sửa lại cấu trúc game" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
