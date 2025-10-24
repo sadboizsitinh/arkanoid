@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -21,6 +22,16 @@ public class HighScoresController {
     @FXML
     private void initialize() {
         loadHighScores();
+
+        javafx.application.Platform.runLater(() -> {
+            if (btnBack != null && btnBack.getScene() != null) {
+                Parent root = btnBack.getScene().getRoot();
+                if (root instanceof Pane) {
+                    BackgroundHelper.setBackgroundImage((Pane) root, "bg-retrospace.png");
+                    System.out.println("🎨 High Scores background set");
+                }
+            }
+        });
 
         if (btnBack != null) {
             btnBack.setOnAction(e -> {
