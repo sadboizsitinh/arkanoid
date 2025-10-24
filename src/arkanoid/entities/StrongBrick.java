@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
  */
 public class StrongBrick extends Brick {
     public StrongBrick(double x, double y, double width, double height) {
-        super(x, y, width, height, 2, BrickType.STRONG);
+        super(x, y, width, height, 3, BrickType.STRONG);
         this.color = Color.DARKRED;
     }
 
