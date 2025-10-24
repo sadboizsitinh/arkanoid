@@ -536,7 +536,7 @@ public class GameManager {
         if (backgroundLoaded) return;
 
         try {
-            String resourcePath = "/assets/images/bg-retrospace.png";
+            String resourcePath = "/assets/images/bg-retrospace(1).png";
             var resourceStream = getClass().getResourceAsStream(resourcePath);
 
             if (resourceStream != null) {
@@ -544,7 +544,7 @@ public class GameManager {
                 System.out.println("✅ Background cached from resources");
             } else {
                 // Fallback: load từ file
-                java.io.File imageFile = new java.io.File("src/arkanoid/assets/images/bg-retrospace.png");
+                java.io.File imageFile = new java.io.File("src/arkanoid/assets/images/bg-retrospace(1).png");
                 if (imageFile.exists()) {
                     cachedBackground = new Image(imageFile.toURI().toString());
                     System.out.println("✅ Background cached from file");
