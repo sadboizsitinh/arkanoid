@@ -12,6 +12,9 @@ import java.util.Queue;
  * Includes trail/glow effect
  */
 public class Ball extends MovableObject {
+
+
+
     private static final double DEFAULT_SIZE = 28;
     private static final double DEFAULT_SPEED = 325;
 
@@ -268,6 +271,7 @@ public class Ball extends MovableObject {
         double H = img.getHeight();
 
         setSpriteRegion(0, 0, W, H);
+
         gc.drawImage(
                 spriteSheet,
                 sourceX, sourceY, sourceWidth, sourceHeight,

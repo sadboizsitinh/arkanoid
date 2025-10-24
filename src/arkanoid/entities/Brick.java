@@ -1,6 +1,7 @@
 package arkanoid.entities;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 /**
@@ -70,18 +71,23 @@ public abstract class Brick extends GameObject {
     @Override
     public void render(GraphicsContext gc) {
         String BrickCode = "";
+        int status = 1;
         if (type == BrickType.NORMAL) {
             BrickCode = "normal_";
         }
         if (type == BrickType.STRONG) {
             BrickCode = "strong_";
+            status = 4 - hitPoints;
         }
         if (type == BrickType.UNBREAKABLE) {
             BrickCode = "unbreakable_";
         }
-        String path = "/brick_" + BrickCode + (hitPoints == 1 ? "2" : "1") + ".png";
+        String path = "file:src/arkanoid/assets/images/brick_" + BrickCode + status + ".png";
         loadTexture(path);
-        setSpriteRegion(0,0,384, 128);
+
+
+
+        setSpriteRegion(0,0,735, 210);
         gc.drawImage(
                 spriteSheet,
                 sourceX, sourceY, sourceWidth, sourceHeight,

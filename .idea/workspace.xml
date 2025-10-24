@@ -5,8 +5,71 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/Gemini_Generated_Image_k0bkrvk0bkrvk0bk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_normal_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_strong_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/Gemini_Generated_Image_k0bkrvk0bkrvk0bk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_normal_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_strong_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_normal_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_strong_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_strong_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_strong_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_strong_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_unbreakable_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/brick_unbreakable_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Brick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/StrongBrick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/StrongBrick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ArkanoidApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_normal_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_strong_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_strong_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_strong_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_strong_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_unbreakable_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/brick_unbreakable_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/CameraShake.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameStateSnapshot$ActivePowerUpState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameStateSnapshot$BallState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameStateSnapshot$BrickState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameStateSnapshot$PowerUpState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameStateSnapshot.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/HighScore.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/HighScoreManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball$TrailPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick$BrickType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/BrickFactory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/BrickFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/ExpandPaddlePowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/ExtraLifePowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/FastBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/GameObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/MovableObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/MultiBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/NormalBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PaddleLike.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp$PowerUpType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/SlowBallPowerUp.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/StrongBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/UnbreakableBrick.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/BackgroundHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/PauseOverlayController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/SceneNavigator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/utils/SoundManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/utils/TextureManager.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +119,7 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
     &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
@@ -163,7 +226,6 @@
       <workItem from="1761320698244" duration="2309000" />
       <workItem from="1761324431273" duration="534000" />
       <workItem from="1761325119390" duration="2341000" />
-      <workItem from="1761331753440" duration="1148000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
