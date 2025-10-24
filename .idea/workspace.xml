@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat:Sửa lại cấu trúc game">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/CameraShake.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/CameraShake.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/PaddleLike.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/PaddleLike.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +163,7 @@
       <workItem from="1761324431273" duration="534000" />
       <workItem from="1761325119390" duration="2341000" />
       <workItem from="1761333680780" duration="1699000" />
-      <workItem from="1761336072025" duration="1567000" />
+      <workItem from="1761336072025" duration="1870000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />

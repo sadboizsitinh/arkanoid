@@ -15,7 +15,7 @@ public class Ball extends MovableObject {
 
 
 
-    private static final double DEFAULT_SIZE = 32;
+    private static final double DEFAULT_SIZE = 30;
     private static final double DEFAULT_SPEED = 325;
 
     // Trail effect constants
