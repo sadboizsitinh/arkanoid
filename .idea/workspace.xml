@@ -5,9 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: load new img power up!">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/GameView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/GameView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid_save.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/Gemini_Generated_Image_k0bkrvk0bkrvk0bk.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/expand_paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/expand_paddle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/extra_life.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/extra_life.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/fast_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/fast_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/multi_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/multi_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/images/slow_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/images/slow_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/PowerUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/expand_paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/expand_paddle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/extra_life.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/extra_life.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/fast_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/fast_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/multi_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/multi_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/slow_ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/images/slow_ball.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp$PowerUpType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp$PowerUpType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/PowerUp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,35 +66,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ArkanoidApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Java/Team_project/arkanoid&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ArkanoidApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Java/Team_project/arkanoid",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../.jdks/openjdk-25" />
@@ -117,8 +135,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
       </set>
     </attachedChunks>
   </component>
@@ -166,6 +184,7 @@
       <workItem from="1761325119390" duration="2341000" />
       <workItem from="1761333680780" duration="1699000" />
       <workItem from="1761371617923" duration="4778000" />
+      <workItem from="1761378337977" duration="1346000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />

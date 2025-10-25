@@ -16,23 +16,26 @@ public abstract class PowerUp extends MovableObject {
     protected double timeRemaining;
     protected boolean active;
 
-    // ✅ Cache images để tránh load lại nhiều lần
+    // Cache images để tránh load lại nhiều lần
     private static final Map<PowerUpType, Image> imageCache = new HashMap<>();
-    private static boolean useImages = true; // ✅ Toggle để bật/tắt image mode
+    private static boolean useImages = true;
+
+    // Kích thước chuẩn để hiển thị
+    private static final double DISPLAY_WIDTH = 60;
+    private static final double DISPLAY_HEIGHT = 60;
 
     public enum PowerUpType {
         EXPAND_PADDLE, FAST_BALL, MULTI_BALL, EXTRA_LIFE, SLOW_BALL
     }
 
     public PowerUp(double x, double y, PowerUpType type, double duration) {
-        super(x, y, 30, 30, 100); // Size 30x30 cho image
+        super(x, y, DISPLAY_WIDTH, DISPLAY_HEIGHT, 100);
         this.type = type;
         this.duration = duration;
         this.timeRemaining = duration;
         this.active = false;
         this.dy = speed; // Fall down
 
-        // ✅ Load image khi khởi tạo (chỉ load 1 lần cho mỗi type)
         if (useImages) {
             loadImage();
         }
@@ -106,32 +109,89 @@ public abstract class PowerUp extends MovableObject {
         Image img = useImages ? imageCache.get(type) : null;
 
         if (img != null && !img.isError()) {
-            // ✅ MODE 1: Render với IMAGE
-            gc.drawImage(img, x, y, 80, 60);
-
-            // Optional: Thêm border cho đẹp
-           // gc.setStroke(Color.WHITE);
-            gc.setLineWidth(2);
-          //  gc.strokeRect(x, y, width, height);
+            // MODE 1: Render với IMAGE (scale theo tỷ lệ gốc)
+            renderImageWithAspectRatio(gc, img);
         } else {
-            // ✅ MODE 2: Render với TEXT (fallback hoặc khi không có image)
-            // Background màu
-            gc.setFill(color);
-            gc.fillRect(x, y, width, height);
+            // MODE 2: Render với TEXT (fallback hoặc khi không có image)
+            renderTextFallback(gc);
+        }
+    }
 
-            // Border
-            gc.setStroke(Color.WHITE);
-            gc.setLineWidth(2);
-            gc.strokeRect(x, y, width, height);
+    /**
+     * Render image với tỷ lệ khung hình gốc
+     */
+    private void renderImageWithAspectRatio(GraphicsContext gc, Image img) {
+        if (img == null || img.isError()) return;
 
-            // Symbol text từ class con (F, S, M, E, L...)
-            gc.setFill(Color.WHITE);
-            gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 18));
+        double imgWidth = img.getWidth();
+        double imgHeight = img.getHeight();
 
-            String symbol = getSymbol();
-            // Center text
-            double textWidth = symbol.length() * 10; // Ước lượng
-            gc.fillText(symbol, x + (width - textWidth) / 2, y + height / 2 + 6);
+        // Tính tỷ lệ gốc
+        double aspectRatio = imgWidth / imgHeight;
+
+        // Luôn scale ảnh để lấp đầy toàn bộ kích thước 60x60
+        // mà vẫn giữ tỷ lệ khung hình gốc (crop hoặc letterbox)
+        double displayWidth, displayHeight;
+        double offsetX, offsetY;
+
+        if (aspectRatio >= 1) {
+            // Ảnh ngang - fit theo chiều cao
+            displayHeight = DISPLAY_HEIGHT;
+            displayWidth = DISPLAY_HEIGHT * aspectRatio;
+            offsetX = x + (DISPLAY_WIDTH - displayWidth) / 2;
+            offsetY = y;
+        } else {
+            // Ảnh dọc - fit theo chiều rộng
+            displayWidth = DISPLAY_WIDTH;
+            displayHeight = DISPLAY_WIDTH / aspectRatio;
+            offsetX = x;
+            offsetY = y + (DISPLAY_HEIGHT - displayHeight) / 2;
+        }
+
+        // Vẽ ảnh với kích thước đồng nhất
+        gc.drawImage(img, offsetX, offsetY, displayWidth, displayHeight);
+    }
+
+    /**
+     * Render text fallback khi không có image
+     */
+    private void renderTextFallback(GraphicsContext gc) {
+        // Background màu theo type
+        gc.setFill(getTypeColor());
+        gc.fillRect(x, y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+        // Border
+        gc.setStroke(Color.WHITE);
+        gc.setLineWidth(2);
+        gc.strokeRect(x, y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+
+        // Symbol text
+        gc.setFill(Color.WHITE);
+        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 24));
+
+        String symbol = getSymbol();
+        // Center text
+        double textWidth = symbol.length() * 14;
+        gc.fillText(symbol, x + (DISPLAY_WIDTH - textWidth) / 2, y + DISPLAY_HEIGHT / 2 + 8);
+    }
+
+    /**
+     * Trả về màu theo loại power-up
+     */
+    private Color getTypeColor() {
+        switch (type) {
+            case EXPAND_PADDLE:
+                return Color.web("#FF6B6B"); // Đỏ
+            case FAST_BALL:
+                return Color.web("#FFD93D"); // Vàng
+            case SLOW_BALL:
+                return Color.web("#6BCB77"); // Xanh lá
+            case MULTI_BALL:
+                return Color.web("#4D96FF"); // Xanh dương
+            case EXTRA_LIFE:
+                return Color.web("#FF69B4"); // Hồng
+            default:
+                return Color.GRAY;
         }
     }
 
@@ -165,9 +225,16 @@ public abstract class PowerUp extends MovableObject {
     }
 
     /**
-     * ✅ Static method để toggle giữa image mode và text mode
+     * Static method để toggle giữa image mode và text mode
      */
     public static void setUseImages(boolean use) {
         useImages = use;
+    }
+
+    /**
+     * Clear cache khi cần
+     */
+    public static void clearImageCache() {
+        imageCache.clear();
     }
 }
