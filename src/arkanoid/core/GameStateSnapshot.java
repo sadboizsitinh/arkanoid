@@ -1,13 +1,15 @@
 package arkanoid.core;
 
 import arkanoid.entities.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
 /**
- * Lưu trữ snapshot của game state để có thể continue sau này
+ * Snapshot của game state để lưu/khôi phục
  */
-public class GameStateSnapshot {
+public class GameStateSnapshot implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     // Game stats
     public int score;
     public int lives;
@@ -19,107 +21,107 @@ public class GameStateSnapshot {
     public double paddleWidth;
 
     // Balls state
-    public static class BallState {
+    public List<BallState> ballStates;
+
+    // Bricks state
+    public List<BrickState> brickStates;
+
+    // PowerUps state
+    public List<PowerUpState> powerUpStates;
+    public List<ActivePowerUpState> activePowerUpStates;
+
+    // ✅ Inner classes cũng phải Serializable
+    public static class BallState implements Serializable {
+        private static final long serialVersionUID = 1L;
         public double x, y;
         public double dx, dy;
         public double speed;
-        public int typeSkin;
         public boolean stuckToPaddle;
-        public double offsetFromPaddleCenter;
-
-        public BallState(Ball ball) {
-            this.x = ball.getX();
-            this.y = ball.getY();
-            this.dx = ball.getDX();
-            this.dy = ball.getDY();
-            this.speed = ball.getSpeed();
-            this.typeSkin = ball.getTypeSkin();
-            this.stuckToPaddle = ball.isStuckToPaddle();
-        }
+        public int typeSkin;
     }
-    public List<BallState> ballStates = new ArrayList<>();
 
-    // Bricks state
-    public static class BrickState {
+    public static class BrickState implements Serializable {
+        private static final long serialVersionUID = 1L;
+        public Brick.BrickType type;
         public double x, y, width, height;
         public int hitPoints;
-        public Brick.BrickType type;
-
-        public BrickState(Brick brick) {
-            this.x = brick.getX();
-            this.y = brick.getY();
-            this.width = brick.getWidth();
-            this.height = brick.getHeight();
-            this.hitPoints = brick.getHitPoints();
-            this.type = brick.getType();
-        }
     }
-    public List<BrickState> brickStates = new ArrayList<>();
 
-    // PowerUps state (falling)
-    public static class PowerUpState {
-        public double x, y;
+    public static class PowerUpState implements Serializable {
+        private static final long serialVersionUID = 1L;
         public PowerUp.PowerUpType type;
-
-        public PowerUpState(PowerUp powerUp) {
-            this.x = powerUp.getX();
-            this.y = powerUp.getY();
-            this.type = powerUp.getType();
-        }
+        public double x, y;
     }
-    public List<PowerUpState> powerUpStates = new ArrayList<>();
 
-    // Active PowerUps state
-    public static class ActivePowerUpState {
+    public static class ActivePowerUpState implements Serializable {
+        private static final long serialVersionUID = 1L;
         public PowerUp.PowerUpType type;
         public double timeRemaining;
-
-        public ActivePowerUpState(PowerUp powerUp) {
-            this.type = powerUp.getType();
-            this.timeRemaining = powerUp.getTimeRemaining();
-        }
-    }
-    public List<ActivePowerUpState> activePowerUpStates = new ArrayList<>();
-
-    public GameStateSnapshot() {
-        // Constructor rỗng
     }
 
     /**
-     * Tạo snapshot từ GameManager hiện tại
+     * Tạo snapshot từ GameManager
      */
     public static GameStateSnapshot createSnapshot(GameManager gm) {
         GameStateSnapshot snapshot = new GameStateSnapshot();
 
-        // Lưu game stats
+        // Lưu stats
         snapshot.score = gm.getScore();
         snapshot.lives = gm.getLives();
         snapshot.level = gm.getLevel();
 
-        // Lưu paddle state
+        // Lưu paddle
         Paddle paddle = gm.getPaddle();
         snapshot.paddleX = paddle.getX();
         snapshot.paddleY = paddle.getY();
         snapshot.paddleWidth = paddle.getWidth();
 
-        // Lưu balls state
+        // Lưu balls
+        snapshot.ballStates = new ArrayList<>();
         for (Ball ball : gm.getBalls()) {
-            snapshot.ballStates.add(new BallState(ball));
+            BallState bs = new BallState();
+            bs.x = ball.getX();
+            bs.y = ball.getY();
+            bs.dx = ball.getDx();
+            bs.dy = ball.getDy();
+            bs.speed = ball.getSpeed();
+            bs.stuckToPaddle = ball.isStuckToPaddle();
+            bs.typeSkin = ball.getTypeSkin();
+            snapshot.ballStates.add(bs);
         }
 
-        // Lưu bricks state
+        // Lưu bricks
+        snapshot.brickStates = new ArrayList<>();
         for (Brick brick : gm.getBricks()) {
-            snapshot.brickStates.add(new BrickState(brick));
+            if (!brick.isDestroyed()) {
+                BrickState brickState = new BrickState();
+                brickState.type = brick.getType();
+                brickState.x = brick.getX();
+                brickState.y = brick.getY();
+                brickState.width = brick.getWidth();
+                brickState.height = brick.getHeight();
+                brickState.hitPoints = brick.getHitPoints();
+                snapshot.brickStates.add(brickState);
+            }
         }
 
-        // Lưu falling powerups state
+        // Lưu falling power-ups
+        snapshot.powerUpStates = new ArrayList<>();
         for (PowerUp powerUp : gm.getPowerUps()) {
-            snapshot.powerUpStates.add(new PowerUpState(powerUp));
+            PowerUpState pState = new PowerUpState();
+            pState.type = powerUp.getType();
+            pState.x = powerUp.getX();
+            pState.y = powerUp.getY();
+            snapshot.powerUpStates.add(pState);
         }
 
-        // Lưu active powerups state
+        // Lưu active power-ups
+        snapshot.activePowerUpStates = new ArrayList<>();
         for (PowerUp powerUp : gm.getActivePowerUps()) {
-            snapshot.activePowerUpStates.add(new ActivePowerUpState(powerUp));
+            ActivePowerUpState apState = new ActivePowerUpState();
+            apState.type = powerUp.getType();
+            apState.timeRemaining = powerUp.getTimeRemaining();
+            snapshot.activePowerUpStates.add(apState);
         }
 
         return snapshot;

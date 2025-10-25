@@ -1,6 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
+import arkanoid.core.GameStatePersistence;
 import arkanoid.utils.SoundManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,15 +30,8 @@ public class MainController {
     @FXML
     private void initialize() {
         SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.3);
-        // Set background image cho Main Menu
-        if (btnStart.getScene() != null && btnStart.getScene().getRoot() instanceof Pane) {
-            BackgroundHelper.setBackgroundImage(
-                    (Pane) btnStart.getScene().getRoot(),
-                    "bg-retrospace.png"
-            );
-        }
 
-        // Hoặc dùng Platform.runLater nếu scene chưa sẵn sàng
+        // Set background
         javafx.application.Platform.runLater(() -> {
             if (btnStart.getScene() != null && btnStart.getScene().getRoot() instanceof Pane) {
                 BackgroundHelper.setBackgroundImage(
@@ -46,47 +40,48 @@ public class MainController {
                 );
             }
         });
-        //  Kiểm tra và hiển thị/ẩn nút Continue
+
+        // ✅ Kiểm tra file save khi mở app
         if (btnContinue != null) {
-            boolean hasSavedGame = GameManager.getInstance().hasSavedGame();
+            boolean hasSavedGame = GameStatePersistence.hasSaveFile();
             btnContinue.setVisible(hasSavedGame);
             btnContinue.setManaged(hasSavedGame);
 
             if (hasSavedGame) {
-                System.out.println(" Found saved game - Continue button enabled");
+                System.out.println("💾 Found saved game file - Continue button enabled");
             } else {
-                System.out.println(" No saved game - Continue button hidden");
+                System.out.println("ℹ️ No saved game file - Continue button hidden");
             }
         }
 
-        // Khi nhấn Start → start game mới
+        // Khi nhấn Start → xóa file save và start mới
         if (btnStart != null) {
             btnStart.setOnAction(e -> {
-                // Clear saved game và start mới
-                GameManager.getInstance().clearSavedGame();
+                GameStatePersistence.deleteSaveFile(); // ✅ Xóa file save cũ
                 GameManager.getInstance().startGame();
                 switchScene("/ui/fxml/GameView.fxml");
             });
         }
 
-        // Khi nhấn High Scores → chuyển sang HighScores.fxml
+        // Khi nhấn High Scores
         if (btnHighScores != null) {
             btnHighScores.setOnAction(e -> switchScene("/ui/fxml/HighScores.fxml"));
         }
 
-        // Khi nhấn Exit → thoát chương trình
+        // Khi nhấn Exit
         if (btnExit != null) {
             btnExit.setOnAction(e -> System.exit(0));
         }
 
+        // ✅ Khi nhấn Continue → load từ file
         if (btnContinue != null) {
             btnContinue.setOnAction(e -> {
-                if (GameManager.getInstance().hasSavedGame()) {
+                if (GameStatePersistence.hasSaveFile()) {
                     GameManager.getInstance().continueGame();
-                    System.out.println(" Continue game called, state: " + GameManager.getInstance().getGameState());
+                    System.out.println("💾 Continue game from file, state: " + GameManager.getInstance().getGameState());
                     switchScene("/ui/fxml/GameView.fxml");
                 } else {
-                    System.err.println(" No saved game to continue!");
+                    System.err.println("❌ No saved game file to continue!");
                 }
             });
         }

@@ -691,16 +691,20 @@ public class GameManager {
     }
 
     public boolean hasSavedGame() {
-        return savedSnapshot != null;
+        return GameStatePersistence.hasSaveFile();
     }
 
     /**
      * Lưu snapshot khi pause và về menu
      */
     public void saveGameState() {
-        if (gameState == GameState.PAUSED) {
-            savedSnapshot = GameStateSnapshot.createSnapshot(this);
-            System.out.println("✅ Game state saved! Score: " + savedSnapshot.score + ", Lives: " + savedSnapshot.lives);
+        // ✅ Cho phép lưu cả khi PLAYING và PAUSED
+        if (gameState == GameState.PLAYING || gameState == GameState.PAUSED) {
+            GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(this);
+            GameStatePersistence.saveToFile(snapshot);
+            System.out.println("✅ Game state saved to file!");
+        } else {
+            System.out.println("⚠️ Cannot save game in state: " + gameState);
         }
     }
 
@@ -708,29 +712,25 @@ public class GameManager {
      * Xóa snapshot (khi game over hoặc win)
      */
     public void clearSavedGame() {
-        savedSnapshot = null;
-        System.out.println("🗑️ Saved game cleared");
+        GameStatePersistence.deleteSaveFile();
+        System.out.println("🗑️ Saved game file deleted");
     }
 
     /**
      * Continue game từ snapshot đã lưu
      */
     public void continueGame() {
-        if (savedSnapshot == null) {
-            System.err.println("❌ No saved game to continue!");
+        GameStateSnapshot snapshot = GameStatePersistence.loadFromFile();
+
+        if (snapshot == null) {
+            System.err.println("❌ No saved game file to continue!");
             return;
         }
 
-        restoreFromSnapshot(savedSnapshot);
+        restoreFromSnapshot(snapshot);
         gameState = GameState.PLAYING;
 
-        // ✅ KHÔNG clear snapshot ngay - chỉ clear khi game over hoặc start new
-        // savedSnapshot sẽ còn cho đến khi:
-        // - Game Over
-        // - Start New Game
-        // - Complete Level (tùy chọn)
-
-        System.out.println("▶️ Game continued from saved state");
+        System.out.println("▶️ Game continued from file");
         System.out.println("   Score: " + score + ", Lives: " + lives + ", Level: " + level);
     }
 

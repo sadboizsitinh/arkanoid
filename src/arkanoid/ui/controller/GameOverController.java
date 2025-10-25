@@ -1,6 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
+import arkanoid.core.GameStatePersistence;
 import arkanoid.core.HighScoreManager;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
@@ -48,10 +49,11 @@ public class GameOverController {
 
     @FXML
     private void initialize() {
-        GameManager.getInstance().clearSavedGame();
+        GameStatePersistence.deleteSaveFile();
 
         if (btnRestart != null) {
             btnRestart.setOnAction(e -> {
+                GameStatePersistence.deleteSaveFile();
                 GameManager.getInstance().startGame();
                 try {
                     GameController.stopGameLoopIfAny();
