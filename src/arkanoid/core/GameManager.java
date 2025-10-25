@@ -333,7 +333,8 @@ public class GameManager {
             // Ball falls below paddle
             if (currentBall.getY() > gameHeight) {
                 ballIterator.remove();
-
+                Collison = false;
+                Streak = 0;
                 // Only lose life if all balls are gone
                 if (balls.isEmpty()) {
                     lives--;
@@ -396,8 +397,6 @@ public class GameManager {
                     // System.exit(0);
                     score += 50 * (Streak / 4);
                 }
-
-
             }
         }
 
