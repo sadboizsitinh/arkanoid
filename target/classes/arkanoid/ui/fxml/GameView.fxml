@@ -9,44 +9,51 @@
 <?import javafx.scene.layout.VBox?>
 
 <!-- ✅ Thêm style trực tiếp vào HBox root -->
-<HBox fx:id="rootPane" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/style.css"
-      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.GameController">
+
+<HBox fx:id="rootPane" prefHeight="600" prefWidth="1000" styleClass="root" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.GameController">
 
     <!-- LEFT PANEL - STATS -->
     <VBox prefWidth="200" style="-fx-background-color: #0f172a; -fx-padding: 20; -fx-spacing: 20; -fx-border-color: #0ea5e9; -fx-border-width: 0 2 0 0;">
 
         <!-- Title -->
-        <Label text="GAME INFO" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #0ea5e9; -fx-alignment: center;" />
+        <Label style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #0ea5e9; -fx-alignment: center;" text="GAME INFO" />
 
         <!-- Score Section -->
-        <VBox spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;">
-            <Label text="SCORE" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0ea5e9;" />
-            <Label fx:id="lblScore" text="0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <VBox prefWidth="148.0" spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #0ea5e9;" text="SCORE" />
+
+            <!-- ✅ Dùng HBox chứa lblScore + StackPane chứa floating scores -->
+            <HBox alignment="CENTER_LEFT" prefHeight="40" spacing="8">
+                <Label fx:id="lblScore" prefHeight="34.0" prefWidth="89.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="0" />
+
+                <!-- ✅ StackPane để chồng các +XX lên nhau -->
+                <StackPane fx:id="scoreContainer" alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="60.0" />
+            </HBox>
         </VBox>
 
         <!-- Lives Section -->
         <VBox spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;">
-            <Label text="LIVES" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ec4899;" />
-            <Label fx:id="lblLives" text="3" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ec4899;" text="LIVES" />
+            <Label fx:id="lblLives" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="3" />
         </VBox>
 
         <!-- Level Section -->
         <VBox spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;">
-            <Label text="LEVEL" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #10b981;" />
-            <Label fx:id="lblLevel" text="1" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #10b981;" text="LEVEL" />
+            <Label fx:id="lblLevel" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="1" />
         </VBox>
 
         <!-- Balls Counter -->
-        <VBox fx:id="ballsContainer" spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;" visible="false" managed="false">
-            <Label text="BALLS" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;" />
-            <Label fx:id="lblBalls" text="1" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" />
+        <VBox fx:id="ballsContainer" managed="false" spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;" visible="false">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;" text="BALLS" />
+            <Label fx:id="lblBalls" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: white;" text="1" />
         </VBox>
 
         <!-- Active Power-ups Section -->
         <VBox spacing="8" style="-fx-background-color: #1e293b; -fx-padding: 15; -fx-background-radius: 8;">
-            <Label text="POWER-UPS" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #a78bfa;" />
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #a78bfa;" text="POWER-UPS" />
             <VBox fx:id="powerUpsContainer" spacing="6">
-                <Label fx:id="lblNoPowerUps" text="No active power-ups" style="-fx-font-size: 12px; -fx-text-fill: #8b93a5; -fx-font-style: italic;" />
+                <Label fx:id="lblNoPowerUps" style="-fx-font-size: 12px; -fx-text-fill: #8b93a5; -fx-font-style: italic;" text="No active power-ups" />
             </VBox>
         </VBox>
     </VBox>
@@ -56,30 +63,13 @@
 
         <!-- Background layer với viền -->
         <VBox style="-fx-background-color: #0f172a; -fx-padding: 8;">
-            <AnchorPane style="-fx-background-color: linear-gradient(to bottom, #1e293b, #0f172a);
-                               -fx-border-color: #0ea5e9;
-                               -fx-border-width: 2;
-                               -fx-border-radius: 4;
-                               -fx-background-radius: 4;">
+            <AnchorPane style="-fx-background-color: linear-gradient(to bottom, #1e293b, #0f172a);                                -fx-border-color: #0ea5e9;                                -fx-border-width: 2;                                -fx-border-radius: 4;                                -fx-background-radius: 4;">
 
                 <!-- Game Canvas -->
                 <Canvas fx:id="gameCanvas" height="600" width="800" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" />
 
                 <!-- Pause Button - GÓC TRÊN BÊN PHẢI -->
-                <Button fx:id="btnPause" prefHeight="52" prefWidth="52"
-                        style="-fx-background-color: rgba(15, 23, 42, 0.4);
-               -fx-text-fill: #60a5fa;
-               -fx-font-size: 20px;
-               -fx-font-weight: bold;
-               -fx-background-radius: 10;
-               -fx-cursor: hand;
-               -fx-border-color: linear-gradient(to bottom right, #60a5fa, #a78bfa, #ec4899);
-               -fx-border-width: 2.5;
-               -fx-border-radius: 10;
-               -fx-effect: dropshadow(gaussian, rgba(96, 165, 250, 0.6), 12, 0.5, 0, 0);"
-                        text="II"
-                        AnchorPane.rightAnchor="12"
-                        AnchorPane.topAnchor="12" />
+                <Button fx:id="btnPause" prefHeight="52" prefWidth="52" style="-fx-background-color: rgba(15, 23, 42, 0.4);                -fx-text-fill: #60a5fa;                -fx-font-size: 20px;                -fx-font-weight: bold;                -fx-background-radius: 10;                -fx-cursor: hand;                -fx-border-color: linear-gradient(to bottom right, #60a5fa, #a78bfa, #ec4899);                -fx-border-width: 2.5;                -fx-border-radius: 10;                -fx-effect: dropshadow(gaussian, rgba(96, 165, 250, 0.6), 12, 0.5, 0, 0);" text="II" AnchorPane.rightAnchor="12" AnchorPane.topAnchor="12" />
             </AnchorPane>
         </VBox>
 

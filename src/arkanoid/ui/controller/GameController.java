@@ -12,11 +12,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import arkanoid.utils.ScoreAnimation;
+import javafx.scene.layout.StackPane;
 
 public class GameController {
 
@@ -57,6 +57,9 @@ public class GameController {
     @FXML
     private HBox rootPane;
 
+    @FXML
+    private StackPane scoreContainer;
+
     private static GameController lastInstance;
     private GameManager.GameState lastState = null;
 
@@ -69,10 +72,12 @@ public class GameController {
 
     // Flag để tránh hiển thị Game Over nhiều lần
     private boolean gameOverShown = false;
+    private int lastScore = 0;
 
     @FXML
     private void initialize() {
         lastInstance = this;
+        lastScore = 0;
         System.out.println("🎮 GameController initialize called");
         System.out.println("📐 Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
 
@@ -232,8 +237,34 @@ public class GameController {
      * Cập nhật UI panel bên trái
      */
     private void updateUIPanel() {
-        if (lblScore != null) {
-            lblScore.setText(String.valueOf(gameManager.getScore()));
+        // ✅ Animate score khi thay đổi
+        int currentScore = gameManager.getScore();
+        if (lblScore != null && currentScore != lastScore) {
+            // Tính điểm vừa được cộng
+            int pointsAdded = currentScore - lastScore;
+
+            if (pointsAdded > 0) {
+                // Hiển thị +XX bay lên
+                if (scoreContainer != null) {
+                    ScoreAnimation.showFloatingScore(
+                            scoreContainer,
+                            80,  // X position (bên phải số điểm)
+                            15,  // Y position
+                            pointsAdded
+                    );
+                }
+
+                // Animation số chạy nhanh
+                ScoreAnimation.animateScoreCount(lblScore, lastScore, currentScore);
+
+                // Flash hiệu ứng
+                ScoreAnimation.flashLabel(lblScore);
+            } else {
+                // Nếu không có animation (ví dụ reset game), update trực tiếp
+                lblScore.setText(String.valueOf(currentScore));
+            }
+
+            lastScore = currentScore;
         }
 
         if (lblLives != null) {
