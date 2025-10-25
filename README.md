@@ -23,6 +23,8 @@ Mỗi viên gạch bị phá sẽ cho điểm, và một số gạch có thể r
   - ⚡️ *Fast Ball* - tăng tốc độ bóng.
 - 👔 **Phối màu đa dạng :**, được thiết kế với chủ đề galaxy, kết hợp bảng phối màu theo chuyên gia. 
 - 🌈 **Hệ thống điểm số (Score System):**
+  - Ăn loại gạch normal được 10 points, gạch strong được 20 points.
+  - Streak: với 4 lần lượt bóng chạm gạch liên tiếp bạn được cộng thêm rất nhiều điểm !
   - High Score được lưu lại khi chơi lại.
 - 🧱 **Nhiều cấp độ (Levels):**
   - Có hơn 10 loại map đa dạng
