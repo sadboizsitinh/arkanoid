@@ -18,13 +18,19 @@ public class ScoreAnimation {
     /**
      * Hiển thị +XX điểm bay lên và biến mất
      */
-    public static void showFloatingScore(Pane container, double startX, double startY, int points) {
+    public static void showFloatingScore(Pane container, double startX, double startY, int points, boolean isStreak) {
         // Tạo label hiển thị +XX
         Label scoreLabel = new Label("+" + points);
         scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-        scoreLabel.setTextFill(Color.web("#fbbf24"));
-        scoreLabel.setOpacity(0.0); // ✅ Bắt đầu ẩn
-        scoreLabel.setStyle("-fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.8), 8, 0.6, 0, 0);");
+
+        // ✅ Màu khác nhau cho Streak và bình thường
+        String color = isStreak ? "#f97316" : "#10b981"; // Streak = cam, Bình thường = xanh lá
+        scoreLabel.setTextFill(Color.web(color));
+        scoreLabel.setOpacity(0.0);
+
+        // ✅ Shadow màu tương ứng
+        String shadowColor = isStreak ? "rgba(249, 115, 22, 0.8)" : "rgba(16, 185, 129, 0.8)";
+        scoreLabel.setStyle("-fx-effect: dropshadow(gaussian, " + shadowColor + ", 8, 0.6, 0, 0);");
 
         // ✅ Thêm vào container ngay - chồng lên nhau
         container.getChildren().add(scoreLabel);

@@ -246,11 +246,16 @@ public class GameController {
             if (pointsAdded > 0) {
                 // Hiển thị +XX bay lên
                 if (scoreContainer != null) {
+                    // ✅ Kiểm tra chính xác xem có phải điểm Streak không
+                    boolean isStreak = (pointsAdded == gameManager.getLastStreakBonus() &&
+                            gameManager.getLastStreakBonus() > 0);
+
                     ScoreAnimation.showFloatingScore(
                             scoreContainer,
-                            80,  // X position (bên phải số điểm)
-                            15,  // Y position
-                            pointsAdded
+                            80,
+                            15,
+                            pointsAdded,
+                            isStreak  // true = cam (streak), false = xanh lá (bình thường)
                     );
                 }
 

@@ -28,6 +28,7 @@ public class GameManager {
     // Streak
     private int Streak = 0;
     private boolean Collison = false;
+    private int lastStreakBonus = 0;
 
     // Camera Shake
     private CameraShake cameraShake;
@@ -390,12 +391,14 @@ public class GameManager {
         if (inMoment) {
             if (Collison == false) {
                 Streak = 0;
+                lastStreakBonus = 0; // ✅ Reset
             } else {
                 Streak++;
                 System.out.println("Streak: " + Streak);
-                if (Streak >= 4 && Streak % 4 == 0) {
-                    // System.exit(0);
-                    score += 50 * (Streak / 4);
+                if (Streak >= 4) {
+                    int streakBonus = 5 * (Streak / 4);
+                    lastStreakBonus = streakBonus; // ✅ Lưu lại
+                    addScoreWithAnimation(streakBonus);
                 }
             }
         }
@@ -434,6 +437,20 @@ public class GameManager {
         }
 
         powerUps.add(powerUp);
+    }
+
+    /**
+     * ✅ THÊM MỚI - Cộng điểm với animation
+     */
+    private void addScoreWithAnimation(int points) {
+        if (points <= 0) return;
+
+        int oldScore = score;
+        score += points;
+
+        boolean isStreak = (points == lastStreakBonus && lastStreakBonus > 0);
+        String emoji = isStreak ? "🔥" : "💚";
+        System.out.println(emoji + " Score: " + oldScore + " -> " + score + " (+" + points + ")");
     }
 
     private void applyPowerUpEffect(PowerUp powerUp) {
@@ -901,4 +918,5 @@ public class GameManager {
     public List<Brick> getBricks() { return bricks; }
     public List<PowerUp> getPowerUps() { return powerUps; }
     public List<PowerUp> getActivePowerUps() { return activePowerUps; }
+    public int getLastStreakBonus() {return lastStreakBonus;}
 }
