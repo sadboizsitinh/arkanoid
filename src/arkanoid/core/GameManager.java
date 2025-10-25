@@ -25,6 +25,10 @@ public class GameManager {
     private List<PowerUp> activePowerUps; // Track active power-ups
     private List<Integer> availableMaps = new ArrayList<>();
 
+    // Streak
+    private int Streak = 0;
+    private boolean Collison = false;
+
     // Camera Shake
     private CameraShake cameraShake;
 
@@ -303,6 +307,7 @@ public class GameManager {
     private void checkCollisions() {
         // Process each ball
         Iterator<Ball> ballIterator = balls.iterator();
+        boolean inMoment = false;
         while (ballIterator.hasNext()) {
             Ball currentBall = ballIterator.next();
 
@@ -349,6 +354,7 @@ public class GameManager {
                 paddle.triggerHitAnimation();
                 cameraShake.shakeOnPaddleHit();
                 SoundManager.play("paddle.wav");
+                Collison = false;
             }
 
             // Ball-Brick collisions
@@ -356,6 +362,8 @@ public class GameManager {
                 if (currentBall.intersects(brick)) {
                     currentBall.bounceOff(brick);
                     brick.takeHit();
+                    Collison = true;
+                    inMoment = true;
 
                     // ✅ Shake mạnh khi brick bị vỡ
                     if (brick.isDestroyed()) {
@@ -375,6 +383,21 @@ public class GameManager {
                     }
                     break; // Only one collision per frame
                 }
+            }
+        }
+
+        if (inMoment) {
+            if (Collison == false) {
+                Streak = 0;
+            } else {
+                Streak++;
+                System.out.println("Streak: " + Streak);
+                if (Streak >= 4 && Streak % 4 == 0) {
+                    // System.exit(0);
+                    score += 50 * (Streak / 4);
+                }
+
+
             }
         }
 

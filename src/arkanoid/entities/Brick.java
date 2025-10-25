@@ -34,6 +34,7 @@ public abstract class Brick extends GameObject {
             hitPoints--;
             if (hitPoints <= 0) {
                 destroyed = true;
+
             }
             updateColor();
         }
