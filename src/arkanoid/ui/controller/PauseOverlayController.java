@@ -12,7 +12,16 @@ public class PauseOverlayController {
     @FXML
     private void initialize() {
         if (btnContinue != null)
-            btnContinue.setOnAction(e -> GameManager.getInstance().togglePause());
+            btnContinue.setOnAction(e -> {
+                GameManager gm = GameManager.getInstance();
+
+                // Nếu đang tạm dừng → quay lại chế độ chơi và bắt đầu countdown
+                if (gm.getGameState() == GameManager.GameState.PAUSED) {
+                    gm.setGameState(GameManager.GameState.PLAYING);
+                    gm.startContinueCountdown(3); // Đếm ngược 3 giây
+                }
+            });
+
 
         if (btnNewGame != null)
             btnNewGame.setOnAction(e -> {

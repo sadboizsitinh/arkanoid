@@ -25,6 +25,10 @@ public class GameManager {
     private List<PowerUp> activePowerUps; // Track active power-ups
     private List<Integer> availableMaps = new ArrayList<>();
 
+    // Continue
+    private boolean isCountdownActive = false;
+    private double countdownTime = 0;
+
     // Streak
     private int Streak = 0;
     private boolean Collison = false;
@@ -85,6 +89,15 @@ public class GameManager {
         // ✅ Release ball khi bắt đầu di chuyển
         releaseBallsFromPaddle();
     }
+
+    public void startContinueCountdown(double seconds) {
+        isCountdownActive = true;
+        countdownTime = seconds;
+        for (Ball b : balls) {
+            b.stickToPaddle(paddle); // Dính lại bóng
+        }
+    }
+
 
     /**
      * ✅ Release tất cả các ball đang dính trên paddle
@@ -241,6 +254,17 @@ public class GameManager {
      * Main game update loop
      */
     public void updateGame(double deltaTime) {
+        if (isCountdownActive) {
+            countdownTime -= deltaTime;
+            if (countdownTime <= 0) {
+                isCountdownActive = false;
+                for (Ball b : balls) {
+                    b.release(); // Cho bóng bay lại
+                }
+            }
+            return; // Dừng toàn bộ logic trong khi đang đếm ngược
+        }
+
         if (gameState != GameState.PLAYING) return;
 
         // ✅ Cập nhật camera shake
@@ -665,6 +689,13 @@ public class GameManager {
 
         // ✅ Khôi phục trạng thái canvas
         gc.restore();
+        if (isCountdownActive) {
+            gc.setFill(javafx.scene.paint.Color.WHITE);
+            gc.setFont(javafx.scene.text.Font.font("Arial", 40));
+            int seconds = (int) Math.ceil(countdownTime);
+            gc.fillText("Continue in " + seconds, gameWidth / 2 - 120, gameHeight / 2);
+        }
+
     }
 
     // Getter để Ball có thể gọi shake nếu cần
