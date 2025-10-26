@@ -40,6 +40,9 @@ public class GameManager {
     private int Streak = 0;
     private boolean Collison = false;
     private int lastStreakBonus = 0;
+    private boolean excellentEffectActive = false;
+    private double excellentEffectTimer = 0.0;
+    private int excellentTriggerStreak = 0;
 
     // Camera Shake
     private CameraShake cameraShake;
@@ -289,6 +292,13 @@ public class GameManager {
         // ✅ Cập nhật camera shake
         cameraShake.update(deltaTime);
 
+        if (excellentEffectActive) {
+            excellentEffectTimer += deltaTime;
+            if (excellentEffectTimer > 2.0) { // Hiệu ứng kéo dài 2 giây
+                excellentEffectActive = false;
+            }
+        }
+
         paddle.update(deltaTime);
 
         // Handle paddle movement with simple flags
@@ -409,6 +419,8 @@ public class GameManager {
                     cameraShake.shakeOnPaddleHit();
                     Collison = false;
 
+                    System.out.println("have been");
+
                     // ✅ Lưu thời gian hit
                     lastPaddleHitTime.put(currentBall, currentTime);
 
@@ -451,14 +463,23 @@ public class GameManager {
         if (inMoment) {
             if (Collison == false) {
                 Streak = 0;
-                lastStreakBonus = 0; // ✅ Reset
+                lastStreakBonus = 0;
+                System.out.println("have been");
             } else {
                 Streak++;
                 System.out.println("Streak: " + Streak);
                 if (Streak >= 4) {
                     int streakBonus = 5 * (Streak / 4);
-                    lastStreakBonus = streakBonus; // ✅ Lưu lại
+                    lastStreakBonus = streakBonus;
                     addScoreWithAnimation(streakBonus);
+
+                    // ✅ TRIGGER EXCELLENT khi Streak đạt 12 (lần đầu tiên)
+                    if (Streak % 2 == 0 && !excellentEffectActive) {
+                        excellentEffectActive = true;
+                        excellentEffectTimer = 0.0;
+                        excellentTriggerStreak = Streak;
+                        System.out.println("🌟 EXCELLENT TRIGGERED! Streak: " + Streak);
+                    }
                 }
             }
         }
@@ -726,12 +747,167 @@ public class GameManager {
         // ✅ Khôi phục trạng thái canvas
         gc.restore();
 
+        if (excellentEffectActive) {
+            renderExcellentEffect(gc);
+        }
+
         // ✅ RENDER COUNTDOWN ĐẸP HƠN
         if (isCountdownActive) {
             renderCountdown(gc);
         }
 
     }
+
+    private void renderExcellentEffect(GraphicsContext gc) {
+        // Tính toán fade và slide
+        double progress = excellentEffectTimer / 2.0; // 0 -> 1
+
+        // ✅ PHASE 1: Fade in + Slide in (0 - 0.6s)
+        // PHASE 2: Hold (0.6 - 1.2s)
+        // PHASE 3: Fade out + Slide out (1.2 - 2.0s)
+
+        double alpha = 0.0;
+        double slideX = 0.0;
+
+        if (excellentEffectTimer < 0.6) {
+            // Fade in + slide từ phải vào
+            double phaseProgress = excellentEffectTimer / 0.6;
+            alpha = phaseProgress; // 0 -> 1
+            slideX = (1 - phaseProgress) * 100; // 100 -> 0 (slide từ phải)
+        } else if (excellentEffectTimer < 1.2) {
+            // Giữ sáng + ở chổi
+            alpha = 1.0;
+            slideX = 0.0;
+        } else {
+            // Fade out + slide ra phải
+            double phaseProgress = (excellentEffectTimer - 1.2) / 0.8;
+            alpha = 1.0 - phaseProgress; // 1 -> 0
+            slideX = phaseProgress * 100; // 0 -> 100 (slide ra phải)
+        }
+
+        // ✅ VỊ TRÍ: Bên phải, chiều cao 40% từ dưới lên
+        double canvasHeight = gc.getCanvas().getHeight();
+        double canvasWidth = gc.getCanvas().getWidth();
+
+        double boxWidth = 140;    // Kích thước box
+        double boxHeight = 50;    // Kích thước box
+
+        // ===== CHỈNH VỊ TRÍ - TÍNH THEO TỈ LỆ =====
+        double rightMarginPercent = 0.25;   // Khoảng cách từ mép phải (5% chiều rộng)
+        // 0.02 = 2%, 0.05 = 5%, 0.1 = 10%
+        double heightPercent = 0.6;         // Chiều cao từ dưới lên (40%)
+        // 0.3 = 30%, 0.4 = 40%, 0.5 = 50%
+
+        double x = canvasWidth * (1 - rightMarginPercent) + slideX;  // Bên phải
+        double y = canvasHeight * heightPercent;                     // % từ dưới lên
+
+        gc.save();
+
+        // ===== BACKGROUND BOX =====
+        gc.setFill(Color.web("#000000", alpha * 0.3));
+        gc.fillRoundRect(x - boxWidth/2, y - boxHeight/2, boxWidth, boxHeight, 10, 10);
+
+        // ===== VIỀN VÀNG ĐẸP HƠN - GLOW MULTIPLE LAYERS =====
+        // Viền ngoài sáng (mờ hơn)
+        gc.setStroke(Color.web("#fbbf24", alpha * 0.7));
+        gc.setLineWidth(2.5);
+        gc.strokeRoundRect(x - boxWidth/2, y - boxHeight/2, boxWidth, boxHeight, 10, 10);
+
+        // Viền trong
+        gc.setStroke(Color.web("#f59e0b", alpha * 0.6));
+        gc.setLineWidth(1.5);
+        gc.strokeRoundRect(x - boxWidth/2 + 1, y - boxHeight/2 + 1, boxWidth - 2, boxHeight - 2, 9, 9);
+
+        // ===== GLOW EFFECT (mờ hơn) =====
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web("#fbbf24", alpha * 0.6),
+                15,
+                0.7,
+                0, 0
+        ));
+
+        // ===== TEXT "EXCELLENT" =====
+        gc.setFont(javafx.scene.text.Font.font("Arial Black",
+                javafx.scene.text.FontWeight.BOLD, 24));
+
+        // Shadow đen
+        gc.setFill(Color.web("#000000", alpha * 0.5));
+        gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+        gc.setTextBaseline(javafx.geometry.VPos.CENTER);
+        gc.fillText("EXCELLENT!", x + 1, y + 2);
+
+        // Text chính (vàng sáng - mờ hơn)
+        gc.setFill(Color.web("#fbbf24", alpha * 0.9));
+        gc.fillText("EXCELLENT!", x, y);
+
+        // Inner glow (trắng - mờ hơn)
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web("#ffffff", alpha * 0.5),
+                8,
+                0.8,
+                0, 0
+        ));
+        gc.setFill(Color.web("#ffffff", alpha * 0.3));
+        gc.fillText("EXCELLENT!", x, y);
+
+        // ===== STREAK INFO (dưới EXCELLENT) - FONT RỰC CHÁY (mờ hơn) =====
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web("#ff6b00", alpha * 0.7),
+                12,
+                0.7,
+                0, 0
+        ));
+        gc.setFont(javafx.scene.text.Font.font("Arial Black",
+                javafx.scene.text.FontWeight.BOLD, 16));
+
+        // Shadow cam đậm
+        gc.setFill(Color.web("#cc3300", alpha * 0.6));
+        gc.fillText("x" + excellentTriggerStreak + " Streak", x + 1, y + 23);
+
+        // Text chính cam rực (mờ hơn)
+        gc.setFill(Color.web("#ff6b00", alpha * 0.85));
+        gc.fillText("x" + excellentTriggerStreak + " Streak", x, y + 22);
+
+        // Inner glow cam sáng (mờ hơn)
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web("#ffaa33", alpha * 0.6),
+                7,
+                0.8,
+                0, 0
+        ));
+        gc.setFill(Color.web("#ffaa33", alpha * 0.5));
+        gc.fillText("x" + excellentTriggerStreak + " Streak", x, y + 22);
+
+
+        // ===== SHINE EFFECT (ánh sáng trượt) =====
+        if (excellentEffectTimer < 1.2) {
+            double shineProgress = excellentEffectTimer / 1.2;
+            double shineX = x - boxWidth/2 + shineProgress * boxWidth;
+
+            gc.setEffect(null);
+
+            // Shine gradient
+            javafx.scene.paint.LinearGradient shineGradient = new javafx.scene.paint.LinearGradient(
+                    shineX - 25, y - boxHeight/2,
+                    shineX + 25, y - boxHeight/2,
+                    false,
+                    javafx.scene.paint.CycleMethod.NO_CYCLE,
+                    new javafx.scene.paint.Stop(0, Color.web("#ffffff", 0.0)),
+                    new javafx.scene.paint.Stop(0.5, Color.web("#ffffff", alpha * 0.6)),
+                    new javafx.scene.paint.Stop(1, Color.web("#ffffff", 0.0))
+            );
+
+            gc.setFill(shineGradient);
+            gc.fillRoundRect(shineX - 25, y - boxHeight/2, 50, boxHeight, 10, 10);
+        }
+
+        gc.restore();
+    }
+
 
     /**
      * ✅ Render countdown đẹp với galaxy theme - CHỈ Ở RIGHT PANEL (800x600)
