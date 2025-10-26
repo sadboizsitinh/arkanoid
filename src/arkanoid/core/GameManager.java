@@ -168,7 +168,7 @@ public class GameManager {
         originalBallSpeed = DEFAULT_BALL_SPEED;
 
         // Initialize paddle
-        paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 80);
+        paddle = new Paddle(gameWidth / 2 - 50, gameHeight - 85);
 
         // Initialize ball và dính lên paddle
         ball = new Ball(gameWidth / 2 - 10, gameHeight / 2);
@@ -473,8 +473,7 @@ public class GameManager {
                     lastStreakBonus = streakBonus;
                     addScoreWithAnimation(streakBonus);
 
-                    // ✅ TRIGGER EXCELLENT khi Streak đạt 12 (lần đầu tiên)
-                    if (Streak % 2 == 0 && !excellentEffectActive) {
+                    if (Streak % 4 == 0 && !excellentEffectActive) {
                         excellentEffectActive = true;
                         excellentEffectTimer = 0.0;
                         excellentTriggerStreak = Streak;

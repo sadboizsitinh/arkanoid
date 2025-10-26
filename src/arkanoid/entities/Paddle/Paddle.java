@@ -25,6 +25,7 @@ public class Paddle extends MovableObject implements PaddleLike {
 
     private PowerUp currentPowerUp;
     private double originalWidth;
+    private double originalHeight;
 
     // Animation state
     private int currentFrame = 1; // 1 = paddle_1, 2 = paddle_2
@@ -35,6 +36,7 @@ public class Paddle extends MovableObject implements PaddleLike {
         super(x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_SPEED);
 
         this.originalWidth = DEFAULT_WIDTH;
+        this.originalHeight = DEFAULT_HEIGHT;
         this.color = Color.BLUE;
         this.useTexture = false;
         this.currentFrame = 1;
@@ -75,6 +77,7 @@ public class Paddle extends MovableObject implements PaddleLike {
 
     public void resetSize() {
         this.width = originalWidth;
+        this.height = originalHeight;
     }
 
     public void setWidth(double newWidth) {
