@@ -134,6 +134,7 @@ public class Ball extends MovableObject {
     /**
      * Bounce off another object using axis penetration to determine normal,
      * then apply specular reflection.
+     * ✅ FIXED: Better corner detection + prevent double collision
      */
     public void bounceOff(GameObject other) {
         double otherX = other.getX();
@@ -141,34 +142,64 @@ public class Ball extends MovableObject {
         double otherW = other.getWidth();
         double otherH = other.getHeight();
 
+        // ✅ Tính overlap theo 4 hướng
         double overlapLeft   = (otherX + otherW) - x;
         double overlapRight  = (x + width) - otherX;
         double overlapTop    = (otherY + otherH) - y;
         double overlapBottom = (y + height) - otherY;
 
-        double minX = Math.min(Math.abs(overlapLeft), Math.abs(overlapRight));
-        double minY = Math.min(Math.abs(overlapTop), Math.abs(overlapBottom));
+        // ✅ Tìm overlap NHỎ NHẤT (= hướng va chạm thực tế)
+        double minX = Math.min(overlapLeft, overlapRight);
+        double minY = Math.min(overlapTop, overlapBottom);
 
         double nx = 0, ny = 0;
-        double epsilon = 0.5;
-        if (minX < minY) {
-            if (Math.abs(overlapLeft) < Math.abs(overlapRight)) {
+        double epsilon = 2.0;
+
+        // ✅ THRESHOLD: Nếu chênh lệch quá nhỏ = va chạm góc → ưu tiên trục Y
+        double threshold = 3.0; // pixels
+
+        if (minX < minY - threshold) {
+            // Va chạm rõ ràng từ TRÁI/PHẢI
+            if (overlapLeft < overlapRight) {
                 nx = -1;
                 x = otherX + otherW + epsilon;
             } else {
                 nx = 1;
                 x = otherX - width - epsilon;
             }
-        } else {
-            if (Math.abs(overlapTop) < Math.abs(overlapBottom)) {
+        } else if (minY < minX - threshold) {
+            // Va chạm rõ ràng từ TRÊN/DƯỚI
+            if (overlapTop < overlapBottom) {
                 ny = -1;
                 y = otherY + otherH + epsilon;
             } else {
                 ny = 1;
                 y = otherY - height - epsilon;
             }
+        } else {
+            // ✅ VA CHẠM GÓC: Ưu tiên hướng di chuyển hiện tại
+            if (Math.abs(dy) > Math.abs(dx)) {
+                // Bóng đang đi chủ yếu theo trục Y → bounce theo Y
+                if (overlapTop < overlapBottom) {
+                    ny = -1;
+                    y = otherY + otherH + epsilon;
+                } else {
+                    ny = 1;
+                    y = otherY - height - epsilon;
+                }
+            } else {
+                // Bóng đang đi chủ yếu theo trục X → bounce theo X
+                if (overlapLeft < overlapRight) {
+                    nx = -1;
+                    x = otherX + otherW + epsilon;
+                } else {
+                    nx = 1;
+                    x = otherX - width - epsilon;
+                }
+            }
         }
 
+        // Specular reflection
         double vx = dx, vy = dy;
         double dot = vx * nx + vy * ny;
         double rx = vx - 2 * dot * nx;
@@ -181,8 +212,16 @@ public class Ball extends MovableObject {
         directionX = rx / mag;
         directionY = ry / mag;
 
+        // ✅ Prevent too horizontal OR too vertical movement
         if (Math.abs(directionY) < 0.2) {
             directionY = Math.copySign(0.2, directionY == 0 ? -1 : directionY);
+            double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
+            directionX /= m2; directionY /= m2;
+        }
+
+        // ✅ THÊM: Prevent too vertical movement (tránh bay thẳng đứng)
+        if (Math.abs(directionX) < 0.2) {
+            directionX = Math.copySign(0.2, directionX == 0 ? 1 : directionX);
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
             directionX /= m2; directionY /= m2;
         }
@@ -192,14 +231,20 @@ public class Ball extends MovableObject {
 
     /**
      * Bounce off paddle with angle variation
+     * ✅ NO position adjustment - just reflect immediately
      */
     public void bounceOffPaddle(Paddle paddle) {
+        // ✅ KHÔNG ĐẨY VỊ TRÍ - chỉ đổi hướng ngay lập tức
+
         double ballCenter = x + width / 2;
         double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
         double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
 
+        // ✅ Clamp hitPosition trong khoảng [-1, 1]
+        hitPosition = Math.max(-1, Math.min(1, hitPosition));
+
         directionX = hitPosition * 0.8;
-        directionY = -Math.abs(directionY);
+        directionY = -Math.abs(directionY);  // Luôn bay lên
 
         double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
         directionX /= magnitude;
@@ -208,31 +253,24 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
+    /**
+     * Bounce off wall - Simple reflection
+     */
     public void bounceOffWall(char wall) {
-        double vx = dx; double vy = dy;
-        double nx = 0, ny = 0;
         switch (wall) {
             case 'L':
-                nx = 1; ny = 0;
+                directionX = Math.abs(directionX);  // Force right
                 break;
             case 'R':
-                nx = -1; ny = 0;
+                directionX = -Math.abs(directionX); // Force left
                 break;
             case 'T':
-                nx = 0; ny = 1;
+                directionY = Math.abs(directionY);  // Force down
                 break;
-            default:
-                nx = 0; ny = -1;
+            case 'B':
+                directionY = -Math.abs(directionY); // Force up
                 break;
         }
-
-        double dot = vx * nx + vy * ny;
-        double rx = vx - 2 * dot * nx;
-        double ry = vy - 2 * dot * ny;
-        double mag = Math.sqrt(rx * rx + ry * ry);
-        if (mag == 0) { rx = -vx; ry = -vy; mag = Math.sqrt(rx*rx + ry*ry); }
-        directionX = rx / mag;
-        directionY = ry / mag;
         updateVelocity();
     }
 

@@ -60,6 +60,9 @@ public class GameManager {
     private static final double DEFAULT_BALL_SPEED = 325.0;
     private double originalBallSpeed;
 
+    private Map<Ball, Long> lastPaddleHitTime = new HashMap<>();
+    private static final long PADDLE_HIT_COOLDOWN = 100; // milliseconds
+
     public enum GameState {
         MENU, PLAYING, PAUSED, GAME_OVER, LEVEL_COMPLETE
     }
@@ -333,6 +336,7 @@ public class GameManager {
         // Process each ball
         Iterator<Ball> ballIterator = balls.iterator();
         boolean inMoment = false;
+        boolean paddleHitThisFrame = false;
         while (ballIterator.hasNext()) {
             Ball currentBall = ballIterator.next();
 
@@ -358,6 +362,7 @@ public class GameManager {
             // Ball falls below paddle
             if (currentBall.getY() > gameHeight) {
                 ballIterator.remove();
+                lastPaddleHitTime.remove(currentBall);
                 Collison = false;
                 Streak = 0;
                 // Only lose life if all balls are gone
@@ -376,11 +381,26 @@ public class GameManager {
 
             // Ball-Paddle collision
             if (currentBall.intersects(paddle)) {
-                currentBall.bounceOffPaddle(paddle);
-                paddle.triggerHitAnimation();
-                cameraShake.shakeOnPaddleHit();
-                SoundManager.play("paddle.wav");
-                Collison = false;
+                // ✅ CHECK COOLDOWN để tránh double hit
+                long currentTime = System.currentTimeMillis();
+                Long lastHit = lastPaddleHitTime.get(currentBall);
+
+                if (currentBall.getDY() > 0 &&
+                        (lastHit == null || currentTime - lastHit > PADDLE_HIT_COOLDOWN)) {
+
+                    currentBall.bounceOffPaddle(paddle);
+                    paddle.triggerHitAnimation();
+                    cameraShake.shakeOnPaddleHit();
+                    Collison = false;
+
+                    // ✅ Lưu thời gian hit
+                    lastPaddleHitTime.put(currentBall, currentTime);
+
+                    if (!paddleHitThisFrame) {
+                        SoundManager.play("paddle.wav");
+                        paddleHitThisFrame = true;
+                    }
+                }
             }
 
             // Ball-Brick collisions
