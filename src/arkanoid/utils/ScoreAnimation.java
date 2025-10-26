@@ -3,6 +3,7 @@ package arkanoid.utils;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -22,18 +23,16 @@ public class ScoreAnimation {
         // Tạo label hiển thị +XX
         Label scoreLabel = new Label("+" + points);
 
-        // ✅ Font size động dựa vào số điểm - để vừa trong 60px
-        int digits = String.valueOf(points).length();
+        // ✅ Font size động dựa vào số điểm - CHỈ XỬ LÝ ĐẾN +500
+        int digits = String.valueOf(points).length() + 1; // +1 cho dấu "+"
         int fontSize;
 
-        if (digits <= 2) {
-            fontSize = 20; // +10 đến +99
-        } else if (digits == 3) {
-            fontSize = 16; // +100 đến +999
+        if (digits <= 3) {
+            fontSize = 20; // +5 đến +99
         } else if (digits == 4) {
-            fontSize = 13; // +1000 đến +9999
+            fontSize = 13; // +100 đến +500 ✅ GIẢM TỪ 16 → 13
         } else {
-            fontSize = 11; // +10000+
+            fontSize = 11; // +1000+
         }
 
         scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, fontSize));
