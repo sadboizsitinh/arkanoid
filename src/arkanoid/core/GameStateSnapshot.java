@@ -1,6 +1,10 @@
 package arkanoid.core;
 
-import arkanoid.entities.*;
+import arkanoid.entities.Ball.Ball;
+import arkanoid.entities.Brick.Brick;
+import arkanoid.entities.Paddle.Paddle;
+import arkanoid.entities.PowerUp.PowerUp;
+
 import java.io.Serializable;
 import java.util.*;
 

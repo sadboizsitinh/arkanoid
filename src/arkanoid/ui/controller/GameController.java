@@ -1,7 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
-import arkanoid.entities.PowerUp;
+import arkanoid.entities.PowerUp.PowerUp;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import arkanoid.utils.ScoreAnimation;
 import javafx.scene.layout.StackPane;

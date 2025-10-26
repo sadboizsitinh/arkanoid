@@ -1,12 +1,18 @@
 package arkanoid.core;
 
 
+import arkanoid.entities.Ball.Ball;
+import arkanoid.entities.Brick.Brick;
+import arkanoid.entities.Brick.NormalBrick;
+import arkanoid.entities.Brick.StrongBrick;
+import arkanoid.entities.Brick.UnbreakableBrick;
+import arkanoid.entities.Paddle.Paddle;
+import arkanoid.entities.PowerUp.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import java.util.*;
-import arkanoid.entities.*;
+
 import arkanoid.utils.SoundManager;
 
 /**
