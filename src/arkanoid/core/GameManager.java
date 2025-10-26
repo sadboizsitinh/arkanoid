@@ -28,6 +28,7 @@ public class GameManager {
     // Continue
     private boolean isCountdownActive = false;
     private double countdownTime = 0;
+    private boolean isCountdownFromMenu = false;
 
     // Streak
     private int Streak = 0;
@@ -96,11 +97,20 @@ public class GameManager {
     public void startContinueCountdown(double seconds) {
         isCountdownActive = true;
         countdownTime = seconds;
+        isCountdownFromMenu = false; // Continue từ pause
         for (Ball b : balls) {
-            b.stickToPaddle(paddle); // Dính lại bóng
+            b.stickToPaddle(paddle);
         }
     }
 
+    public void startCountdownFromMenu(double seconds) {
+        isCountdownActive = true;
+        countdownTime = seconds;
+        isCountdownFromMenu = true; // Continue từ menu
+        for (Ball b : balls) {
+            b.stickToPaddle(paddle);
+        }
+    }
 
     /**
      * ✅ Release tất cả các ball đang dính trên paddle
@@ -709,19 +719,166 @@ public class GameManager {
 
         // ✅ Khôi phục trạng thái canvas
         gc.restore();
+
+        // ✅ RENDER COUNTDOWN ĐẸP HƠN
         if (isCountdownActive) {
-            gc.setFill(javafx.scene.paint.Color.WHITE);
-            gc.setFont(javafx.scene.text.Font.font("Arial", 40));
-            int seconds = (int) Math.ceil(countdownTime);
-            gc.fillText("Continue in " + seconds, gameWidth / 2 - 120, gameHeight / 2);
+            renderCountdown(gc);
         }
 
     }
 
-    // Getter để Ball có thể gọi shake nếu cần
-    public CameraShake getCameraShake() {
-        return cameraShake;
+    /**
+     * ✅ Render countdown đẹp với galaxy theme - CHỈ Ở RIGHT PANEL (800x600)
+     * Thêm vào class GameManager.java, thay thế method renderCountdown() cũ
+     */
+    private void renderCountdown(GraphicsContext gc) {
+        int seconds = (int) Math.ceil(countdownTime);
+
+        // ✅ OVERLAY CHỈ CHE RIGHT PANEL (800x600 canvas)
+        gc.setFill(Color.web("#000000", 0.75));
+        gc.fillRect(0, 0, gameWidth, gameHeight);
+
+        // Tính toán fade và scale cho hiệu ứng mượt
+        double fadeProgress = countdownTime - Math.floor(countdownTime);
+        double scale = 0.7 + (1.0 - fadeProgress) * 0.5; // Scale từ 0.7 -> 1.2
+        double opacity = 0.2 + fadeProgress * 0.8; // Opacity từ 0.2 -> 1.0
+
+        // ✅ MÀU SẮC GALAXY theo số đếm
+        String numberColor, glowColor, ringColor;
+        switch (seconds) {
+            case 3:
+                numberColor = "#a855f7";  // Tím galaxy
+                glowColor = "#c084fc";    // Tím sáng
+                ringColor = "#7c3aed";    // Tím đậm
+                break;
+            case 2:
+                numberColor = "#06b6d4";  // Cyan space
+                glowColor = "#22d3ee";    // Cyan sáng
+                ringColor = "#0891b2";    // Cyan đậm
+                break;
+            case 1:
+                numberColor = "#ec4899";  // Hồng neon
+                glowColor = "#f472b6";    // Hồng sáng
+                ringColor = "#db2777";    // Hồng đậm
+                break;
+            default:
+                numberColor = "#ffffff";
+                glowColor = "#e0e0e0";
+                ringColor = "#cccccc";
+        }
+
+        // ✅ VẼ Ở GIỮA RIGHT PANEL
+        double centerX = gameWidth / 2;  // 400px (giữa canvas 800px)
+        double centerY = gameHeight / 2; // 300px (giữa canvas 600px)
+
+        gc.save();
+        gc.translate(centerX, centerY);
+        gc.scale(scale, scale);
+
+        // ===== VÒNG TRÒN XOAY GALAXY =====
+        double rotation = (1.0 - fadeProgress) * 360;
+        gc.save();
+        gc.rotate(rotation);
+
+        // Vẽ 3 vòng tròn đồng tâm với opacity khác nhau
+        for (int i = 0; i < 3; i++) {
+            double radius = 140 + i * 20;
+            double ringOpacity = opacity * (0.3 - i * 0.08);
+
+            gc.setStroke(Color.web(ringColor, ringOpacity));
+            gc.setLineWidth(3 - i * 0.5);
+            gc.strokeOval(-radius, -radius, radius * 2, radius * 2);
+        }
+        gc.restore();
+
+        // ===== HIỆU ỨNG GLOW ĐA LỚP =====
+        // Lớp glow ngoài cùng (blur lớn)
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web(glowColor, opacity * 0.8),
+                80,
+                0.7,
+                0, 0
+        ));
+        gc.setFill(Color.web(glowColor, opacity * 0.15));
+        gc.fillOval(-110, -110, 220, 220);
+
+        // Lớp glow giữa
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web(numberColor, opacity * 0.9),
+                50,
+                0.6,
+                0, 0
+        ));
+        gc.setFill(Color.web(numberColor, opacity * 0.25));
+        gc.fillOval(-85, -85, 170, 170);
+
+        // ===== SỐ CHÍNH =====
+        String numberText = String.valueOf(seconds);
+
+        // Shadow đen cho số (depth)
+        gc.setEffect(null);
+        gc.setFont(javafx.scene.text.Font.font("Arial Black",
+                javafx.scene.text.FontWeight.BOLD, 220));
+        gc.setFill(Color.web("#000000", opacity * 0.6));
+        gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+        gc.setTextBaseline(javafx.geometry.VPos.CENTER);
+        gc.fillText(numberText, 6, 8);
+
+        // Outer glow cho số
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web(glowColor, opacity),
+                40,
+                0.8,
+                0, 0
+        ));
+        gc.setFill(Color.web(numberColor, opacity));
+        gc.fillText(numberText, 0, 0);
+
+        // Inner glow (số màu trắng sáng ở giữa)
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                Color.web("#ffffff", opacity * 0.9),
+                15,
+                0.9,
+                0, 0
+        ));
+        gc.setFill(Color.web("#ffffff", opacity * 0.95));
+        gc.fillText(numberText, 0, 0);
+
+        // ===== CÁC ĐIỂM SAO NHỎ XUNG QUANH =====
+        gc.setEffect(null);
+        for (int i = 0; i < 12; i++) {
+            double angle = Math.toRadians(i * 30 + rotation * 0.5);
+            double distance = 160 + Math.sin(rotation * 0.05 + i) * 10;
+            double x = Math.cos(angle) * distance;
+            double y = Math.sin(angle) * distance;
+            double starSize = 3 + Math.random() * 2;
+
+            gc.setFill(Color.web(glowColor, opacity * (0.6 + Math.random() * 0.4)));
+            gc.fillOval(x - starSize/2, y - starSize/2, starSize, starSize);
+        }
+
+        // ===== TEXT MÔ TẢ PHÍA DƯỚI =====
+        gc.setEffect(null);
+        gc.setFont(javafx.scene.text.Font.font("Arial",
+                javafx.scene.text.FontWeight.BOLD, 22));
+
+        String message = isCountdownFromMenu ? "Get Ready!" : "Resume in...";
+
+        // Shadow cho text
+        gc.setFill(Color.web("#000000", opacity * 0.7));
+        gc.fillText(message, 2, 112);
+
+        // Text chính
+        gc.setFill(Color.web("#ffffff", opacity * 0.95));
+        gc.fillText(message, 0, 110);
+
+        gc.restore();
     }
+
 
     /**
      * Hiển thị hint khi ball đang dính trên paddle
@@ -970,4 +1127,7 @@ public class GameManager {
     public List<PowerUp> getPowerUps() { return powerUps; }
     public List<PowerUp> getActivePowerUps() { return activePowerUps; }
     public int getLastStreakBonus() {return lastStreakBonus;}
+    public boolean isCountdownFromMenu() {return isCountdownFromMenu;}
+    // Getter để Ball có thể gọi shake nếu cần
+    public CameraShake getCameraShake() {return cameraShake;}
 }

@@ -7,15 +7,13 @@
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: load new img power up!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid_save.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/GameView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/GameView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/utils/ScoreAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/utils/ScoreAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/GameView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/GameView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/utils/ScoreAnimation.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/utils/ScoreAnimation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,7 +180,7 @@
       <workItem from="1761405298385" duration="908000" />
       <workItem from="1761467498353" duration="23000" />
       <workItem from="1761467536745" duration="5468000" />
-      <workItem from="1761484361830" duration="3349000" />
+      <workItem from="1761484361830" duration="4912000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />

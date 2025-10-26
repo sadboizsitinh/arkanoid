@@ -77,8 +77,13 @@ public class MainController {
         if (btnContinue != null) {
             btnContinue.setOnAction(e -> {
                 if (GameStatePersistence.hasSaveFile()) {
+                    // ✅ Load game state
                     GameManager.getInstance().continueGame();
-                    System.out.println("💾 Continue game from file, state: " + GameManager.getInstance().getGameState());
+
+                    // ✅ BẮT ĐẦU COUNTDOWN 3 GIÂY
+                    GameManager.getInstance().startCountdownFromMenu(3);
+
+                    System.out.println("💾 Continue game from file with countdown");
                     switchScene("/ui/fxml/GameView.fxml");
                 } else {
                     System.err.println("❌ No saved game file to continue!");

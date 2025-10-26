@@ -18,7 +18,7 @@ public class PauseOverlayController {
                 // Nếu đang tạm dừng → quay lại chế độ chơi và bắt đầu countdown
                 if (gm.getGameState() == GameManager.GameState.PAUSED) {
                     gm.setGameState(GameManager.GameState.PLAYING);
-                    gm.startContinueCountdown(3); // Đếm ngược 3 giây
+                    gm.startContinueCountdown(3); // ✅ Dùng method này cho pause
                 }
             });
 
