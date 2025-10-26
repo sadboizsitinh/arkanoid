@@ -479,6 +479,9 @@ public class GameManager {
                         excellentEffectTimer = 0.0;
                         excellentTriggerStreak = Streak;
                         System.out.println("🌟 EXCELLENT TRIGGERED! Streak: " + Streak);
+
+
+                        SoundManager.play("streak.wav");
                     }
                 }
             }

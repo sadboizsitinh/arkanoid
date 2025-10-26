@@ -8,7 +8,21 @@ import java.util.Map;
 public class SoundManager {
     private static final Map<String, AudioClip> cache = new HashMap<>();
     private static AudioClip backgroundMusic;
-    private static String currentBackgroundTrack = null; // ✅ Track hiện tại
+    private static String currentBackgroundTrack = null;
+
+    // ✅ MAP ÂM LƯỢNG CHO TỪNG FILE
+    private static final Map<String, Double> volumeMap = new HashMap<>();
+    static {
+        // Âm thanh hiệu ứng
+        volumeMap.put("paddle.wav", 0.5);      // Chạm paddle - nhỏ
+        volumeMap.put("gach.wav", 0.5);        // Chạm gạch - nhỏ
+        volumeMap.put("gachvo.wav", 0.6);      // Phá gạch - vừa
+        volumeMap.put("powerup.wav", 0.7);     // Power-up - vừa to
+        volumeMap.put("game_over.wav", 0.8);   // Game over - to
+        volumeMap.put("matmang.wav", 0.7);     // Mất mạng - to
+        volumeMap.put("Qua_man.wav", 0.8);     // Qua level - to
+        volumeMap.put("steak.wav", 1.5);       // Streak/Excellent - to
+    }
 
     private static AudioClip loadSound(String fileName) {
         try {
@@ -28,11 +42,22 @@ public class SoundManager {
         return cache.computeIfAbsent(fileName, SoundManager::loadSound);
     }
 
-    /** Phát âm thanh hiệu ứng (ngắn) */
+    /** ✅ Phát âm thanh hiệu ứng (ngắn) - SỬ DỤNG ÂM LƯỢNG TỪ MAP */
     public static void play(String fileName) {
         AudioClip clip = getSound(fileName);
-        if (clip != null){
-            clip.setVolume(0.6);
+        if (clip != null) {
+            // ✅ LẤY ÂM LƯỢNG TỪ MAP, NẾU KHÔNG CÓ THÌ DÙNG MẶC ĐỊNH 0.6
+            double volume = volumeMap.getOrDefault(fileName, 0.6);
+            clip.setVolume(volume);
+            clip.play();
+        }
+    }
+
+    /** ✅ OVERLOAD: Phát âm thanh với âm lượng tùy chọn */
+    public static void play(String fileName, double volume) {
+        AudioClip clip = getSound(fileName);
+        if (clip != null) {
+            clip.setVolume(Math.max(0.0, Math.min(1.0, volume))); // Giới hạn 0-1
             clip.play();
         }
     }
@@ -55,10 +80,13 @@ public class SoundManager {
             if (url != null) {
                 backgroundMusic = new AudioClip(url.toString());
                 backgroundMusic.setCycleCount(AudioClip.INDEFINITE);
-                backgroundMusic.setVolume(volume);
+
+                // ✅ GIỚI HẠN ÂM LƯỢNG NHẠC NỀN (0-0.4 để không quá to)
+                double limitedVolume = Math.max(0.0, Math.min(0.4, volume));
+                backgroundMusic.setVolume(limitedVolume);
                 backgroundMusic.play();
-                currentBackgroundTrack = fileName; // ✅ Lưu tên bài đang phát
-                System.out.println("🎵 Started playing background: " + fileName);
+                currentBackgroundTrack = fileName;
+                System.out.println("🎵 Started playing background: " + fileName + " (volume: " + limitedVolume + ")");
             }
         } catch (Exception e) {
             System.err.println("❌ Không thể phát nhạc nền: " + e.getMessage());
@@ -69,8 +97,8 @@ public class SoundManager {
     public static void stopBackground() {
         if (backgroundMusic != null) {
             backgroundMusic.stop();
-            currentBackgroundTrack = null; // ✅ Reset track name
-            System.out.println("⏹️ Background music stopped");
+            currentBackgroundTrack = null;
+            System.out.println("Background music stopped");
         }
     }
 
@@ -78,7 +106,7 @@ public class SoundManager {
     public static void pauseBackground() {
         if (backgroundMusic != null && backgroundMusic.isPlaying()) {
             backgroundMusic.stop();
-            System.out.println("⏸️ Background music paused");
+            System.out.println("Background music paused");
         }
     }
 
@@ -86,13 +114,22 @@ public class SoundManager {
     public static void resumeBackground() {
         if (backgroundMusic != null) {
             backgroundMusic.play();
-            System.out.println("▶️ Background music resumed");
+            System.out.println("Background music resumed");
         }
     }
 
     /** Kiểm tra xem có nhạc nền đang phát không */
     public static boolean isBackgroundPlaying() {
         return backgroundMusic != null && backgroundMusic.isPlaying();
+    }
+
+    /** CHỈNH ÂM LƯỢNG CỦA NHẠC NỀN */
+    public static void setBackgroundVolume(double volume) {
+        if (backgroundMusic != null) {
+            double limitedVolume = Math.max(0.0, Math.min(0.3, volume)); // Max 40%
+            backgroundMusic.setVolume(limitedVolume);
+            System.out.println(" Background volume set to: " + limitedVolume);
+        }
     }
 
 }
