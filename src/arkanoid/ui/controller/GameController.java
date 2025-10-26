@@ -142,6 +142,11 @@ public class GameController {
         javafx.application.Platform.runLater(() -> {
             gameCanvas.requestFocus();
             System.out.println("⌨️ Focus requested");
+
+            // ✅ THÊM: Điều chỉnh font size ngay khi khởi tạo
+            if (lblScore != null) {
+                adjustScoreFontSize(gameManager.getScore());
+            }
         });
     }
 
@@ -233,9 +238,6 @@ public class GameController {
         System.out.println("✅ Game loop started");
     }
 
-    /**
-     * Cập nhật UI panel bên trái
-     */
     private void updateUIPanel() {
         // ✅ Animate score khi thay đổi
         int currentScore = gameManager.getScore();
@@ -259,11 +261,15 @@ public class GameController {
                     );
                 }
 
-                // Animation số chạy nhanh
+                // ✅ 1. ĐIỀU CHỈNH FONT SIZE TRƯỚC
+                adjustScoreFontSize(currentScore);
+
+                // ✅ 2. SAU ĐÓ MỚI ANIMATION (để animateScoreCount dùng font mới)
                 ScoreAnimation.animateScoreCount(lblScore, lastScore, currentScore);
 
-                // Flash hiệu ứng
+                // ✅ 3. FLASH SAU CÙNG (flashLabel sẽ lưu style mới)
                 ScoreAnimation.flashLabel(lblScore);
+
             } else {
                 // Nếu không có animation (ví dụ reset game), update trực tiếp
                 lblScore.setText(String.valueOf(currentScore));
@@ -522,5 +528,36 @@ public class GameController {
 
     public static void stopGameLoopIfAny() {
         if (lastInstance != null) lastInstance.stopLoop();
+    }
+
+    /**
+     * Tự động điều chỉnh font size để số vừa khít trong không gian 89px
+     */
+    private void adjustScoreFontSize(int score) {
+        if (lblScore == null) return;
+
+        String scoreText = String.valueOf(score);
+        int digits = scoreText.length();
+        int fontSize;
+
+        // Tính toán font size dựa trên số chữ số
+        // Width ~89px, mỗi chữ số chiếm khoảng 15-18px tùy font size
+        if (digits <= 4) {
+            fontSize = 28; // 0-9999: font to nhất
+        } else if (digits == 5) {
+            fontSize = 22; // 10000-99999
+        } else if (digits == 6) {
+            fontSize = 18; // 100000-999999
+        } else if (digits == 7) {
+            fontSize = 15; // 1000000-9999999
+        } else {
+            fontSize = 13; // 10000000+: font nhỏ nhất
+        }
+
+        // Chỉ update style, KHÔNG đổi text (để animation tự xử lý)
+        lblScore.setStyle(String.format(
+                "-fx-font-size: %dpx; -fx-font-weight: bold; -fx-text-fill: white;",
+                fontSize
+        ));
     }
 }

@@ -21,7 +21,22 @@ public class ScoreAnimation {
     public static void showFloatingScore(Pane container, double startX, double startY, int points, boolean isStreak) {
         // Tạo label hiển thị +XX
         Label scoreLabel = new Label("+" + points);
-        scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+
+        // ✅ Font size động dựa vào số điểm - để vừa trong 60px
+        int digits = String.valueOf(points).length();
+        int fontSize;
+
+        if (digits <= 2) {
+            fontSize = 20; // +10 đến +99
+        } else if (digits == 3) {
+            fontSize = 16; // +100 đến +999
+        } else if (digits == 4) {
+            fontSize = 13; // +1000 đến +9999
+        } else {
+            fontSize = 11; // +10000+
+        }
+
+        scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, fontSize));
 
         // ✅ Màu khác nhau cho Streak và bình thường
         String color = isStreak ? "#f97316" : "#10b981"; // Streak = cam, Bình thường = xanh lá
@@ -85,7 +100,10 @@ public class ScoreAnimation {
 
             KeyFrame keyFrame = new KeyFrame(
                     Duration.millis(duration * progress),
-                    e -> label.setText(String.valueOf(currentScore))
+                    e -> {
+                        // ✅ CHỈ update text, KHÔNG đụng style
+                        label.setText(String.valueOf(currentScore));
+                    }
             );
             timeline.getKeyFrames().add(keyFrame);
         }
@@ -99,15 +117,22 @@ public class ScoreAnimation {
     public static void flashLabel(Label label) {
         if (label == null) return;
 
-        String originalStyle = label.getStyle();
+        // ✅ LƯU style hiện tại (đã có font size mới)
+        String currentStyle = label.getStyle();
 
         Timeline flash = new Timeline(
-                new KeyFrame(Duration.ZERO, e ->
-                        label.setStyle(originalStyle + "-fx-text-fill: #fbbf24; -fx-scale-x: 1.1; -fx-scale-y: 1.1;")
-                ),
-                new KeyFrame(Duration.millis(100), e ->
-                        label.setStyle(originalStyle + "-fx-text-fill: white; -fx-scale-x: 1.0; -fx-scale-y: 1.0;")
-                )
+                new KeyFrame(Duration.ZERO, e -> {
+                    // ✅ GIỮ NGUYÊN font size, CHỈ đổi màu và scale
+                    label.setStyle(currentStyle.replace("-fx-text-fill: white;", "-fx-text-fill: #fbbf24;"));
+                    label.setScaleX(1.1);
+                    label.setScaleY(1.1);
+                }),
+                new KeyFrame(Duration.millis(100), e -> {
+                    // ✅ Restore lại màu trắng, giữ font size
+                    label.setStyle(currentStyle);
+                    label.setScaleX(1.0);
+                    label.setScaleY(1.0);
+                })
         );
         flash.play();
     }
