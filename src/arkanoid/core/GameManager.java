@@ -408,26 +408,26 @@ public class GameManager {
                 if (currentBall.intersects(brick)) {
                     currentBall.bounceOff(brick);
                     brick.takeHit();
-                    Collison = true;
-                    inMoment = true;
 
-                    // ✅ Shake mạnh khi brick bị vỡ
+                    if (brick.getType() != Brick.BrickType.UNBREAKABLE) {
+                        Collison = true;
+                        inMoment = true;
+                    }
+
                     if (brick.isDestroyed()) {
-                        cameraShake.shakeOnBrickHit(); // Shake mạnh
+                        cameraShake.shakeOnBrickHit();
                         SoundManager.play("gachvo.wav");
                         score += brick.getPoints();
 
-                        // Random chance to spawn power-up
-                        if (Math.random() < 0.3) { // 30% chance
+                        if (Math.random() < 0.3) {
                             spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
                                     brick.getY() + brick.getHeight());
                         }
                     } else {
-                        // ✅ Shake nhẹ khi brick bị hit nhưng chưa vỡ
                         cameraShake.shakeOnPaddleHit();
                         SoundManager.play("gach.wav");
                     }
-                    break; // Only one collision per frame
+                    break;
                 }
             }
         }
