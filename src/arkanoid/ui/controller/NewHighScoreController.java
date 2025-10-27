@@ -110,19 +110,30 @@ public class NewHighScoreController {
      */
     private void goToHighScores() {
         try {
-            Stage stage = (Stage) btnSave.getScene().getWindow();
-
-            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/HighScores.fxml");
-            FXMLLoader loader;
-
-            if (resourceUrl != null) {
-                loader = new FXMLLoader(resourceUrl);
-            } else {
-                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/HighScores.fxml");
-                loader = new FXMLLoader(fxmlFile.toURI().toURL());
+            // 🔹 Tìm stage đang hiển thị
+            javafx.stage.Stage stage = null;
+            for (javafx.stage.Window window : javafx.stage.Stage.getWindows()) {
+                if (window instanceof javafx.stage.Stage && window.isShowing()) {
+                    stage = (javafx.stage.Stage) window;
+                    break;
+                }
+            }
+            if (stage == null) {
+                System.err.println("No active stage found to show HighScores!");
+                return;
             }
 
-            Parent root = loader.load();
+            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/HighScores.fxml");
+            javafx.fxml.FXMLLoader loader;
+
+            if (resourceUrl != null) {
+                loader = new javafx.fxml.FXMLLoader(resourceUrl);
+            } else {
+                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/HighScores.fxml");
+                loader = new javafx.fxml.FXMLLoader(fxmlFile.toURI().toURL());
+            }
+
+            javafx.scene.Parent root = loader.load();
 
             // Refresh danh sách
             HighScoresController controller = loader.getController();
@@ -130,8 +141,10 @@ public class NewHighScoreController {
                 controller.refreshScores();
             }
 
-            stage.setScene(new Scene(root, 800, 600));
+            stage.setScene(new javafx.scene.Scene(root, 800, 600));
+            stage.show();
             System.out.println("Navigated to High Scores screen");
+
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println("Không thể load HighScores.fxml");
@@ -143,21 +156,34 @@ public class NewHighScoreController {
      */
     private void goToMainMenu() {
         try {
-            Stage stage = (Stage) btnSkip.getScene().getWindow();
-
-            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/Main.fxml");
-            FXMLLoader loader;
-
-            if (resourceUrl != null) {
-                loader = new FXMLLoader(resourceUrl);
-            } else {
-                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/Main.fxml");
-                loader = new FXMLLoader(fxmlFile.toURI().toURL());
+            // 🔹 Lấy stage đang mở (an toàn)
+            javafx.stage.Stage stage = null;
+            for (javafx.stage.Window window : javafx.stage.Stage.getWindows()) {
+                if (window instanceof javafx.stage.Stage && window.isShowing()) {
+                    stage = (javafx.stage.Stage) window;
+                    break;
+                }
+            }
+            if (stage == null) {
+                System.err.println("No active stage found to show Main Menu!");
+                return;
             }
 
-            Parent root = loader.load();
-            stage.setScene(new Scene(root, 800, 600));
+            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/Main.fxml");
+            javafx.fxml.FXMLLoader loader;
+
+            if (resourceUrl != null) {
+                loader = new javafx.fxml.FXMLLoader(resourceUrl);
+            } else {
+                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/Main.fxml");
+                loader = new javafx.fxml.FXMLLoader(fxmlFile.toURI().toURL());
+            }
+
+            javafx.scene.Parent root = loader.load();
+            stage.setScene(new javafx.scene.Scene(root, 800, 600));
+            stage.show();
             System.out.println("Navigated to Main Menu");
+
         } catch (Exception ex) {
             ex.printStackTrace();
             System.err.println("Không thể load Main.fxml");
