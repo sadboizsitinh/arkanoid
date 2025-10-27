@@ -542,15 +542,15 @@ public class GameController {
         // Tính toán font size dựa trên số chữ số
         // Width ~89px, mỗi chữ số chiếm khoảng 15-18px tùy font size
         if (digits <= 4) {
-            fontSize = 28; // 0-9999: font to nhất
+            fontSize = 22; // 0-9999: font to nhất
         } else if (digits == 5) {
-            fontSize = 22; // 10000-99999
+            fontSize = 18; // 10000-99999
         } else if (digits == 6) {
-            fontSize = 18; // 100000-999999
+            fontSize = 15; // 100000-999999
         } else if (digits == 7) {
-            fontSize = 15; // 1000000-9999999
+            fontSize = 13; // 1000000-9999999
         } else {
-            fontSize = 13; // 10000000+: font nhỏ nhất
+            fontSize = 11; // 10000000+: font nhỏ nhất
         }
 
         // Chỉ update style, KHÔNG đổi text (để animation tự xử lý)

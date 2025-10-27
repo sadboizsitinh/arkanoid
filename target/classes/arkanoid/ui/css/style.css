@@ -1,18 +1,16 @@
-/* Root background mặc định */
+/* ===== ROOT & BASE STYLES ===== */
 .root {
     -fx-background-color: #0f172a;
     -fx-font-family: "Segoe UI", sans-serif;
 }
 
-
-/* ✅ Overlay tối để text dễ đọc */
+/* ===== OVERLAY STYLES ===== */
 .dark-overlay {
     -fx-background-color: rgba(0, 0, 0, 0.7);
     -fx-padding: 40;
     -fx-background-radius: 12;
 }
 
-/* ✅ Overlay cho New High Score popup */
 .popup-overlay {
     -fx-background-color: rgba(0, 0, 0, 0.85);
 }
@@ -24,10 +22,12 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0.3, 0, 5);
 }
 
+/* ===== LABEL STYLES ===== */
 .label {
     -fx-text-fill: cyan;
 }
 
+/* ===== BUTTON STYLES ===== */
 .button {
     -fx-background-radius: 14;
     -fx-font-size: 18px;
@@ -50,7 +50,6 @@
     -fx-text-fill: #ec4899;
 }
 
-/* ✅ HOVER EFFECTS CHO BUTTONS */
 .button:hover {
     -fx-opacity: 1.0;
     -fx-scale-x: 1.05;
@@ -58,13 +57,11 @@
     -fx-cursor: hand;
 }
 
-/* Hover cho button-main */
 .button-main:hover {
     -fx-background-color: linear-gradient(to bottom, #22d3ee, #06b6d4, #0284c7);
     -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.6), 20, 0.4, 0, 0);
 }
 
-/* Hover cho button-alt */
 .button-alt:hover {
     -fx-background-color: rgba(236, 72, 153, 0.2);
     -fx-border-color: #f472b6;
@@ -72,9 +69,71 @@
     -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.5), 16, 0.3, 0, 0);
 }
 
-/* Pressed effect */
 .button:pressed {
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
     -fx-opacity: 0.85;
+}
+
+/* ===== LED BORDER STYLES (JavaFX Compatible) ===== */
+
+/* LED Border Container - Outer glow layer */
+.led-border-container {
+    -fx-padding: 2;
+    -fx-background-radius: 10;
+}
+
+/* Title Panel - Cyan LED */
+.led-border-title {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #06b6d4 0%, #0ea5e9 25%, #3b82f6 50%, #0ea5e9 75%, #06b6d4 100%);
+    -fx-effect: dropshadow(gaussian, rgba(6, 182, 212, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Score Panel - Blue LED */
+.led-border-score {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #0ea5e9 0%, #06b6d4 50%, #0ea5e9 100%);
+    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Lives Panel - Pink LED */
+.led-border-lives {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #ec4899 0%, #f472b6 50%, #ec4899 100%);
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Level Panel - Green LED */
+.led-border-level {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #10b981 0%, #34d399 50%, #10b981 100%);
+    -fx-effect: dropshadow(gaussian, rgba(16, 185, 129, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Balls Panel - Yellow LED */
+.led-border-balls {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #fbbf24 0%, #fcd34d 50%, #fbbf24 100%);
+    -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Power-ups Panel - Purple LED */
+.led-border-powerups {
+    -fx-background-color:
+            linear-gradient(from 0% 0% to 100% 100%,
+            #a78bfa 0%, #c4b5fd 50%, #a78bfa 100%);
+    -fx-effect: dropshadow(gaussian, rgba(167, 139, 250, 0.6), 15, 0.5, 0, 0);
+}
+
+/* Inner content panel - Common style */
+.panel-content {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, #1e293b, #0f172a);
+    -fx-padding: 15;
+    -fx-background-radius: 8;
 }

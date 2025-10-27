@@ -28,11 +28,11 @@ public class ScoreAnimation {
         int fontSize;
 
         if (digits <= 3) {
-            fontSize = 20; // +5 đến +99
+            fontSize = 15; // +5 đến +99
         } else if (digits == 4) {
-            fontSize = 13; // +100 đến +500
+            fontSize = 11; // +100 đến +500
         } else {
-            fontSize = 11; // +1000+
+            fontSize = 9; // +1000+
         }
 
         scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, fontSize));
