@@ -340,7 +340,13 @@ public class VersusController {
                         gameManager.getWinner()
                 );
 
-                stage.setScene(new Scene(root, 1296, 800));
+                // ✅ FIX: RESIZE STAGE về 800x600 cho GameOver
+                stage.setScene(new Scene(root, 800, 600));
+                stage.setWidth(800);
+                stage.setHeight(640); // +40 cho title bar
+                stage.centerOnScreen();
+
+                System.out.println("✅ Stage resized to 800x600 for Game Over");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -359,18 +365,23 @@ public class VersusController {
             FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
             Parent root = loader.load();
 
+            // ✅ FIX: RESIZE STAGE về 800x600
             stage.setScene(new Scene(root, 800, 600));
-            stage.setResizable(true);
+            stage.setWidth(800);
+            stage.setHeight(640);
             stage.centerOnScreen();
+            stage.setResizable(true);
+
+            System.out.println("✅ Returned to Main Menu - Stage resized to 800x600");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
     public void cleanup() {
         if (gameLoop != null) {
             gameLoop.stop();
+            gameLoop = null;
         }
     }
 

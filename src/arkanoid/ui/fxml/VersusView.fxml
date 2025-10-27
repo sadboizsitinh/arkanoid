@@ -28,9 +28,8 @@
 
         <!-- Center Divider -->
         <Pane HBox.hgrow="ALWAYS">
-            <VBox alignment="CENTER" style="-fx-padding: 0;">
-                <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;                                          -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.8), 15, 0.7, 0, 0);" text="VS" />
-            </VBox>
+            <VBox alignment="CENTER" style="-fx-padding: 0;" />
+             <Label layoutX="221.0" layoutY="5.0" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;                                          -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.8), 15, 0.7, 0, 0);" text="VS" />
         </Pane>
 
         <!-- Player 2 Info -->

@@ -209,6 +209,7 @@ public class VersusGameOverController {
     private void playAgain() {
         try {
             VersusController.stopGameLoopIfAny();
+            VersusGameManager.resetInstance(); // ✅ Reset instance cũ
 
             Stage stage = (Stage) btnPlayAgain.getScene().getWindow();
 
@@ -223,9 +224,15 @@ public class VersusGameOverController {
             }
 
             Parent root = loader.load();
-            stage.setScene(new Scene(root, 1280, 720));
 
-            System.out.println("✅ Restarted versus game");
+            // ✅ FIX: RESIZE STAGE về 1320x740 cho Versus
+            stage.setScene(new Scene(root, 1296, 800));
+            stage.setWidth(1320);
+            stage.setHeight(740);
+            stage.centerOnScreen();
+            stage.setResizable(false);
+
+            System.out.println("✅ Restarted versus game - Stage resized to 1320x740");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -247,7 +254,15 @@ public class VersusGameOverController {
             }
 
             Parent root = loader.load();
+
+            // ✅ FIX: RESIZE STAGE về 800x600 cho Main Menu
             stage.setScene(new Scene(root, 800, 600));
+            stage.setWidth(800);
+            stage.setHeight(640); // +40 cho title bar
+            stage.centerOnScreen();
+            stage.setResizable(true); // Cho phép resize lại
+
+            System.out.println("✅ Stage resized to 800x600 for Main Menu");
 
         } catch (Exception e) {
             e.printStackTrace();
