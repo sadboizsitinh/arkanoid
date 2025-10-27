@@ -3,7 +3,7 @@ package arkanoid.ui.controller;
 import arkanoid.core.GameManager;
 import arkanoid.core.GameStatePersistence;
 import arkanoid.core.HighScoreManager;
-import javafx.animation.PauseTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,27 +29,101 @@ public class GameOverController {
         System.out.println("   GameOver.setStats() called");
         System.out.println("   Score: " + score);
         System.out.println("   Level: " + level);
-        System.out.println("   lblScore is null? " + (lblScore == null));
-        System.out.println("   lblLevel is null? " + (lblLevel == null));
-        System.out.println("   btnRestart is null? " + (btnRestart == null));
         System.out.println("============================================");
 
-        if (lblScore != null) lblScore.setText("Final Score: " + score);
-        if (lblLevel != null) lblLevel.setText("Level Reached: " + level);
+        if (lblScore != null) {
+            // Fade in + scale animation cho score
+            lblScore.setOpacity(0);
+            lblScore.setScaleX(0.5);
+            lblScore.setScaleY(0.5);
 
-        // Dùng PauseTransition để delay trước khi check high score
-        PauseTransition delay = new PauseTransition(Duration.seconds(0.0001));
-        delay.setOnFinished(event -> {
-            System.out.println("Delay finished, calling checkAndShowHighScore()");
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.3));
+            delay.setOnFinished(e -> {
+                // Count up animation
+                animateScoreCountUp(0, score, 1.5);
+
+                // Fade + Scale in
+                FadeTransition fade = new FadeTransition(Duration.seconds(0.8), lblScore);
+                fade.setFromValue(0);
+                fade.setToValue(1);
+
+                ScaleTransition scale = new ScaleTransition(Duration.seconds(0.8), lblScore);
+                scale.setFromX(0.5);
+                scale.setFromY(0.5);
+                scale.setToX(1.0);
+                scale.setToY(1.0);
+
+                ParallelTransition parallel = new ParallelTransition(fade, scale);
+                parallel.play();
+            });
+            delay.play();
+        }
+
+        if (lblLevel != null) {
+            // Fade in + rotate animation cho level
+            lblLevel.setOpacity(0);
+            lblLevel.setRotate(-180);
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(0.8));
+            delay.setOnFinished(e -> {
+                lblLevel.setText(String.valueOf(level));
+
+                FadeTransition fade = new FadeTransition(Duration.seconds(0.6), lblLevel);
+                fade.setFromValue(0);
+                fade.setToValue(1);
+
+                RotateTransition rotate = new RotateTransition(Duration.seconds(0.6), lblLevel);
+                rotate.setFromAngle(-180);
+                rotate.setToAngle(0);
+
+                ParallelTransition parallel = new ParallelTransition(fade, rotate);
+                parallel.play();
+            });
+            delay.play();
+        }
+
+        // Delay để check high score
+        PauseTransition checkDelay = new PauseTransition(Duration.seconds(2.0));
+        checkDelay.setOnFinished(event -> {
+            System.out.println("Checking high score...");
             checkAndShowHighScore();
         });
-        delay.play();
-        System.out.println("PauseTransition started");
+        checkDelay.play();
+    }
+
+    /**
+     * Animation đếm số từ 0 lên finalScore
+     */
+    private void animateScoreCountUp(int start, int end, double durationSeconds) {
+        Timeline timeline = new Timeline();
+        final int steps = 50; // Số bước animation
+        final long stepDuration = (long) (durationSeconds * 1000 / steps);
+
+        for (int i = 0; i <= steps; i++) {
+            final int value = start + (int) ((end - start) * i / (double) steps);
+            KeyFrame keyFrame = new KeyFrame(
+                    Duration.millis(i * stepDuration),
+                    e -> lblScore.setText(String.valueOf(value))
+            );
+            timeline.getKeyFrames().add(keyFrame);
+        }
+
+        timeline.play();
     }
 
     @FXML
     private void initialize() {
         GameStatePersistence.deleteSaveFile();
+
+        // Animation entrance cho buttons với stagger effect
+        javafx.application.Platform.runLater(() -> {
+            if (btnRestart != null) {
+                animateButtonEntrance(btnRestart, 1.8);
+            }
+            if (btnBack != null) {
+                animateButtonEntrance(btnBack, 2.0);
+            }
+        });
 
         if (btnRestart != null) {
             btnRestart.setOnAction(e -> {
@@ -57,9 +131,7 @@ public class GameOverController {
                 GameManager.getInstance().startGame();
                 try {
                     GameController.stopGameLoopIfAny();
-
                     GameManager.getInstance().clearSavedGame();
-
                     GameManager.getInstance().startGame();
 
                     Stage stage = (Stage) btnRestart.getScene().getWindow();
@@ -91,23 +163,61 @@ public class GameOverController {
     }
 
     /**
+     * Animation đẹp hơn cho button entrance
+     */
+    private void animateButtonEntrance(Button button, double delay) {
+        button.setOpacity(0);
+        button.setScaleX(0.8);
+        button.setScaleY(0.8);
+        button.setTranslateY(20);
+
+        PauseTransition pause = new PauseTransition(Duration.seconds(delay));
+        pause.setOnFinished(e -> {
+            FadeTransition fade = new FadeTransition(Duration.seconds(0.4), button);
+            fade.setFromValue(0);
+            fade.setToValue(1);
+
+            ScaleTransition scale = new ScaleTransition(Duration.seconds(0.4), button);
+            scale.setFromX(0.8);
+            scale.setFromY(0.8);
+            scale.setToX(1.0);
+            scale.setToY(1.0);
+
+            TranslateTransition translate = new TranslateTransition(Duration.seconds(0.4), button);
+            translate.setFromY(20);
+            translate.setToY(0);
+
+            ParallelTransition parallel = new ParallelTransition(fade, scale, translate);
+            parallel.play();
+
+            // Thêm bounce effect nhẹ
+            parallel.setOnFinished(ev -> {
+                ScaleTransition bounce = new ScaleTransition(Duration.seconds(0.15), button);
+                bounce.setToX(1.05);
+                bounce.setToY(1.05);
+                bounce.setAutoReverse(true);
+                bounce.setCycleCount(2);
+                bounce.play();
+            });
+        });
+        pause.play();
+    }
+
+    /**
      * Kiểm tra và hiển thị popup nhập tên nếu đạt high score
      */
     private void checkAndShowHighScore() {
-        // Kiểm tra có phải high score không
         if (!HighScoreManager.getInstance().isHighScore(finalScore)) {
             System.out.println("Score: " + finalScore + " - Not a high score");
             return;
         }
 
-        System.out.println("NEW HIGH SCORE! " + finalScore);
+        System.out.println("🎉 NEW HIGH SCORE! " + finalScore);
 
         try {
-            // Lấy Scene và Root hiện tại
             Scene scene = btnRestart.getScene();
             Parent gameOverRoot = scene.getRoot();
 
-            // Nếu root chưa phải StackPane, wrap nó
             StackPane container;
             if (gameOverRoot instanceof StackPane) {
                 container = (StackPane) gameOverRoot;
@@ -117,7 +227,6 @@ public class GameOverController {
                 scene.setRoot(container);
             }
 
-            // Load overlay NewHighScore
             FXMLLoader loader = new FXMLLoader();
             java.net.URL resourceUrl = getClass().getResource("/ui/fxml/NewHighScore.fxml");
 
@@ -130,21 +239,17 @@ public class GameOverController {
 
             Parent overlay = loader.load();
 
-            // Lấy controller của overlay
             NewHighScoreController controller = loader.getController();
             controller.setStats(finalScore, finalLevel);
 
-            // Set callback khi đóng overlay
             controller.setOnClose(() -> {
-                // Xóa overlay khỏi container
                 container.getChildren().remove(overlay);
                 System.out.println("High Score overlay closed");
             });
 
-            // Thêm overlay lên trên (sẽ che phủ Game Over với nền mờ đậm)
             container.getChildren().add(overlay);
 
-            System.out.println("High Score overlay displayed on top of Game Over");
+            System.out.println("✅ High Score overlay displayed on top of Game Over");
 
         } catch (Exception ex) {
             ex.printStackTrace();

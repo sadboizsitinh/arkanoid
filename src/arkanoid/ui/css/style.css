@@ -38,41 +38,70 @@
 }
 
 .button-main {
-    -fx-background-color: linear-gradient(to bottom, #17c0e9, #0ea5e9, #0369a1);
+    -fx-background-color: linear-gradient(to bottom, #06b6d4, #0891b2, #0e7490);
     -fx-text-fill: white;
+    -fx-background-radius: 14;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 12 34;
+    -fx-effect: dropshadow(gaussian, rgba(6, 182, 212, 0.6), 20, 0.5, 0, 2);
+    -fx-border-color: rgba(6, 182, 212, 0.3);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+}
+
+.button-main:hover {
+    -fx-background-color: linear-gradient(to bottom, #22d3ee, #06b6d4, #0891b2);
+    -fx-effect: dropshadow(gaussian, rgba(6, 182, 212, 0.9), 25, 0.7, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+
+.button-main:pressed {
+    -fx-background-color: linear-gradient(to bottom, #0891b2, #0e7490, #155e75);
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+    -fx-translate-y: 2px;
 }
 
 .button-alt {
     -fx-background-color: transparent;
-    -fx-border-color: #ec4899;
-    -fx-border-width: 2;
+    -fx-border-color: linear-gradient(to right, #ec4899, #a855f7);
+    -fx-border-width: 2.5;
     -fx-border-radius: 14;
-    -fx-text-fill: #ec4899;
-}
-
-.button:hover {
-    -fx-opacity: 1.0;
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
+    -fx-background-radius: 14;
+    -fx-text-fill: #f472b6;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
     -fx-cursor: hand;
-}
-
-.button-main:hover {
-    -fx-background-color: linear-gradient(to bottom, #22d3ee, #06b6d4, #0284c7);
-    -fx-effect: dropshadow(gaussian, rgba(14, 165, 233, 0.6), 20, 0.4, 0, 0);
+    -fx-padding: 12 34;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.4), 15, 0.4, 0, 0);
 }
 
 .button-alt:hover {
-    -fx-background-color: rgba(236, 72, 153, 0.2);
-    -fx-border-color: #f472b6;
-    -fx-text-fill: #f472b6;
-    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.5), 16, 0.3, 0, 0);
+    -fx-background-color: rgba(236, 72, 153, 0.15);
+    -fx-border-color: linear-gradient(to right, #f472b6, #c084fc);
+    -fx-text-fill: #fbbf24;
+    -fx-effect: dropshadow(gaussian, rgba(236, 72, 153, 0.7), 20, 0.6, 0, 0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
-.button:pressed {
+.button-alt:pressed {
+    -fx-background-color: rgba(236, 72, 153, 0.3);
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
-    -fx-opacity: 0.85;
+    -fx-translate-y: 2px;
+}
+
+/* ===== SCORE AND LEVEL LABELS WITH GLOW ===== */
+.score-label-glow {
+    -fx-effect: dropshadow(gaussian, rgba(6, 182, 212, 0.8), 15, 0.7, 0, 0);
+}
+
+.level-label-glow {
+    -fx-effect: dropshadow(gaussian, rgba(167, 139, 250, 0.8), 15, 0.7, 0, 0);
 }
 
 /* ===== LED BORDER STYLES (JavaFX Compatible) ===== */
