@@ -94,13 +94,13 @@ public class GameManager {
     public void setMovingLeft(boolean moving) {
         this.movingLeft = moving;
         // Release ball khi bắt đầu di chuyển
-        releaseBallsFromPaddle();
+        // releaseBallsFromPaddle();
     }
 
     public void setMovingRight(boolean moving) {
         this.movingRight = moving;
         // Release ball khi bắt đầu di chuyển
-        releaseBallsFromPaddle();
+       // releaseBallsFromPaddle();
     }
 
     public void startContinueCountdown(double seconds) {
@@ -118,6 +118,33 @@ public class GameManager {
         isCountdownFromMenu = true; // Continue từ menu
         for (Ball b : balls) {
             b.stickToPaddle(paddle);
+        }
+    }
+
+    /**
+     * Xử lý phím A/D hoặc mũi tên trái/phải để điều chỉnh góc bóng
+     */
+    public void rotateSelectedBallDirection(boolean clockwise) {
+        if (gameState == GameState.PLAYING && !balls.isEmpty()) {
+            for (Ball b : balls) {
+                if (b.isStuckToPaddle()) {
+                    b.rotateDirection(clockwise);
+                }
+            }
+        }
+    }
+
+    /**
+     * Xử lý phím SPACE để phóng bóng với góc đã chọn
+     */
+    public void fireSelectedBallDirection() {
+        if (gameState == GameState.PLAYING && !balls.isEmpty()) {
+            for (Ball b : balls) {
+                if (b.isStuckToPaddle()) {
+                    b.applySelectedDirection(); // Áp dụng góc chọn
+                    b.release();                // Phóng bóng
+                }
+            }
         }
     }
 
@@ -752,6 +779,12 @@ public class GameManager {
                 powerUp.render(gc);
             }
 
+            for (Ball b : balls) {
+                if (b.isStuckToPaddle()) {
+                    b.renderDirectionArrow(gc);
+                }
+            }
+
             // Hiển thị hướng dẫn khi ball đang dính
             if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
                 renderStuckBallHint(gc);
@@ -1082,9 +1115,9 @@ public class GameManager {
     private void renderStuckBallHint(GraphicsContext gc) {
         gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 18));
         gc.setFill(Color.web("#fbbf24"));
-        String hint = "Move paddle to start!";
+        String hint = "Press Space to start!";
         double textWidth = 180; // Ước lượng
-        gc.fillText(hint, gameWidth / 2 - textWidth / 2, gameHeight - 100);
+        gc.fillText(hint, gameWidth / 2 - textWidth / 2, gameHeight - 180);
     }
 
     private void renderMenu(GraphicsContext gc) {

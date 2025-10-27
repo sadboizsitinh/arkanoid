@@ -150,36 +150,133 @@ public class GameController {
     }
 
     private void handleKeyPress(KeyCode code, boolean isPressed) {
-        if (code == KeyCode.A || code == KeyCode.LEFT) {
-            if (isPressed && !leftKeyDown) {
-                leftKeyDown = true;
-                gameManager.setMovingLeft(true);
-            } else if (!isPressed && leftKeyDown) {
-                leftKeyDown = false;
-                gameManager.setMovingLeft(false);
+        // ========== KIỂM TRA BÓNG CÓ DÍNH TRÊN PADDLE KHÔNG ==========
+        boolean ballStuck = gameManager.getBalls().stream()
+                .anyMatch(ball -> ball.isStuckToPaddle());
+
+        // ========== XỬ LÝ PHÍM A - DI CHUYỂN/XOAY GÓC ==========
+        if (code == KeyCode.A) {
+            if (isPressed) {
+                if (ballStuck) {
+                    // Nếu bóng dính → XOAY GÓC TRÁI
+                    gameManager.rotateSelectedBallDirection(false);
+                    System.out.println("🎮 A pressed: Rotate LEFT");
+                } else {
+                    // Nếu bóng bay → DI CHUYỂN PADDLE TRÁI
+                    if (!leftKeyDown) {
+                        leftKeyDown = true;
+                        gameManager.setMovingLeft(true);
+                        System.out.println("🎮 A pressed: Move LEFT");
+                    }
+                }
+            } else {
+                // A nhả ra
+                if (!ballStuck && leftKeyDown) {
+                    leftKeyDown = false;
+                    gameManager.setMovingLeft(false);
+                    System.out.println("🎮 A released: Stop LEFT");
+                }
             }
         }
 
-        if (code == KeyCode.D || code == KeyCode.RIGHT) {
-            if (isPressed && !rightKeyDown) {
-                rightKeyDown = true;
-                gameManager.setMovingRight(true);
-            } else if (!isPressed && rightKeyDown) {
-                rightKeyDown = false;
-                gameManager.setMovingRight(false);
+        // ========== XỬ LÝ PHÍM D - DI CHUYỂN/XOAY GÓC ==========
+        if (code == KeyCode.D) {
+            if (isPressed) {
+                if (ballStuck) {
+                    // Nếu bóng dính → XOAY GÓC PHẢI
+                    gameManager.rotateSelectedBallDirection(true);
+                    System.out.println("🎮 D pressed: Rotate RIGHT");
+                } else {
+                    // Nếu bóng bay → DI CHUYỂN PADDLE PHẢI
+                    if (!rightKeyDown) {
+                        rightKeyDown = true;
+                        gameManager.setMovingRight(true);
+                        System.out.println("🎮 D pressed: Move RIGHT");
+                    }
+                }
+            } else {
+                // D nhả ra
+                if (!ballStuck && rightKeyDown) {
+                    rightKeyDown = false;
+                    gameManager.setMovingRight(false);
+                    System.out.println("🎮 D released: Stop RIGHT");
+                }
             }
         }
 
-        if (isPressed) {
-            if (code == KeyCode.P || code == KeyCode.ESCAPE) {
-                gameManager.togglePause();
+        // ========== XỬ LÝ PHÍM MŨI TÊN TRÁI (←) ==========
+        if (code == KeyCode.LEFT) {
+            if (isPressed) {
+                if (ballStuck) {
+                    // Nếu bóng dính → XOAY GÓC TRÁI
+                    gameManager.rotateSelectedBallDirection(false);
+                    System.out.println("🎮 LEFT arrow pressed: Rotate LEFT");
+                } else {
+                    // Nếu bóng bay → DI CHUYỂN PADDLE TRÁI
+                    if (!leftKeyDown) {
+                        leftKeyDown = true;
+                        gameManager.setMovingLeft(true);
+                        System.out.println("🎮 LEFT arrow pressed: Move LEFT");
+                    }
+                }
+            } else {
+                // LEFT nhả ra
+                if (!ballStuck && leftKeyDown) {
+                    leftKeyDown = false;
+                    gameManager.setMovingLeft(false);
+                    System.out.println("🎮 LEFT arrow released: Stop LEFT");
+                }
             }
-            if (code == KeyCode.SPACE && gameManager.getGameState() == GameManager.GameState.MENU) {
+        }
+
+        // ========== XỬ LÝ PHÍM MŨI TÊN PHẢI (→) ==========
+        if (code == KeyCode.RIGHT) {
+            if (isPressed) {
+                if (ballStuck) {
+                    // Nếu bóng dính → XOAY GÓC PHẢI
+                    gameManager.rotateSelectedBallDirection(true);
+                    System.out.println("🎮 RIGHT arrow pressed: Rotate RIGHT");
+                } else {
+                    // Nếu bóng bay → DI CHUYỂN PADDLE PHẢI
+                    if (!rightKeyDown) {
+                        rightKeyDown = true;
+                        gameManager.setMovingRight(true);
+                        System.out.println("🎮 RIGHT arrow pressed: Move RIGHT");
+                    }
+                }
+            } else {
+                // RIGHT nhả ra
+                if (!ballStuck && rightKeyDown) {
+                    rightKeyDown = false;
+                    gameManager.setMovingRight(false);
+                    System.out.println("🎮 RIGHT arrow released: Stop RIGHT");
+                }
+            }
+        }
+
+        // ========== XỬ LÝ PHÍM SPACE - PHÓNG BÓNG ==========
+        if (isPressed && code == KeyCode.SPACE) {
+            if (ballStuck) {
+                // Nếu bóng dính → PHÓNG BÓNG
+                gameManager.fireSelectedBallDirection();
+                System.out.println("🎮 SPACE pressed: FIRE BALL! 🔥");
+            } else if (gameManager.getGameState() == GameManager.GameState.MENU) {
+                // Nếu ở menu → BẮT ĐẦU GAME
                 gameManager.startGame();
+                System.out.println("🎮 SPACE pressed: Start Game");
             }
-            if (code == KeyCode.R && gameManager.getGameState() == GameManager.GameState.GAME_OVER) {
-                gameManager.startGame();
-            }
+        }
+
+        // ========== XỬ LÝ PHÍM P - TẠM DỪNG ==========
+        if (isPressed && (code == KeyCode.P || code == KeyCode.ESCAPE)) {
+            gameManager.togglePause();
+            System.out.println("🎮 P/ESC pressed: Toggle Pause");
+        }
+
+        // ========== XỬ LÝ PHÍM R - RESTART ==========
+        if (isPressed && code == KeyCode.R && gameManager.getGameState() == GameManager.GameState.GAME_OVER) {
+            gameManager.startGame();
+            System.out.println("🎮 R pressed: Restart Game");
         }
     }
 

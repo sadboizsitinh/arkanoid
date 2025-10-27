@@ -12,18 +12,20 @@ import java.util.Queue;
 /**
  * Game ball that bounces around the screen
  * Handles collisions with other objects
- * Includes trail/glow effect
+ * Includes trail/glow effect and direction selector
  */
 public class Ball extends MovableObject {
-
-
 
     private static final double DEFAULT_SIZE = 30;
     private static final double DEFAULT_SPEED = 325;
 
     // Trail effect constants
     private static final int MAX_TRAIL_POINTS = 30;
-    private static final double TRAIL_UPDATE_INTERVAL = 0.01; // Update trail every 10ms
+    private static final double TRAIL_UPDATE_INTERVAL = 0.01;
+
+    // Direction selector
+    private double selectedAngle = -90; // Mặc định hướng lên (độ)
+    private static final double ANGLE_STEP = 15; // Mỗi lần bấm thay đổi 15 độ
 
     // Index Skin
     private int TypeSkin = 1;
@@ -40,13 +42,9 @@ public class Ball extends MovableObject {
     public Ball(double x, double y) {
         super(x, y, DEFAULT_SIZE, DEFAULT_SIZE, DEFAULT_SPEED);
         this.color = Color.RED;
-        // Start moving up and right
         this.directionX = 1;
         this.directionY = -1;
-
-        // Initialize trail
         this.trail = new LinkedList<>();
-
         updateVelocity();
     }
 
@@ -62,7 +60,7 @@ public class Ball extends MovableObject {
     public void stickToPaddle(Paddle paddle) {
         stuckToPaddle = true;
         offsetFromPaddleCenter = 0;
-        // Clear trail when stuck
+        selectedAngle = -90; // Reset góc về hướng lên
         trail.clear();
     }
 
@@ -79,10 +77,146 @@ public class Ball extends MovableObject {
     }
 
     /**
-     * Update trail points - add new point if enough time has passed
+     * Thay đổi góc chọn (khi bấm A/D hoặc mũi tên)
      */
+    public void rotateDirection(boolean clockwise) {
+        if (stuckToPaddle) {
+            if (clockwise) {
+                selectedAngle += ANGLE_STEP;
+            } else {
+                selectedAngle -= ANGLE_STEP;
+            }
+            // Giới hạn góc từ -170 đến -10 độ (phạm vi hợp lý)
+            if (selectedAngle > -10) selectedAngle = -10;
+            if (selectedAngle < -170) selectedAngle = -170;
+        }
+    }
+
+    /**
+     * Áp dụng góc chọn và phóng bóng
+     */
+    public void applySelectedDirection() {
+        double radians = Math.toRadians(selectedAngle);
+        directionX = Math.cos(radians);
+        directionY = Math.sin(radians);
+        updateVelocity();
+    }
+
+    /**
+     * Vẽ mũi tên hướng dẫn trên bóng
+     */
+    /**
+     * Vẽ mũi tên hướng dẫn trên bóng - Galaxy theme
+     */
+    public void renderDirectionArrow(GraphicsContext gc) {
+        if (!stuckToPaddle) return;
+
+        double ballCenterX = x + width / 2;
+        double ballCenterY = y + height / 2;
+
+        // Vị trí mũi tên ở phía trên bóng
+        double arrowDistance = 70;
+        double radians = Math.toRadians(selectedAngle);
+        double arrowX = ballCenterX + Math.cos(radians) * arrowDistance;
+        double arrowY = ballCenterY + Math.sin(radians) * arrowDistance;
+
+        // ===== ĐƯỜNG NÉT TỪ BÓNG ĐẾN MŨI TÊN - GLOW =====
+        gc.save();
+
+        // Glow effect cho đường nét
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                javafx.scene.paint.Color.web("#a855f7", 0.8),
+                20,
+                0.8,
+                0, 0
+        ));
+
+        gc.setStroke(javafx.scene.paint.Color.web("#c084fc", 0.8));
+        gc.setLineWidth(3);
+        gc.strokeLine(ballCenterX, ballCenterY, arrowX, arrowY);
+
+        // ===== VẼ MŨI TÊN TO ĐẸP =====
+        double arrowSize = 22; // Mũi tên to hơn
+        double angle1 = radians + Math.toRadians(150);
+        double angle2 = radians - Math.toRadians(150);
+
+        double x1 = arrowX + Math.cos(angle1) * arrowSize;
+        double y1 = arrowY + Math.sin(angle1) * arrowSize;
+        double x2 = arrowX + Math.cos(angle2) * arrowSize;
+        double y2 = arrowY + Math.sin(angle2) * arrowSize;
+
+        // ===== GLOW NGOÀI (Tím Galaxy) =====
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                javafx.scene.paint.Color.web("#a855f7", 0.9),
+                30,
+                0.9,
+                0, 0
+        ));
+
+        // Fill mũi tên - Gradient Tím đến Xanh
+        javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
+                arrowX, arrowY - 20,
+                arrowX, arrowY + 20,
+                false,
+                javafx.scene.paint.CycleMethod.NO_CYCLE,
+                new javafx.scene.paint.Stop(0, javafx.scene.paint.Color.web("#c084fc")),    // Tím sáng
+                new javafx.scene.paint.Stop(0.5, javafx.scene.paint.Color.web("#a855f7")),  // Tím vừa
+                new javafx.scene.paint.Stop(1, javafx.scene.paint.Color.web("#7c3aed"))     // Tím đậm
+        );
+
+        gc.setFill(gradient);
+        gc.fillPolygon(
+                new double[]{arrowX, x1, x2},
+                new double[]{arrowY, y1, y2},
+                3
+        );
+
+        // ===== VIỀN MŨI TÊN - XANH NEON =====
+        gc.setEffect(new javafx.scene.effect.DropShadow(
+                javafx.scene.effect.BlurType.GAUSSIAN,
+                javafx.scene.paint.Color.web("#06b6d4", 0.9),
+                15,
+                0.8,
+                0, 0
+        ));
+
+        gc.setStroke(javafx.scene.paint.Color.web("#22d3ee", 0.95));
+        gc.setLineWidth(2.5);
+        gc.strokePolygon(
+                new double[]{arrowX, x1, x2},
+                new double[]{arrowY, y1, y2},
+                3
+        );
+
+        // ===== STAR EFFECT XUNG QUANH MŨI TÊN =====
+        gc.setEffect(null);
+        for (int i = 0; i < 6; i++) {
+            double starAngle = Math.toRadians(i * 60);
+            double starDist = 35;
+            double starX = arrowX + Math.cos(starAngle) * starDist;
+            double starY = arrowY + Math.sin(starAngle) * starDist;
+            double starSize = 4 + Math.random() * 2;
+
+            gc.setFill(javafx.scene.paint.Color.web("#fbbf24", 0.7 + Math.random() * 0.3));
+            gc.fillOval(starX - starSize/2, starY - starSize/2, starSize, starSize);
+        }
+
+        // ===== HINT TEXT PHÍ DƯỚI =====
+        gc.setEffect(null);
+        gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 13));
+        gc.setFill(javafx.scene.paint.Color.web("#60a5fa", 0.85));
+        gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+
+        String hintText = "A/D to aim • SPACE to fire";
+        gc.fillText(hintText, ballCenterX, ballCenterY + 85);
+
+        gc.restore();
+    }
+
     private void updateTrail() {
-        timeSinceLastTrail += 0.016; // Approximate delta time
+        timeSinceLastTrail += 0.016;
 
         if (timeSinceLastTrail >= TRAIL_UPDATE_INTERVAL && !stuckToPaddle) {
             double ballCenterX = x + width / 2;
@@ -90,7 +224,6 @@ public class Ball extends MovableObject {
 
             trail.add(new TrailPoint(ballCenterX, ballCenterY, 1.0));
 
-            // Keep trail size limited
             if (trail.size() > MAX_TRAIL_POINTS) {
                 trail.poll();
             }
@@ -98,35 +231,26 @@ public class Ball extends MovableObject {
             timeSinceLastTrail = 0;
         }
 
-        // Fade out trail points
         for (TrailPoint point : trail) {
             point.alpha -= 0.05;
         }
 
-        // Remove fully faded points
         trail.removeIf(point -> point.alpha <= 0);
     }
 
-    /**
-     * Render trail effect
-     */
     private void renderTrail(GraphicsContext gc) {
         for (TrailPoint point : trail) {
             if (point.alpha > 0) {
-                // Draw glowing circle with decreasing size and opacity
                 double radius = (width / 2) * point.alpha;
 
-                // Outer glow - more transparent
                 gc.setFill(Color.color(1.0, 1.0, 1.0, 0.3 * point.alpha));
                 gc.fillOval(point.x - radius * 1.5, point.y - radius * 1.5,
                         radius * 3, radius * 3);
 
-                // Middle glow
                 gc.setFill(Color.color(0.6, 0.8, 1.0, 0.5 * point.alpha));
                 gc.fillOval(point.x - radius, point.y - radius,
                         radius * 2, radius * 2);
 
-                // Core - brighter
                 gc.setFill(Color.color(1.0, 1.0, 1.0, 0.8 * point.alpha));
                 gc.fillOval(point.x - radius * 0.6, point.y - radius * 0.6,
                         radius * 1.2, radius * 1.2);
@@ -134,35 +258,25 @@ public class Ball extends MovableObject {
         }
     }
 
-    /**
-     * Bounce off another object using axis penetration to determine normal,
-     * then apply specular reflection.
-     * FIXED: Better corner detection + prevent double collision
-     */
     public void bounceOff(GameObject other) {
         double otherX = other.getX();
         double otherY = other.getY();
         double otherW = other.getWidth();
         double otherH = other.getHeight();
 
-        // Tính overlap theo 4 hướng
         double overlapLeft   = (otherX + otherW) - x;
         double overlapRight  = (x + width) - otherX;
         double overlapTop    = (otherY + otherH) - y;
         double overlapBottom = (y + height) - otherY;
 
-        // Tìm overlap NHỎ NHẤT (= hướng va chạm thực tế)
         double minX = Math.min(overlapLeft, overlapRight);
         double minY = Math.min(overlapTop, overlapBottom);
 
         double nx = 0, ny = 0;
         double epsilon = 2.0;
-
-        // THRESHOLD: Nếu chênh lệch quá nhỏ = va chạm góc → ưu tiên trục Y
-        double threshold = 3.0; // pixels
+        double threshold = 3.0;
 
         if (minX < minY - threshold) {
-            // Va chạm rõ ràng từ TRÁI/PHẢI
             if (overlapLeft < overlapRight) {
                 nx = -1;
                 x = otherX + otherW + epsilon;
@@ -171,7 +285,6 @@ public class Ball extends MovableObject {
                 x = otherX - width - epsilon;
             }
         } else if (minY < minX - threshold) {
-            // Va chạm rõ ràng từ TRÊN/DƯỚI
             if (overlapTop < overlapBottom) {
                 ny = -1;
                 y = otherY + otherH + epsilon;
@@ -180,9 +293,7 @@ public class Ball extends MovableObject {
                 y = otherY - height - epsilon;
             }
         } else {
-            // VA CHẠM GÓC: Ưu tiên hướng di chuyển hiện tại
             if (Math.abs(dy) > Math.abs(dx)) {
-                // Bóng đang đi chủ yếu theo trục Y → bounce theo Y
                 if (overlapTop < overlapBottom) {
                     ny = -1;
                     y = otherY + otherH + epsilon;
@@ -191,7 +302,6 @@ public class Ball extends MovableObject {
                     y = otherY - height - epsilon;
                 }
             } else {
-                // Bóng đang đi chủ yếu theo trục X → bounce theo X
                 if (overlapLeft < overlapRight) {
                     nx = -1;
                     x = otherX + otherW + epsilon;
@@ -202,7 +312,6 @@ public class Ball extends MovableObject {
             }
         }
 
-        // Specular reflection
         double vx = dx, vy = dy;
         double dot = vx * nx + vy * ny;
         double rx = vx - 2 * dot * nx;
@@ -215,14 +324,12 @@ public class Ball extends MovableObject {
         directionX = rx / mag;
         directionY = ry / mag;
 
-        // Prevent too horizontal OR too vertical movement
         if (Math.abs(directionY) < 0.2) {
             directionY = Math.copySign(0.2, directionY == 0 ? -1 : directionY);
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
             directionX /= m2; directionY /= m2;
         }
 
-        // THÊM: Prevent too vertical movement (tránh bay thẳng đứng)
         if (Math.abs(directionX) < 0.2) {
             directionX = Math.copySign(0.2, directionX == 0 ? 1 : directionX);
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
@@ -232,22 +339,15 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
-    /**
-     * Bounce off paddle with angle variation
-     * NO position adjustment - just reflect immediately
-     */
     public void bounceOffPaddle(Paddle paddle) {
-        // KHÔNG ĐẨY VỊ TRÍ - chỉ đổi hướng ngay lập tức
-
         double ballCenter = x + width / 2;
         double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
         double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
 
-        // Clamp hitPosition trong khoảng [-1, 1]
         hitPosition = Math.max(-1, Math.min(1, hitPosition));
 
         directionX = hitPosition * 0.8;
-        directionY = -Math.abs(directionY);  // Luôn bay lên
+        directionY = -Math.abs(directionY);
 
         double magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
         directionX /= magnitude;
@@ -256,22 +356,19 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
-    /**
-     * Bounce off wall - Simple reflection
-     */
     public void bounceOffWall(char wall) {
         switch (wall) {
             case 'L':
-                directionX = Math.abs(directionX);  // Force right
+                directionX = Math.abs(directionX);
                 break;
             case 'R':
-                directionX = -Math.abs(directionX); // Force left
+                directionX = -Math.abs(directionX);
                 break;
             case 'T':
-                directionY = Math.abs(directionY);  // Force down
+                directionY = Math.abs(directionY);
                 break;
             case 'B':
-                directionY = -Math.abs(directionY); // Force up
+                directionY = -Math.abs(directionY);
                 break;
         }
         updateVelocity();
@@ -300,10 +397,8 @@ public class Ball extends MovableObject {
 
     @Override
     public void render(GraphicsContext gc) {
-        // Render trail first (behind the ball)
         renderTrail(gc);
 
-        // Render ball
         String path = "file:src/arkanoid/assets/images/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
@@ -325,10 +420,8 @@ public class Ball extends MovableObject {
     public double getSpeed() { return speed; }
     public double getDX() { return dx; }
     public double getDY() { return dy; }
+    public double getSelectedAngle() { return selectedAngle; }
 
-    /**
-     * Inner class to represent a trail point
-     */
     private static class TrailPoint {
         double x, y, alpha;
 
