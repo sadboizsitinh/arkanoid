@@ -9,33 +9,22 @@ import javafx.scene.paint.Color;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * Game ball that bounces around the screen
- * Handles collisions with other objects
- * Includes trail/glow effect and direction selector
- */
 public class Ball extends MovableObject {
 
     private static final double DEFAULT_SIZE = 30;
     private static final double DEFAULT_SPEED = 325;
 
-    // Trail effect constants
     private static final int MAX_TRAIL_POINTS = 30;
     private static final double TRAIL_UPDATE_INTERVAL = 0.01;
 
-    // Direction selector
-    private double selectedAngle = -90; // Mặc định hướng lên (độ)
-    private static final double ANGLE_STEP = 15; // Mỗi lần bấm thay đổi 15 độ
+    private double selectedAngle = -90;
+    private static final double ANGLE_STEP = 15;
 
-    // Index Skin
     private int TypeSkin = 1;
-
     private double directionX, directionY;
-
     private boolean stuckToPaddle = true;
     private double offsetFromPaddleCenter = 0;
 
-    // Trail effect
     private Queue<TrailPoint> trail;
     private double timeSinceLastTrail = 0;
 
@@ -60,7 +49,7 @@ public class Ball extends MovableObject {
     public void stickToPaddle(Paddle paddle) {
         stuckToPaddle = true;
         offsetFromPaddleCenter = 0;
-        selectedAngle = -90; // Reset góc về hướng lên
+        selectedAngle = -90;
         trail.clear();
     }
 
@@ -76,9 +65,6 @@ public class Ball extends MovableObject {
         return stuckToPaddle;
     }
 
-    /**
-     * Thay đổi góc chọn (khi bấm A/D hoặc mũi tên)
-     */
     public void rotateDirection(boolean clockwise) {
         if (stuckToPaddle) {
             if (clockwise) {
@@ -86,15 +72,11 @@ public class Ball extends MovableObject {
             } else {
                 selectedAngle -= ANGLE_STEP;
             }
-            // Giới hạn góc từ -170 đến -10 độ (phạm vi hợp lý)
             if (selectedAngle > -10) selectedAngle = -10;
             if (selectedAngle < -170) selectedAngle = -170;
         }
     }
 
-    /**
-     * Áp dụng góc chọn và phóng bóng
-     */
     public void applySelectedDirection() {
         double radians = Math.toRadians(selectedAngle);
         directionX = Math.cos(radians);
@@ -102,42 +84,30 @@ public class Ball extends MovableObject {
         updateVelocity();
     }
 
-    /**
-     * Vẽ mũi tên hướng dẫn trên bóng
-     */
-    /**
-     * Vẽ mũi tên hướng dẫn trên bóng - Galaxy theme
-     */
     public void renderDirectionArrow(GraphicsContext gc) {
         if (!stuckToPaddle) return;
 
         double ballCenterX = x + width / 2;
         double ballCenterY = y + height / 2;
 
-        // Vị trí mũi tên ở phía trên bóng
         double arrowDistance = 70;
         double radians = Math.toRadians(selectedAngle);
         double arrowX = ballCenterX + Math.cos(radians) * arrowDistance;
         double arrowY = ballCenterY + Math.sin(radians) * arrowDistance;
 
-        // ===== ĐƯỜNG NÉT TỪ BÓNG ĐẾN MŨI TÊN - GLOW =====
         gc.save();
 
-        // Glow effect cho đường nét
         gc.setEffect(new javafx.scene.effect.DropShadow(
                 javafx.scene.effect.BlurType.GAUSSIAN,
                 javafx.scene.paint.Color.web("#a855f7", 0.8),
-                20,
-                0.8,
-                0, 0
+                20, 0.8, 0, 0
         ));
 
         gc.setStroke(javafx.scene.paint.Color.web("#c084fc", 0.8));
         gc.setLineWidth(3);
         gc.strokeLine(ballCenterX, ballCenterY, arrowX, arrowY);
 
-        // ===== VẼ MŨI TÊN TO ĐẸP =====
-        double arrowSize = 22; // Mũi tên to hơn
+        double arrowSize = 22;
         double angle1 = radians + Math.toRadians(150);
         double angle2 = radians - Math.toRadians(150);
 
@@ -146,24 +116,20 @@ public class Ball extends MovableObject {
         double x2 = arrowX + Math.cos(angle2) * arrowSize;
         double y2 = arrowY + Math.sin(angle2) * arrowSize;
 
-        // ===== GLOW NGOÀI (Tím Galaxy) =====
         gc.setEffect(new javafx.scene.effect.DropShadow(
                 javafx.scene.effect.BlurType.GAUSSIAN,
                 javafx.scene.paint.Color.web("#a855f7", 0.9),
-                30,
-                0.9,
-                0, 0
+                30, 0.9, 0, 0
         ));
 
-        // Fill mũi tên - Gradient Tím đến Xanh
         javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
                 arrowX, arrowY - 20,
                 arrowX, arrowY + 20,
                 false,
                 javafx.scene.paint.CycleMethod.NO_CYCLE,
-                new javafx.scene.paint.Stop(0, javafx.scene.paint.Color.web("#c084fc")),    // Tím sáng
-                new javafx.scene.paint.Stop(0.5, javafx.scene.paint.Color.web("#a855f7")),  // Tím vừa
-                new javafx.scene.paint.Stop(1, javafx.scene.paint.Color.web("#7c3aed"))     // Tím đậm
+                new javafx.scene.paint.Stop(0, javafx.scene.paint.Color.web("#c084fc")),
+                new javafx.scene.paint.Stop(0.5, javafx.scene.paint.Color.web("#a855f7")),
+                new javafx.scene.paint.Stop(1, javafx.scene.paint.Color.web("#7c3aed"))
         );
 
         gc.setFill(gradient);
@@ -173,13 +139,10 @@ public class Ball extends MovableObject {
                 3
         );
 
-        // ===== VIỀN MŨI TÊN - XANH NEON =====
         gc.setEffect(new javafx.scene.effect.DropShadow(
                 javafx.scene.effect.BlurType.GAUSSIAN,
                 javafx.scene.paint.Color.web("#06b6d4", 0.9),
-                15,
-                0.8,
-                0, 0
+                15, 0.8, 0, 0
         ));
 
         gc.setStroke(javafx.scene.paint.Color.web("#22d3ee", 0.95));
@@ -190,7 +153,6 @@ public class Ball extends MovableObject {
                 3
         );
 
-        // ===== STAR EFFECT XUNG QUANH MŨI TÊN =====
         gc.setEffect(null);
         for (int i = 0; i < 6; i++) {
             double starAngle = Math.toRadians(i * 60);
@@ -203,7 +165,6 @@ public class Ball extends MovableObject {
             gc.fillOval(starX - starSize/2, starY - starSize/2, starSize, starSize);
         }
 
-        // ===== HINT TEXT PHÍ DƯỚI =====
         gc.setEffect(null);
         gc.setFont(javafx.scene.text.Font.font("Arial", javafx.scene.text.FontWeight.BOLD, 13));
         gc.setFill(javafx.scene.paint.Color.web("#60a5fa", 0.85));
@@ -399,16 +360,59 @@ public class Ball extends MovableObject {
     public void render(GraphicsContext gc) {
         renderTrail(gc);
 
+        // ✅ TRY LOAD TEXTURE, NẾU FAIL → FALLBACK
         String path = "file:src/arkanoid/assets/images/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
-        setSpriteRegion(0, 0, 317, 323);
+        if (useTexture && spriteSheet != null && !spriteSheet.isError()) {
+            // Render với texture
+            setSpriteRegion(0, 0, 317, 323);
+            gc.drawImage(
+                    spriteSheet,
+                    sourceX, sourceY, sourceWidth, sourceHeight,
+                    x, y, width, height
+            );
+        } else {
+            // ✅ FALLBACK: Vẽ ball đơn giản với gradient
+            renderBallFallback(gc);
+        }
+    }
 
-        gc.drawImage(
-                spriteSheet,
-                sourceX, sourceY, sourceWidth, sourceHeight,
-                x, y, width, height
+    /**
+     * ✅ Render ball fallback khi texture không load được
+     */
+    private void renderBallFallback(GraphicsContext gc) {
+        double centerX = x + width / 2;
+        double centerY = y + height / 2;
+        double radius = width / 2;
+
+        // Outer glow
+        gc.setFill(Color.web("#FF1493", 0.3));
+        gc.fillOval(centerX - radius * 1.5, centerY - radius * 1.5, radius * 3, radius * 3);
+
+        // Main ball với gradient
+        javafx.scene.paint.RadialGradient gradient = new javafx.scene.paint.RadialGradient(
+                0, 0,
+                centerX, centerY,
+                radius,
+                false,
+                javafx.scene.paint.CycleMethod.NO_CYCLE,
+                new javafx.scene.paint.Stop(0, Color.web("#FF69B4")),
+                new javafx.scene.paint.Stop(0.7, Color.web("#FF1493")),
+                new javafx.scene.paint.Stop(1, Color.web("#C71585"))
         );
+
+        gc.setFill(gradient);
+        gc.fillOval(x, y, width, height);
+
+        // Shine effect
+        gc.setFill(Color.web("#FFFFFF", 0.6));
+        gc.fillOval(x + radius * 0.3, y + radius * 0.3, radius * 0.6, radius * 0.6);
+
+        // Border
+        gc.setStroke(Color.web("#FF1493"));
+        gc.setLineWidth(2);
+        gc.strokeOval(x, y, width, height);
     }
 
     public void setDirection(double dx, double dy) {

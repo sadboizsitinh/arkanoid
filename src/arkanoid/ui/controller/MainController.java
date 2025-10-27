@@ -28,6 +28,9 @@ public class MainController {
     private Button btnContinue;
 
     @FXML
+    private Button btnVersus;
+
+    @FXML
     private void initialize() {
         SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.3);
 
@@ -40,6 +43,10 @@ public class MainController {
                 );
             }
         });
+
+        if (btnVersus != null) {
+            btnVersus.setOnAction(e -> switchScene("/ui/fxml/VersusView.fxml", 1280)); // Width lớn hơn cho 2 màn hình
+        }
 
         // Kiểm tra file save khi mở app
         if (btnContinue != null) {
@@ -116,13 +123,12 @@ public class MainController {
     /**
      * Chuyển sang scene khác theo đường dẫn FXML.
      */
-    private void switchScene(String fxmlPath) {
+    private void switchScene(String fxmlPath, int width) {
         try {
             System.out.println("Switching to: " + fxmlPath);
 
             Stage stage = (Stage) btnStart.getScene().getWindow();
 
-            // Chuyển đổi đường dẫn: /ui/fxml/GameView.fxml → src/arkanoid/ui/fxml/GameView.fxml
             String filePath = "src/arkanoid" + fxmlPath;
             java.io.File fxmlFile = new java.io.File(filePath);
 
@@ -136,9 +142,9 @@ public class MainController {
             FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
             Parent root = loader.load();
 
-            // CẬP NHẬT: Nếu là GameView thì dùng width 1000 (800 canvas + 200 panel)
-            int width = fxmlPath.contains("GameView") ? 1000 : 800;
-            Scene scene = new Scene(root, width, 600);
+            // Sử dụng width được truyền vào
+            int finalWidth = (width > 0) ? width : (fxmlPath.contains("GameView") ? 1000 : 800);
+            Scene scene = new Scene(root, finalWidth, 600);
             stage.setScene(scene);
 
             System.out.println("Scene switched successfully");
@@ -148,4 +154,10 @@ public class MainController {
             System.err.println("Không thể load file FXML: " + fxmlPath);
         }
     }
+
+    // Overload method cũ để tương thích ngược
+    private void switchScene(String fxmlPath) {
+        switchScene(fxmlPath, -1); // -1 = auto detect width
+    }
+
 }

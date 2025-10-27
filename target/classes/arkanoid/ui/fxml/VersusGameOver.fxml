@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+
+<StackPane prefHeight="600" prefWidth="800"
+           style="-fx-background-color: linear-gradient(to bottom, #0f172a, #1e1b4b, #312e81);"
+           stylesheets="@../css/style.css"
+           xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="arkanoid.ui.controller.VersusGameOverController">
+
+    <!-- Decorative elements -->
+    <StackPane mouseTransparent="true">
+        <VBox alignment="TOP_LEFT" style="-fx-padding: 20;" mouseTransparent="true">
+            <Label text="🎮" style="-fx-font-size: 32px; -fx-opacity: 0.6;" mouseTransparent="true"/>
+        </VBox>
+        <VBox alignment="TOP_RIGHT" style="-fx-padding: 20;" mouseTransparent="true">
+            <Label text="🎮" style="-fx-font-size: 32px; -fx-opacity: 0.6;" mouseTransparent="true"/>
+        </VBox>
+        <VBox alignment="BOTTOM_LEFT" style="-fx-padding: 20;" mouseTransparent="true">
+            <Label text="⭐" style="-fx-font-size: 32px; -fx-opacity: 0.6;" mouseTransparent="true"/>
+        </VBox>
+        <VBox alignment="BOTTOM_RIGHT" style="-fx-padding: 20;" mouseTransparent="true">
+            <Label text="⭐" style="-fx-font-size: 32px; -fx-opacity: 0.6;" mouseTransparent="true"/>
+        </VBox>
+    </StackPane>
+
+    <!-- Main Content -->
+    <VBox alignment="CENTER" spacing="40" style="-fx-padding: 40;">
+
+        <!-- Winner Title -->
+        <VBox alignment="CENTER" spacing="12">
+            <Label fx:id="lblWinner" text="🏆 WINNER 🏆"
+                   style="-fx-font-size: 56px;
+                        -fx-font-weight: bold;
+                        -fx-text-fill: #fbbf24;
+                        -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.9), 30, 0.8, 0, 0);"/>
+            <Label text="VERSUS MATCH RESULTS"
+                   style="-fx-font-size: 18px;
+                        -fx-text-fill: #8b93a5;
+                        -fx-font-style: italic;"/>
+        </VBox>
+
+        <!-- Scores Display -->
+        <HBox spacing="60" alignment="CENTER">
+
+            <!-- Player 1 Stats -->
+            <VBox alignment="CENTER" spacing="12"
+                  style="-fx-background-color: linear-gradient(to bottom, rgba(124, 252, 0, 0.1), rgba(124, 252, 0, 0.05));
+                       -fx-padding: 24;
+                       -fx-background-radius: 12;
+                       -fx-border-color: #7CFC00;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 12;
+                       -fx-effect: dropshadow(gaussian, rgba(124, 252, 0, 0.4), 15, 0.5, 0, 0);">
+
+                <Label text="PLAYER 1"
+                       style="-fx-font-size: 22px;
+                            -fx-font-weight: bold;
+                            -fx-text-fill: #7CFC00;
+                            -fx-letter-spacing: 2px;"/>
+
+                <VBox alignment="CENTER" spacing="4">
+                    <Label text="SCORE"
+                           style="-fx-font-size: 14px;
+                                -fx-font-weight: bold;
+                                -fx-text-fill: #8b93a5;"/>
+                    <Label fx:id="lblScore1" text="0"
+                           style="-fx-font-size: 48px;
+                                -fx-font-weight: bold;
+                                -fx-text-fill: #7CFC00;
+                                -fx-effect: dropshadow(gaussian, rgba(124, 252, 0, 0.6), 12, 0.6, 0, 0);"/>
+                </VBox>
+
+                <Label fx:id="lblResultP1" text="✓ WINNER"
+                       style="-fx-font-size: 20px;
+                            -fx-font-weight: bold;
+                            -fx-text-fill: #7CFC00;"/>
+            </VBox>
+
+            <!-- VS Divider -->
+            <VBox alignment="CENTER">
+                <Label text="VS"
+                       style="-fx-font-size: 36px;
+                            -fx-font-weight: bold;
+                            -fx-text-fill: #fbbf24;
+                            -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.8), 15, 0.7, 0, 0);"/>
+            </VBox>
+
+            <!-- Player 2 Stats -->
+            <VBox alignment="CENTER" spacing="12"
+                  style="-fx-background-color: linear-gradient(to bottom, rgba(0, 191, 255, 0.1), rgba(0, 191, 255, 0.05));
+                       -fx-padding: 24;
+                       -fx-background-radius: 12;
+                       -fx-border-color: #00BFFF;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 12;
+                       -fx-effect: dropshadow(gaussian, rgba(0, 191, 255, 0.4), 15, 0.5, 0, 0);">
+
+                <Label text="PLAYER 2"
+                       style="-fx-font-size: 22px;
+                            -fx-font-weight: bold;
+                            -fx-text-fill: #00BFFF;
+                            -fx-letter-spacing: 2px;"/>
+
+                <VBox alignment="CENTER" spacing="4">
+                    <Label text="SCORE"
+                           style="-fx-font-size: 14px;
+                                -fx-font-weight: bold;
+                                -fx-text-fill: #8b93a5;"/>
+                    <Label fx:id="lblScore2" text="0"
+                           style="-fx-font-size: 48px;
+                                -fx-font-weight: bold;
+                                -fx-text-fill: #00BFFF;
+                                -fx-effect: dropshadow(gaussian, rgba(0, 191, 255, 0.6), 12, 0.6, 0, 0);"/>
+                </VBox>
+
+                <Label fx:id="lblResultP2" text="✗ LOSER"
+                       style="-fx-font-size: 20px;
+                            -fx-font-weight: bold;
+                            -fx-text-fill: #ef4444;"/>
+            </VBox>
+
+        </HBox>
+
+        <!-- Buttons -->
+        <HBox alignment="CENTER" spacing="24">
+            <Button fx:id="btnPlayAgain" prefHeight="56" prefWidth="220"
+                    styleClass="button-main"
+                    text="🔄 Play Again"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <Button fx:id="btnMainMenu" prefHeight="56" prefWidth="220"
+                    styleClass="button-alt"
+                    text="🏠 Main Menu"
+                    style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+        </HBox>
+
+    </VBox>
+
+</StackPane>

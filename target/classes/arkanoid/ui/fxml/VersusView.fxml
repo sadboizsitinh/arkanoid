@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="800" prefWidth="1296" style="-fx-background-color: #0f172a;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.VersusController">
+
+    <!-- TOP BAR - Thu gọn chiều cao -->
+    <HBox alignment="CENTER" spacing="0" style="-fx-padding: 8; -fx-background-color: rgba(0,0,0,0.5);">
+
+        <!-- Player 1 Info -->
+        <VBox alignment="CENTER_LEFT" prefWidth="400" spacing="4" style="-fx-padding: 0 20 0 20;">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #7CFC00;" text="PLAYER 1" />
+            <HBox alignment="CENTER_LEFT" spacing="20">
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #8b93a5;" text="SCORE" />
+                    <Label fx:id="lblScore1" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #7CFC00;" text="0" />
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="2">
+                    <Label style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #8b93a5;" text="LIVES" />
+                    <Label fx:id="lblLives1" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #7CFC00;" text="3" />
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <!-- Center Divider -->
+        <Pane HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" style="-fx-padding: 0;">
+                <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;                                          -fx-effect: dropshadow(gaussian, rgba(251, 191, 36, 0.8), 15, 0.7, 0, 0);" text="VS" />
+            </VBox>
+        </Pane>
+
+        <!-- Player 2 Info -->
+        <VBox alignment="CENTER_RIGHT" prefWidth="400" spacing="4" style="-fx-padding: 0 20 0 20;">
+            <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #00BFFF;" text="PLAYER 2" />
+            <HBox alignment="CENTER_RIGHT" spacing="20">
+                <VBox alignment="CENTER_RIGHT" spacing="2">
+                    <Label style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #8b93a5;" text="SCORE" />
+                    <Label fx:id="lblScore2" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00BFFF;" text="0" />
+                </VBox>
+                <VBox alignment="CENTER_RIGHT" spacing="2">
+                    <Label style="-fx-font-size: 10px; -fx-font-weight: bold; -fx-text-fill: #8b93a5;" text="LIVES" />
+                    <Label fx:id="lblLives2" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #00BFFF;" text="3" />
+                </VBox>
+            </HBox>
+        </VBox>
+    </HBox>
+
+    <!-- GAME AREA - Đảm bảo đủ không gian cho 2 canvas 640x600 -->
+    <HBox spacing="8" style="-fx-padding: 4; -fx-background-color: #0f172a;" VBox.vgrow="ALWAYS">
+
+        <!-- Player 1 Canvas - CỐ ĐỊNH 640x600 -->
+        <AnchorPane fx:id="paneP1" maxHeight="600" maxWidth="640" minHeight="600" minWidth="640" prefHeight="600" prefWidth="640" style="-fx-background-color: #1e293b;                            -fx-border-color: #7CFC00;                            -fx-border-width: 3;                            -fx-border-radius: 4;                            -fx-effect: dropshadow(gaussian, rgba(124, 252, 0, 0.4), 12, 0.5, 0, 0);" />
+
+        <!-- Player 2 Canvas - CỐ ĐỊNH 640x600 -->
+        <AnchorPane fx:id="paneP2" maxHeight="600" maxWidth="640" minHeight="600" minWidth="640" prefHeight="600" prefWidth="640" style="-fx-background-color: #1e293b;                            -fx-border-color: #00BFFF;                            -fx-border-width: 3;                            -fx-border-radius: 4;                            -fx-effect: dropshadow(gaussian, rgba(0, 191, 255, 0.4), 12, 0.5, 0, 0);" />
+    </HBox>
+
+</VBox>
