@@ -21,7 +21,8 @@ public class SoundManager {
         volumeMap.put("game_over.wav", 0.8);   // Game over - to
         volumeMap.put("matmang.wav", 0.7);     // Mất mạng - to
         volumeMap.put("Qua_man.wav", 0.8);     // Qua level - to
-        volumeMap.put("steak.wav", 1.5);       // Streak/Excellent - to
+        volumeMap.put("steak.wav", 1.2); // Streak/Excellent - to
+        volumeMap.put("goodjob.wav", 1.2);
     }
 
     private static AudioClip loadSound(String fileName) {
@@ -57,7 +58,7 @@ public class SoundManager {
     public static void play(String fileName, double volume) {
         AudioClip clip = getSound(fileName);
         if (clip != null) {
-            clip.setVolume(Math.max(0.0, Math.min(1.0, volume))); // Giới hạn 0-1
+            clip.setVolume(Math.max(0.0, Math.min(1.5, volume))); // Giới hạn 0-1
             clip.play();
         }
     }

@@ -481,7 +481,19 @@ public class GameManager {
 
 
                         SoundManager.play("streak.wav");
+
+                        new Thread(() -> {
+                            try {
+                                Thread.sleep(750); // Đợi 0.75 giây
+                                SoundManager.play("goodjob.wav");
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }).start();
                     }
+
+
+
                 }
             }
         }
