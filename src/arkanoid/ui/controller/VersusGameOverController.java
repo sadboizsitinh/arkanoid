@@ -226,9 +226,9 @@ public class VersusGameOverController {
             Parent root = loader.load();
 
             // ✅ FIX: RESIZE STAGE về 1320x740 cho Versus
-            stage.setScene(new Scene(root, 1296, 800));
-            stage.setWidth(1320);
-            stage.setHeight(740);
+            Scene scene = new Scene(root, 1296, 740);
+            stage.setScene(scene);
+            stage.sizeToScene(); // Tự động fit stage với scene
             stage.centerOnScreen();
             stage.setResizable(false);
 
@@ -256,9 +256,9 @@ public class VersusGameOverController {
             Parent root = loader.load();
 
             // ✅ FIX: RESIZE STAGE về 800x600 cho Main Menu
-            stage.setScene(new Scene(root, 800, 600));
-            stage.setWidth(800);
-            stage.setHeight(640); // +40 cho title bar
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.sizeToScene();
             stage.centerOnScreen();
             stage.setResizable(true); // Cho phép resize lại
 
