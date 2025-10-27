@@ -5,18 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: load new img power up!">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/HighScores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/HighScores.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/HighScores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/HighScores.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

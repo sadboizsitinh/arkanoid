@@ -57,43 +57,23 @@ public class NewHighScoreController {
      */
     private void handleSave() {
         String name = txtName.getText().trim();
+        if (name.isEmpty()) name = "Anonymous";
+        if (name.length() > 15) name = name.substring(0, 15);
 
-        if (name.isEmpty()) {
-            name = "Anonymous";
-        }
-
-        // Giới hạn 15 ký tự
-        if (name.length() > 15) {
-            name = name.substring(0, 15);
-        }
-
-        // Thêm vào high scores
         int rank = HighScoreManager.getInstance().addHighScore(name, score, level);
+        System.out.println(" High score saved: " + name + " - " + score + " (Rank #" + rank + ")");
+        System.out.println(" Staying on Game Over screen");
 
-        System.out.println("High score saved: " + name + " - " + score + " (Rank #" + rank + ")");
-
-        // Đóng popup trước
-        closePopup();
-
-        // Delay nhỏ rồi chuyển sang High Scores screen
-        javafx.animation.PauseTransition delay =
-                new javafx.animation.PauseTransition(javafx.util.Duration.millis(300));
-        delay.setOnFinished(e -> goToHighScores());
-        delay.play();
+        closePopup(); // CHỈ ĐÓNG POPUP, KHÔNG CHUYỂN SCENE
     }
 
     /**
      * Bỏ qua không lưu, đóng popup và về menu
      */
     private void handleSkip() {
-        System.out.println("Skipped saving high score");
+        System.out.println(" Skipped saving high score");
+        System.out.println(" Staying on Game Over screen");
         closePopup();
-
-        // Delay nhỏ rồi về menu
-        javafx.animation.PauseTransition delay =
-                new javafx.animation.PauseTransition(javafx.util.Duration.millis(300));
-        delay.setOnFinished(e -> goToMainMenu());
-        delay.play();
     }
 
     /**

@@ -35,6 +35,7 @@ public class GameManager {
     private boolean isCountdownActive = false;
     private double countdownTime = 0;
     private boolean isCountdownFromMenu = false;
+    private boolean isContinueFromSave = false;
 
     // Streak
     private int Streak = 0;
@@ -106,7 +107,8 @@ public class GameManager {
     public void startContinueCountdown(double seconds) {
         isCountdownActive = true;
         countdownTime = seconds;
-        isCountdownFromMenu = false; // Continue từ pause
+        isCountdownFromMenu = false;
+        isContinueFromSave = true;
         for (Ball b : balls) {
             b.stickToPaddle(paddle);
         }
@@ -115,7 +117,8 @@ public class GameManager {
     public void startCountdownFromMenu(double seconds) {
         isCountdownActive = true;
         countdownTime = seconds;
-        isCountdownFromMenu = true; // Continue từ menu
+        isCountdownFromMenu = true;
+        isContinueFromSave = true;
         for (Ball b : balls) {
             b.stickToPaddle(paddle);
         }
@@ -186,6 +189,7 @@ public class GameManager {
         difficultyLevel = 1;
         movingLeft = false;
         movingRight = false;
+        isContinueFromSave = false;
 
         availableMaps.clear();
         for (int i = 1; i <= 9; i++) {
@@ -307,6 +311,7 @@ public class GameManager {
             countdownTime -= deltaTime;
             if (countdownTime <= 0) {
                 isCountdownActive = false;
+                isContinueFromSave = false;
                 for (Ball b : balls) {
                     b.release(); // Cho bóng bay lại
                 }
@@ -779,14 +784,17 @@ public class GameManager {
                 powerUp.render(gc);
             }
 
+            // CHỈ HIỂN THỊ MŨI TÊN KHI KHÔNG PHẢI CONTINUE TỪ SAVE
             for (Ball b : balls) {
                 if (b.isStuckToPaddle()) {
-                    b.renderDirectionArrow(gc);
+                    if (!isContinueFromSave) {
+                        b.renderDirectionArrow(gc);
+                    }
                 }
             }
 
-            // Hiển thị hướng dẫn khi ball đang dính
-            if (balls.stream().anyMatch(Ball::isStuckToPaddle)) {
+            //  CHỈ HIỂN THỊ HƯỚNG DẪN KHI KHÔNG PHẢI CONTINUE TỪ SAVE
+            if (!isContinueFromSave && balls.stream().anyMatch(Ball::isStuckToPaddle)) {
                 renderStuckBallHint(gc);
             }
         }
@@ -1333,4 +1341,6 @@ public class GameManager {
     public boolean isCountdownFromMenu() {return isCountdownFromMenu;}
     // Getter để Ball có thể gọi shake nếu cần
     public CameraShake getCameraShake() {return cameraShake;}
+
+    public boolean isContinueFromSave() {return isContinueFromSave;}
 }
