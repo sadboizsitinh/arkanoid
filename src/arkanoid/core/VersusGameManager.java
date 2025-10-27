@@ -243,26 +243,26 @@ public class VersusGameManager {
         if (gameState != VersusState.PLAYING) return;
 
         // Update countdown cho player 1
-        if (isCountdownActive1) {
-            countdownTime1 -= deltaTime;
-            if (countdownTime1 <= 0) {
-                isCountdownActive1 = false;
-                for (Ball b : balls1) {
-                    b.release();
-                }
-            }
-        }
-
-        // Update countdown cho player 2
-        if (isCountdownActive2) {
-            countdownTime2 -= deltaTime;
-            if (countdownTime2 <= 0) {
-                isCountdownActive2 = false;
-                for (Ball b : balls2) {
-                    b.release();
-                }
-            }
-        }
+//        if (isCountdownActive1) {
+//            countdownTime1 -= deltaTime;
+//            if (countdownTime1 <= 0) {
+//                isCountdownActive1 = false;
+//                for (Ball b : balls1) {
+//                    b.release();
+//                }
+//            }
+//        }
+//
+//        // Update countdown cho player 2
+//        if (isCountdownActive2) {
+//            countdownTime2 -= deltaTime;
+//            if (countdownTime2 <= 0) {
+//                isCountdownActive2 = false;
+//                for (Ball b : balls2) {
+//                    b.release();
+//                }
+//            }
+//        }
 
         if (!player1GameOver && !isCountdownActive1) {
             updatePlayer(deltaTime, paddle1, balls1, bricks1, powerUps1, activePowerUps1,
@@ -305,17 +305,21 @@ public class VersusGameManager {
 
         paddle.update(deltaTime);
 
-        if (movingLeft) {
-            double newX = paddle.getX() - paddle.getSpeed() * deltaTime;
-            if (newX < 0) newX = 0;
-            paddle.setX(newX);
-        }
-        if (movingRight) {
-            double newX = paddle.getX() + paddle.getSpeed() * deltaTime;
-            if (newX + paddle.getWidth() > gameWidth) {
-                newX = gameWidth - paddle.getWidth();
+        boolean anyBallStuck = balls.stream().anyMatch(Ball::isStuckToPaddle);
+
+        if (!anyBallStuck) {
+            if (movingLeft) {
+                double newX = paddle.getX() - paddle.getSpeed() * deltaTime;
+                if (newX < 0) newX = 0;
+                paddle.setX(newX);
             }
-            paddle.setX(newX);
+            if (movingRight) {
+                double newX = paddle.getX() + paddle.getSpeed() * deltaTime;
+                if (newX + paddle.getWidth() > gameWidth) {
+                    newX = gameWidth - paddle.getWidth();
+                }
+                paddle.setX(newX);
+            }
         }
 
         for (Ball ball : balls) {
@@ -588,14 +592,14 @@ public class VersusGameManager {
 
     private void startCountdownForPlayer(int playerNum, double seconds) {
         if (playerNum == 1) {
-            isCountdownActive1 = true;
-            countdownTime1 = seconds;
+            //isCountdownActive1 = true;
+            //countdownTime1 = seconds;
             for (Ball b : balls1) {
                 b.stickToPaddle(paddle1);
             }
         } else {
-            isCountdownActive2 = true;
-            countdownTime2 = seconds;
+            //isCountdownActive2 = true;
+            //countdownTime2 = seconds;
             for (Ball b : balls2) {
                 b.stickToPaddle(paddle2);
             }
@@ -741,8 +745,7 @@ public class VersusGameManager {
             ball.render(gc);
 
             // ✅ Hiển thị arrow AIM khi ball đang stuck
-            boolean isCountdownActive = (playerNum == 1) ? isCountdownActive1 : isCountdownActive2;
-            if (ball.isStuckToPaddle() && !isCountdownActive) {
+            if (ball.isStuckToPaddle()) {
                 ball.renderDirectionArrow(gc);
             }
         }
@@ -767,12 +770,12 @@ public class VersusGameManager {
         }
 
         // ===== RENDER COUNTDOWN =====
-        boolean isCountdownActive = (playerNum == 1) ? isCountdownActive1 : isCountdownActive2;
-        double countdownTime = (playerNum == 1) ? countdownTime1 : countdownTime2;
-
-        if (isCountdownActive) {
-            renderCountdown(gc, countdownTime);
-        }
+//        boolean isCountdownActive = (playerNum == 1) ? isCountdownActive1 : isCountdownActive2;
+//        double countdownTime = (playerNum == 1) ? countdownTime1 : countdownTime2;
+//
+//        if (isCountdownActive) {
+//            renderCountdown(gc, countdownTime);
+//        }
     }
 
     /**
