@@ -82,13 +82,6 @@ public class GameOverController {
             delay.play();
         }
 
-        // Delay để check high score
-        PauseTransition checkDelay = new PauseTransition(Duration.seconds(2.0));
-        checkDelay.setOnFinished(event -> {
-            System.out.println("Checking high score...");
-            checkAndShowHighScore();
-        });
-        checkDelay.play();
     }
 
     /**

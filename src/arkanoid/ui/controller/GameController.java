@@ -1,6 +1,7 @@
 package arkanoid.ui.controller;
 
 import arkanoid.core.GameManager;
+import arkanoid.core.HighScoreManager;
 import arkanoid.entities.PowerUp.PowerUp;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
@@ -473,7 +474,14 @@ public class GameController {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            showGameOverOverlay();
+
+            // Kiểm tra nếu đạt high score → hiển thị popup nhập tên trước
+            if (HighScoreManager.getInstance().isHighScore(gameManager.getScore())) {
+                showHighScoreInputFirst();
+            } else {
+                // Không đạt high score → hiển thị Game Over bình thường
+                showGameOverOverlay();
+            }
         });
     }
 
@@ -655,5 +663,62 @@ public class GameController {
                 "-fx-font-size: %dpx; -fx-font-weight: bold; -fx-text-fill: white;",
                 fontSize
         ));
+    }
+
+    /**
+     * Hiển thị popup nhập tên HIGH SCORE TRƯỚC, sau đó mới hiển thị Game Over
+     */
+    private void showHighScoreInputFirst() {
+        System.out.println("🎉 NEW HIGH SCORE! Showing input popup first...");
+
+        try {
+            Stage stage = (Stage) gameCanvas.getScene().getWindow();
+
+            // Tạo overlay tối để che game canvas
+            StackPane overlay = new StackPane();
+            overlay.setStyle("-fx-background-color: rgba(0, 0, 0, 0.85);");
+            overlay.setPrefSize(800, 600);
+
+            // Load popup nhập tên
+            FXMLLoader loader = new FXMLLoader();
+            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/NewHighScore.fxml");
+
+            if (resourceUrl != null) {
+                loader.setLocation(resourceUrl);
+            } else {
+                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/NewHighScore.fxml");
+                loader.setLocation(fxmlFile.toURI().toURL());
+            }
+
+            Parent popup = loader.load();
+            NewHighScoreController controller = loader.getController();
+
+            // Set stats
+            controller.setStats(gameManager.getScore(), gameManager.getLevel());
+
+            // ✅ QUAN TRỌNG: Set callback để hiển thị Game Over SAU KHI đóng popup
+            controller.setOnClose(() -> {
+                System.out.println("✅ High score saved! Now showing Game Over screen...");
+                showGameOverOverlay();
+            });
+
+            overlay.getChildren().add(popup);
+
+            // Hiển thị overlay trên canvas hiện tại
+            Scene currentScene = stage.getScene();
+            if (currentScene.getRoot() instanceof StackPane) {
+                ((StackPane) currentScene.getRoot()).getChildren().add(overlay);
+            } else {
+                // Wrap root vào StackPane nếu chưa có
+                Parent oldRoot = currentScene.getRoot();
+                StackPane newRoot = new StackPane(oldRoot, overlay);
+                currentScene.setRoot(newRoot);
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.err.println(" Error showing high score input, falling back to Game Over");
+            showGameOverOverlay();
+        }
     }
 }
