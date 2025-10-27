@@ -137,7 +137,7 @@ public class Ball extends MovableObject {
     /**
      * Bounce off another object using axis penetration to determine normal,
      * then apply specular reflection.
-     * ✅ FIXED: Better corner detection + prevent double collision
+     * FIXED: Better corner detection + prevent double collision
      */
     public void bounceOff(GameObject other) {
         double otherX = other.getX();
@@ -145,20 +145,20 @@ public class Ball extends MovableObject {
         double otherW = other.getWidth();
         double otherH = other.getHeight();
 
-        // ✅ Tính overlap theo 4 hướng
+        // Tính overlap theo 4 hướng
         double overlapLeft   = (otherX + otherW) - x;
         double overlapRight  = (x + width) - otherX;
         double overlapTop    = (otherY + otherH) - y;
         double overlapBottom = (y + height) - otherY;
 
-        // ✅ Tìm overlap NHỎ NHẤT (= hướng va chạm thực tế)
+        // Tìm overlap NHỎ NHẤT (= hướng va chạm thực tế)
         double minX = Math.min(overlapLeft, overlapRight);
         double minY = Math.min(overlapTop, overlapBottom);
 
         double nx = 0, ny = 0;
         double epsilon = 2.0;
 
-        // ✅ THRESHOLD: Nếu chênh lệch quá nhỏ = va chạm góc → ưu tiên trục Y
+        // THRESHOLD: Nếu chênh lệch quá nhỏ = va chạm góc → ưu tiên trục Y
         double threshold = 3.0; // pixels
 
         if (minX < minY - threshold) {
@@ -180,7 +180,7 @@ public class Ball extends MovableObject {
                 y = otherY - height - epsilon;
             }
         } else {
-            // ✅ VA CHẠM GÓC: Ưu tiên hướng di chuyển hiện tại
+            // VA CHẠM GÓC: Ưu tiên hướng di chuyển hiện tại
             if (Math.abs(dy) > Math.abs(dx)) {
                 // Bóng đang đi chủ yếu theo trục Y → bounce theo Y
                 if (overlapTop < overlapBottom) {
@@ -215,14 +215,14 @@ public class Ball extends MovableObject {
         directionX = rx / mag;
         directionY = ry / mag;
 
-        // ✅ Prevent too horizontal OR too vertical movement
+        // Prevent too horizontal OR too vertical movement
         if (Math.abs(directionY) < 0.2) {
             directionY = Math.copySign(0.2, directionY == 0 ? -1 : directionY);
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
             directionX /= m2; directionY /= m2;
         }
 
-        // ✅ THÊM: Prevent too vertical movement (tránh bay thẳng đứng)
+        // THÊM: Prevent too vertical movement (tránh bay thẳng đứng)
         if (Math.abs(directionX) < 0.2) {
             directionX = Math.copySign(0.2, directionX == 0 ? 1 : directionX);
             double m2 = Math.sqrt(directionX * directionX + directionY * directionY);
@@ -234,16 +234,16 @@ public class Ball extends MovableObject {
 
     /**
      * Bounce off paddle with angle variation
-     * ✅ NO position adjustment - just reflect immediately
+     * NO position adjustment - just reflect immediately
      */
     public void bounceOffPaddle(Paddle paddle) {
-        // ✅ KHÔNG ĐẨY VỊ TRÍ - chỉ đổi hướng ngay lập tức
+        // KHÔNG ĐẨY VỊ TRÍ - chỉ đổi hướng ngay lập tức
 
         double ballCenter = x + width / 2;
         double paddleCenter = paddle.getX() + paddle.getWidth() / 2;
         double hitPosition = (ballCenter - paddleCenter) / (paddle.getWidth() / 2);
 
-        // ✅ Clamp hitPosition trong khoảng [-1, 1]
+        // Clamp hitPosition trong khoảng [-1, 1]
         hitPosition = Math.max(-1, Math.min(1, hitPosition));
 
         directionX = hitPosition * 0.8;

@@ -29,26 +29,26 @@ public class ArkanoidApplication extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
 
-            // ✅ Lưu game khi đóng cửa sổ (nhấn X)
+            // Lưu game khi đóng cửa sổ (nhấn X)
             primaryStage.setOnCloseRequest(event -> {
-                System.out.println("🚪 Window closing...");
+                System.out.println("Window closing...");
                 saveGameOnExit();
             });
 
-            // ✅ Lưu game khi JVM shutdown (Alt+F4, kill process, etc.)
+            // Lưu game khi JVM shutdown (Alt+F4, kill process, etc.)
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                System.out.println("🛑 JVM shutting down...");
+                System.out.println("JVM shutting down...");
                 saveGameOnExit();
             }));
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("❌ Lỗi khi load Main.fxml: " + e.getMessage());
+            System.err.println("Lỗi khi load Main.fxml: " + e.getMessage());
         }
     }
 
     /**
-     * ✅ Lưu game nếu đang chơi hoặc pause
+     * Lưu game nếu đang chơi hoặc pause
      */
     private void saveGameOnExit() {
         try {
@@ -58,20 +58,20 @@ public class ArkanoidApplication extends Application {
             if (gm.getGameState() == GameManager.GameState.PLAYING ||
                     gm.getGameState() == GameManager.GameState.PAUSED) {
 
-                System.out.println("💾 Auto-saving game before exit...");
+                System.out.println("Auto-saving game before exit...");
                 GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(gm);
                 boolean success = GameStatePersistence.saveToFile(snapshot);
 
                 if (success) {
-                    System.out.println("✅ Game auto-saved successfully!");
+                    System.out.println("Game auto-saved successfully!");
                 } else {
-                    System.err.println("❌ Failed to auto-save game!");
+                    System.err.println("Failed to auto-save game!");
                 }
             } else {
-                System.out.println("ℹ️ No active game to save (state: " + gm.getGameState() + ")");
+                System.out.println("No active game to save (state: " + gm.getGameState() + ")");
             }
         } catch (Exception e) {
-            System.err.println("❌ Error during auto-save: " + e.getMessage());
+            System.err.println("Error during auto-save: " + e.getMessage());
             e.printStackTrace();
         }
     }

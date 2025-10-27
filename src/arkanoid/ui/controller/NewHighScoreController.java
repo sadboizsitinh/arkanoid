@@ -20,7 +20,7 @@ public class NewHighScoreController {
     public void setStats(int score, int level) {
         this.score = score;
         this.level = level;
-        System.out.println("📊 NewHighScore popup - Score: " + score + ", Level: " + level);
+        System.out.println("NewHighScore popup - Score: " + score + ", Level: " + level);
     }
 
     /**
@@ -70,7 +70,7 @@ public class NewHighScoreController {
         // Thêm vào high scores
         int rank = HighScoreManager.getInstance().addHighScore(name, score, level);
 
-        System.out.println("✅ High score saved: " + name + " - " + score + " (Rank #" + rank + ")");
+        System.out.println("High score saved: " + name + " - " + score + " (Rank #" + rank + ")");
 
         // Đóng popup trước
         closePopup();
@@ -86,7 +86,7 @@ public class NewHighScoreController {
      * Bỏ qua không lưu, đóng popup và về menu
      */
     private void handleSkip() {
-        System.out.println("⏭️ Skipped saving high score");
+        System.out.println("Skipped saving high score");
         closePopup();
 
         // Delay nhỏ rồi về menu
@@ -131,10 +131,10 @@ public class NewHighScoreController {
             }
 
             stage.setScene(new Scene(root, 800, 600));
-            System.out.println("✅ Navigated to High Scores screen");
+            System.out.println("Navigated to High Scores screen");
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.err.println("❌ Không thể load HighScores.fxml");
+            System.err.println("Không thể load HighScores.fxml");
         }
     }
 
@@ -157,10 +157,10 @@ public class NewHighScoreController {
 
             Parent root = loader.load();
             stage.setScene(new Scene(root, 800, 600));
-            System.out.println("✅ Navigated to Main Menu");
+            System.out.println("Navigated to Main Menu");
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.err.println("❌ Không thể load Main.fxml");
+            System.err.println("Không thể load Main.fxml");
         }
     }
 }

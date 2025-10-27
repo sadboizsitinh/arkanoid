@@ -27,7 +27,7 @@ public class BackgroundHelper {
                 if (imageFile.exists()) {
                     image = new Image(imageFile.toURI().toString());
                 } else {
-                    System.err.println("⚠️ Image not found: " + imagePath);
+                    System.err.println("Image not found: " + imagePath);
                     return;
                 }
             }
@@ -48,10 +48,10 @@ public class BackgroundHelper {
             );
 
             pane.setBackground(new Background(backgroundImage));
-            System.out.println("✅ Background image set: " + imagePath);
+            System.out.println("Background image set: " + imagePath);
 
         } catch (Exception e) {
-            System.err.println("❌ Error setting background: " + e.getMessage());
+            System.err.println("Error setting background: " + e.getMessage());
             e.printStackTrace();
         }
     }

@@ -26,7 +26,7 @@ public class GameOverController {
         this.finalLevel = level;
 
         System.out.println("============================================");
-        System.out.println("📊 GameOver.setStats() called");
+        System.out.println("   GameOver.setStats() called");
         System.out.println("   Score: " + score);
         System.out.println("   Level: " + level);
         System.out.println("   lblScore is null? " + (lblScore == null));
@@ -37,14 +37,14 @@ public class GameOverController {
         if (lblScore != null) lblScore.setText("Final Score: " + score);
         if (lblLevel != null) lblLevel.setText("Level Reached: " + level);
 
-        // ✅ Dùng PauseTransition để delay trước khi check high score
+        // Dùng PauseTransition để delay trước khi check high score
         PauseTransition delay = new PauseTransition(Duration.seconds(0.0001));
         delay.setOnFinished(event -> {
-            System.out.println("⏰ Delay finished, calling checkAndShowHighScore()");
+            System.out.println("Delay finished, calling checkAndShowHighScore()");
             checkAndShowHighScore();
         });
         delay.play();
-        System.out.println("⏱️ PauseTransition started");
+        System.out.println("PauseTransition started");
     }
 
     @FXML
@@ -76,10 +76,10 @@ public class GameOverController {
                     Parent root = loader.load();
                     stage.setScene(new Scene(root, 1000, 600));
 
-                    System.out.println("✅ Game restarted successfully!");
+                    System.out.println("Game restarted successfully!");
 
                 } catch (Exception ex) {
-                    System.err.println("❌ Error restarting game:");
+                    System.err.println("Error restarting game:");
                     ex.printStackTrace();
                 }
             });
@@ -96,11 +96,11 @@ public class GameOverController {
     private void checkAndShowHighScore() {
         // Kiểm tra có phải high score không
         if (!HighScoreManager.getInstance().isHighScore(finalScore)) {
-            System.out.println("📊 Score: " + finalScore + " - Not a high score");
+            System.out.println("Score: " + finalScore + " - Not a high score");
             return;
         }
 
-        System.out.println("🎉 NEW HIGH SCORE! " + finalScore);
+        System.out.println("NEW HIGH SCORE! " + finalScore);
 
         try {
             // Lấy Scene và Root hiện tại
@@ -138,17 +138,17 @@ public class GameOverController {
             controller.setOnClose(() -> {
                 // Xóa overlay khỏi container
                 container.getChildren().remove(overlay);
-                System.out.println("✅ High Score overlay closed");
+                System.out.println("High Score overlay closed");
             });
 
             // Thêm overlay lên trên (sẽ che phủ Game Over với nền mờ đậm)
             container.getChildren().add(overlay);
 
-            System.out.println("✅ High Score overlay displayed on top of Game Over");
+            System.out.println("High Score overlay displayed on top of Game Over");
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.err.println("❌ Error showing High Score overlay: " + ex.getMessage());
+            System.err.println("Error showing High Score overlay: " + ex.getMessage());
         }
     }
 

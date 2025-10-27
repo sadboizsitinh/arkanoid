@@ -10,7 +10,7 @@ public class SoundManager {
     private static AudioClip backgroundMusic;
     private static String currentBackgroundTrack = null;
 
-    // ✅ MAP ÂM LƯỢNG CHO TỪNG FILE
+    // MAP ÂM LƯỢNG CHO TỪNG FILE
     private static final Map<String, Double> volumeMap = new HashMap<>();
     static {
         // Âm thanh hiệu ứng
@@ -28,12 +28,12 @@ public class SoundManager {
         try {
             URL url = SoundManager.class.getResource("/arkanoid/assets/sounds/" + fileName);
             if (url == null) {
-                System.err.println("❌ Không tìm thấy âm thanh: " + fileName);
+                System.err.println("Không tìm thấy âm thanh: " + fileName);
                 return null;
             }
             return new AudioClip(url.toString());
         } catch (Exception e) {
-            System.err.println("❌ Lỗi khi tải âm thanh " + fileName + ": " + e.getMessage());
+            System.err.println("Lỗi khi tải âm thanh " + fileName + ": " + e.getMessage());
             return null;
         }
     }
@@ -42,18 +42,18 @@ public class SoundManager {
         return cache.computeIfAbsent(fileName, SoundManager::loadSound);
     }
 
-    /** ✅ Phát âm thanh hiệu ứng (ngắn) - SỬ DỤNG ÂM LƯỢNG TỪ MAP */
+    /** Phát âm thanh hiệu ứng (ngắn) - SỬ DỤNG ÂM LƯỢNG TỪ MAP */
     public static void play(String fileName) {
         AudioClip clip = getSound(fileName);
         if (clip != null) {
-            // ✅ LẤY ÂM LƯỢNG TỪ MAP, NẾU KHÔNG CÓ THÌ DÙNG MẶC ĐỊNH 0.6
+            // LẤY ÂM LƯỢNG TỪ MAP, NẾU KHÔNG CÓ THÌ DÙNG MẶC ĐỊNH 0.6
             double volume = volumeMap.getOrDefault(fileName, 0.6);
             clip.setVolume(volume);
             clip.play();
         }
     }
 
-    /** ✅ OVERLOAD: Phát âm thanh với âm lượng tùy chọn */
+    /** OVERLOAD: Phát âm thanh với âm lượng tùy chọn */
     public static void play(String fileName, double volume) {
         AudioClip clip = getSound(fileName);
         if (clip != null) {
@@ -64,7 +64,7 @@ public class SoundManager {
 
     /** Phát nhạc nền loop vô hạn - CHỈ phát nếu chưa phát hoặc khác bài */
     public static void playBackground(String fileName, double volume) {
-        // ✅ Nếu đang phát cùng bài nhạc thì KHÔNG làm gì
+        // Nếu đang phát cùng bài nhạc thì KHÔNG làm gì
         if (fileName.equals(currentBackgroundTrack) &&
                 backgroundMusic != null &&
                 backgroundMusic.isPlaying()) {
@@ -72,7 +72,7 @@ public class SoundManager {
             return;
         }
 
-        // ✅ Nếu khác bài thì dừng bài cũ và phát bài mới
+        // Nếu khác bài thì dừng bài cũ và phát bài mới
         stopBackground();
 
         try {
@@ -81,7 +81,7 @@ public class SoundManager {
                 backgroundMusic = new AudioClip(url.toString());
                 backgroundMusic.setCycleCount(AudioClip.INDEFINITE);
 
-                // ✅ GIỚI HẠN ÂM LƯỢNG NHẠC NỀN (0-0.4 để không quá to)
+                // GIỚI HẠN ÂM LƯỢNG NHẠC NỀN (0-0.4 để không quá to)
                 double limitedVolume = Math.max(0.0, Math.min(0.4, volume));
                 backgroundMusic.setVolume(limitedVolume);
                 backgroundMusic.play();
@@ -89,7 +89,7 @@ public class SoundManager {
                 System.out.println("🎵 Started playing background: " + fileName + " (volume: " + limitedVolume + ")");
             }
         } catch (Exception e) {
-            System.err.println("❌ Không thể phát nhạc nền: " + e.getMessage());
+            System.err.println("Không thể phát nhạc nền: " + e.getMessage());
         }
     }
 

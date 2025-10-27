@@ -13,7 +13,7 @@ import javafx.util.Duration;
 
 public class ScoreAnimation {
 
-    // ✅ Biến đếm số lần animation đang chạy
+    // Biến đếm số lần animation đang chạy
     private static int animationCounter = 0;
 
     /**
@@ -23,49 +23,49 @@ public class ScoreAnimation {
         // Tạo label hiển thị +XX
         Label scoreLabel = new Label("+" + points);
 
-        // ✅ Font size động dựa vào số điểm - CHỈ XỬ LÝ ĐẾN +500
+        // Font size động dựa vào số điểm - CHỈ XỬ LÝ ĐẾN +500
         int digits = String.valueOf(points).length() + 1; // +1 cho dấu "+"
         int fontSize;
 
         if (digits <= 3) {
             fontSize = 20; // +5 đến +99
         } else if (digits == 4) {
-            fontSize = 13; // +100 đến +500 ✅ GIẢM TỪ 16 → 13
+            fontSize = 13; // +100 đến +500
         } else {
             fontSize = 11; // +1000+
         }
 
         scoreLabel.setFont(Font.font("Arial", FontWeight.BOLD, fontSize));
 
-        // ✅ Màu khác nhau cho Streak và bình thường
+        // Màu khác nhau cho Streak và bình thường
         String color = isStreak ? "#f97316" : "#10b981"; // Streak = cam, Bình thường = xanh lá
         scoreLabel.setTextFill(Color.web(color));
         scoreLabel.setOpacity(0.0);
 
-        // ✅ Shadow màu tương ứng
+        // Shadow màu tương ứng
         String shadowColor = isStreak ? "rgba(249, 115, 22, 0.8)" : "rgba(16, 185, 129, 0.8)";
         scoreLabel.setStyle("-fx-effect: dropshadow(gaussian, " + shadowColor + ", 8, 0.6, 0, 0);");
 
-        // ✅ Thêm vào container ngay - chồng lên nhau
+        // Thêm vào container ngay - chồng lên nhau
         container.getChildren().add(scoreLabel);
 
-        // ✅ Tính delay dựa trên số animation đang chạy (mỗi cái cách nhau 150ms)
+        // Tính delay dựa trên số animation đang chạy (mỗi cái cách nhau 150ms)
         int currentIndex = animationCounter++;
         double delay = currentIndex * 150.0; // 150ms giữa mỗi animation
 
         // Animation: bay lên và mờ dần với delay
         Timeline animation = new Timeline(
-                // ✅ Bắt đầu với delay
+                // Bắt đầu với delay
                 new KeyFrame(Duration.millis(delay),
                         new KeyValue(scoreLabel.translateYProperty(), 0),
                         new KeyValue(scoreLabel.opacityProperty(), 0.0)
                 ),
-                // ✅ Fade in nhanh
+                // Fade in nhanh
                 new KeyFrame(Duration.millis(delay + 100),
                         new KeyValue(scoreLabel.translateYProperty(), 0),
                         new KeyValue(scoreLabel.opacityProperty(), 1.0)
                 ),
-                // ✅ Bay lên và mờ dần
+                // Bay lên và mờ dần
                 new KeyFrame(Duration.millis(delay + 900),
                         new KeyValue(scoreLabel.translateYProperty(), -50),
                         new KeyValue(scoreLabel.opacityProperty(), 0.0)
@@ -75,7 +75,7 @@ public class ScoreAnimation {
         // Xóa label sau khi animation xong
         animation.setOnFinished(e -> {
             container.getChildren().remove(scoreLabel);
-            animationCounter--; // ✅ Giảm counter khi xong
+            animationCounter--; // Giảm counter khi xong
         });
 
         animation.play();
@@ -100,7 +100,7 @@ public class ScoreAnimation {
             KeyFrame keyFrame = new KeyFrame(
                     Duration.millis(duration * progress),
                     e -> {
-                        // ✅ CHỈ update text, KHÔNG đụng style
+                        // CHỈ update text, KHÔNG đụng style
                         label.setText(String.valueOf(currentScore));
                     }
             );
@@ -116,18 +116,18 @@ public class ScoreAnimation {
     public static void flashLabel(Label label) {
         if (label == null) return;
 
-        // ✅ LƯU style hiện tại (đã có font size mới)
+        // LƯU style hiện tại (đã có font size mới)
         String currentStyle = label.getStyle();
 
         Timeline flash = new Timeline(
                 new KeyFrame(Duration.ZERO, e -> {
-                    // ✅ GIỮ NGUYÊN font size, CHỈ đổi màu và scale
+                    // GIỮ NGUYÊN font size, CHỈ đổi màu và scale
                     label.setStyle(currentStyle.replace("-fx-text-fill: white;", "-fx-text-fill: #fbbf24;"));
                     label.setScaleX(1.1);
                     label.setScaleY(1.1);
                 }),
                 new KeyFrame(Duration.millis(100), e -> {
-                    // ✅ Restore lại màu trắng, giữ font size
+                    // Restore lại màu trắng, giữ font size
                     label.setStyle(currentStyle);
                     label.setScaleX(1.0);
                     label.setScaleY(1.0);

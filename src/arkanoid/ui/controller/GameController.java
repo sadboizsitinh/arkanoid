@@ -77,8 +77,8 @@ public class GameController {
     private void initialize() {
         lastInstance = this;
         lastScore = 0;
-        System.out.println("🎮 GameController initialize called");
-        System.out.println("📐 Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
+        System.out.println("GameController initialize called");
+        System.out.println("Canvas size: " + gameCanvas.getWidth() + "x" + gameCanvas.getHeight());
 
         // Ẩn overlay lúc đầu
         if (pauseOverlay != null) {
@@ -89,21 +89,21 @@ public class GameController {
         gameManager = GameManager.getInstance();
 
         if (gameManager.hasSavedGame()) {
-            System.out.println("📄 Continuing from saved game...");
+            System.out.println("Continuing from saved game...");
         } else {
-            System.out.println("🆕 Starting new game...");
+            System.out.println("Starting new game...");
             gameManager.setGameState(GameManager.GameState.MENU);
             gameManager.startGame();
         }
 
-        System.out.println("✅ Game state after init: " + gameManager.getGameState());
+        System.out.println("Game state after init: " + gameManager.getGameState());
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gameCanvas.setFocusTraversable(true);
 
         if (rootPane != null) {
             BackgroundHelper.setBackgroundImage(rootPane, "bg-retrospace.png");
-            System.out.println("🎨 Background set for game view");
+            System.out.println("Background set for game view");
         }
         javafx.application.Platform.runLater(() -> {
             gameCanvas.requestFocus();
@@ -114,7 +114,7 @@ public class GameController {
         // Setup input handlers
         gameCanvas.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
-                System.out.println("🎯 Scene ready, setting up input handlers");
+                System.out.println("Scene ready, setting up input handlers");
 
                 newScene.setOnKeyPressed(event -> {
                     handleKeyPress(event.getCode(), true);
@@ -140,9 +140,9 @@ public class GameController {
 
         javafx.application.Platform.runLater(() -> {
             gameCanvas.requestFocus();
-            System.out.println("⌨️ Focus requested");
+            System.out.println("Focus requested");
 
-            // ✅ THÊM: Điều chỉnh font size ngay khi khởi tạo
+            // THÊM: Điều chỉnh font size ngay khi khởi tạo
             if (lblScore != null) {
                 adjustScoreFontSize(gameManager.getScore());
             }
@@ -208,7 +208,7 @@ public class GameController {
                 GameManager.GameState state = gameManager.getGameState();
                 if (lastState != state) {
                     System.out.println("==========================================");
-                    System.out.println("🔄 STATE CHANGE: " + lastState + " → " + state);
+                    System.out.println("STATE CHANGE: " + lastState + " → " + state);
                     System.out.println("==========================================");
 
                     if (state == GameManager.GameState.PAUSED) {
@@ -234,11 +234,11 @@ public class GameController {
             }
         };
         gameLoop.start();
-        System.out.println("✅ Game loop started");
+        System.out.println("Game loop started");
     }
 
     private void updateUIPanel() {
-        // ✅ Animate score khi thay đổi
+        // Animate score khi thay đổi
         int currentScore = gameManager.getScore();
         if (lblScore != null && currentScore != lastScore) {
             // Tính điểm vừa được cộng
@@ -247,7 +247,7 @@ public class GameController {
             if (pointsAdded > 0) {
                 // Hiển thị +XX bay lên
                 if (scoreContainer != null) {
-                    // ✅ Kiểm tra chính xác xem có phải điểm Streak không
+                    // Kiểm tra chính xác xem có phải điểm Streak không
                     boolean isStreak = (pointsAdded == gameManager.getLastStreakBonus() &&
                             gameManager.getLastStreakBonus() > 0);
 
@@ -260,13 +260,13 @@ public class GameController {
                     );
                 }
 
-                // ✅ 1. ĐIỀU CHỈNH FONT SIZE TRƯỚC
+                // 1. ĐIỀU CHỈNH FONT SIZE TRƯỚC
                 adjustScoreFontSize(currentScore);
 
-                // ✅ 2. SAU ĐÓ MỚI ANIMATION (để animateScoreCount dùng font mới)
+                // 2. SAU ĐÓ MỚI ANIMATION (để animateScoreCount dùng font mới)
                 ScoreAnimation.animateScoreCount(lblScore, lastScore, currentScore);
 
-                // ✅ 3. FLASH SAU CÙNG (flashLabel sẽ lưu style mới)
+                // 3. FLASH SAU CÙNG (flashLabel sẽ lưu style mới)
                 ScoreAnimation.flashLabel(lblScore);
 
             } else {
@@ -346,7 +346,7 @@ public class GameController {
      */
     private void handleGameOver() {
         if (gameOverShown) {
-            System.out.println("⚠️ Game Over already shown, skipping...");
+            System.out.println("Game Over already shown, skipping...");
             return;
         }
 
@@ -355,12 +355,12 @@ public class GameController {
         }
 
         gameOverShown = true;
-        System.out.println("💀 GAME OVER DETECTED!");
+        System.out.println("GAME OVER DETECTED!");
 
         // Dừng game loop
         if (gameLoop != null) {
             gameLoop.stop();
-            System.out.println("⏸️ Game loop stopped");
+            System.out.println("Game loop stopped");
         }
 
         // Reset input
@@ -391,18 +391,18 @@ public class GameController {
      */
     private void showGameOverOverlay() {
         System.out.println("====================================");
-        System.out.println("🎯 showGameOverOverlay() CALLED");
+        System.out.println("showGameOverOverlay() CALLED");
         System.out.println("====================================");
 
         try {
             Stage stage = (Stage) gameCanvas.getScene().getWindow();
             if (stage == null) {
-                System.err.println("❌ ERROR: Stage is NULL!");
+                System.err.println("ERROR: Stage is NULL!");
                 return;
             }
 
             // === LOAD FXML ===
-            System.out.println("📂 Loading GameOver.fxml...");
+            System.out.println("Loading GameOver.fxml...");
 
             FXMLLoader loader = new FXMLLoader();
             java.net.URL resourceUrl = getClass().getResource("/ui/fxml/GameOver.fxml");
@@ -410,43 +410,43 @@ public class GameController {
             Parent overlay = null;
 
             if (resourceUrl != null) {
-                System.out.println("✅ Loading from resources: " + resourceUrl);
+                System.out.println("Loading from resources: " + resourceUrl);
                 loader.setLocation(resourceUrl);
                 overlay = loader.load();
             } else {
-                System.out.println("⚠️ Resource not found, trying file path...");
+                System.out.println("Resource not found, trying file path...");
                 java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/GameOver.fxml");
 
                 if (fxmlFile.exists()) {
-                    System.out.println("✅ Loading from file: " + fxmlFile.getAbsolutePath());
+                    System.out.println("Loading from file: " + fxmlFile.getAbsolutePath());
                     loader.setLocation(fxmlFile.toURI().toURL());
                     overlay = loader.load();
                 } else {
-                    System.err.println("❌ GameOver.fxml NOT FOUND!");
+                    System.err.println("GameOver.fxml NOT FOUND!");
                     overlay = createSimpleGameOverOverlay();
                 }
             }
 
             if (overlay == null) {
-                System.err.println("❌ Failed to load overlay");
+                System.err.println("Failed to load overlay");
                 overlay = createSimpleGameOverOverlay();
             } else {
-                System.out.println("✅ GameOver.fxml loaded successfully!");
+                System.out.println("GameOver.fxml loaded successfully!");
 
                 // Lấy controller và set stats
                 GameOverController ctrl = loader.getController();
                 if (ctrl != null) {
                     ctrl.setStats(gameManager.getScore(), gameManager.getLevel());
-                    System.out.println("✅ Stats set: Score=" + gameManager.getScore() + ", Level=" + gameManager.getLevel());
+                    System.out.println("Stats set: Score=" + gameManager.getScore() + ", Level=" + gameManager.getLevel());
                 } else {
-                    System.err.println("⚠️ GameOverController is NULL!");
+                    System.err.println(" GameOverController is NULL!");
                 }
             }
 
-            // ✅ THAY THẾ TOÀN BỘ SCENE - KHÔNG DÙNG STACKPANE
+            // THAY THẾ TOÀN BỘ SCENE - KHÔNG DÙNG STACKPANE
             Scene newScene = new Scene(overlay, 800, 600);
 
-            // ✅ Load stylesheet từ file hoặc resource
+            // Load stylesheet từ file hoặc resource
             try {
                 java.net.URL cssUrl = getClass().getResource("/ui/css/style.css");
                 if (cssUrl != null) {

@@ -41,23 +41,23 @@ public class MainController {
             }
         });
 
-        // ✅ Kiểm tra file save khi mở app
+        // Kiểm tra file save khi mở app
         if (btnContinue != null) {
             boolean hasSavedGame = GameStatePersistence.hasSaveFile();
             btnContinue.setVisible(hasSavedGame);
             btnContinue.setManaged(hasSavedGame);
 
             if (hasSavedGame) {
-                System.out.println("💾 Found saved game file - Continue button enabled");
+                System.out.println("Found saved game file - Continue button enabled");
             } else {
-                System.out.println("ℹ️ No saved game file - Continue button hidden");
+                System.out.println("ℹNo saved game file - Continue button hidden");
             }
         }
 
         // Khi nhấn Start → xóa file save và start mới
         if (btnStart != null) {
             btnStart.setOnAction(e -> {
-                GameStatePersistence.deleteSaveFile(); // ✅ Xóa file save cũ
+                GameStatePersistence.deleteSaveFile(); // Xóa file save cũ
                 GameManager.getInstance().startGame();
                 switchScene("/ui/fxml/GameView.fxml");
             });
@@ -73,20 +73,20 @@ public class MainController {
             btnExit.setOnAction(e -> System.exit(0));
         }
 
-        // ✅ Khi nhấn Continue → load từ file
+        // Khi nhấn Continue → load từ file
         if (btnContinue != null) {
             btnContinue.setOnAction(e -> {
                 if (GameStatePersistence.hasSaveFile()) {
-                    // ✅ Load game state
+                    // Load game state
                     GameManager.getInstance().continueGame();
 
-                    // ✅ BẮT ĐẦU COUNTDOWN 3 GIÂY
+                    // BẮT ĐẦU COUNTDOWN 3 GIÂY
                     GameManager.getInstance().startCountdownFromMenu(3);
 
-                    System.out.println("💾 Continue game from file with countdown");
+                    System.out.println("Continue game from file with countdown");
                     switchScene("/ui/fxml/GameView.fxml");
                 } else {
-                    System.err.println("❌ No saved game file to continue!");
+                    System.err.println("No saved game file to continue!");
                 }
             });
         }
@@ -127,25 +127,25 @@ public class MainController {
             java.io.File fxmlFile = new java.io.File(filePath);
 
             if (!fxmlFile.exists()) {
-                System.err.println("❌ FXML file not found: " + fxmlFile.getAbsolutePath());
+                System.err.println("FXML file not found: " + fxmlFile.getAbsolutePath());
                 return;
             }
 
-            System.out.println("✅ Loading FXML from: " + fxmlFile.getAbsolutePath());
+            System.out.println("Loading FXML from: " + fxmlFile.getAbsolutePath());
 
             FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
             Parent root = loader.load();
 
-            // ✅ CẬP NHẬT: Nếu là GameView thì dùng width 1000 (800 canvas + 200 panel)
+            // CẬP NHẬT: Nếu là GameView thì dùng width 1000 (800 canvas + 200 panel)
             int width = fxmlPath.contains("GameView") ? 1000 : 800;
             Scene scene = new Scene(root, width, 600);
             stage.setScene(scene);
 
-            System.out.println("✅ Scene switched successfully");
+            System.out.println("Scene switched successfully");
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            System.err.println("❌ Không thể load file FXML: " + fxmlPath);
+            System.err.println("Không thể load file FXML: " + fxmlPath);
         }
     }
 }

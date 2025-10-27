@@ -86,20 +86,20 @@ public class GameManager {
         this.activePowerUps = new ArrayList<>();
         this.balls = new ArrayList<>();
         this.originalBallSpeed = DEFAULT_BALL_SPEED;
-        this.cameraShake = new CameraShake(); // ✅ Khởi tạo camera shake
+        this.cameraShake = new CameraShake(); // Khởi tạo camera shake
         reset();
     }
 
 
     public void setMovingLeft(boolean moving) {
         this.movingLeft = moving;
-        // ✅ Release ball khi bắt đầu di chuyển
+        // Release ball khi bắt đầu di chuyển
         releaseBallsFromPaddle();
     }
 
     public void setMovingRight(boolean moving) {
         this.movingRight = moving;
-        // ✅ Release ball khi bắt đầu di chuyển
+        // Release ball khi bắt đầu di chuyển
         releaseBallsFromPaddle();
     }
 
@@ -122,7 +122,7 @@ public class GameManager {
     }
 
     /**
-     * ✅ Release tất cả các ball đang dính trên paddle
+     * Release tất cả các ball đang dính trên paddle
      */
     private void releaseBallsFromPaddle() {
         if (gameState == GameState.PLAYING) {
@@ -289,7 +289,7 @@ public class GameManager {
 
         if (gameState != GameState.PLAYING) return;
 
-        // ✅ Cập nhật camera shake
+        // Cập nhật camera shake
         cameraShake.update(deltaTime);
 
         if (excellentEffectActive) {
@@ -407,7 +407,7 @@ public class GameManager {
 
             // Ball-Paddle collision
             if (currentBall.intersects(paddle)) {
-                // ✅ CHECK COOLDOWN để tránh double hit
+                // CHECK COOLDOWN để tránh double hit
                 long currentTime = System.currentTimeMillis();
                 Long lastHit = lastPaddleHitTime.get(currentBall);
 
@@ -421,7 +421,7 @@ public class GameManager {
 
                     System.out.println("have been");
 
-                    // ✅ Lưu thời gian hit
+                    // Lưu thời gian hit
                     lastPaddleHitTime.put(currentBall, currentTime);
 
                     if (!paddleHitThisFrame) {
@@ -477,7 +477,7 @@ public class GameManager {
                         excellentEffectActive = true;
                         excellentEffectTimer = 0.0;
                         excellentTriggerStreak = Streak;
-                        System.out.println("🌟 EXCELLENT TRIGGERED! Streak: " + Streak);
+                        System.out.println("EXCELLENT TRIGGERED! Streak: " + Streak);
 
 
                         SoundManager.play("streak.wav");
@@ -523,7 +523,7 @@ public class GameManager {
     }
 
     /**
-     * ✅ THÊM MỚI - Cộng điểm với animation
+     * THÊM MỚI - Cộng điểm với animation
      */
     private void addScoreWithAnimation(int points) {
         if (points <= 0) return;
@@ -663,15 +663,15 @@ public class GameManager {
 
             if (resourceStream != null) {
                 cachedBackground = new Image(resourceStream);
-                System.out.println("✅ Background cached from resources");
+                System.out.println("Background cached from resources");
             } else {
                 // Fallback: load từ file
                 java.io.File imageFile = new java.io.File("src/arkanoid/assets/images/bg-retrospace(1).png");
                 if (imageFile.exists()) {
                     cachedBackground = new Image(imageFile.toURI().toString());
-                    System.out.println("✅ Background cached from file");
+                    System.out.println("Background cached from file");
                 } else {
-                    System.err.println("⚠️ Background image not found");
+                    System.err.println("Background image not found");
                     cachedBackground = null;
                 }
             }
@@ -679,7 +679,7 @@ public class GameManager {
             backgroundLoaded = true;
 
         } catch (Exception e) {
-            System.err.println("❌ Error loading background: " + e.getMessage());
+            System.err.println("Error loading background: " + e.getMessage());
             cachedBackground = null;
             backgroundLoaded = true;
         }
@@ -690,22 +690,22 @@ public class GameManager {
      * Render all game objects
      */
     public void render(GraphicsContext gc) {
-        // ✅ Load background chỉ 1 lần
+        // Load background chỉ 1 lần
         if (!backgroundLoaded) {
             loadBackgroundImage();
         }
 
-        // ✅ Lấy offset từ camera shake
+        // Lấy offset từ camera shake
         double shakeX = cameraShake.getShakeX();
         double shakeY = cameraShake.getShakeY();
 
         // Lưu trạng thái canvas
         gc.save();
 
-        // ✅ Áp dụng offset rung lên toàn bộ canvas
+        // Áp dụng offset rung lên toàn bộ canvas
         gc.translate(shakeX, shakeY);
 
-        // ✅ VẼ BACKGROUND (đã được cache - NHANH!)
+        // VẼ BACKGROUND
         if (cachedBackground != null) {
             gc.drawImage(cachedBackground, -shakeX, -shakeY, gameWidth, gameHeight);
         } else {
@@ -746,14 +746,14 @@ public class GameManager {
             }
         }
 
-        // ✅ Khôi phục trạng thái canvas
+        // Khôi phục trạng thái canvas
         gc.restore();
 
         if (excellentEffectActive) {
             renderExcellentEffect(gc);
         }
 
-        // ✅ RENDER COUNTDOWN ĐẸP HƠN
+        // RENDER COUNTDOWN ĐẸP HƠN
         if (isCountdownActive) {
             renderCountdown(gc);
         }
@@ -764,7 +764,7 @@ public class GameManager {
         // Tính toán fade và slide
         double progress = excellentEffectTimer / 2.0; // 0 -> 1
 
-        // ✅ PHASE 1: Fade in + Slide in (0 - 0.6s)
+        // PHASE 1: Fade in + Slide in (0 - 0.6s)
         // PHASE 2: Hold (0.6 - 1.2s)
         // PHASE 3: Fade out + Slide out (1.2 - 2.0s)
 
@@ -787,7 +787,7 @@ public class GameManager {
             slideX = phaseProgress * 100; // 0 -> 100 (slide ra phải)
         }
 
-        // ✅ VỊ TRÍ: Bên phải, chiều cao 40% từ dưới lên
+        // VỊ TRÍ: Bên phải, chiều cao 40% từ dưới lên
         double canvasHeight = gc.getCanvas().getHeight();
         double canvasWidth = gc.getCanvas().getWidth();
 
@@ -912,13 +912,13 @@ public class GameManager {
 
 
     /**
-     * ✅ Render countdown đẹp với galaxy theme - CHỈ Ở RIGHT PANEL (800x600)
+     * Render countdown đẹp với galaxy theme - CHỈ Ở RIGHT PANEL (800x600)
      * Thêm vào class GameManager.java, thay thế method renderCountdown() cũ
      */
     private void renderCountdown(GraphicsContext gc) {
         int seconds = (int) Math.ceil(countdownTime);
 
-        // ✅ OVERLAY CHỈ CHE RIGHT PANEL (800x600 canvas)
+        // OVERLAY CHỈ CHE RIGHT PANEL (800x600 canvas)
         gc.setFill(Color.web("#000000", 0.75));
         gc.fillRect(0, 0, gameWidth, gameHeight);
 
@@ -927,7 +927,7 @@ public class GameManager {
         double scale = 0.7 + (1.0 - fadeProgress) * 0.5; // Scale từ 0.7 -> 1.2
         double opacity = 0.2 + fadeProgress * 0.8; // Opacity từ 0.2 -> 1.0
 
-        // ✅ MÀU SẮC GALAXY theo số đếm
+        // MÀU SẮC GALAXY theo số đếm
         String numberColor, glowColor, ringColor;
         switch (seconds) {
             case 3:
@@ -951,7 +951,7 @@ public class GameManager {
                 ringColor = "#cccccc";
         }
 
-        // ✅ VẼ Ở GIỮA RIGHT PANEL
+        // VẼ Ở GIỮA RIGHT PANEL
         double centerX = gameWidth / 2;  // 400px (giữa canvas 800px)
         double centerY = gameHeight / 2; // 300px (giữa canvas 600px)
 
@@ -1129,13 +1129,13 @@ public class GameManager {
      * Lưu snapshot khi pause và về menu
      */
     public void saveGameState() {
-        // ✅ Cho phép lưu cả khi PLAYING và PAUSED
+        // Cho phép lưu cả khi PLAYING và PAUSED
         if (gameState == GameState.PLAYING || gameState == GameState.PAUSED) {
             GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(this);
             GameStatePersistence.saveToFile(snapshot);
-            System.out.println("✅ Game state saved to file!");
+            System.out.println("Game state saved to file!");
         } else {
-            System.out.println("⚠️ Cannot save game in state: " + gameState);
+            System.out.println("Cannot save game in state: " + gameState);
         }
     }
 
@@ -1144,7 +1144,7 @@ public class GameManager {
      */
     public void clearSavedGame() {
         GameStatePersistence.deleteSaveFile();
-        System.out.println("🗑️ Saved game file deleted");
+        System.out.println("Saved game file deleted");
     }
 
     /**
@@ -1154,14 +1154,14 @@ public class GameManager {
         GameStateSnapshot snapshot = GameStatePersistence.loadFromFile();
 
         if (snapshot == null) {
-            System.err.println("❌ No saved game file to continue!");
+            System.err.println("No saved game file to continue!");
             return;
         }
 
         restoreFromSnapshot(snapshot);
         gameState = GameState.PLAYING;
 
-        System.out.println("▶️ Game continued from file");
+        System.out.println("Game continued from file");
         System.out.println("   Score: " + score + ", Lives: " + lives + ", Level: " + level);
     }
 
@@ -1269,32 +1269,6 @@ public class GameManager {
                 return null;
         }
     }
-
-    // Cập nhật phương thức checkGameConditions để clear saved game khi thắng/thua
-    // Thêm vào cuối phương thức checkGameConditions():
-    /*
-    if (cleared) {
-        level++;
-        createLevel(level);
-        resetBallAndPaddle();
-        // Clear saved game vì đã qua level mới
-        clearSavedGame();
-    }
-    */
-
-    // Cập nhật startGame để clear saved game khi start mới
-    // Thêm vào đầu startGame():
-    /*
-    public void startGame() {
-        System.out.println("startGame called, current state: " + gameState);
-
-        clearSavedGame(); // ✅ Clear saved game khi start mới
-        reset();
-        gameState = GameState.PLAYING;
-
-        System.out.println("Game started, new state: " + gameState);
-    }
-    */
 
     // Getters for external access
     public GameState getGameState() { return gameState; }

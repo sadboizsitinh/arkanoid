@@ -28,7 +28,7 @@ public class HighScoresController {
                 Parent root = btnBack.getScene().getRoot();
                 if (root instanceof Pane) {
                     BackgroundHelper.setBackgroundImage((Pane) root, "bg-retrospace.png");
-                    System.out.println("🎨 High Scores background set");
+                    System.out.println("High Scores background set");
                 }
             }
         });
@@ -75,7 +75,7 @@ public class HighScoresController {
         List<HighScore> scores = HighScoreManager.getInstance().getHighScores();
 
         if (scores.isEmpty()) {
-            listScores.getItems().add("🏆 No high scores yet!");
+            listScores.getItems().add("No high scores yet!");
             listScores.getItems().add("");
             listScores.getItems().add("Play the game to set a record!");
         } else {
@@ -107,7 +107,7 @@ public class HighScoresController {
             listScores.getItems().add("═══════════════════════════════════");
         }
 
-        System.out.println("📊 Loaded " + scores.size() + " high scores");
+        System.out.println("Loaded " + scores.size() + " high scores");
     }
 
     /**
@@ -131,7 +131,7 @@ public class HighScoresController {
                 success.setContentText("All high scores have been cleared!");
                 success.showAndWait();
 
-                System.out.println("🗑️ All high scores cleared");
+                System.out.println("All high scores cleared");
             }
         });
     }

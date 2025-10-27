@@ -102,11 +102,11 @@ public class HighScoreManager {
                     new FileInputStream(filePath.toFile()))) {
                 highScores = (List<HighScore>) ois.readObject();
                 Collections.sort(highScores);
-                System.out.println("✅ Loaded " + highScores.size() + " high scores");
+                System.out.println("Loaded " + highScores.size() + " high scores");
             }
 
         } catch (Exception e) {
-            System.err.println("⚠️ Error loading high scores: " + e.getMessage());
+            System.err.println("Error loading high scores: " + e.getMessage());
             highScores = new ArrayList<>();
         }
     }
@@ -118,9 +118,9 @@ public class HighScoreManager {
         try (ObjectOutputStream oos = new ObjectOutputStream(
                 new FileOutputStream(SAVE_FILE))) {
             oos.writeObject(highScores);
-            System.out.println("✅ High scores saved");
+            System.out.println("High scores saved");
         } catch (Exception e) {
-            System.err.println("⚠️ Error saving high scores: " + e.getMessage());
+            System.err.println("Error saving high scores: " + e.getMessage());
         }
     }
 

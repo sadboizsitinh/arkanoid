@@ -34,7 +34,7 @@ public class GameStateSnapshot implements Serializable {
     public List<PowerUpState> powerUpStates;
     public List<ActivePowerUpState> activePowerUpStates;
 
-    // ✅ Inner classes cũng phải Serializable
+    // Inner classes cũng phải Serializable
     public static class BallState implements Serializable {
         private static final long serialVersionUID = 1L;
         public double x, y;
