@@ -19,13 +19,14 @@ import java.util.*;
  * ✅ Fix: Không countdown ban đầu, cho phép aim trước
  */
 public class VersusGameManager {
+
     private static VersusGameManager instance;
 
     public enum VersusState {
         WAITING, PLAYING, PAUSED, GAME_OVER
     }
 
-    private VersusState gameState;
+    private VersusState gameState = VersusState.PLAYING;
 
     private final double gameWidth = 640;
     private final double gameHeight = 600;
@@ -776,6 +777,16 @@ public class VersusGameManager {
 //        if (isCountdownActive) {
 //            renderCountdown(gc, countdownTime);
 //        }
+
+        if (gameState == VersusState.PAUSED) {
+            gc.setFill(javafx.scene.paint.Color.rgb(0, 0, 0, 0.5));
+            gc.fillRect(0, 0, 640, 600);
+            gc.setFill(javafx.scene.paint.Color.WHITE);
+            gc.setFont(javafx.scene.text.Font.font("Arial Black", 48));
+            gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+            gc.fillText("PAUSED", 320, 300);
+        }
+
     }
 
     /**
