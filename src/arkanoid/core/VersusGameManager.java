@@ -15,8 +15,8 @@ import java.util.*;
 
 /**
  * Quản lý game đối kháng 2 người chơi - FIXED VERSION
- * ✅ Fix: Mỗi player chuyển màn độc lập
- * ✅ Fix: Không countdown ban đầu, cho phép aim trước
+ * Fix: Mỗi player chuyển màn độc lập
+ * Fix: Không countdown ban đầu, cho phép aim trước
  */
 public class VersusGameManager {
 
@@ -40,7 +40,7 @@ public class VersusGameManager {
     private int score1 = 0;
     private int lives1 = 3;
     private boolean player1GameOver = false;
-    private int currentLevel1 = 1; // ✅ Level riêng cho P1
+    private int currentLevel1 = 1; // Level riêng cho P1
 
     // Player 1 - Streak System
     private int streak1 = 0;
@@ -66,7 +66,7 @@ public class VersusGameManager {
     private int score2 = 0;
     private int lives2 = 3;
     private boolean player2GameOver = false;
-    private int currentLevel2 = 1; // ✅ Level riêng cho P2
+    private int currentLevel2 = 1; // Level riêng cho P2
 
     // Player 2 - Streak System
     private int streak2 = 0;
@@ -125,9 +125,9 @@ public class VersusGameManager {
         resetGame();
         gameState = VersusState.PLAYING;
 
-        // ✅ FIX: KHÔNG start countdown ngay
-        // ✅ Để ball stick trên paddle, player có thể aim (A/D) rồi fire (W/UP)
-        System.out.println("✅ Game started - Players can aim with A/D and LEFT/RIGHT, fire with W/UP");
+        // FIX: KHÔNG start countdown ngay
+        // Để ball stick trên paddle, player có thể aim (A/D) rồi fire (W/UP)
+        System.out.println("Game started - Players can aim with A/D and LEFT/RIGHT, fire with W/UP");
     }
 
     private void resetGame() {
@@ -139,7 +139,7 @@ public class VersusGameManager {
         lastStreakBonus1 = 0;
         excellentEffect1Active = false;
         lastPaddleHitTime1.clear();
-        currentLevel1 = 1; // ✅ Reset level P1
+        currentLevel1 = 1; // Reset level P1
 
         score2 = 0;
         lives2 = 3;
@@ -149,7 +149,7 @@ public class VersusGameManager {
         lastStreakBonus2 = 0;
         excellentEffect2Active = false;
         lastPaddleHitTime2.clear();
-        currentLevel2 = 1; // ✅ Reset level P2
+        currentLevel2 = 1; // Reset level P2
 
         p1Left = p1Right = false;
         p2Left = p2Right = false;
@@ -158,14 +158,14 @@ public class VersusGameManager {
         balls1.clear();
         Ball ball1 = new Ball(gameWidth / 2 - 15, gameHeight - 100);
         ball1.applySpeed(DEFAULT_BALL_SPEED);
-        ball1.stickToPaddle(paddle1); // ✅ Stick để aim
+        ball1.stickToPaddle(paddle1); // Stick để aim
         balls1.add(ball1);
 
         paddle2 = new Paddle(gameWidth / 2 - 60, gameHeight - 50);
         balls2.clear();
         Ball ball2 = new Ball(gameWidth / 2 - 15, gameHeight - 100);
         ball2.applySpeed(DEFAULT_BALL_SPEED);
-        ball2.stickToPaddle(paddle2); // ✅ Stick để aim
+        ball2.stickToPaddle(paddle2); // Stick để aim
         balls2.add(ball2);
 
         bricks1.clear();
@@ -181,12 +181,12 @@ public class VersusGameManager {
     }
 
     /**
-     * ✅ FIX: Load level cho TỪNG player riêng biệt
+     * FIX: Load level cho TỪNG player riêng biệt
      */
     private void loadLevel(int level, List<Brick> bricks) {
         String filename = "map" + Math.min(level, 9) + ".csv";
         loadBricksForPlayer(bricks, filename);
-        System.out.println("✅ Loaded " + filename + " for player (level " + level + ")");
+        System.out.println("Loaded " + filename + " for player (level " + level + ")");
     }
 
     private void loadBricksForPlayer(List<Brick> bricks, String filename) {
@@ -236,7 +236,7 @@ public class VersusGameManager {
                 }
             }
         } catch (Exception e) {
-            System.err.println("❌ Cannot load " + filename + ": " + e.getMessage());
+            System.err.println("Cannot load " + filename + ": " + e.getMessage());
         }
     }
 
@@ -537,12 +537,12 @@ public class VersusGameManager {
             }
         }
 
-        // ✅ FIX: Check level complete cho TỪNG player
+        // FIX: Check level complete cho TỪNG player
         checkLevelCompleteForPlayer(bricks, paddle, balls, playerNum);
     }
 
     /**
-     * ✅ FIX: Check level complete riêng cho từng player
+     * FIX: Check level complete riêng cho từng player
      */
     private void checkLevelCompleteForPlayer(List<Brick> bricks, Paddle paddle, List<Ball> balls, int playerNum) {
         boolean cleared = bricks.stream()
@@ -551,14 +551,14 @@ public class VersusGameManager {
         if (cleared) {
             if (playerNum == 1 && !player1GameOver) {
                 currentLevel1++;
-                System.out.println("✅ P1 cleared level " + (currentLevel1 - 1) + " → Loading level " + currentLevel1);
+                System.out.println("P1 cleared level " + (currentLevel1 - 1) + " → Loading level " + currentLevel1);
                 SoundManager.play("Qua_man.wav");
                 loadLevel(currentLevel1, bricks1);
                 resetBallForPlayer(paddle1, balls1);
                 startCountdownForPlayer(1, 3.0);
             } else if (playerNum == 2 && !player2GameOver) {
                 currentLevel2++;
-                System.out.println("✅ P2 cleared level " + (currentLevel2 - 1) + " → Loading level " + currentLevel2);
+                System.out.println("P2 cleared level " + (currentLevel2 - 1) + " → Loading level " + currentLevel2);
                 SoundManager.play("Qua_man.wav");
                 loadLevel(currentLevel2, bricks2);
                 resetBallForPlayer(paddle2, balls2);
@@ -690,7 +690,7 @@ public class VersusGameManager {
         }
     }
 
-    // ✅ RENDER TRỰC TIẾP - KHÔNG GỌI entity.render()
+    // RENDER TRỰC TIẾP - KHÔNG GỌI entity.render()
     public void renderPlayer1(GraphicsContext gc) {
         renderPlayer(gc, paddle1, balls1, bricks1, powerUps1, player1GameOver, 1);
     }
@@ -745,18 +745,18 @@ public class VersusGameManager {
         for (Ball ball : balls) {
             ball.render(gc);
 
-            // ✅ Hiển thị arrow AIM khi ball đang stuck
+            // Hiển thị arrow AIM khi ball đang stuck
             if (ball.isStuckToPaddle()) {
                 ball.renderDirectionArrow(gc);
             }
         }
 
-        // ✅ RENDER BRICKS
+        // RENDER BRICKS
         for (Brick brick : bricks) {
             brick.render(gc);
         }
 
-        // ✅ RENDER POWERUPS
+        // RENDER POWERUPS
         for (PowerUp powerUp : powerUps) {
             powerUp.render(gc);
         }
@@ -778,19 +778,19 @@ public class VersusGameManager {
 //            renderCountdown(gc, countdownTime);
 //        }
 
-        if (gameState == VersusState.PAUSED) {
-            gc.setFill(javafx.scene.paint.Color.rgb(0, 0, 0, 0.5));
-            gc.fillRect(0, 0, 640, 600);
-            gc.setFill(javafx.scene.paint.Color.WHITE);
-            gc.setFont(javafx.scene.text.Font.font("Arial Black", 48));
-            gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
-            gc.fillText("PAUSED", 320, 300);
-        }
+//        if (gameState == VersusState.PAUSED) {
+//            gc.setFill(javafx.scene.paint.Color.rgb(0, 0, 0, 0.5));
+//            gc.fillRect(0, 0, 640, 600);
+//            gc.setFill(javafx.scene.paint.Color.WHITE);
+//            gc.setFont(javafx.scene.text.Font.font("Arial Black", 48));
+//            gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER);
+//            gc.fillText("PAUSED", 320, 300);
+//        }
 
     }
 
     /**
-     * ✅ Load background image (chỉ load 1 lần)
+     * Load background image (chỉ load 1 lần)
      */
     private void loadBackgroundImage() {
         if (backgroundLoaded) return;
@@ -801,15 +801,15 @@ public class VersusGameManager {
 
             if (resourceStream != null) {
                 cachedBackground = new javafx.scene.image.Image(resourceStream);
-                System.out.println("✅ Background cached from resources");
+                System.out.println("Background cached from resources");
             } else {
                 // Fallback: load từ file
                 java.io.File imageFile = new java.io.File("src/arkanoid/assets/images/bg-retrospace(1).png");
                 if (imageFile.exists()) {
                     cachedBackground = new javafx.scene.image.Image(imageFile.toURI().toString());
-                    System.out.println("✅ Background cached from file");
+                    System.out.println("Background cached from file");
                 } else {
-                    System.err.println("⚠️ Background image not found");
+                    System.err.println("Background image not found");
                     cachedBackground = null;
                 }
             }

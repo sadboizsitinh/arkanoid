@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class VersusController {
@@ -47,6 +48,10 @@ public class VersusController {
     private double lastP2RotateTime = 0;
     private static final double ROTATE_COOLDOWN = 0.15;
 
+    // ✅ NEW: Pause overlay
+    private StackPane pauseOverlay;
+    private StackPane rootPane; // Root container để chứa pause overlay
+
     @FXML
     private void initialize() {
         lastInstance = this;
@@ -56,7 +61,6 @@ public class VersusController {
         canvasP1 = new Canvas(640, 600);
         canvasP2 = new Canvas(640, 600);
 
-        // Make canvas focusable
         canvasP1.setFocusTraversable(true);
         canvasP2.setFocusTraversable(true);
 
@@ -79,7 +83,6 @@ public class VersusController {
         GraphicsContext gc1 = canvasP1.getGraphicsContext2D();
         GraphicsContext gc2 = canvasP2.getGraphicsContext2D();
 
-        // ✅ FIX: Setup input handlers NGAY trong Platform.runLater
         javafx.application.Platform.runLater(() -> {
             try {
                 Stage stage = (Stage) paneP1.getScene().getWindow();
@@ -94,16 +97,20 @@ public class VersusController {
                 System.err.println("⚠️ Cannot resize window: " + e.getMessage());
             }
 
-            // ✅ FIX: Setup input AFTER scene is ready
-            setupInputHandlers();
+            // ✅ FIX: Get root pane TRƯỚC khi setup input
+            getRootPane();
 
-            // Request focus cho canvas
-            canvasP1.requestFocus();
-            System.out.println("✅ Canvas focus requested");
+            // Delay một chút để đảm bảo rootPane đã được set
+            javafx.application.Platform.runLater(() -> {
+                setupInputHandlers();
+                canvasP1.requestFocus();
+                System.out.println("✅ Canvas focus requested");
+            });
         });
 
         startGameLoop(gc1, gc2);
     }
+
 
     private void setupInputHandlers() {
         Scene scene = paneP1.getScene();
@@ -113,7 +120,6 @@ public class VersusController {
             attachKeyHandlers(scene);
         } else {
             System.out.println("⚠️ Scene not ready, waiting for sceneProperty");
-            // Fallback: Wait for scene to be ready
             paneP1.sceneProperty().addListener((obs, oldScene, newScene) -> {
                 if (newScene != null) {
                     System.out.println("✅ Scene ready via listener, setting up handlers");
@@ -124,11 +130,9 @@ public class VersusController {
     }
 
     private void attachKeyHandlers(Scene scene) {
-        // ✅ FIX: Remove old handlers first to prevent duplicates
         scene.setOnKeyPressed(null);
         scene.setOnKeyReleased(null);
 
-        // ✅ FIX: Use setOnKeyPressed/Released instead of addEventFilter
         scene.setOnKeyPressed(event -> {
             System.out.println("🎮 KEY PRESSED: " + event.getCode());
             handleKeyPress(event.getCode(), true);
@@ -141,15 +145,13 @@ public class VersusController {
             event.consume();
         });
 
-        // ✅ FIX: Ensure focus stays on scene
         scene.getWindow().focusedProperty().addListener((o, oldVal, newVal) -> {
             if (newVal) {
-                System.out.println("🔍 Window gained focus, requesting canvas focus");
+                System.out.println("🔒 Window gained focus, requesting canvas focus");
                 canvasP1.requestFocus();
             }
         });
 
-        // ✅ FIX: Add mouse click to regain focus if lost
         scene.setOnMouseClicked(event -> {
             canvasP1.requestFocus();
             System.out.println("🖱️ Mouse clicked, focus regained");
@@ -161,18 +163,31 @@ public class VersusController {
     private void handleKeyPress(KeyCode code, boolean isPressed) {
         VersusGameManager.VersusState state = gameManager.getGameState();
 
-        // Debug log
         System.out.println("📋 handleKeyPress: " + code + " | pressed=" + isPressed + " | state=" + state);
 
-        // Handle PAUSE and ESC in any state
+        // ✅ NEW: Handle PAUSE
         if (code == KeyCode.P && isPressed) {
             gameManager.togglePause();
             System.out.println("⏸️ Toggle pause - new state: " + gameManager.getGameState());
+
+            // Show/hide pause overlay
+            if (gameManager.getGameState() == VersusGameManager.VersusState.PAUSED) {
+                showPauseOverlay();
+            } else {
+                hidePauseOverlay();
+            }
             return;
         }
 
+        // ✅ NEW: ESC shows pause menu
         if (code == KeyCode.ESCAPE && isPressed) {
-            goToMainMenu();
+            if (state == VersusGameManager.VersusState.PLAYING) {
+                gameManager.togglePause();
+                showPauseOverlay();
+            } else if (state == VersusGameManager.VersusState.PAUSED) {
+                gameManager.togglePause();
+                hidePauseOverlay();
+            }
             return;
         }
 
@@ -266,6 +281,60 @@ public class VersusController {
         }
     }
 
+    // ✅ NEW: Show pause overlay
+    private void showPauseOverlay() {
+        if (pauseOverlay != null || rootPane == null) {
+            System.out.println("⚠️ pauseOverlay already showing or rootPane null");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            java.net.URL resourceUrl = getClass().getResource("/ui/fxml/VersusGamePauseOverlay.fxml");
+
+            if (resourceUrl != null) {
+                loader.setLocation(resourceUrl);
+            } else {
+                java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/VersusGamePauseOverlay.fxml");
+                loader.setLocation(fxmlFile.toURI().toURL());
+            }
+
+            pauseOverlay = loader.load();
+
+            // ✅ FIX: Pass reference của VersusController VÀ Stage vào PauseOverlay
+            VersusGamePauseOverlayController controller = loader.getController();
+            controller.setVersusController(this);
+
+            // ✅ NEW: Pass Stage reference
+            Stage stage = (Stage) paneP1.getScene().getWindow();
+            controller.setStage(stage);
+            System.out.println("✅ Passed stage to overlay controller: " + stage);
+
+            rootPane.getChildren().add(pauseOverlay);
+
+            System.out.println("✅ Pause overlay shown");
+
+        } catch (Exception e) {
+            System.err.println("❌ Error showing pause overlay: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // ✅ NEW: Public method để hide overlay từ bên ngoài
+    public void hidePauseOverlayPublic() {
+        hidePauseOverlay();
+    }
+
+    // ✅ NEW: Hide pause overlay
+    private void hidePauseOverlay() {
+        if (pauseOverlay != null && rootPane != null) {
+            rootPane.getChildren().remove(pauseOverlay);
+            pauseOverlay = null;
+            canvasP1.requestFocus();
+            System.out.println("✅ Pause overlay hidden");
+        }
+    }
+
     private void startGameLoop(GraphicsContext gc1, GraphicsContext gc2) {
         gameLoop = new AnimationTimer() {
             private long lastUpdate = 0;
@@ -340,13 +409,12 @@ public class VersusController {
                         gameManager.getWinner()
                 );
 
-                // ✅ FIX: RESIZE STAGE về 800x600 cho GameOver
                 stage.setScene(new Scene(root, 800, 600));
                 stage.setWidth(800);
-                stage.setHeight(640); // +40 cho title bar
+                stage.setHeight(640);
                 stage.centerOnScreen();
 
-                System.out.println("✅ Stage resized to 800x600 for Game Over");
+                System.out.println("Stage resized to 800x600 for Game Over");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -354,40 +422,41 @@ public class VersusController {
         });
     }
 
-    private void goToMainMenu() {
-        try {
-            if (gameLoop != null) {
-                gameLoop.stop();
-            }
-
-            Stage stage = (Stage) canvasP1.getScene().getWindow();
-            java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/Main.fxml");
-            FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
-            Parent root = loader.load();
-
-            // ✅ FIX: RESIZE STAGE về 800x600
-            stage.setScene(new Scene(root, 800, 600));
-            stage.setWidth(800);
-            stage.setHeight(640);
-            stage.centerOnScreen();
-            stage.setResizable(true);
-
-            System.out.println("✅ Returned to Main Menu - Stage resized to 800x600");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void cleanup() {
         if (gameLoop != null) {
             gameLoop.stop();
             gameLoop = null;
         }
+        hidePauseOverlay();
     }
 
     public static void stopGameLoopIfAny() {
         if (lastInstance != null) {
             lastInstance.cleanup();
+        }
+    }
+
+    private void getRootPane() {
+        try {
+            javafx.application.Platform.runLater(() -> {
+                Scene scene = paneP1.getScene();
+                if (scene != null) {
+                    // VersusView.fxml root đã là StackPane rồi
+                    if (scene.getRoot() instanceof StackPane) {
+                        rootPane = (StackPane) scene.getRoot();
+                        System.out.println("Found root StackPane directly");
+                    } else {
+                        // Nếu không phải, wrap nó
+                        Parent oldRoot = scene.getRoot();
+                        StackPane newRoot = new StackPane(oldRoot);
+                        scene.setRoot(newRoot);
+                        rootPane = newRoot;
+                        System.out.println("Created new root StackPane");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            System.err.println("Error getting root pane: " + e.getMessage());
         }
     }
 }

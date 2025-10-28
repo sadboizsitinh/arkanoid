@@ -5,10 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: load new img power up!">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/arkanoid/core/VersusGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/VersusGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/VersusController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/VersusController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/VersusGameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/VersusGameOverController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/VersusView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/VersusGameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/VersusGameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/VersusView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
