@@ -7,19 +7,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
 
-/**
- * Player controlled paddle
- * Can move left and right, and apply power-ups
- * Supports sprite sheet textures
- * Includes frame animation on ball hit
- */
 public class Paddle extends MovableObject implements PaddleLike {
     private static final double DEFAULT_WIDTH = 120;
     private static final double DEFAULT_HEIGHT = 36;
     private static final double DEFAULT_SPEED = 800;
 
-    // Animation constants
-    private static final double HIT_ANIMATION_DURATION = 0.2; // 0.5 seconds
+    private static final double HIT_ANIMATION_DURATION = 0.2;
 
     public int TypeSkin = 1;
 
@@ -27,9 +20,8 @@ public class Paddle extends MovableObject implements PaddleLike {
     private double originalWidth;
     private double originalHeight;
 
-    // Animation state
-    private int currentFrame = 1; // 1 = paddle_1, 2 = paddle_2
-    private double hitAnimationTimer = 0; // Timer để theo dõi thời gian animation
+    private int currentFrame = 1;
+    private double hitAnimationTimer = 0;
     private boolean isAnimating = false;
 
     public Paddle(double x, double y) {
@@ -50,20 +42,20 @@ public class Paddle extends MovableObject implements PaddleLike {
         String path = "file:src/arkanoid/assets/images/paddle_" + currentFrame + ".png";
         loadTexture(path);
 
-        Image img = new Image(path);
-        double W = img.getWidth();
-        double H = img.getHeight();
-
-        setSpriteRegion(0, 0, W, H);
+        try {
+            Image img = new Image(path);
+            double W = img.getWidth();
+            double H = img.getHeight();
+            setSpriteRegion(0, 0, W, H);
+        } catch (Exception e) {
+            // Texture loading failed, will use fallback
+        }
     }
 
-    /**
-     * Gọi khi ball chạm vào paddle để bắt đầu animation
-     */
     public void triggerHitAnimation() {
         isAnimating = true;
         hitAnimationTimer = 0;
-        currentFrame = 2; // Chuyển sang paddle_2
+        currentFrame = 2;
         loadPaddleTexture();
     }
 
@@ -83,16 +75,17 @@ public class Paddle extends MovableObject implements PaddleLike {
     public void setWidth(double newWidth) {
         this.width = newWidth;
     }
-    public void setHeight(double newHeight) {this.height = newHeight;}
+
+    public void setHeight(double newHeight) {
+        this.height = newHeight;
+    }
 
     @Override
     public void update(double deltaTime) {
-        // Cập nhật animation
         if (isAnimating) {
             hitAnimationTimer += deltaTime;
 
             if (hitAnimationTimer >= HIT_ANIMATION_DURATION) {
-                // Animation kết thúc, chuyển lại về paddle_1
                 isAnimating = false;
                 hitAnimationTimer = 0;
                 currentFrame = 1;
@@ -100,14 +93,12 @@ public class Paddle extends MovableObject implements PaddleLike {
             }
         }
 
-        // Progress power-up
         if (currentPowerUp != null && currentPowerUp.isExpired()) {
             currentPowerUp.removeEffect(this);
             currentPowerUp = null;
         }
     }
 
-    // Update position and check bound
     public void moveLeft(double deltaTime) {
         x -= speed * deltaTime;
 
@@ -128,20 +119,51 @@ public class Paddle extends MovableObject implements PaddleLike {
 
     @Override
     public void render(GraphicsContext gc) {
-        if (useTexture && spriteSheet != null) {
-            // Vẽ sprite từ sprite sheet
+        // ✅ TRY RENDER TEXTURE, NẾU FAIL → FALLBACK
+        if (useTexture && spriteSheet != null && !spriteSheet.isError()) {
             gc.drawImage(
                     spriteSheet,
-                    sourceX, sourceY, sourceWidth, sourceHeight,  // Source rectangle
-                    x, y, width, height                            // Destination rectangle
+                    sourceX, sourceY, sourceWidth, sourceHeight,
+                    x, y, width, height
             );
-
         } else {
-            // Fallback: vẽ bằng màu
-            gc.setFill(color);
-            gc.fillRect(x, y, width, height);
-            gc.setStroke(Color.BLACK);
-            gc.strokeRect(x, y, width, height);
+            // ✅ FALLBACK: Vẽ paddle đơn giản
+            renderPaddleFallback(gc);
+        }
+    }
+
+    /**
+     * ✅ Render paddle fallback khi texture không load được
+     */
+    private void renderPaddleFallback(GraphicsContext gc) {
+        // Background gradient
+        javafx.scene.paint.LinearGradient gradient = new javafx.scene.paint.LinearGradient(
+                x, y,
+                x, y + height,
+                false,
+                javafx.scene.paint.CycleMethod.NO_CYCLE,
+                new javafx.scene.paint.Stop(0, Color.web("#00BFFF")),
+                new javafx.scene.paint.Stop(0.5, Color.web("#1E90FF")),
+                new javafx.scene.paint.Stop(1, Color.web("#0080FF"))
+        );
+
+        gc.setFill(gradient);
+        gc.fillRoundRect(x, y, width, height, 8, 8);
+
+        // Top highlight
+        gc.setFill(Color.web("#87CEEB", 0.5));
+        gc.fillRoundRect(x, y, width, height * 0.3, 8, 8);
+
+        // Border
+        gc.setStroke(Color.web("#87CEEB"));
+        gc.setLineWidth(2);
+        gc.strokeRoundRect(x, y, width, height, 8, 8);
+
+        // Inner border (nếu đang hit animation)
+        if (isAnimating) {
+            gc.setStroke(Color.web("#FFFFFF", 0.7));
+            gc.setLineWidth(1);
+            gc.strokeRoundRect(x + 2, y + 2, width - 4, height - 4, 6, 6);
         }
     }
 
@@ -154,7 +176,16 @@ public class Paddle extends MovableObject implements PaddleLike {
     public double getSourceY() { return sourceY; }
     public double getSourceWidth() { return sourceWidth; }
     public double getSourceHeight() { return sourceHeight; }
+
     public static double getDefaultWidth() {
         return DEFAULT_WIDTH;
+    }
+
+    public void setX(double newX) {
+        this.x = newX;
+    }
+
+    public double getSpeed() {
+        return speed;
     }
 }
