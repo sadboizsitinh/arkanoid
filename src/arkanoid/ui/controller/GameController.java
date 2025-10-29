@@ -631,7 +631,14 @@ public class GameController {
     }
 
     public static void stopGameLoopIfAny() {
-        if (lastInstance != null) lastInstance.stopLoop();
+        // === SỬA LỖI: Thêm kiểm tra lastInstance != null ===
+        if (lastInstance != null) {
+            System.out.println("GameController: Stopping game loop for last instance.");
+            lastInstance.cleanup(); // Chỉ gọi cleanup nếu lastInstance tồn tại
+            lastInstance = null; // Đặt lại thành null sau khi dọn dẹp
+        } else {
+            // System.out.println("GameController: No active instance to stop."); // Bỏ comment này nếu muốn debug
+        }
     }
 
     /**

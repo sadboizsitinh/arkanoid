@@ -4,11 +4,55 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: load new img power up!">
+    <list default="true" id="a019836d-b4ea-4d44-8914-10306d02f31b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/core/PlayerSave.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/arkanoid/core/SaveGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/arkanoid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ArkanoidApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ArkanoidApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/maps/map1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/maps/map1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameStatePersistence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameStatePersistence.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Ball/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Ball/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Brick/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Brick/Brick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Brick/BrickFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Brick/BrickFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Paddle/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Paddle/Paddle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/SceneNavigator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/SceneNavigator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/maps/map1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/maps/map1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball/Ball$TrailPoint.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball/Ball.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick/BrickFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick/BrickFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle/Paddle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/PauseOverlayController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/SceneNavigator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,79 +67,59 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;PhongHoangNguyen&quot;
+    &quot;assignee&quot;: &quot;DucHieu252&quot;
   }
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,
-    &quot;accountId&quot;: &quot;b1338d4e-04e2-4a96-9e8a-f130691e4f77&quot;
+    &quot;accountId&quot;: &quot;f8b167ec-24de-42f0-8ea4-b07296b440b7&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="340gYOp5fH26lyT1jTtzUiOAD9w" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="1" id="Add" />
-  </component>
+  <component name="ProjectId" id="34jbts5yNgxobJtn5M5ThWRv0PI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ArkanoidApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Java/Team_project/arkanoid&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.JavaFX&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ArkanoidApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "JavaScript Debug.Next.js: debug client-side.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "DucHieu",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../.jdks/openjdk-25" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="arkanoid.Main" />
-      <module name="arkanoid" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;D:\openjfx-25_windows-x64_bin-sdk\javafx-sdk-25\lib&quot; --add-modules javafx.controls,javafx.fxml " />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/arkanoid" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="arkanoid.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -109,11 +133,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Application.Main" />
-      <item itemvalue="JavaScript Debug.Next.js: debug client-side" />
-      <item itemvalue="npm.Next.js: server-side" />
-    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -125,115 +144,19 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="" />
-      <created>1760355949893</created>
+      <changelist id="a019836d-b4ea-4d44-8914-10306d02f31b" name="Changes" comment="" />
+      <created>1761730147049</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1760355949893</updated>
-      <workItem from="1760355951068" duration="29000" />
-      <workItem from="1760355997671" duration="117000" />
-      <workItem from="1760356130072" duration="29000" />
-      <workItem from="1760356190697" duration="21000" />
-      <workItem from="1760356237832" duration="285000" />
-      <workItem from="1760356564892" duration="165000" />
-      <workItem from="1760357150471" duration="754000" />
-      <workItem from="1760413263141" duration="6291000" />
-      <workItem from="1760451022258" duration="1357000" />
-      <workItem from="1760620589371" duration="430000" />
-      <workItem from="1760623757557" duration="1059000" />
-      <workItem from="1760624832683" duration="17703000" />
-      <workItem from="1760716422981" duration="241000" />
-      <workItem from="1760716825467" duration="8000" />
-      <workItem from="1760757019309" duration="3271000" />
-      <workItem from="1760855335617" duration="515000" />
-      <workItem from="1760856030605" duration="4130000" />
-      <workItem from="1760861037346" duration="402000" />
-      <workItem from="1760864836011" duration="5842000" />
-      <workItem from="1760887267507" duration="4491000" />
-      <workItem from="1760934478319" duration="641000" />
-      <workItem from="1760945088769" duration="1741000" />
-      <workItem from="1760947251272" duration="1004000" />
-      <workItem from="1761114387367" duration="520000" />
-      <workItem from="1761115206001" duration="3322000" />
-      <workItem from="1761119487341" duration="359000" />
-      <workItem from="1761124736571" duration="43000" />
-      <workItem from="1761124792377" duration="2495000" />
-      <workItem from="1761153167158" duration="6637000" />
-      <workItem from="1761160852158" duration="2809000" />
-      <workItem from="1761204803267" duration="1032000" />
-      <workItem from="1761279620695" duration="73000" />
-      <workItem from="1761320698244" duration="2309000" />
-      <workItem from="1761324431273" duration="534000" />
-      <workItem from="1761325119390" duration="2341000" />
-      <workItem from="1761333680780" duration="1699000" />
-      <workItem from="1761371617923" duration="4778000" />
-      <workItem from="1761378337977" duration="1346000" />
-      <workItem from="1761380264460" duration="5069000" />
-      <workItem from="1761388702446" duration="8430000" />
-      <workItem from="1761398321924" duration="28000" />
-      <workItem from="1761398366619" duration="1706000" />
-      <workItem from="1761405298385" duration="908000" />
-      <workItem from="1761467498353" duration="23000" />
-      <workItem from="1761467536745" duration="5468000" />
-      <workItem from="1761484361830" duration="7493000" />
-      <workItem from="1761502281583" duration="5776000" />
-      <workItem from="1761535530972" duration="1259000" />
-      <workItem from="1761552886902" duration="2684000" />
-      <workItem from="1761574317209" duration="443000" />
+      <updated>1761730147049</updated>
+      <workItem from="1761730148663" duration="279000" />
+      <workItem from="1761730442869" duration="6511000" />
+      <workItem from="1761758255006" duration="519000" />
+      <workItem from="1761759075573" duration="4773000" />
     </task>
-    <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
-      <option name="closed" value="true" />
-      <created>1760356339954</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1760356339954</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feat:Sửa lại cấu trúc game">
-      <option name="closed" value="true" />
-      <created>1760676003579</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1760676003579</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn" />
-    <MESSAGE value="feat:Sửa lại cấu trúc game" />
-    <MESSAGE value="feat: load new img power up!" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: load new img power up!" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

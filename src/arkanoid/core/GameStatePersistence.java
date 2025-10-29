@@ -62,6 +62,19 @@ public class GameStatePersistence {
     }
 
     /**
+     * (HÀM BỊ THIẾU - HÃY THÊM VÀO)
+     * Kiểm tra xem file save (arkanoid_save.dat) có tồn tại không.
+     * Hàm này được gọi bởi MainController để bật/tắt nút "Continue".
+     */
+    public static boolean doesSaveFileExist() {
+        // Lấy tên file đã định nghĩa ở đầu file
+        File saveFile = new File(SAVE_FILE);
+
+        // Trả về true nếu file tồn tại, false nếu không
+        return saveFile.exists();
+    }
+
+    /**
      * Kiểm tra có file save không
      */
     public static boolean hasSaveFile() {

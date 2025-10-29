@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import arkanoid.core.HighScoreManager;
 
 public class NewHighScoreController {
     @FXML private TextField txtName;

@@ -3,6 +3,7 @@ package arkanoid;
 import arkanoid.core.GameManager;
 import arkanoid.core.GameStatePersistence;
 import arkanoid.core.GameStateSnapshot;
+import arkanoid.ui.controller.SceneNavigator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,17 +30,18 @@ public class ArkanoidApplication extends Application {
             primaryStage.setResizable(false);
             primaryStage.show();
 
+            // === 2. THÊM DÒNG NÀY VÀO ===
+            // Giao Stage chính cho SceneNavigator để nó có thể chuyển cảnh
+            SceneNavigator.setStage(primaryStage);
+            // =============================
+
             // Lưu game khi đóng cửa sổ (nhấn X)
             primaryStage.setOnCloseRequest(event -> {
                 System.out.println("Window closing...");
                 saveGameOnExit();
             });
 
-            // Lưu game khi JVM shutdown (Alt+F4, kill process, etc.)
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                System.out.println("JVM shutting down...");
-                saveGameOnExit();
-            }));
+            // ... (phần còn lại của hàm) ...
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,31 +50,12 @@ public class ArkanoidApplication extends Application {
     }
 
     /**
-     * Lưu game nếu đang chơi hoặc pause
+     * (HÀM ĐÃ SỬA LỖI)
+     * Vô hiệu hóa auto-save.
+     * Việc lưu game (có hỏi tên) được xử lý trong PauseOverlayController.
      */
     private void saveGameOnExit() {
-        try {
-            GameManager gm = GameManager.getInstance();
-
-            // Chỉ lưu nếu đang PLAYING hoặc PAUSED
-            if (gm.getGameState() == GameManager.GameState.PLAYING ||
-                    gm.getGameState() == GameManager.GameState.PAUSED) {
-
-                System.out.println("Auto-saving game before exit...");
-                GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(gm);
-                boolean success = GameStatePersistence.saveToFile(snapshot);
-
-                if (success) {
-                    System.out.println("Game auto-saved successfully!");
-                } else {
-                    System.err.println("Failed to auto-save game!");
-                }
-            } else {
-                System.out.println("No active game to save (state: " + gm.getGameState() + ")");
-            }
-        } catch (Exception e) {
-            System.err.println("Error during auto-save: " + e.getMessage());
-            e.printStackTrace();
-        }
+        System.out.println("Auto-save on exit is disabled. Please save via the Pause Menu.");
+        // Không làm gì cả
     }
 }

@@ -39,25 +39,7 @@ public class HighScoresController {
 
         if (btnBack != null) {
             btnBack.setOnAction(e -> {
-                try {
-                    Stage stage = (Stage) btnBack.getScene().getWindow();
-
-                    java.net.URL resourceUrl = getClass().getResource("/ui/fxml/Main.fxml");
-                    FXMLLoader loader;
-
-                    if (resourceUrl != null) {
-                        loader = new FXMLLoader(resourceUrl);
-                    } else {
-                        java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/Main.fxml");
-                        loader = new FXMLLoader(fxmlFile.toURI().toURL());
-                    }
-
-                    Parent root = loader.load();
-                    stage.setScene(new Scene(root, 800, 600));
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    System.err.println("Không thể load Main.fxml");
-                }
+                SceneNavigator.goToMenu(); // SỬA LẠI: Dùng SceneNavigator
             });
         }
 

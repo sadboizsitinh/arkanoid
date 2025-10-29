@@ -1,18 +1,16 @@
 package arkanoid.core;
 
-
 import arkanoid.entities.Ball.Ball;
-import arkanoid.entities.Brick.Brick;
-import arkanoid.entities.Brick.NormalBrick;
-import arkanoid.entities.Brick.StrongBrick;
-import arkanoid.entities.Brick.UnbreakableBrick;
+import arkanoid.entities.Brick.*;
 import arkanoid.entities.Paddle.Paddle;
 import arkanoid.entities.PowerUp.*;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import java.util.*;
-
+import arkanoid.entities.Brick.BrickFactory; // Bạn cần tạo class này nếu chưa có
+import arkanoid.entities.Brick.Brick;
+import arkanoid.entities.PowerUp.PowerUp;
 import arkanoid.utils.SoundManager;
 
 /**
@@ -173,7 +171,7 @@ public class GameManager {
 
     public void startGame() {
         System.out.println("startGame called, current state: " + gameState);
-
+        this.currentlyLoadedProfile = null;
         reset();
         gameState = GameState.PLAYING;
 
@@ -282,9 +280,9 @@ public class GameManager {
 
                         double x = col * brickWidth, y = 50 + row * brickHeight;
                         switch (type) {
-                            case 1 -> bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
-                            case 2 -> bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
-                            case 3 -> bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            case 1 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.NORMAL,x, y, brickWidth - 2, brickHeight - 2 ));
+                            case 2 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.STRONG,x, y, brickWidth - 2, brickHeight - 2 ));
+                            case 3 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.UNBREAKABLE,x, y, brickWidth - 2, brickHeight - 2 ));
                         }
                     }
                     row++;
@@ -1178,26 +1176,28 @@ public class GameManager {
         return GameStatePersistence.hasSaveFile();
     }
 
-    /**
-     * Lưu snapshot khi pause và về menu
-     */
-    public void saveGameState() {
-        // Cho phép lưu cả khi PLAYING và PAUSED
-        if (gameState == GameState.PLAYING || gameState == GameState.PAUSED) {
-            GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(this);
-            GameStatePersistence.saveToFile(snapshot);
-            System.out.println("Game state saved to file!");
-        } else {
-            System.out.println("Cannot save game in state: " + gameState);
-        }
-    }
+
 
     /**
-     * Xóa snapshot (khi game over hoặc win)
+     * (HÀM QUAN TRỌNG - THÊM VÀO)
+     * Tạo snapshot và lưu game cho một profile (dùng SaveGameManager 10 slot)
+     * @param playerName Tên người chơi
      */
-    public void clearSavedGame() {
-        GameStatePersistence.deleteSaveFile();
-        System.out.println("Saved game file deleted");
+    public void saveGameForPlayer(String playerName) {
+        if (gameState != GameState.PLAYING && gameState != GameState.PAUSED) {
+            System.out.println("Cannot save game when not in PLAYING or PAUSED state.");
+            return;
+        }
+        if (playerName == null || playerName.trim().isEmpty()) {
+            System.out.println("Cannot save game with empty name.");
+            return;
+        }
+
+        // Tạo snapshot
+        GameStateSnapshot snapshot = GameStateSnapshot.createSnapshot(this);
+
+        // Dùng SaveGameManager (hệ thống 10 slot) để lưu
+        SaveGameManager.getInstance().saveGame(playerName, snapshot);
     }
 
     /**
@@ -1218,90 +1218,6 @@ public class GameManager {
         System.out.println("   Score: " + score + ", Lives: " + lives + ", Level: " + level);
     }
 
-    /**
-     * Khôi phục game state từ snapshot
-     */
-    private void restoreFromSnapshot(GameStateSnapshot snapshot) {
-        // Khôi phục stats
-        this.score = snapshot.score;
-        this.lives = snapshot.lives;
-        this.level = snapshot.level;
-
-        // Khôi phục paddle
-        paddle = new Paddle(snapshot.paddleX, snapshot.paddleY);
-        paddle.setWidth(snapshot.paddleWidth);
-
-        // Khôi phục balls
-        balls.clear();
-        for (GameStateSnapshot.BallState ballState : snapshot.ballStates) {
-            Ball ball = new Ball(ballState.x, ballState.y);
-            ball.setTypeSkin(ballState.typeSkin);
-            ball.applySpeed(ballState.speed);
-            ball.setDirection(ballState.dx / ballState.speed, ballState.dy / ballState.speed);
-
-            if (ballState.stuckToPaddle) {
-                ball.stickToPaddle(paddle);
-            } else {
-                ball.release();
-            }
-
-            balls.add(ball);
-        }
-
-        // Set main ball reference
-        if (!balls.isEmpty()) {
-            ball = balls.get(0);
-        }
-
-        // Khôi phục bricks
-        bricks.clear();
-        for (GameStateSnapshot.BrickState brickState : snapshot.brickStates) {
-            Brick brick = null;
-            switch (brickState.type) {
-                case NORMAL:
-                    brick = new NormalBrick(brickState.x, brickState.y, brickState.width, brickState.height);
-                    break;
-                case STRONG:
-                    brick = new StrongBrick(brickState.x, brickState.y, brickState.width, brickState.height);
-                    break;
-                case UNBREAKABLE:
-                    brick = new UnbreakableBrick(brickState.x, brickState.y, brickState.width, brickState.height);
-                    break;
-            }
-
-            if (brick != null) {
-                // Restore hitPoints
-                brick.setHitPoints(brickState.hitPoints);
-                brick.updateColor();
-                bricks.add(brick);
-            }
-        }
-
-        // Khôi phục falling powerups
-        powerUps.clear();
-        for (GameStateSnapshot.PowerUpState pState : snapshot.powerUpStates) {
-            PowerUp powerUp = createPowerUpByType(pState.type, pState.x, pState.y);
-            if (powerUp != null) {
-                powerUps.add(powerUp);
-            }
-        }
-
-        // Khôi phục active powerups
-        activePowerUps.clear();
-        for (GameStateSnapshot.ActivePowerUpState apState : snapshot.activePowerUpStates) {
-            PowerUp powerUp = createPowerUpByType(apState.type, 0, 0);
-            if (powerUp != null) {
-                powerUp.activate();
-                powerUp.setTimeRemaining(apState.timeRemaining);
-                powerUp.applyEffect(paddle);
-                activePowerUps.add(powerUp);
-            }
-        }
-
-        // Reset input flags
-        movingLeft = false;
-        movingRight = false;
-    }
 
     /**
      * Helper method để tạo PowerUp theo type
@@ -1323,9 +1239,195 @@ public class GameManager {
         }
     }
 
+    /**
+     * (HÀM ĐÃ SỬA LỖI HOÀN CHỈNH - THAY THẾ TOÀN BỘ)
+     * Khôi phục toàn bộ trạng thái game từ một snapshot.
+     * Đã SỬA LỖI "188 errors", LỖI "NullPointerException" ở dòng 318, VÀ LỖI "NullPointerException" ở dòng 316.
+     *
+     * @param snapshot Dữ liệu game
+     */
+    public void restoreFromSnapshot(GameStateSnapshot snapshot) {
+        if (snapshot == null) {
+            System.err.println("Snapshot bị null, không thể khôi phục game.");
+            return;
+        }
+
+        try {
+            // 1. Dọn dẹp các List (thay vì gọi resetGame())
+            if (this.bricks != null) this.bricks.clear();
+            if (this.balls != null) this.balls.clear();
+            if (this.powerUps != null) this.powerUps.clear();
+            if (this.activePowerUps != null) this.activePowerUps.clear();
+
+            // 2. Khôi phục các chỉ số cơ bản
+            this.score = snapshot.score;
+            this.lives = snapshot.lives;
+            this.level = snapshot.level;
+
+            // 3. Khôi phục Paddle (Kiểm tra null cho an toàn)
+            if (this.paddle != null) {
+                this.paddle.setX(snapshot.paddleX);
+                this.paddle.setY(snapshot.paddleY);
+                this.paddle.setWidth(snapshot.paddleWidth);
+            }
+
+            // 4. Khôi phục Balls
+            for (GameStateSnapshot.BallState bs : snapshot.ballStates) {
+                // Thêm kiểm tra 'bs != null' cho an toàn
+                if (bs != null) {
+                    Ball newBall = new Ball(bs.x, bs.y);
+                    newBall.setSpeed(bs.speed);
+                    newBall.setDirection(bs.dx, bs.dy);
+                    newBall.setStuckToPaddle(bs.stuckToPaddle);
+                    newBall.setTypeSkin(bs.typeSkin);
+                    this.balls.add(newBall);
+                }
+            }
+
+            // 5. Khôi phục Bricks
+            for (GameStateSnapshot.BrickState brs : snapshot.brickStates) {
+                // Thêm kiểm tra 'brs != null' cho an toàn
+                if (brs != null) {
+                    Brick brick = BrickFactory.createBrick(brs.type, brs.x, brs.y, brs.width, brs.height);
+                    if (brick != null) {
+                        brick.setHitPoints(brs.hitPoints);
+                        this.bricks.add(brick);
+                    }
+                }
+            }
+
+            // 6. Khôi phục Power-ups đang rơi
+            for (GameStateSnapshot.PowerUpState pus : snapshot.powerUpStates) {
+                // Thêm kiểm tra 'pus != null' và 'pus.type != null'
+                if (pus != null && pus.type != null) {
+                    PowerUp powerUp = createPowerUp(pus.type, pus.x, pus.y);
+                    if (powerUp != null) {
+                        this.powerUps.add(powerUp);
+                    }
+                }
+            }
+
+            // 7. Khôi phục Power-ups đang kích hoạt (ĐÂY LÀ PHẦN BỊ LỖI)
+            for (GameStateSnapshot.ActivePowerUpState apus : snapshot.activePowerUpStates) {
+
+                // === [FIX LỖI NULLPOINTER MỚI NHẤT] ===
+                // Kiểm tra xem bản thân 'apus' (phần tử trong List) có bị null không
+                if (apus == null) {
+                    System.err.println("Restore Error: Bỏ qua active power-up vì 'apus' (data) bị null.");
+                    continue; // Bỏ qua, sang phần tử tiếp theo
+                }
+                // === HẾT FIX MỚI ===
+
+                if (apus.type == null) {
+                    System.err.println("Restore Error: Bỏ qua active power-up vì 'apus.type' bị null.");
+                    continue;
+                }
+
+                PowerUp activePowerUp = createPowerUp(apus.type, 0, 0);
+
+                // Kiểm tra null CỰC KỲ QUAN TRỌNG
+                if (activePowerUp != null) {
+
+                    activePowerUp.setTimeRemaining(apus.timeRemaining);
+
+                    if (this.paddle != null) {
+                        activePowerUp.applyEffect(this.paddle);
+                    }
+
+                    this.activePowerUps.add(activePowerUp);
+
+                } else {
+                    System.err.println("Restore Error: Không thể tạo active power-up từ type: " + apus.type + ". Bỏ qua.");
+                }
+            }
+            // === Kết thúc phần sửa lỗi ===
+
+            // 8. Đặt trạng thái game
+            this.setGameState(GameState.PLAYING);
+            this.isContinueFromSave = true;
+            this.startContinueCountdown(3);
+
+            System.out.println("Game đã được khôi phục từ snapshot. Điểm: " + this.score);
+
+        } catch (Exception e) {
+            System.err.println("Lỗi nghiêm trọng khi khôi phục game từ snapshot: " + e.getMessage());
+            e.printStackTrace();
+            this.startGame(); // Fallback: Bắt đầu game mới nếu khôi phục lỗi
+        }
+    }
+
+    /**
+     * (HÀM BỊ THIẾU - HÃY THÊM VÀO)
+     * Tạo một đối tượng PowerUp dựa trên type.
+     * Hàm này được gọi bởi 'restoreFromSnapshot'.
+     */
+    private PowerUp createPowerUp(PowerUp.PowerUpType type, double x, double y) {
+        if (type == null) {
+            return null; // An toàn
+        }
+
+        // Dựa trên các file .java bạn đã cung cấp
+        switch (type) {
+            case EXPAND_PADDLE:
+                return new ExpandPaddlePowerUp(x, y);
+            case FAST_BALL:
+                return new FastBallPowerUp(x, y);
+            case SLOW_BALL:
+                return new SlowBallPowerUp(x, y);
+            case EXTRA_LIFE:
+                return new ExtraLifePowerUp(x, y);
+            case MULTI_BALL:
+                return new MultiBallPowerUp(x, y);
+            default:
+                // Báo lỗi nếu gặp type lạ
+                System.err.println("GameManager: Không thể tạo PowerUp, type không xác định: " + type);
+                return null;
+        }
+    }
+
+    /**
+     * (HÀM ĐÃ SỬA LỖI - THAY THẾ HÀM CŨ)
+     * Đặt trạng thái game VÀ tự động xóa profile nếu Game Over.
+     */
+    public void setGameState(GameState state) {
+        // Chỉ thực hiện khi trạng thái thực sự thay đổi
+        if (this.gameState == state) {
+            return;
+        }
+
+        this.gameState = state;
+        System.out.println("Game state changed to: " + state);
+
+        // === LOGIC MỚI: XÓA PROFILE KHI GAME OVER ===
+
+        // 1. Kiểm tra xem có phải là Game Over không
+        if (state == GameState.GAME_OVER) {
+
+            // 2. Kiểm tra xem người chơi có đang chơi từ 1 profile đã tải không
+            if (this.currentlyLoadedProfile != null) {
+
+                System.out.println("Game Over! Đang xóa profile: " + this.currentlyLoadedProfile);
+
+                // 3. Gọi SaveGameManager để xóa file save
+                SaveGameManager.getInstance().deleteSave(this.currentlyLoadedProfile);
+
+                // 4. Đặt lại profile đã tải (để tránh lỗi)
+                this.currentlyLoadedProfile = null;
+
+            } else {
+                // Nếu đây là game mới (Start Game) thì không có profile để xóa
+                System.out.println("Game Over! (Không có profile nào được tải, không xóa gì cả)");
+            }
+        }
+    }
+
+
+    private String currentlyLoadedProfile = null;
+    public String getCurrentlyLoadedProfile() { return currentlyLoadedProfile; }
+    public void setCurrentlyLoadedProfile(String name) { this.currentlyLoadedProfile = name; }
+
     // Getters for external access
     public GameState getGameState() { return gameState; }
-    public void setGameState(GameState state) { this.gameState = state; }
     public double getGameWidth() { return gameWidth; }
     public double getGameHeight() { return gameHeight; }
     public int getScore() { return score; }

@@ -62,6 +62,29 @@ public abstract class Brick extends GameObject {
         }
     }
 
+    /**
+     * (HÀM MỚI - BẮT BUỘC THÊM VÀO)
+     * Dùng để khôi phục hitPoints từ file save.
+     */
+    public void setHitPoints(int hp) {
+        this.hitPoints = hp;
+
+        // Đảm bảo trạng thái 'destroyed' được cập nhật
+        if (hp <= 0 && this.type != BrickType.UNBREAKABLE) {
+            this.destroyed = true;
+        }
+
+        // Cập nhật lại màu sắc (quan trọng cho StrongBrick)
+        updateColor();
+    }
+
+    /**
+     * (HÀM BỊ THIẾU - HÃY THÊM VÀO)
+     * Dùng để lấy hitPoints hiện tại (để lưu game)
+     */
+    public int getHitPoints() {
+        return this.hitPoints;
+    }
 
     @Override
     public void update(double deltaTime) {
@@ -94,11 +117,5 @@ public abstract class Brick extends GameObject {
                 x, y, width, height
         );
     }
-    public int getHitPoints() {
-        return hitPoints;
-    }
 
-    public void setHitPoints(int points) {
-        this.hitPoints = points;
-    }
 }

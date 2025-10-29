@@ -1,37 +1,37 @@
 package arkanoid.ui.controller;
 
+// Thêm lại các import này
 import arkanoid.core.GameManager;
-import arkanoid.core.GameStatePersistence;
+import arkanoid.core.GameStateSnapshot;
+import arkanoid.core.PlayerSave;
+import arkanoid.core.SaveGameManager;
 import arkanoid.utils.SoundManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import java.io.IOException;
 
+import java.util.List; // Thêm lại
+import javafx.scene.control.Alert; // Thêm lại
+import javafx.scene.control.ChoiceDialog; // Thêm lại
+
+/**
+ * (PHIÊN BẢN SỬA LỖI - QUAY LẠI LOGIC LƯU PROFILE)
+ * Sử dụng SaveGameManager để lưu 10 slot theo tên.
+ */
 public class MainController {
 
-    @FXML
-    private Button btnStart;
-
-    @FXML
-    private Button btnHighScores;
-
-    @FXML
-    private Button btnExit;
-
-    @FXML
-    private Button btnContinue;
+    @FXML private Button btnStart;
+    @FXML private Button btnHighScores;
+    @FXML private Button btnExit;
+    @FXML private Button btnContinue;
+    @FXML private Button btnVersus;
 
     @FXML
     private void initialize() {
         SoundManager.playBackground("Arkanoid_sound_menu.wav", 0.3);
 
-        // Set background
         javafx.application.Platform.runLater(() -> {
             if (btnStart.getScene() != null && btnStart.getScene().getRoot() instanceof Pane) {
                 BackgroundHelper.setBackgroundImage(
@@ -41,111 +41,76 @@ public class MainController {
             }
         });
 
-        // Kiểm tra file save khi mở app
-        if (btnContinue != null) {
-            boolean hasSavedGame = GameStatePersistence.hasSaveFile();
-            btnContinue.setVisible(hasSavedGame);
-            btnContinue.setManaged(hasSavedGame);
-
-            if (hasSavedGame) {
-                System.out.println("Found saved game file - Continue button enabled");
-            } else {
-                System.out.println("ℹNo saved game file - Continue button hidden");
-            }
-        }
-
-        // Khi nhấn Start → xóa file save và start mới
+        // === GÁN SỰ KIỆN CHO TẤT CẢ CÁC NÚT ===
         if (btnStart != null) {
-            btnStart.setOnAction(e -> {
-                GameStatePersistence.deleteSaveFile(); // Xóa file save cũ
-                GameManager.getInstance().startGame();
-                switchScene("/ui/fxml/GameView.fxml");
-            });
+            btnStart.setOnAction(e -> handleStartGame(e));
         }
-
-        // Khi nhấn High Scores
         if (btnHighScores != null) {
-            btnHighScores.setOnAction(e -> switchScene("/ui/fxml/HighScores.fxml"));
+            btnHighScores.setOnAction(e -> handleHighScores(e));
         }
-
-        // Khi nhấn Exit
-        if (btnExit != null) {
-            btnExit.setOnAction(e -> System.exit(0));
+        if (btnVersus != null) {
+            btnVersus.setOnAction(e -> handleVersusGame(e));
         }
-
-        // Khi nhấn Continue → load từ file
         if (btnContinue != null) {
-            btnContinue.setOnAction(e -> {
-                if (GameStatePersistence.hasSaveFile()) {
-                    // Load game state
-                    GameManager.getInstance().continueGame();
-
-                    // BẮT ĐẦU COUNTDOWN 3 GIÂY
-                    GameManager.getInstance().startCountdownFromMenu(3);
-
-                    System.out.println("Continue game from file with countdown");
-                    switchScene("/ui/fxml/GameView.fxml");
-                } else {
-                    System.err.println("No saved game file to continue!");
-                }
-            });
+            btnContinue.setOnAction(e -> handleContinueGame(e));
         }
+        if (btnExit != null) {
+            btnExit.setOnAction(e -> handleExitGame(e));
+        }
+
+        // [SỬA LỖI] Dùng SaveGameManager (quản lý 10 slot)
+        btnContinue.setDisable(!SaveGameManager.getInstance().hasSavedGames());
     }
 
     @FXML
-    private void openSelectSkin(ActionEvent event) throws IOException {
-        // Load từ file thay vì resources
-        java.io.File fxmlFile = new java.io.File("src/arkanoid/ui/fxml/SelectSkin.fxml");
-        FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root, 1000, 600);
-
-        // Load CSS từ file
-        java.io.File cssFile = new java.io.File("src/arkanoid/ui/css/style.css");
-        if (cssFile.exists()) {
-            scene.getStylesheets().add(cssFile.toURI().toURL().toExternalForm());
-        }
-
-        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
+    private void handleStartGame(ActionEvent event) {
+        // [SỬA LỖI] Bắt đầu game mới KHÔNG xóa profile của người khác
+        // GameManager.getInstance().clearSavedGame(); // <-- BỎ DÒNG NÀY
+        GameManager.getInstance().startGame();
+        SceneNavigator.goToGame();
     }
 
+    @FXML
+    private void handleContinueGame(ActionEvent event) {
+        // [SỬA LỖI] Lấy danh sách profile từ SaveGameManager
+        List<PlayerSave> saves = SaveGameManager.getInstance().getSavedGames();
 
-    /**
-     * Chuyển sang scene khác theo đường dẫn FXML.
-     */
-    private void switchScene(String fxmlPath) {
-        try {
-            System.out.println("Switching to: " + fxmlPath);
-
-            Stage stage = (Stage) btnStart.getScene().getWindow();
-
-            // Chuyển đổi đường dẫn: /ui/fxml/GameView.fxml → src/arkanoid/ui/fxml/GameView.fxml
-            String filePath = "src/arkanoid" + fxmlPath;
-            java.io.File fxmlFile = new java.io.File(filePath);
-
-            if (!fxmlFile.exists()) {
-                System.err.println("FXML file not found: " + fxmlFile.getAbsolutePath());
-                return;
-            }
-
-            System.out.println("Loading FXML from: " + fxmlFile.getAbsolutePath());
-
-            FXMLLoader loader = new FXMLLoader(fxmlFile.toURI().toURL());
-            Parent root = loader.load();
-
-            // CẬP NHẬT: Nếu là GameView thì dùng width 1000 (800 canvas + 200 panel)
-            int width = fxmlPath.contains("GameView") ? 1000 : 800;
-            Scene scene = new Scene(root, width, 600);
-            stage.setScene(scene);
-
-            System.out.println("Scene switched successfully");
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.err.println("Không thể load file FXML: " + fxmlPath);
+        if (saves == null || saves.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Không có game đã lưu");
+            alert.setHeaderText(null);
+            alert.setContentText("Không tìm thấy profile nào.");
+            alert.showAndWait();
+            return;
         }
+
+        // [SỬA LỖI] Hiển thị BẢNG CHỌN (ChoiceDialog)
+        ChoiceDialog<PlayerSave> dialog = new ChoiceDialog<>(saves.get(0), saves);
+        dialog.setTitle("Chọn Profile");
+        dialog.setHeaderText("Chọn một lượt chơi để tiếp tục:");
+        dialog.setContentText("Profile:");
+
+        dialog.showAndWait().ifPresent(selectedSave -> {
+            // Tải snapshot từ profile đã chọn
+            GameManager.getInstance().restoreFromSnapshot(selectedSave.getSnapshot());
+            GameManager.getInstance().setCurrentlyLoadedProfile(selectedSave.getPlayerName());
+            SceneNavigator.goToGame();
+        });
+    }
+
+    @FXML
+    private void handleHighScores(ActionEvent event) {
+        SceneNavigator.goToHighScores();
+    }
+
+    @FXML
+    private void handleVersusGame(ActionEvent event) {
+        SceneNavigator.goToVersus();
+    }
+
+    @FXML
+    private void handleExitGame(ActionEvent event) {
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
 }

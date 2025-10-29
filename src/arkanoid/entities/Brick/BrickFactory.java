@@ -13,7 +13,6 @@ public class BrickFactory {
                 return new StrongBrick(x, y, width, height);
             case UNBREAKABLE :
                 return new UnbreakableBrick(x, y, width, height);
-
             default :
                 return null;
         }
