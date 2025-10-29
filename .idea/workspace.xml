@@ -4,55 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a019836d-b4ea-4d44-8914-10306d02f31b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/arkanoid/core/PlayerSave.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/arkanoid/core/SaveGameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_2_2025_6_30_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_10_5_2025_4_28_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" afterDir="false" />
+    <list default="true" id="a019836d-b4ea-4d44-8914-10306d02f31b" name="Changes" comment="feat: lưu dữ liệu người chơi nhiều lần">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid.iml" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ArkanoidApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ArkanoidApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/assets/maps/map1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/assets/maps/map1.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameStatePersistence.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameStatePersistence.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Ball/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Ball/Ball.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Brick/Brick.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Brick/Brick.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Brick/BrickFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Brick/BrickFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/entities/Paddle/Paddle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/entities/Paddle/Paddle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/GameOverController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/HighScoresController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/NewHighScoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/PauseOverlayController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/controller/SceneNavigator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/controller/SceneNavigator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/assets/maps/map1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/assets/maps/map1.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball/Ball$TrailPoint.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Ball/Ball.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick/BrickFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Brick/BrickFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle/Paddle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/entities/Paddle/Paddle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/HighScoresController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/MainController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/NewHighScoreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/PauseOverlayController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/SceneNavigator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/Main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/fxml/PauseOverlay.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/SaveGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/SaveGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$GameState.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,11 +111,32 @@
       <workItem from="1761730148663" duration="279000" />
       <workItem from="1761730442869" duration="6511000" />
       <workItem from="1761758255006" duration="519000" />
-      <workItem from="1761759075573" duration="4773000" />
+      <workItem from="1761759075573" duration="6223000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: lưu dữ liệu người chơi nhiều lần">
+      <option name="closed" value="true" />
+      <created>1761763976175</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761763976175</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: lưu dữ liệu người chơi nhiều lần">
+      <option name="closed" value="true" />
+      <created>1761764013672</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761764013672</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: lưu dữ liệu người chơi nhiều lần" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: lưu dữ liệu người chơi nhiều lần" />
   </component>
 </project>

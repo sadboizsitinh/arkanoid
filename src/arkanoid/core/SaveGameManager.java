@@ -69,22 +69,24 @@ public class SaveGameManager {
     }
 
     /**
-     * (HÀM BỊ THIẾU MÀ BẠN CẦN)
+     * (HÀM BỊ THIẾU - HÃY THÊM VÀO)
      * Xóa một lượt lưu (profile) dựa theo tên người chơi.
+     * @param playerName Tên profile cần xóa
      */
     public void deleteSave(String playerName) {
         if (playerName == null || playerName.isEmpty()) {
-            return;
+            return; // Không làm gì nếu tên rỗng
         }
 
-        // [SỬA LỖI] Dùng "savedGames"
+        // Dùng removeIf để xóa phần tử khớp với tên (không phân biệt hoa thường)
         boolean removed = savedGames.removeIf(save ->
                 save.getPlayerName().equalsIgnoreCase(playerName)
         );
 
         if (removed) {
             System.out.println("Đã xóa profile: " + playerName);
-            saveSaveGamesToFile(); // Gọi hàm save (đã thêm ở dưới)
+            // Lưu lại danh sách (đã bị xóa) vào file
+            saveSaveGamesToFile();
         } else {
             System.out.println("Không tìm thấy profile để xóa: " + playerName);
         }

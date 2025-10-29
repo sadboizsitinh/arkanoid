@@ -12,6 +12,7 @@ import arkanoid.entities.Brick.BrickFactory; // Bạn cần tạo class này n�
 import arkanoid.entities.Brick.Brick;
 import arkanoid.entities.PowerUp.PowerUp;
 import arkanoid.utils.SoundManager;
+import arkanoid.core.SaveGameManager;
 
 /**
  * Singleton GameManager - manages all game logic and state
@@ -1386,7 +1387,7 @@ public class GameManager {
     }
 
     /**
-     * (HÀM ĐÃ SỬA LỖI - THAY THẾ HÀM CŨ)
+     * (HÀM ĐÚNG - HÀM DUY NHẤT)
      * Đặt trạng thái game VÀ tự động xóa profile nếu Game Over.
      */
     public void setGameState(GameState state) {
@@ -1398,7 +1399,7 @@ public class GameManager {
         this.gameState = state;
         System.out.println("Game state changed to: " + state);
 
-        // === LOGIC MỚI: XÓA PROFILE KHI GAME OVER ===
+        // === LOGIC XÓA PROFILE KHI GAME OVER ===
 
         // 1. Kiểm tra xem có phải là Game Over không
         if (state == GameState.GAME_OVER) {
@@ -1409,6 +1410,7 @@ public class GameManager {
                 System.out.println("Game Over! Đang xóa profile: " + this.currentlyLoadedProfile);
 
                 // 3. Gọi SaveGameManager để xóa file save
+                // (Đảm bảo bạn đã thêm import arkanoid.core.SaveGameManager; ở đầu file)
                 SaveGameManager.getInstance().deleteSave(this.currentlyLoadedProfile);
 
                 // 4. Đặt lại profile đã tải (để tránh lỗi)
