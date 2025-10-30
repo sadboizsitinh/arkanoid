@@ -23,6 +23,7 @@ public class GameStateSnapshot implements Serializable {
     public double paddleX;
     public double paddleY;
     public double paddleWidth;
+    public double paddleHeight;
 
     // Balls state
     public List<BallState> ballStates;
@@ -79,6 +80,8 @@ public class GameStateSnapshot implements Serializable {
         snapshot.paddleX = paddle.getX();
         snapshot.paddleY = paddle.getY();
         snapshot.paddleWidth = paddle.getWidth();
+        snapshot.paddleHeight = paddle.getHeight();
+
 
         // Lưu balls
         snapshot.ballStates = new ArrayList<>();

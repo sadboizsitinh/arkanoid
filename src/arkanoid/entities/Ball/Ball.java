@@ -12,7 +12,7 @@ import java.util.Queue;
 public class Ball extends MovableObject {
 
     private static final double DEFAULT_SIZE = 30;
-    private static final double DEFAULT_SPEED = 325;
+    private static final double DEFAULT_SPEED = 600;
 
     private static final int MAX_TRAIL_POINTS = 30;
     private static final double TRAIL_UPDATE_INTERVAL = 0.01;

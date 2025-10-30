@@ -475,11 +475,11 @@ public class GameManager {
                         cameraShake.shakeOnBrickHit();
                         SoundManager.play("gachvo.wav");
                         score += brick.getPoints();
-
-                        if (Math.random() < 0.3) {
+                        if (Math.random() < 1) {
                             spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
                                     brick.getY() + brick.getHeight());
                         }
+
                     } else {
                         cameraShake.shakeOnPaddleHit();
                         SoundManager.play("gach.wav");

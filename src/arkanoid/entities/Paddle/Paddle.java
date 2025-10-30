@@ -180,10 +180,12 @@ public class Paddle extends MovableObject implements PaddleLike {
     public static double getDefaultWidth() {
         return DEFAULT_WIDTH;
     }
+    public static double getDefaultHeight() {return DEFAULT_HEIGHT;}
 
     public void setX(double newX) {
         this.x = newX;
     }
+    public void setY(double newY) {this.y = newY;}
 
     public double getSpeed() {
         return speed;

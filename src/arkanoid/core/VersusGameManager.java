@@ -1,10 +1,7 @@
 package arkanoid.core;
 
 import arkanoid.entities.Ball.Ball;
-import arkanoid.entities.Brick.Brick;
-import arkanoid.entities.Brick.NormalBrick;
-import arkanoid.entities.Brick.StrongBrick;
-import arkanoid.entities.Brick.UnbreakableBrick;
+import arkanoid.entities.Brick.*;
 import arkanoid.entities.Paddle.Paddle;
 import arkanoid.entities.PowerUp.*;
 import arkanoid.utils.SoundManager;
@@ -227,9 +224,9 @@ public class VersusGameManager {
                         double y = 50 + row * brickHeight;
 
                         switch (type) {
-                            case 1 -> bricks.add(new NormalBrick(x, y, brickWidth - 2, brickHeight - 2));
-                            case 2 -> bricks.add(new StrongBrick(x, y, brickWidth - 2, brickHeight - 2));
-                            case 3 -> bricks.add(new UnbreakableBrick(x, y, brickWidth - 2, brickHeight - 2));
+                            case 1 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.NORMAL,x, y, brickWidth - 2, brickHeight - 2 ));
+                            case 2 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.STRONG,x, y, brickWidth - 2, brickHeight - 2 ));
+                            case 3 -> bricks.add(BrickFactory.createBrick(Brick.BrickType.UNBREAKABLE,x, y, brickWidth - 2, brickHeight - 2 ));
                         }
                     }
                     row++;
