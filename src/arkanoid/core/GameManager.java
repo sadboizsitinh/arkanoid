@@ -36,6 +36,7 @@ public class GameManager {
 
     // Streak
     private int Streak = 0;
+    private boolean preCollision = false;
     private boolean Collison = false;
     private int lastStreakBonus = 0;
     private boolean excellentEffectActive = false;
@@ -446,9 +447,8 @@ public class GameManager {
                     currentBall.bounceOffPaddle(paddle);
                     paddle.triggerHitAnimation();
                     cameraShake.shakeOnPaddleHit();
+                    preCollision = Collison;
                     Collison = false;
-
-                    System.out.println("have been");
 
                     // Lưu thời gian hit
                     lastPaddleHitTime.put(currentBall, currentTime);
@@ -475,7 +475,7 @@ public class GameManager {
                         cameraShake.shakeOnBrickHit();
                         SoundManager.play("gachvo.wav");
                         score += brick.getPoints();
-                        if (Math.random() < 1) {
+                        if (Math.random() < 0) {
                             spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
                                     brick.getY() + brick.getHeight());
                         }
@@ -490,8 +490,8 @@ public class GameManager {
         }
 
         if (inMoment) {
-            if (Collison == false) {
-                Streak = 0;
+            if (preCollision == false) {
+                Streak = 1;
                 lastStreakBonus = 0;
                 System.out.println("have been");
             } else {
@@ -520,9 +520,6 @@ public class GameManager {
                             }
                         }).start();
                     }
-
-
-
                 }
             }
         }
