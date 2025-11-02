@@ -340,6 +340,7 @@ public class GameManager {
 
         if(balls.isEmpty() || ballstuck){
             paddle.setX(gameWidth / 2 - paddle.getWidth() / 2);
+            paddle.update(deltaTime);
         } else {
             if (movingLeft) {
                 paddle.moveLeft(deltaTime);
@@ -697,6 +698,8 @@ public class GameManager {
         paddle.setX(gameWidth / 2 - paddle.getWidth() / 2);
         paddle.resetSize();
 
+        movingLeft = false;
+        movingRight = false;
         for (PowerUp powerUp : activePowerUps) {
             powerUp.removeEffect(paddle);
         }

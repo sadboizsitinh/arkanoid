@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: fix bug paddle!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid_save.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +197,7 @@
       <workItem from="1761906550115" duration="889000" />
       <workItem from="1761978344464" duration="5381000" />
       <workItem from="1761984869343" duration="425000" />
-      <workItem from="1762068696646" duration="6333000" />
+      <workItem from="1762068696646" duration="9728000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
@@ -229,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762074922178</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: fix bug paddle!">
+      <option name="closed" value="true" />
+      <created>1762075438394</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1762075438394</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
