@@ -360,7 +360,7 @@ public class Ball extends MovableObject {
     public void render(GraphicsContext gc) {
         renderTrail(gc);
 
-        // ✅ TRY LOAD TEXTURE, NẾU FAIL → FALLBACK
+        //  TRY LOAD TEXTURE, NẾU FAIL → FALLBACK
         String path = "file:src/arkanoid/assets/images/skinball_" + TypeSkin + ".png";
         loadTexture(path);
 
@@ -373,13 +373,13 @@ public class Ball extends MovableObject {
                     x, y, width, height
             );
         } else {
-            // ✅ FALLBACK: Vẽ ball đơn giản với gradient
+            //  FALLBACK: Vẽ ball đơn giản với gradient
             renderBallFallback(gc);
         }
     }
 
     /**
-     * ✅ Render ball fallback khi texture không load được
+     *  Render ball fallback khi texture không load được
      */
     private void renderBallFallback(GraphicsContext gc) {
         double centerX = x + width / 2;

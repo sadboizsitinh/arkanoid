@@ -242,7 +242,7 @@ public class GameOverController {
 
             container.getChildren().add(overlay);
 
-            System.out.println("✅ High Score overlay displayed on top of Game Over");
+            System.out.println(" High Score overlay displayed on top of Game Over");
 
         } catch (Exception ex) {
             ex.printStackTrace();

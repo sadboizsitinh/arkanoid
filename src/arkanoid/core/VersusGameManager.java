@@ -814,14 +814,14 @@ public class VersusGameManager {
             backgroundLoaded = true;
 
         } catch (Exception e) {
-            System.err.println("❌ Error loading background: " + e.getMessage());
+            System.err.println(" Error loading background: " + e.getMessage());
             cachedBackground = null;
             backgroundLoaded = true;
         }
     }
 
     /**
-     * ✅ Render Excellent Effect
+     *  Render Excellent Effect
      */
     private void renderExcellentEffect(GraphicsContext gc, double excellentEffectTimer, int excellentTriggerStreak) {
         double progress = excellentEffectTimer / 2.0;
@@ -951,7 +951,7 @@ public class VersusGameManager {
     }
 
     /**
-     * ✅ Render Countdown
+     *  Render Countdown
      */
     private void renderCountdown(GraphicsContext gc, double countdownTime) {
         int seconds = (int) Math.ceil(countdownTime);

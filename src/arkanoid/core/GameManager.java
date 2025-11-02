@@ -36,6 +36,7 @@ public class GameManager {
 
     // Streak
     private int Streak = 0;
+    private boolean preCollision = false;
     private boolean Collison = false;
     private int lastStreakBonus = 0;
     private boolean excellentEffectActive = false;
@@ -327,15 +328,25 @@ public class GameManager {
                 excellentEffectActive = false;
             }
         }
-
         paddle.update(deltaTime);
 
-        // Handle paddle movement with simple flags
-        if (movingLeft) {
-            paddle.moveLeft(deltaTime);
+        boolean ballstuck = false;
+        for(Ball b : balls){
+            if(b.isStuckToPaddle()){
+                ballstuck = true;
+                break;
+            }
         }
-        if (movingRight) {
-            paddle.moveRight(deltaTime);
+
+        if(balls.isEmpty() || ballstuck){
+            paddle.setX(gameWidth / 2 - paddle.getWidth() / 2);
+        } else {
+            if (movingLeft) {
+                paddle.moveLeft(deltaTime);
+            }
+            if (movingRight) {
+                paddle.moveRight(deltaTime);
+            }
         }
 
         // Update vị trí ball khi dính trên paddle
@@ -422,6 +433,7 @@ public class GameManager {
                 Streak = 0;
                 // Only lose life if all balls are gone
                 if (balls.isEmpty()) {
+
                     lives--;
                     if (lives <= 0) {
                         SoundManager.play("game_over.wav");
@@ -446,9 +458,8 @@ public class GameManager {
                     currentBall.bounceOffPaddle(paddle);
                     paddle.triggerHitAnimation();
                     cameraShake.shakeOnPaddleHit();
+                    preCollision = Collison;
                     Collison = false;
-
-                    System.out.println("have been");
 
                     // Lưu thời gian hit
                     lastPaddleHitTime.put(currentBall, currentTime);
@@ -475,7 +486,7 @@ public class GameManager {
                         cameraShake.shakeOnBrickHit();
                         SoundManager.play("gachvo.wav");
                         score += brick.getPoints();
-                        if (Math.random() < 1) {
+                        if (Math.random() < 0.3){
                             spawnRandomPowerUp(brick.getX() + brick.getWidth() / 2,
                                     brick.getY() + brick.getHeight());
                         }
@@ -490,8 +501,8 @@ public class GameManager {
         }
 
         if (inMoment) {
-            if (Collison == false) {
-                Streak = 0;
+            if (preCollision == false) {
+                Streak = 1;
                 lastStreakBonus = 0;
                 System.out.println("have been");
             } else {
@@ -520,9 +531,6 @@ public class GameManager {
                             }
                         }).start();
                     }
-
-
-
                 }
             }
         }

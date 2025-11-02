@@ -1,11 +1,15 @@
 package arkanoid.entities.Paddle;
 
 import arkanoid.core.GameManager;
+import arkanoid.entities.Ball.Ball;
 import arkanoid.entities.MovableObject;
 import arkanoid.entities.PowerUp.PowerUp;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Paddle extends MovableObject implements PaddleLike {
     private static final double DEFAULT_WIDTH = 120;
@@ -119,7 +123,7 @@ public class Paddle extends MovableObject implements PaddleLike {
 
     @Override
     public void render(GraphicsContext gc) {
-        // ✅ TRY RENDER TEXTURE, NẾU FAIL → FALLBACK
+        //  TRY RENDER TEXTURE, NẾU FAIL → FALLBACK
         if (useTexture && spriteSheet != null && !spriteSheet.isError()) {
             gc.drawImage(
                     spriteSheet,
@@ -127,13 +131,13 @@ public class Paddle extends MovableObject implements PaddleLike {
                     x, y, width, height
             );
         } else {
-            // ✅ FALLBACK: Vẽ paddle đơn giản
+            //  FALLBACK: Vẽ paddle đơn giản
             renderPaddleFallback(gc);
         }
     }
 
     /**
-     * ✅ Render paddle fallback khi texture không load được
+     *  Render paddle fallback khi texture không load được
      */
     private void renderPaddleFallback(GraphicsContext gc) {
         // Background gradient

@@ -48,7 +48,7 @@ public class VersusController {
     private double lastP2RotateTime = 0;
     private static final double ROTATE_COOLDOWN = 0.15;
 
-    // ✅ NEW: Pause overlay
+    //  NEW: Pause overlay
     private StackPane pauseOverlay;
     private StackPane rootPane; // Root container để chứa pause overlay
 
@@ -56,7 +56,7 @@ public class VersusController {
     private void initialize() {
         lastInstance = this;
 
-        System.out.println("✅ VersusController initialized");
+        System.out.println(" VersusController initialized");
 
         canvasP1 = new Canvas(640, 600);
         canvasP2 = new Canvas(640, 600);
@@ -91,20 +91,20 @@ public class VersusController {
                     stage.setHeight(740);
                     stage.centerOnScreen();
                     stage.setResizable(false);
-                    System.out.println("✅ Window resized to 1320x740");
+                    System.out.println(" Window resized to 1320x740");
                 }
             } catch (Exception e) {
-                System.err.println("⚠️ Cannot resize window: " + e.getMessage());
+                System.err.println(" Cannot resize window: " + e.getMessage());
             }
 
-            // ✅ FIX: Get root pane TRƯỚC khi setup input
+            //  FIX: Get root pane TRƯỚC khi setup input
             getRootPane();
 
             // Delay một chút để đảm bảo rootPane đã được set
             javafx.application.Platform.runLater(() -> {
                 setupInputHandlers();
                 canvasP1.requestFocus();
-                System.out.println("✅ Canvas focus requested");
+                System.out.println(" Canvas focus requested");
             });
         });
 
@@ -116,13 +116,13 @@ public class VersusController {
         Scene scene = paneP1.getScene();
 
         if (scene != null) {
-            System.out.println("✅ Scene available, setting up handlers immediately");
+            System.out.println(" Scene available, setting up handlers immediately");
             attachKeyHandlers(scene);
         } else {
-            System.out.println("⚠️ Scene not ready, waiting for sceneProperty");
+            System.out.println(" Scene not ready, waiting for sceneProperty");
             paneP1.sceneProperty().addListener((obs, oldScene, newScene) -> {
                 if (newScene != null) {
-                    System.out.println("✅ Scene ready via listener, setting up handlers");
+                    System.out.println(" Scene ready via listener, setting up handlers");
                     attachKeyHandlers(newScene);
                 }
             });
@@ -154,21 +154,21 @@ public class VersusController {
 
         scene.setOnMouseClicked(event -> {
             canvasP1.requestFocus();
-            System.out.println("🖱️ Mouse clicked, focus regained");
+            System.out.println(" Mouse clicked, focus regained");
         });
 
-        System.out.println("✅ Input handlers attached successfully");
+        System.out.println(" Input handlers attached successfully");
     }
 
     private void handleKeyPress(KeyCode code, boolean isPressed) {
         VersusGameManager.VersusState state = gameManager.getGameState();
 
-        System.out.println("📋 handleKeyPress: " + code + " | pressed=" + isPressed + " | state=" + state);
+        System.out.println(" handleKeyPress: " + code + " | pressed=" + isPressed + " | state=" + state);
 
-        // ✅ NEW: Handle PAUSE
+        //  NEW: Handle PAUSE
         if (code == KeyCode.P && isPressed) {
             gameManager.togglePause();
-            System.out.println("⏸️ Toggle pause - new state: " + gameManager.getGameState());
+            System.out.println(" Toggle pause - new state: " + gameManager.getGameState());
 
             // Show/hide pause overlay
             if (gameManager.getGameState() == VersusGameManager.VersusState.PAUSED) {
@@ -179,7 +179,7 @@ public class VersusController {
             return;
         }
 
-        // ✅ NEW: ESC shows pause menu
+        //  NEW: ESC shows pause menu
         if (code == KeyCode.ESCAPE && isPressed) {
             if (state == VersusGameManager.VersusState.PLAYING) {
                 gameManager.togglePause();
@@ -276,15 +276,15 @@ public class VersusController {
         }
 
         if (code == KeyCode.UP && isPressed) {
-            System.out.println("🔥 P2 FIRE");
+            System.out.println(" P2 FIRE");
             gameManager.firePlayer2Ball();
         }
     }
 
-    // ✅ NEW: Show pause overlay
+    //  NEW: Show pause overlay
     private void showPauseOverlay() {
         if (pauseOverlay != null || rootPane == null) {
-            System.out.println("⚠️ pauseOverlay already showing or rootPane null");
+            System.out.println(" pauseOverlay already showing or rootPane null");
             return;
         }
 
@@ -301,37 +301,37 @@ public class VersusController {
 
             pauseOverlay = loader.load();
 
-            // ✅ FIX: Pass reference của VersusController VÀ Stage vào PauseOverlay
+            //  FIX: Pass reference của VersusController VÀ Stage vào PauseOverlay
             VersusGamePauseOverlayController controller = loader.getController();
             controller.setVersusController(this);
 
-            // ✅ NEW: Pass Stage reference
+            //  NEW: Pass Stage reference
             Stage stage = (Stage) paneP1.getScene().getWindow();
             controller.setStage(stage);
-            System.out.println("✅ Passed stage to overlay controller: " + stage);
+            System.out.println(" Passed stage to overlay controller: " + stage);
 
             rootPane.getChildren().add(pauseOverlay);
 
-            System.out.println("✅ Pause overlay shown");
+            System.out.println(" Pause overlay shown");
 
         } catch (Exception e) {
-            System.err.println("❌ Error showing pause overlay: " + e.getMessage());
+            System.err.println(" Error showing pause overlay: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    // ✅ NEW: Public method để hide overlay từ bên ngoài
+    //  NEW: Public method để hide overlay từ bên ngoài
     public void hidePauseOverlayPublic() {
         hidePauseOverlay();
     }
 
-    // ✅ NEW: Hide pause overlay
+    //  NEW: Hide pause overlay
     private void hidePauseOverlay() {
         if (pauseOverlay != null && rootPane != null) {
             rootPane.getChildren().remove(pauseOverlay);
             pauseOverlay = null;
             canvasP1.requestFocus();
-            System.out.println("✅ Pause overlay hidden");
+            System.out.println(" Pause overlay hidden");
         }
     }
 
@@ -363,7 +363,7 @@ public class VersusController {
             }
         };
         gameLoop.start();
-        System.out.println("✅ Game loop started");
+        System.out.println(" Game loop started");
     }
 
     private void updateUI() {

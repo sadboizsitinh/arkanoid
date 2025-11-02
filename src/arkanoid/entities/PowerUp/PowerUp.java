@@ -55,12 +55,12 @@ public abstract class PowerUp extends MovableObject {
                 if (url != null) {
                     Image img = new Image(url.toString());
                     imageCache.put(type, img);
-                    System.out.println("✅ Loaded power-up image: " + imagePath);
+                    System.out.println(" Loaded power-up image: " + imagePath);
                 } else {
-                    System.err.println("⚠️ Image not found: " + imagePath + " - Using text fallback");
+                    System.err.println(" Image not found: " + imagePath + " - Using text fallback");
                 }
             } catch (Exception e) {
-                System.err.println("⚠️ Error loading image: " + e.getMessage() + " - Using text fallback");
+                System.err.println(" Error loading image: " + e.getMessage() + " - Using text fallback");
             }
         }
     }

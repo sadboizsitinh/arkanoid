@@ -563,14 +563,14 @@ public class GameController {
                     }
                 }
             } catch (Exception e) {
-                System.err.println("⚠️ Could not load stylesheet");
+                System.err.println(" Could not load stylesheet");
             }
 
             stage.setScene(newScene);
-            System.out.println("✅ Game Over scene set successfully!");
+            System.out.println(" Game Over scene set successfully!");
 
         } catch (Exception ex) {
-            System.err.println("❌ EXCEPTION in showGameOverOverlay:");
+            System.err.println(" EXCEPTION in showGameOverOverlay:");
             ex.printStackTrace();
         }
     }
@@ -696,9 +696,9 @@ public class GameController {
             // Set stats
             controller.setStats(gameManager.getScore(), gameManager.getLevel());
 
-            // ✅ QUAN TRỌNG: Set callback để hiển thị Game Over SAU KHI đóng popup
+            //  QUAN TRỌNG: Set callback để hiển thị Game Over SAU KHI đóng popup
             controller.setOnClose(() -> {
-                System.out.println("✅ High score saved! Now showing Game Over screen...");
+                System.out.println(" High score saved! Now showing Game Over screen...");
                 showGameOverOverlay();
             });
 
