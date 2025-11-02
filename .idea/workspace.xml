@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: fix bug paddle!" />
+    <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: fix bug paddle!">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" afterPath="$PROJECT_DIR$/arkanoid_save.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +23,7 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -27,12 +32,12 @@
     &quot;assignee&quot;: &quot;PhongHoangNguyen&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/sadboizsitinh/Arkanoid.git",
-    "accountId": "f8b167ec-24de-42f0-8ea4-b07296b440b7"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,
+    &quot;accountId&quot;: &quot;f8b167ec-24de-42f0-8ea4-b07296b440b7&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -190,7 +195,7 @@
       <workItem from="1761906550115" duration="889000" />
       <workItem from="1761978344464" duration="5381000" />
       <workItem from="1761984869343" duration="425000" />
-      <workItem from="1762068696646" duration="5978000" />
+      <workItem from="1762068696646" duration="6333000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Tạo vô hạn map và tăng độ khó mỗi khi qua 10 màn">
       <option name="closed" value="true" />
@@ -216,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762074839816</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: fix bug paddle!">
+      <option name="closed" value="true" />
+      <created>1762074922178</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762074922178</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -251,6 +264,7 @@
     <MESSAGE value="feat: load new img power up!" />
     <MESSAGE value="feat: fix bug paddle!" />
     <option name="LAST_COMMIT_MESSAGE" value="feat: fix bug paddle!" />
+    <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
