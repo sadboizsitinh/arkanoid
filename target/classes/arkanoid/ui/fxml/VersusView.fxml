@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<!-- ✅ THAY ĐỔI: Wrap VBox trong StackPane để có thể add pause overlay -->
+<!--  THAY ĐỔI: Wrap VBox trong StackPane để có thể add pause overlay -->
 <StackPane prefHeight="740" prefWidth="1296" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arkanoid.ui.controller.VersusController">
 
     <VBox prefHeight="740" prefWidth="1296" style="-fx-background-color: #0f172a;" stylesheets="@../css/style.css">
