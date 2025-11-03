@@ -6,10 +6,128 @@
   <component name="ChangeListManager">
     <list default="true" id="0557b086-d28a-43ea-b093-40ac74bcf4fb" name="Changes" comment="feat: fix bug paddle!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arkanoid_save.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/arkanoid/core/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/highscores.dat" beforeDir="false" afterPath="$PROJECT_DIR$/highscores.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/arkanoid.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/bg-retrospace(1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/bg-retrospace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_normal_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_unbreakable_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/bricks-wip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/classdiagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/effect.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/expand_paddle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/extra_life.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/fast_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/multi_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/paddle_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/paddle_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/slow_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/images/slow_ball1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/Arkanoid_sound_menu.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/Qua_man.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gach.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gachda.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gachvo.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/game_over.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/goodjob.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/matmang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/paddle.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/powerup.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/streak.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/GameOver.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/GameView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/HighScores.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/Main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/NewHighScore.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusGameOver.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusGamePauseOverlay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/core/VersusGameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/core/VersusGameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/arkanoid.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/arkanoid-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/bg-retrospace(1).png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/bg-retrospace.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_normal_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_strong_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/brick_unbreakable_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/bricks-wip.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/classdiagram.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/effect.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/expand_paddle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/extra_life.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/fast_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/multi_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/paddle_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/paddle_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/skinball_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/slow_ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/images/slow_ball1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map1.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map10.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map2.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map3.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map4.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map5.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map6.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map7.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map8.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/maps/map9.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/Arkanoid_sound_menu.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/Qua_man.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gach.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gachda.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/gachvo.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/game_over.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/goodjob.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/matmang.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/paddle.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/powerup.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/assets/sounds/streak.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/GameOver.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/GameView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/HighScores.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/Main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/NewHighScore.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/PauseOverlay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusGameOver.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusGamePauseOverlay.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/out/production/arkanoid/arkanoid/ui/fxml/VersusView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/GameOverController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/arkanoid/ui/controller/VersusController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +152,12 @@
     &quot;assignee&quot;: &quot;PhongHoangNguyen&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/sadboizsitinh/Arkanoid.git&quot;,
-    &quot;accountId&quot;: &quot;f8b167ec-24de-42f0-8ea4-b07296b440b7&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/sadboizsitinh/Arkanoid.git",
+    "accountId": "b1338d4e-04e2-4a96-9e8a-f130691e4f77"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 8
@@ -115,15 +233,12 @@
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="JavaScript Debug.Next.js: debug client-side" />
-      <item itemvalue="npm.Next.js: server-side" />
     </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
         <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26199.169" />
-        <option value="bundled-js-predefined-d6986cc7102b-9c94529fcfe0-JavaScript-IU-252.26199.169" />
       </set>
     </attachedChunks>
   </component>
