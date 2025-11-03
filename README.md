@@ -147,6 +147,9 @@ Vòng lặp game (Game Loop) được điều khiển bởi `GameController` và
 
 ![my image](src/arkanoid/assets/images/classdiagram.png)
 
+## 🖥️ Video sơ lược về các tính năng game: https://drive.google.com/drive/u/1/folders/1xUeyW-x7O7a1FblPpWyc6fHHiCIXbNaa?hl=vi
+
+
 ## 📂 Cấu trúc Thư mục
 ``` bash
 src/
